@@ -57,6 +57,11 @@ public class GameWindow {
         }
 
         public void startGameLoop() {
+            // Setup any objects we may have
+            for (GameObject object : GameState.gameObjects) {
+                object.setup();
+            }
+
             Timer timer = new Timer(33, _ -> {
                 frameSinceStart++;
                 repaint();
