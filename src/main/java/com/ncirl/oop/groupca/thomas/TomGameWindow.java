@@ -5,11 +5,11 @@ import com.ncirl.oop.groupca.thomas.GameObjects.GameObject;
 import javax.swing.*;
 import java.awt.*;
 
-public class GameWindow {
+public class TomGameWindow {
     private static final JLabel buildingMaterialLbl = new JLabel("Materials: 0");
     private static final JButton placeFarmBtn = new JButton("Place Farm [110]");
 
-    private GameWindow() {}
+    private TomGameWindow() {}
 
     public static void createWindow() {
         int width = 800;

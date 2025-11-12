@@ -31,43 +31,43 @@ public class OOPGroupCAGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        Deliver = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        growFoodGameBtn = new javax.swing.JButton();
+        deliverFoodNameBtn = new javax.swing.JButton();
+        manageFoodGameBtn = new javax.swing.JButton();
+        exitBtn = new javax.swing.JButton();
+        titleLbl = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Grow Food");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        growFoodGameBtn.setText("Grow Food");
+        growFoodGameBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                growFoodGameBtnActionPerformed(evt);
             }
         });
 
-        Deliver.setText("Deliver Food");
-        Deliver.addActionListener(new java.awt.event.ActionListener() {
+        deliverFoodNameBtn.setText("Deliver Food");
+        deliverFoodNameBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DeliverActionPerformed(evt);
+                deliverFoodNameBtnActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Manage Food");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        manageFoodGameBtn.setText("Manage Food");
+        manageFoodGameBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                manageFoodGameBtnActionPerformed(evt);
             }
         });
 
-        jButton4.setText("Exit");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        exitBtn.setText("Exit");
+        exitBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                exitBtnActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("People Shouldnt Starve");
+        titleLbl.setText("People Shouldn't Starve");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -77,58 +77,55 @@ public class OOPGroupCAGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton4))
+                        .addComponent(exitBtn))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(180, 180, 180)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Deliver, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(manageFoodGameBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(growFoodGameBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(deliverFoodNameBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(169, 169, 169)
-                        .addComponent(jLabel1)))
+                        .addComponent(titleLbl)))
                 .addContainerGap(172, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(titleLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(growFoodGameBtn)
                 .addGap(18, 18, 18)
-                .addComponent(Deliver)
+                .addComponent(deliverFoodNameBtn)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3)
+                .addComponent(manageFoodGameBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
-                .addComponent(jButton4)
+                .addComponent(exitBtn)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void growFoodGameBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_growFoodGameBtnActionPerformed
+        GameLauncher.launchAlexGame();
+    }//GEN-LAST:event_growFoodGameBtnActionPerformed
+
+    private void deliverFoodNameBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deliverFoodNameBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        GameLauncher.launchAntonioGame();
+    }//GEN-LAST:event_deliverFoodNameBtnActionPerformed
 
-    private void DeliverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeliverActionPerformed
+    private void manageFoodGameBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageFoodGameBtnActionPerformed
         // TODO add your handling code here:
-        AntonioGUI myGUI = new AntonioGUI();
-        myGUI.setVisible(true);
-        dispose();
+        GameLauncher.launchTomGame();
+    }//GEN-LAST:event_manageFoodGameBtnActionPerformed
 
-    }//GEN-LAST:event_DeliverActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        //TomGameWindow.initGameWindow();
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
         // TODO add your handling code here:
         dispose();
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_exitBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -156,10 +153,10 @@ public class OOPGroupCAGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Deliver;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton deliverFoodNameBtn;
+    private javax.swing.JButton exitBtn;
+    private javax.swing.JButton growFoodGameBtn;
+    private javax.swing.JButton manageFoodGameBtn;
+    private javax.swing.JLabel titleLbl;
     // End of variables declaration//GEN-END:variables
 }
