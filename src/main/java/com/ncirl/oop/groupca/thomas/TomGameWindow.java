@@ -1,6 +1,8 @@
 package com.ncirl.oop.groupca.thomas;
 
+import com.ncirl.oop.groupca.thomas.GameObjects.Farm;
 import com.ncirl.oop.groupca.thomas.GameObjects.GameObject;
+import com.ncirl.oop.groupca.thomas.util.Vector2D;
 
 import javax.swing.*;
 import java.awt.*;
@@ -42,6 +44,9 @@ public class TomGameWindow {
             controlPanel.add(placeFarmBtn);
             controlPanel.add(buildingMaterialLbl);
 
+            // event listeners
+            placeFarmBtn.addActionListener((event) -> GameState.placeFarm());
+
             frame.setLayout(new BorderLayout());
 
             frame.add(controlPanel, BorderLayout.NORTH);
@@ -63,6 +68,13 @@ public class TomGameWindow {
         private void renderFrame(Graphics2D g2) {
             for (GameObject object : GameState.gameObjects) {
                 object.render(g2);
+            }
+
+            // Mouse-state related rendering
+            if (GameState.isPlacingFarm) {
+                Point mousePos = MouseInfo.getPointerInfo().getLocation();
+                SwingUtilities.convertPointFromScreen(mousePos, this);
+                Farm.drawGhost(g2, new Vector2D(mousePos.x, mousePos.y));
             }
         }
 
