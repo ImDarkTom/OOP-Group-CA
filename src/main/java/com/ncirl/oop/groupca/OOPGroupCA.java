@@ -1,8 +1,7 @@
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ */
 package com.ncirl.oop.groupca;
-
-import com.ncirl.oop.groupca.thomas.GameWindow;
-import com.ncirl.oop.groupca.alex.AlexWindow;
 
 /**
  *
@@ -10,8 +9,7 @@ import com.ncirl.oop.groupca.alex.AlexWindow;
  */
 public class OOPGroupCA {
     public static void main(String[] args) {
-        // GameWindow.createWindow();
-        new AlexWindow();
-        
+        OOPGroupCAGUI myGUI = new OOPGroupCAGUI();
+        myGUI.setVisible(true);
     }
 }
