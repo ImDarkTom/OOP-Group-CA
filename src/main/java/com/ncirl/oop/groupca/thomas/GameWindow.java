@@ -6,6 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GameWindow {
+    private static final JLabel buildingMaterialLbl = new JLabel("Materials: 0");
+
     private GameWindow() {}
 
     public static void createWindow() {
@@ -22,7 +24,6 @@ public class GameWindow {
         // // 2D canvas
         GameCanvas canvas = new GameCanvas();
 
-        JLabel buildingMaterialLbl = new JLabel("Materials: 0");
         JButton placeFarmBtn = new JButton("Place Farm");
 
         JPanel controlPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -78,12 +79,23 @@ public class GameWindow {
                 object.setup();
             }
 
-            Timer timer = new Timer(33, _ -> {
-                frameSinceStart++;
-                repaint();
+            Timer logicTimer = new Timer(100, _ -> {
+                buildingMaterialLbl.setText("Materials: " + GameState.getMaterials());
+
+                GameState.tickLogic();
             });
 
-            timer.start();
+            Timer frameTimer = new Timer(33, _ -> {
+                frameSinceStart++;
+
+                // Update non-canvas UI elements
+                buildingMaterialLbl.setText("Materials: " + GameState.getMaterials());
+
+                repaint(); // this re-runs `paintComponent`
+            });
+
+            frameTimer.start();
+            logicTimer.start();
         }
     }
 }
