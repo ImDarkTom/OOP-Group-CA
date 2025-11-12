@@ -9,6 +9,8 @@ public class GameWindow {
     private GameWindow() {}
 
     public static void createWindow() {
+        System.setProperty("sun.java2d.uiScale", "2.0");
+
         int width = 800;
         int height = 600;
 
@@ -16,9 +18,54 @@ public class GameWindow {
         frame.setTitle("Game Window");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // 2D canvas
+        // UI
+        // // 2D canvas
         GameCanvas canvas = new GameCanvas();
-        frame.add(canvas);
+
+        JLabel buildingMaterialLbl = new JLabel("Materials: 0");
+        JButton placeFarmBtn = new JButton("Place Farm");
+
+        JPanel controlPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        controlPanel.add(placeFarmBtn);
+        controlPanel.add(buildingMaterialLbl);
+
+        frame.setLayout(new BorderLayout());
+
+        frame.add(controlPanel, BorderLayout.NORTH);
+        frame.add(canvas, BorderLayout.CENTER);
+
+        frame.pack();
+
+//        GroupLayout layout = new GroupLayout(frame.getContentPane());
+//        frame.getContentPane().setLayout(layout);
+//
+//        layout.setHorizontalGroup(
+//                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+//                        .addGroup(layout.createSequentialGroup()
+//                                .addContainerGap()
+//                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+//                                        .addComponent(canvas, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+//                                        .addGroup(layout.createSequentialGroup()
+//                                                .addComponent(placeFarmBtn, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
+//                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+//                                                .addComponent(buildingMaterialLbl, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
+//                                                .addGap(0, 0, Short.MAX_VALUE)))
+//                                .addContainerGap())
+//        );
+//
+//        layout.setVerticalGroup(
+//                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+//                        .addGroup(layout.createSequentialGroup()
+//                                .addContainerGap()
+//                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+//                                        .addComponent(placeFarmBtn)
+//                                        .addComponent(buildingMaterialLbl))
+//                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+//                                .addComponent(canvas, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+//                                .addContainerGap())
+//        );
+//
+//        frame.pack();
 
         // init state
         GameState.generateWorld();
