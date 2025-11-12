@@ -5,7 +5,8 @@ import com.ncirl.oop.groupca.thomas.GameState;
 import java.awt.*;
 
 public class Settlement extends GameObject {
-    private float hunger = 0;
+//    private final int MAX_HUNGER = 1000;
+    private int hunger = 0;
     private int giveMaterialTick = 0;
 
     public Settlement(double startX, double startY) {
@@ -27,13 +28,13 @@ public class Settlement extends GameObject {
 
     @Override
     public void tickLogic() {
-        this.hunger += 0.1F;
+        this.hunger += 1;
 
         giveMaterialTick++;
 
         if (giveMaterialTick == 10) {
             giveMaterialTick = 0;
-            GameState.setMaterials(GameState.getMaterials() + 1);
+            GameState.setPlayerMaterials(GameState.getPlayerMaterials() + 1);
         }
     }
 }
