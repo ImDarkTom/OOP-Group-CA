@@ -36,37 +36,6 @@ public class GameWindow {
 
         frame.pack();
 
-//        GroupLayout layout = new GroupLayout(frame.getContentPane());
-//        frame.getContentPane().setLayout(layout);
-//
-//        layout.setHorizontalGroup(
-//                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-//                        .addGroup(layout.createSequentialGroup()
-//                                .addContainerGap()
-//                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-//                                        .addComponent(canvas, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-//                                        .addGroup(layout.createSequentialGroup()
-//                                                .addComponent(placeFarmBtn, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
-//                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-//                                                .addComponent(buildingMaterialLbl, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
-//                                                .addGap(0, 0, Short.MAX_VALUE)))
-//                                .addContainerGap())
-//        );
-//
-//        layout.setVerticalGroup(
-//                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-//                        .addGroup(layout.createSequentialGroup()
-//                                .addContainerGap()
-//                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-//                                        .addComponent(placeFarmBtn)
-//                                        .addComponent(buildingMaterialLbl))
-//                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-//                                .addComponent(canvas, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-//                                .addContainerGap())
-//        );
-//
-//        frame.pack();
-
         // init state
         GameState.generateWorld();
 
