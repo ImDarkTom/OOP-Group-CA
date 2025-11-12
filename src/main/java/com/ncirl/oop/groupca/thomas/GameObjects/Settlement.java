@@ -1,39 +1,20 @@
 package com.ncirl.oop.groupca.thomas.GameObjects;
 
+import com.ncirl.oop.groupca.thomas.GameState;
+
 import java.awt.*;
-import java.util.Timer;
-import java.util.TimerTask;
-
-class TickHunger extends TimerTask {
-    private final Settlement settlement;
-
-    public TickHunger(Settlement settlement) {
-        this.settlement = settlement;
-    }
-
-    @Override
-    public void run() {
-        settlement.setHunger(settlement.getHunger() + 1);
-    }
-}
 
 public class Settlement extends GameObject {
-    private float hunger = 0;
+//    private final int MAX_HUNGER = 1000;
+    private int hunger = 0;
+    private int giveMaterialTick = 0;
 
     public Settlement(double startX, double startY) {
         super(startX, startY, 50);
     }
 
     @Override
-    public void setup() {
-        // use java util timer instead of swing like we do on `GameWindow`
-        Timer timer = new Timer();
-
-        // pass in this instance of the settlement as the one to tick hunger for
-        TimerTask task = new TickHunger(this);
-
-        timer.schedule(task, 1000, 1000);
-    }
+    public void setup() {}
 
     @Override
     public void render(Graphics2D g2) {
@@ -45,11 +26,15 @@ public class Settlement extends GameObject {
         g2.drawString("Hunger: " + hunger, (int)pos.x, (int)pos.y);
     }
 
-    public float getHunger() {
-        return hunger;
-    }
+    @Override
+    public void tickLogic() {
+        this.hunger += 1;
 
-    public void setHunger(float hunger) {
-        this.hunger = hunger;
+        giveMaterialTick++;
+
+        if (giveMaterialTick == 10) {
+            giveMaterialTick = 0;
+            GameState.setPlayerMaterials(GameState.getPlayerMaterials() + 1);
+        }
     }
 }

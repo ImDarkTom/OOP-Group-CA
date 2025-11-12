@@ -1,9 +1,10 @@
 package com.ncirl.oop.groupca.thomas.GameObjects;
 
 import com.ncirl.oop.groupca.thomas.util.Renderable;
+import com.ncirl.oop.groupca.thomas.util.Tickable;
 import com.ncirl.oop.groupca.thomas.util.Vector2D;
 
-public abstract class GameObject implements Renderable {
+public abstract class GameObject implements Renderable, Tickable {
     Vector2D pos;
     int size;
 
