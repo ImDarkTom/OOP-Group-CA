@@ -18,7 +18,7 @@ public class GameState {
         GameState.materials = materials;
     }
 
-    private GameState() {};
+    private GameState() {}
 
     public static void generateWorld() {
         gameObjects.add(new Settlement(
