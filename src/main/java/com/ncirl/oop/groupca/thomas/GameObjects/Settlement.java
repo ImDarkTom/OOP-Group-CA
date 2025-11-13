@@ -9,8 +9,13 @@ public class Settlement extends GameObject {
     private int hunger = 0;
     private int giveMaterialTick = 0;
 
+    private final Image asset;
+
     public Settlement(double startX, double startY) {
         super(startX, startY, 50);
+
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        asset = toolkit.getImage(getClass().getResource("/tom_game/settlement.png"));
     }
 
     @Override
@@ -19,7 +24,7 @@ public class Settlement extends GameObject {
     @Override
     public void render(Graphics2D g2) {
         g2.setColor(Color.RED);
-        g2.fillRect((int)pos.x, (int)pos.y, size, size);
+        g2.drawImage(asset, 50, 50, null);
 
         g2.setColor(Color.BLACK);
         g2.setFont(new Font("SansSerif", Font.BOLD, 16));

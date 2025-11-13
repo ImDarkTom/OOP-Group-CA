@@ -1,99 +1,73 @@
 package com.ncirl.oop.groupca.thomas;
 
 import com.ncirl.oop.groupca.OOPGroupCAGUI;
-import com.ncirl.oop.groupca.thomas.GameObjects.Farm;
-import com.ncirl.oop.groupca.thomas.GameObjects.GameObject;
-import com.ncirl.oop.groupca.thomas.util.Vector2D;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class TomGameWindow {
-    private static final JButton backToMenuBtn = new JButton("< Menu");
-    private static final JButton placeFarmBtn = new JButton("Place Farm [110]");
-    private static final JLabel buildingMaterialLbl = new JLabel("Materials: 0");
+public class TomGameWindow extends JFrame {
+    private GameCanvas canvas;
+    private JPanel controlPanel;
+    private JButton backToMenuBtn;
+    private JButton placeFarmBtn;
+    private JLabel buildingMaterialLbl;
 
-    public TomGameWindow() {}
+    public TomGameWindow() { initComponents(); }
 
-    public void createWindow() {
-        int width = 800;
-        int height = 600;
+    // Even though this wasn't made through the form editor, still have an initComponents method for the sake of uniformity
+    private void initComponents() {
+        final int WINDOW_WIDTH = 800;
+        final int WINDOW_HEIGHT = 600;
 
-        // Setup JFrame
-        JFrame frame = new JFrame();
-        frame.setTitle("Game Window");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        canvas = new GameCanvas();
+        controlPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        backToMenuBtn = new JButton("Menu");
+        placeFarmBtn = new JButton("Place Farm [110]");
+        buildingMaterialLbl = new JLabel("Materials: 0");
 
-        // Create the canvas we'll be rendering the game to
-        GameCanvas canvas = new GameCanvas();
+        // Frame meta
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Game Window");
+
+        // Canvas
         canvas.setBackground(new Color(0, 127, 12));
 
-        // UI Layout
-        JPanel controlPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        controlPanel.add(placeFarmBtn);
-        controlPanel.add(buildingMaterialLbl);
-
-        // event listeners
-        placeFarmBtn.addActionListener((event) -> GameState.placeFarm());
-        backToMenuBtn.addActionListener((e) -> {
+        // back to menu btn
+        controlPanel.add(backToMenuBtn);
+        backToMenuBtn.addActionListener(_ -> {
             OOPGroupCAGUI myGUI = new OOPGroupCAGUI();
             myGUI.setVisible(true);
-            frame.dispose();
+            dispose();
         });
 
-        frame.setLayout(new BorderLayout());
+        // place farm btn
+        controlPanel.add(placeFarmBtn);
+        placeFarmBtn.addActionListener(_ -> GameState.placeFarm());
 
-        frame.add(controlPanel, BorderLayout.NORTH);
-        frame.add(canvas, BorderLayout.CENTER);
+        // building material lbl
+        controlPanel.add(buildingMaterialLbl);
 
-        frame.pack();
+        // frame ui
+        setLayout(new BorderLayout());
+        add(controlPanel, BorderLayout.NORTH);
+        add(canvas, BorderLayout.CENTER);
 
-        // init state
+        pack();
+
+        // set size & set location has to be after pack
+        setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+        setLocationRelativeTo(null);
+
+        // game state
         GameState.generateWorld();
-        canvas.startGameLoop();
-
-        // init window
-        frame.setSize(width, height);
-
-        SwingUtilities.invokeLater(() -> {
-            frame.setVisible(true);
-        });
+        canvas.startGameLoop(this);
     }
 
-    static class GameCanvas extends JPanel {
-        private void renderFrame(Graphics2D g2) {
-            for (GameObject object : GameState.gameObjects) {
-                object.render(g2);
-            }
+    public void setBuildingMaterialAmount(int amount) {
+        buildingMaterialLbl.setText("Materials: " + amount);
+    }
 
-            // Mouse-state related rendering
-            if (GameState.isPlacingFarm) {
-                Point mousePos = MouseInfo.getPointerInfo().getLocation();
-                SwingUtilities.convertPointFromScreen(mousePos, this);
-                Farm.drawGhost(g2, new Vector2D(mousePos.x, mousePos.y));
-            }
-        }
-
-        @Override
-        protected void paintComponent(Graphics g) {
-            super.paintComponent(g);
-            renderFrame((Graphics2D) g);
-        }
-
-        public void startGameLoop() {
-            // 10 ticks/s
-            Timer logicTimer = new Timer(100, _ -> {
-                buildingMaterialLbl.setText("Materials: " + GameState.getPlayerMaterials());
-                placeFarmBtn.setEnabled(GameState.getPlayerMaterials() >= 110);
-
-                GameState.tickLogic();
-            });
-
-            // 30 fps
-            Timer frameTimer = new Timer(33, _ -> repaint()); // this re-runs `paintComponent`
-
-            frameTimer.start();
-            logicTimer.start();
-        }
+    public void setFarmBtnEnabled(boolean val) {
+        placeFarmBtn.setEnabled(val);
     }
 }

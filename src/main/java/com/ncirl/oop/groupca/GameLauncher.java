@@ -25,7 +25,7 @@ public class GameLauncher {
     
     public static void launchTomGame() {
         TomGameWindow tomGameWindow = new TomGameWindow();
-        tomGameWindow.createWindow();
+        tomGameWindow.setVisible(true);
     }
     
     public static void launchAlexGame() {
