@@ -29,37 +29,38 @@ public class TomGameWindow {
             System.out.println("Error setting LookAndFeel: " + ex);
         }
 
+        // Setup JFrame
+        JFrame frame = new JFrame();
+        frame.setTitle("Game Window");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // Create the canvas we'll be rendering the game to
+        GameCanvas canvas = new GameCanvas();
+        canvas.setBackground(new Color(0, 127, 12));
+
+        // UI Layout
+        JPanel controlPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        controlPanel.add(placeFarmBtn);
+        controlPanel.add(buildingMaterialLbl);
+
+        // event listeners
+        placeFarmBtn.addActionListener((event) -> GameState.placeFarm());
+
+        frame.setLayout(new BorderLayout());
+
+        frame.add(controlPanel, BorderLayout.NORTH);
+        frame.add(canvas, BorderLayout.CENTER);
+
+        frame.pack();
+
+        // init state
+        GameState.generateWorld();
+        canvas.startGameLoop();
+
+        // init window
+        frame.setSize(width, height);
+
         SwingUtilities.invokeLater(() -> {
-            // Setup JFrame
-            JFrame frame = new JFrame();
-            frame.setTitle("Game Window");
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-            // Create the canvas we'll be rendering the game to
-            GameCanvas canvas = new GameCanvas();
-            canvas.setBackground(new Color(0, 127, 12));
-
-            // UI Layout
-            JPanel controlPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-            controlPanel.add(placeFarmBtn);
-            controlPanel.add(buildingMaterialLbl);
-
-            // event listeners
-            placeFarmBtn.addActionListener((event) -> GameState.placeFarm());
-
-            frame.setLayout(new BorderLayout());
-
-            frame.add(controlPanel, BorderLayout.NORTH);
-            frame.add(canvas, BorderLayout.CENTER);
-
-            frame.pack();
-
-            // init state
-            GameState.generateWorld();
-            canvas.startGameLoop();
-
-            // init window
-            frame.setSize(width, height);
             frame.setVisible(true);
         });
     }
