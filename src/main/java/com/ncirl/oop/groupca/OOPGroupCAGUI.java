@@ -4,6 +4,8 @@
  */
 package com.ncirl.oop.groupca;
 
+import com.ncirl.oop.groupca.thomas.ScoreWindow.ScoreGUI;
+
 /**
  *
  * @author anton
@@ -31,11 +33,13 @@ public class OOPGroupCAGUI extends javax.swing.JFrame {
         growFoodGameBtn = new javax.swing.JButton();
         deliverFoodNameBtn = new javax.swing.JButton();
         manageFoodGameBtn = new javax.swing.JButton();
-        exitBtn = new javax.swing.JButton();
+        showScoreBtn = new javax.swing.JButton();
         titleLbl = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        exitBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("OOP Group Project");
+        setSize(new java.awt.Dimension(400, 300));
 
         growFoodGameBtn.setText("Grow Food");
         growFoodGameBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -58,6 +62,16 @@ public class OOPGroupCAGUI extends javax.swing.JFrame {
             }
         });
 
+        showScoreBtn.setText("Score");
+        showScoreBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showScoreBtnActionPerformed(evt);
+            }
+        });
+
+        titleLbl.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        titleLbl.setText("People Shouldn't Starve");
+
         exitBtn.setText("Exit");
         exitBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -65,54 +79,48 @@ public class OOPGroupCAGUI extends javax.swing.JFrame {
             }
         });
 
-        titleLbl.setText("People Shouldnt Starve");
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images.jpeg"))); // NOI18N
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(exitBtn))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(180, 180, 180)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(manageFoodGameBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(growFoodGameBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(deliverFoodNameBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(169, 169, 169)
-                        .addComponent(titleLbl)))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(146, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(manageFoodGameBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(growFoodGameBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(deliverFoodNameBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(146, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(titleLbl)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(exitBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(showScoreBtn)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(titleLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(growFoodGameBtn)
-                        .addGap(18, 18, 18)
-                        .addComponent(deliverFoodNameBtn)
-                        .addGap(18, 18, 18)
-                        .addComponent(manageFoodGameBtn))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
-                        .addComponent(jLabel1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
-                .addComponent(exitBtn)
+                .addGap(18, 18, 18)
+                .addComponent(growFoodGameBtn)
+                .addGap(18, 18, 18)
+                .addComponent(deliverFoodNameBtn)
+                .addGap(18, 18, 18)
+                .addComponent(manageFoodGameBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(exitBtn)
+                    .addComponent(showScoreBtn))
                 .addContainerGap())
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void growFoodGameBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_growFoodGameBtnActionPerformed
@@ -130,8 +138,14 @@ public class OOPGroupCAGUI extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_manageFoodGameBtnActionPerformed
 
+    private void showScoreBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showScoreBtnActionPerformed
+        ScoreGUI scoreGUI = new ScoreGUI();
+        scoreGUI.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_showScoreBtnActionPerformed
+
     private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
-        dispose();
+        dispose(); // Close the window
     }//GEN-LAST:event_exitBtnActionPerformed
 
     /**
@@ -163,8 +177,8 @@ public class OOPGroupCAGUI extends javax.swing.JFrame {
     private javax.swing.JButton deliverFoodNameBtn;
     private javax.swing.JButton exitBtn;
     private javax.swing.JButton growFoodGameBtn;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JButton manageFoodGameBtn;
+    private javax.swing.JButton showScoreBtn;
     private javax.swing.JLabel titleLbl;
     // End of variables declaration//GEN-END:variables
 }
