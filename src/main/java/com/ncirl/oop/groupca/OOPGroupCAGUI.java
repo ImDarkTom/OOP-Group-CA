@@ -4,9 +4,6 @@
  */
 package com.ncirl.oop.groupca;
 
-import com.ncirl.oop.groupca.antonio.AntonioGUI;
-//import com.ncirl.oop.groupca.thomas.TomGameWindow;
-
 /**
  *
  * @author anton
@@ -110,20 +107,20 @@ public class OOPGroupCAGUI extends javax.swing.JFrame {
 
     private void growFoodGameBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_growFoodGameBtnActionPerformed
         GameLauncher.launchAlexGame();
+        this.dispose();
     }//GEN-LAST:event_growFoodGameBtnActionPerformed
 
     private void deliverFoodNameBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deliverFoodNameBtnActionPerformed
-        // TODO add your handling code here:
         GameLauncher.launchAntonioGame();
+        this.dispose();
     }//GEN-LAST:event_deliverFoodNameBtnActionPerformed
 
     private void manageFoodGameBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageFoodGameBtnActionPerformed
-        // TODO add your handling code here:
         GameLauncher.launchTomGame();
+        this.dispose();
     }//GEN-LAST:event_manageFoodGameBtnActionPerformed
 
     private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
-        // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_exitBtnActionPerformed
 
