@@ -3,7 +3,8 @@
  */
 package com.ncirl.oop.groupca;
 
-import com.ncirl.oop.groupca.thomas.TomGameWindow;
+import javax.swing.*;
+import java.awt.*;
 
 /**
  *
@@ -24,6 +25,18 @@ public class OOPGroupCA {
                 GameLauncher.launchAntonioGame();
                 return;
             }
+        }
+
+        // Set LookAndFeel to Nimbus, taken from Netbeans' generated UI code.
+        try {
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ReflectiveOperationException | UnsupportedLookAndFeelException ex) {
+            System.out.println("Error setting LookAndFeel: " + ex);
         }
 
         OOPGroupCAGUI myGUI = new OOPGroupCAGUI();

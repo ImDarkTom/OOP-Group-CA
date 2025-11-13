@@ -1,5 +1,6 @@
 package com.ncirl.oop.groupca.thomas;
 
+import com.ncirl.oop.groupca.OOPGroupCAGUI;
 import com.ncirl.oop.groupca.thomas.GameObjects.Farm;
 import com.ncirl.oop.groupca.thomas.GameObjects.GameObject;
 import com.ncirl.oop.groupca.thomas.util.Vector2D;
@@ -8,26 +9,15 @@ import javax.swing.*;
 import java.awt.*;
 
 public class TomGameWindow {
-    private static final JLabel buildingMaterialLbl = new JLabel("Materials: 0");
+    private static final JButton backToMenuBtn = new JButton("< Menu");
     private static final JButton placeFarmBtn = new JButton("Place Farm [110]");
+    private static final JLabel buildingMaterialLbl = new JLabel("Materials: 0");
 
-    private TomGameWindow() {}
+    public TomGameWindow() {}
 
-    public static void createWindow() {
+    public void createWindow() {
         int width = 800;
         int height = 600;
-
-        // Set LookAndFeel to Nimbus, taken from Netbeans' generated UI code.
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | UnsupportedLookAndFeelException ex) {
-            System.out.println("Error setting LookAndFeel: " + ex);
-        }
 
         // Setup JFrame
         JFrame frame = new JFrame();
@@ -45,6 +35,11 @@ public class TomGameWindow {
 
         // event listeners
         placeFarmBtn.addActionListener((event) -> GameState.placeFarm());
+        backToMenuBtn.addActionListener((e) -> {
+            OOPGroupCAGUI myGUI = new OOPGroupCAGUI();
+            myGUI.setVisible(true);
+            frame.dispose();
+        });
 
         frame.setLayout(new BorderLayout());
 
