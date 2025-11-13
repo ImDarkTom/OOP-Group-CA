@@ -4,6 +4,8 @@
  */
 package com.ncirl.oop.groupca;
 
+import com.ncirl.oop.groupca.thomas.ScoreWindow.ScoreGUI;
+
 /**
  *
  * @author anton
@@ -30,61 +32,88 @@ public class OOPGroupCAGUI extends javax.swing.JFrame {
 
         growFoodGameBtn = new javax.swing.JButton();
         deliverFoodNameBtn = new javax.swing.JButton();
-        manageFoodGameBtn = new javax.swing.JButton();
-        exitBtn = new javax.swing.JButton();
+        supplyFoodGameBtn = new javax.swing.JButton();
+        showScoreBtn = new javax.swing.JButton();
         titleLbl = new javax.swing.JLabel();
+        exitBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("OOP Group Project");
+        setSize(new java.awt.Dimension(400, 300));
 
+        growFoodGameBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small_icons/seedling.png"))); // NOI18N
         growFoodGameBtn.setText("Grow Food");
+        growFoodGameBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        growFoodGameBtn.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/small_icons/arrow_right.png"))); // NOI18N
         growFoodGameBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 growFoodGameBtnActionPerformed(evt);
             }
         });
 
+        deliverFoodNameBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small_icons/truck.png"))); // NOI18N
         deliverFoodNameBtn.setText("Deliver Food");
+        deliverFoodNameBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        deliverFoodNameBtn.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/small_icons/arrow_right.png"))); // NOI18N
         deliverFoodNameBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deliverFoodNameBtnActionPerformed(evt);
             }
         });
 
-        manageFoodGameBtn.setText("Manage Food");
-        manageFoodGameBtn.addActionListener(new java.awt.event.ActionListener() {
+        supplyFoodGameBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small_icons/wrench.png"))); // NOI18N
+        supplyFoodGameBtn.setText("Supply Food");
+        supplyFoodGameBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        supplyFoodGameBtn.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/small_icons/arrow_right.png"))); // NOI18N
+        supplyFoodGameBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                manageFoodGameBtnActionPerformed(evt);
+                supplyFoodGameBtnActionPerformed(evt);
             }
         });
 
+        showScoreBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small_icons/star.png"))); // NOI18N
+        showScoreBtn.setText("Score");
+        showScoreBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        showScoreBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showScoreBtnActionPerformed(evt);
+            }
+        });
+
+        titleLbl.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        titleLbl.setText("People Shouldn't Starve");
+
         exitBtn.setText("Exit");
+        exitBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         exitBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exitBtnActionPerformed(evt);
             }
         });
 
-        titleLbl.setText("People Shouldn't Starve");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(exitBtn))
+                        .addComponent(exitBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(showScoreBtn))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(180, 180, 180)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(manageFoodGameBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(growFoodGameBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(deliverFoodNameBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(169, 169, 169)
-                        .addComponent(titleLbl)))
-                .addContainerGap(172, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(titleLbl)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(142, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(growFoodGameBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(deliverFoodNameBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(supplyFoodGameBtn, javax.swing.GroupLayout.Alignment.LEADING))
+                .addContainerGap(143, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -96,13 +125,16 @@ public class OOPGroupCAGUI extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(deliverFoodNameBtn)
                 .addGap(18, 18, 18)
-                .addComponent(manageFoodGameBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
-                .addComponent(exitBtn)
+                .addComponent(supplyFoodGameBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(exitBtn)
+                    .addComponent(showScoreBtn))
                 .addContainerGap())
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void growFoodGameBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_growFoodGameBtnActionPerformed
@@ -115,13 +147,19 @@ public class OOPGroupCAGUI extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_deliverFoodNameBtnActionPerformed
 
-    private void manageFoodGameBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageFoodGameBtnActionPerformed
+    private void supplyFoodGameBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supplyFoodGameBtnActionPerformed
         GameLauncher.launchTomGame();
         this.dispose();
-    }//GEN-LAST:event_manageFoodGameBtnActionPerformed
+    }//GEN-LAST:event_supplyFoodGameBtnActionPerformed
+
+    private void showScoreBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showScoreBtnActionPerformed
+        ScoreGUI scoreGUI = new ScoreGUI();
+        scoreGUI.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_showScoreBtnActionPerformed
 
     private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
-        dispose();
+        this.dispose(); // Close the window
     }//GEN-LAST:event_exitBtnActionPerformed
 
     /**
@@ -153,7 +191,8 @@ public class OOPGroupCAGUI extends javax.swing.JFrame {
     private javax.swing.JButton deliverFoodNameBtn;
     private javax.swing.JButton exitBtn;
     private javax.swing.JButton growFoodGameBtn;
-    private javax.swing.JButton manageFoodGameBtn;
+    private javax.swing.JButton showScoreBtn;
+    private javax.swing.JButton supplyFoodGameBtn;
     private javax.swing.JLabel titleLbl;
     // End of variables declaration//GEN-END:variables
 }
