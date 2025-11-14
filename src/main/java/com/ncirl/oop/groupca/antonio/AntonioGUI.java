@@ -5,6 +5,14 @@
 package com.ncirl.oop.groupca.antonio;
 
 import com.ncirl.oop.groupca.OOPGroupCAGUI;
+import com.ncirl.oop.groupca.antonio.Items.Delivery;
+import com.ncirl.oop.groupca.antonio.Items.Items;
+import com.ncirl.oop.groupca.antonio.Items.Pickup;
+import com.ncirl.oop.groupca.antonio.Map.Maps;
+import com.ncirl.oop.groupca.antonio.Vehicle.Air;
+import com.ncirl.oop.groupca.antonio.Vehicle.Land;
+import com.ncirl.oop.groupca.antonio.Vehicle.Sea;
+import com.ncirl.oop.groupca.antonio.Vehicle.Vehicle;
 
 /**
  *
@@ -33,13 +41,18 @@ public class AntonioGUI extends javax.swing.JFrame {
         Air = new javax.swing.JButton();
         Land = new javax.swing.JButton();
         Sea = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        gameName = new javax.swing.JLabel();
         Back = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         Air.setText("Air");
         Air.setPreferredSize(new java.awt.Dimension(80, 23));
+        Air.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AirActionPerformed(evt);
+            }
+        });
 
         Land.setText("Land");
         Land.setPreferredSize(new java.awt.Dimension(80, 23));
@@ -51,8 +64,13 @@ public class AntonioGUI extends javax.swing.JFrame {
 
         Sea.setText("Sea");
         Sea.setPreferredSize(new java.awt.Dimension(80, 23));
+        Sea.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SeaActionPerformed(evt);
+            }
+        });
 
-        jLabel1.setText("Food Delivery Game Name WIP");
+        gameName.setText("Food Delivery Game Name WIP");
 
         Back.setText("Back");
         Back.addActionListener(new java.awt.event.ActionListener() {
@@ -80,14 +98,14 @@ public class AntonioGUI extends javax.swing.JFrame {
                         .addGap(120, 120, 120))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(79, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addComponent(gameName)
                 .addGap(80, 80, 80))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addComponent(jLabel1)
+                .addComponent(gameName)
                 .addGap(30, 30, 30)
                 .addComponent(Air, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -111,7 +129,36 @@ public class AntonioGUI extends javax.swing.JFrame {
 
     private void LandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LandActionPerformed
         // TODO add your handling code here:
+        Vehicle vehicle = new Land(300, 200, 0, 0, 0, 0, 0);
+        Items pickup = new Pickup(60, new int[]{150}, new int[]{200}, 0, 0);
+        Items delivery = new Delivery(60, new int[]{450}, new int[]{200}, 0, 0);
+
+        Maps map = new Maps(vehicle, pickup, delivery);
+        map.createWindow();
+        dispose();
     }//GEN-LAST:event_LandActionPerformed
+
+    private void AirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AirActionPerformed
+        // TODO add your handling code here:
+        Vehicle vehicle = new Air(300, 200, 0, 0, 0, 0, 0);
+        Items pickup = new Pickup(60, new int[]{150}, new int[]{200}, 0, 0);
+        Items delivery = new Delivery(60, new int[]{450}, new int[]{200}, 0, 0);
+
+        Maps map = new Maps(vehicle, pickup, delivery);
+        map.createWindow();
+        dispose();
+    }//GEN-LAST:event_AirActionPerformed
+
+    private void SeaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeaActionPerformed
+        // TODO add your handling code here:
+        Vehicle vehicle = new Sea(300, 200, 0, 0, 0, 0, 0);
+        Items pickup = new Pickup(60, new int[]{150}, new int[]{200}, 0, 0);
+        Items delivery = new Delivery(60, new int[]{450}, new int[]{200}, 0, 0);
+
+        Maps map = new Maps(vehicle, pickup, delivery);
+        map.createWindow();
+        dispose();
+    }//GEN-LAST:event_SeaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -143,6 +190,6 @@ public class AntonioGUI extends javax.swing.JFrame {
     private javax.swing.JButton Back;
     private javax.swing.JButton Land;
     private javax.swing.JButton Sea;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel gameName;
     // End of variables declaration//GEN-END:variables
 }

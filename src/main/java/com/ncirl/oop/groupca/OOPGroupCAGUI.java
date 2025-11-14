@@ -115,6 +115,7 @@ public class OOPGroupCAGUI extends javax.swing.JFrame {
     private void deliverFoodNameBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deliverFoodNameBtnActionPerformed
         // TODO add your handling code here:
         GameLauncher.launchAntonioGame();
+        dispose();
     }//GEN-LAST:event_deliverFoodNameBtnActionPerformed
 
     private void manageFoodGameBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageFoodGameBtnActionPerformed
