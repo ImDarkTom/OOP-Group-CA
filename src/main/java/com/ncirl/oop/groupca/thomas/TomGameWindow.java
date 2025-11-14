@@ -39,13 +39,17 @@ public class TomGameWindow extends JFrame {
             myGUI.setVisible(true);
             dispose();
         });
+        backToMenuBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small_icons/back.png")));
 
         // place farm btn
         controlPanel.add(placeFarmBtn);
         placeFarmBtn.addActionListener(_ -> GameState.placeFarm());
+        placeFarmBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tom_game/contruct.png")));
 
         // building material lbl
         controlPanel.add(buildingMaterialLbl);
+        buildingMaterialLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small_icons/wrench.png")));
+
 
         // frame ui
         setLayout(new BorderLayout());
