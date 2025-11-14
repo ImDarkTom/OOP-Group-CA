@@ -4,6 +4,7 @@ import com.ncirl.oop.groupca.OOPGroupCAGUI;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 
 public class TomGameWindow extends JFrame {
     private GameCanvas canvas;
@@ -34,11 +35,7 @@ public class TomGameWindow extends JFrame {
 
         // back to menu btn
         controlPanel.add(backToMenuBtn);
-        backToMenuBtn.addActionListener(_ -> {
-            OOPGroupCAGUI myGUI = new OOPGroupCAGUI();
-            myGUI.setVisible(true);
-            dispose();
-        });
+        backToMenuBtn.addActionListener(this::backToMenuBtnAction);
         backToMenuBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small_icons/back.png")));
 
         // place farm btn
@@ -67,6 +64,17 @@ public class TomGameWindow extends JFrame {
         canvas.startGameLoop(this);
     }
 
+    // button actions
+    private void backToMenuBtnAction(ActionEvent _e) {
+        OOPGroupCAGUI myGUI = new OOPGroupCAGUI();
+        myGUI.setVisible(true);
+
+        GameState.resetState();
+
+        dispose();
+    }
+
+    // get/set
     public void setBuildingMaterialAmount(int amount) {
         buildingMaterialLbl.setText("Materials: " + amount);
     }
