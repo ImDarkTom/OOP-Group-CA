@@ -66,6 +66,10 @@ public class TomGameWindow extends JFrame {
 
     // button actions
     private void backToMenuBtnAction(ActionEvent _e) {
+        if (JOptionPane.showConfirmDialog(this, "Are you sure you want to go back to menu", "Confirm", JOptionPane.YES_NO_OPTION) == 1) {
+            // If no, return
+            return;
+        }
         OOPGroupCAGUI myGUI = new OOPGroupCAGUI();
         myGUI.setVisible(true);
 
