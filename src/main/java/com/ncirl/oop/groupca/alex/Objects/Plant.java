@@ -8,22 +8,24 @@ import java.awt.*;
  *
  * @author DELL
  */
-public class Player {
-    private int posX;private int posY;
-    private int width;private int height;
+abstract public class Plant {
+    protected int posX;protected int posY;
+    protected int width;protected int height;
+    protected String tool;protected boolean held;
     
-    public Player() {
+    public Plant() {
         posX = 100;
         posY = 100;
         width = 50;
         height = 50;
+        held = false;
     }
     
-    public void setPosX(int X) {
+    public void setX(int X) {
       posX = X;  
     }
-    public void setPosY(int Y) {
-      posY = Y;  
+    public void setY(int Y) {
+      posY = Y;
     }
     
     public int getX() {
@@ -33,13 +35,15 @@ public class Player {
         return posY;
     }
     
-    public void paintPlayer(Graphics g) {
-        g.setColor(Color.blue);
-        g.fillRect(posX, posY+(height/4), width, height/2);
-        g.setColor(Color.yellow);
-        g.fillRect(posX+(width/4), posY-(height/4), width/2, height/2);
-        
-        
-        g.setColor(Color.black);
+    public boolean toggleHeld() {
+        if(held==true) {
+            held=false;
+        } else {
+            held=true;
+        }
+        return held;
+    }
+    
+    public void paintPlant(Graphics g) {
     }
 }

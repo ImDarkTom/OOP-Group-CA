@@ -3,59 +3,98 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.ncirl.oop.groupca.alex;
-import com.ncirl.oop.groupca.alex.Objects.Player;
+import com.ncirl.oop.groupca.alex.Objects.*;
 import javax.swing.*;
-import java.io.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 /**
  *
  * @author DELL
  */
-public class AlexWindow {
-    
-    JFrame f;
-    JButton btn1;
+public class AlexWindow { // Must create variables at the start so they can be used outside of creatWindow()
+    private static GameLoop game = new GameLoop(); 
+    private static JFrame f;
+    private static JButton btn1;
+    private static Label points;
     
     public AlexWindow() {
         createWindow();
     }
     
-    public void createWindow() {
-        Label L1 = new Label("Label 1");
-        f = new JFrame("Frame");
-        btn1 = new JButton("");
+    public static void createWindow() {
+        f = new JFrame("Frame"); // Create frame and JPanel for buttons
+        JPanel buttonContainer = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        btn1 = new JButton("Back"); // Create back button
+        GameWindow gamePanel = new GameWindow(); // Create panel to handle painting to screen
         
-        btn1.setBounds(150, 200, 150, 50);
-    
-        f.add(L1);
-        f.add(btn1);
-        f.add(new panel());
+        points = new Label("Points"); // Create label for points
+        game.setPanel(gamePanel); // Pass panel to GameLoop so repaint() can be called every tick
+        game.startTicks(); // Start tick timer as GameLoop now has panel
+        
+        
+        // Add button and container JPanel
+        f.add(buttonContainer, BorderLayout.SOUTH);
+        buttonContainer.add(btn1);
+        buttonContainer.add(points);
+        // Action Listener
+        btn1.addActionListener(e -> { //
+            backButton();
+        });
+
+        f.add(gamePanel); // Add panel to 
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //f.setLayout(new BorderLayout());
         f.pack();
         f.setVisible(true);
     }
     
-    public class panel extends JPanel {
-        public panel() {
-            setBorder(BorderFactory.createLineBorder(Color.black));
+    static public class GameWindow extends JPanel { // Main panel
+        public GameWindow() {
+            setBorder(BorderFactory.createLineBorder(Color.black)); // Makes black border
         }
-        Player player = new Player();
+       
+        Player player = new Player(); // Create objects (will have to create arraylists here)
+        Wheat wheat = new Wheat(200, 300);
+        Onion onion = new Onion(400, 300);
+        Shovel shovel = new Shovel(100, 150);
+        Scythe scythe = new Scythe(300, 100);
         
-        public Dimension getPreferredSize() {
-            return new Dimension(500,500);
+        
+        @Override
+        public Dimension getPreferredSize() { // Set window size
+            return new Dimension(600,500);
         }
         
-        public void paintComponent(Graphics g) {
-            super.paintComponent(g);  
-            player.paintPlayer(g);
-
-            // Draw Text
-            g.drawString("This is my custom Panel!",10,20);
-        } 
+        @Override
+        public void paintComponent(Graphics g) { // Function to draw items to screen, handles graphics
+            super.paintComponent(g);
+            
+            player.paintPlayer(g); // Shows all objects in the game, this will change
+            wheat.paintPlant(g); // dramatically to loading from gameLoop logic/lists
+            onion.paintPlant(g);
+            shovel.paintTool(g);
+            scythe.paintTool(g);
+            
+            if(game.getStatus()==false) { // Shows instructions
+                g.drawString("Welcome", 100, 100);
+                g.drawString("You must tend the farm.", 100, 130);
+                g.drawString("Pick up and drop tools with E, move with WASD", 100, 160);
+                g.drawString("The onions (purple circles), need the shovel. The wheat requires the scythe.", 100, 190);
+            }
+            updatePoints();
+        }
     }
-
+    static public void updatePoints() {
+        points.setText("Points: "+game.getPoints());
+    }
+    
+    static public void backButton() {
+        game.endTicks();
+        f.dispose();
+        
+    }
 }
 
 
