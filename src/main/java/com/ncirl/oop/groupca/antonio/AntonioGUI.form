@@ -43,7 +43,7 @@
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace pref="79" max="32767" attributes="0"/>
-              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <Component id="gameName" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -52,7 +52,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <Component id="gameName" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
               <Component id="Air" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -74,6 +74,9 @@
           <Dimension value="[80, 23]"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AirActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="Land">
       <Properties>
@@ -93,8 +96,11 @@
           <Dimension value="[80, 23]"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SeaActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="gameName">
       <Properties>
         <Property name="text" type="java.lang.String" value="Food Delivery Game Name WIP"/>
       </Properties>
