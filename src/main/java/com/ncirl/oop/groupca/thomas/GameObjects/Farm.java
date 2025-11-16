@@ -1,6 +1,5 @@
 package com.ncirl.oop.groupca.thomas.GameObjects;
 
-import com.ncirl.oop.groupca.thomas.GameState;
 import com.ncirl.oop.groupca.thomas.util.Vector2D;
 
 import java.awt.*;

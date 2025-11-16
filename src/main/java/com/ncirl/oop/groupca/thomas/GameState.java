@@ -31,6 +31,12 @@ public class GameState {
         ));
     }
 
+    public static void resetState() {
+        gameObjects = new ArrayList<>();
+        playerMaterials = 100;
+        isPlacingFarm = false;
+    }
+
     public static void tickLogic() {
         for (GameObject object : gameObjects) {
             object.tickLogic();
