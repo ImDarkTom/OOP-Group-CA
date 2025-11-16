@@ -24,7 +24,8 @@ public class GameLauncher {
     }
     
     public static void launchTomGame() {
-        TomGameWindow.createWindow();
+        TomGameWindow tomGameWindow = new TomGameWindow();
+        tomGameWindow.createWindow();
     }
     
     public static void launchAlexGame() {
