@@ -6,8 +6,7 @@ package com.ncirl.oop.groupca.alex;
 import com.ncirl.oop.groupca.alex.Objects.*;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import com.ncirl.oop.groupca.OOPGroupCAGUI;
 
 /**
  *
@@ -91,9 +90,10 @@ public class AlexWindow { // Must create variables at the start so they can be u
     }
     
     static public void backButton() {
+        OOPGroupCAGUI mainMenu = new OOPGroupCAGUI();
+        mainMenu.setVisible(true);
         game.endTicks();
         f.dispose();
-        
     }
 }
 
