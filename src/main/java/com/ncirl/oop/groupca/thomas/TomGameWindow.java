@@ -12,6 +12,7 @@ public class TomGameWindow extends JFrame {
     private JButton backToMenuBtn;
     private JButton placeFarmBtn;
     private JLabel buildingMaterialLbl;
+    private JLabel scoreLbl;
 
     public TomGameWindow() { initComponents(); }
 
@@ -25,6 +26,7 @@ public class TomGameWindow extends JFrame {
         backToMenuBtn = new JButton("Menu");
         placeFarmBtn = new JButton("Place Farm [110]");
         buildingMaterialLbl = new JLabel("Materials: 0");
+        scoreLbl = new JLabel("Score: 0");
 
         // Frame meta
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -47,6 +49,7 @@ public class TomGameWindow extends JFrame {
         controlPanel.add(buildingMaterialLbl);
         buildingMaterialLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small_icons/wrench.png")));
 
+        controlPanel.add(scoreLbl);
 
         // frame ui
         setLayout(new BorderLayout());
@@ -66,6 +69,10 @@ public class TomGameWindow extends JFrame {
 
     // button actions
     private void backToMenuBtnAction(ActionEvent _e) {
+        if (JOptionPane.showConfirmDialog(this, "Are you sure you want to go back to menu", "Confirm", JOptionPane.YES_NO_OPTION) == 1) {
+            // If no, return
+            return;
+        }
         OOPGroupCAGUI myGUI = new OOPGroupCAGUI();
         myGUI.setVisible(true);
 
