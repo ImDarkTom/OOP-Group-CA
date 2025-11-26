@@ -10,7 +10,15 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
+ * Recite before compilation:
+ *  Our Father who art in heaven, hallowed be thy name. Thy kingdom come. Thy
+ * will be done on earth as it is in heaven. Give us this day our daily bread,
+ * and forgive us our trespasses, as we forgive those who trespass against us,
+ * and lead us not into temptation, but deliver us from evil. For thine is the
+ * kingdom and the power, and the glory, forever and ever.
  *
+ * Amen.
+ * 
  * @author anton
  */
 public class OOPGroupCAGUI extends javax.swing.JFrame {
@@ -111,30 +119,30 @@ public class OOPGroupCAGUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(showScoreBtn))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 97, Short.MAX_VALUE)
                         .addComponent(titleLbl)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 98, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(142, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(growFoodGameBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(deliverFoodNameBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(deliverFoodNameBtn, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(supplyFoodGameBtn, javax.swing.GroupLayout.Alignment.LEADING))
-                .addContainerGap(143, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(titleLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(growFoodGameBtn)
                 .addGap(18, 18, 18)
                 .addComponent(deliverFoodNameBtn)
                 .addGap(18, 18, 18)
                 .addComponent(supplyFoodGameBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(exitBtn)
                     .addComponent(showScoreBtn))
