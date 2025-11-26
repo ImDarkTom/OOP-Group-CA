@@ -39,11 +39,11 @@ public class AlexWindow { // Must create variables at the start so they can be u
         buttonContainer.add(points);
         // Action Listener
         btn1.addActionListener(e -> { //
-            backButton();
+            exitButton();
         });
         f.setResizable(false);
-        f.add(gamePanel); // Add panel to 
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.add(gamePanel); // Add panel to
+        FrameUtils.setBackToMenuOnClose(f, AlexWindow::exitButton);
         //f.setLayout(new BorderLayout());
         f.pack();
         f.setVisible(true);
@@ -89,11 +89,8 @@ public class AlexWindow { // Must create variables at the start so they can be u
         points.setText("Points: "+game.getPoints());
     }
     
-    static public void backButton() {
-        OOPGroupCAGUI mainMenu = new OOPGroupCAGUI();
-        mainMenu.setVisible(true);
+    static public void exitButton() {
         game.endTicks();
-        f.dispose();
     }
 }
 
