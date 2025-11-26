@@ -1,6 +1,7 @@
 package com.ncirl.oop.groupca.thomas;
 
 import com.ncirl.oop.groupca.OOPGroupCAGUI;
+import com.ncirl.oop.groupca.thomas.util.FrameUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,7 +19,7 @@ public class TomGameWindow extends JFrame {
 
     // Even though this wasn't made through the form editor, still have an initComponents method for the sake of uniformity
     private void initComponents() {
-        final int WINDOW_WIDTH = 800;
+        final int WINDOW_WIDTH = 1000;
         final int WINDOW_HEIGHT = 600;
 
         canvas = new GameCanvas();
@@ -28,11 +29,11 @@ public class TomGameWindow extends JFrame {
         buildingMaterialLbl = new JLabel("Materials: 0");
         scoreLbl = new JLabel("Score: 0");
 
-        // Frame meta
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        // Frame meta#
+        FrameUtils.setBackToMenuOnClose(this, GameState::resetState);
+
         setTitle("Game Window");
 
-        // Canvas
         canvas.setBackground(new Color(0, 127, 12));
 
         // back to menu btn
