@@ -60,7 +60,7 @@ public class Maps {
     class Panel extends JPanel {
 
         public Panel() {
-            setPreferredSize(new Dimension(600, 500));
+            setPreferredSize(new Dimension(1000, 600));
             setBorder(BorderFactory.createLineBorder(Color.BLACK));
             setBackground(Color.ORANGE);
 
