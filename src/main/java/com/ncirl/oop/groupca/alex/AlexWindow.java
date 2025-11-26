@@ -34,14 +34,14 @@ public class AlexWindow { // Must create variables at the start so they can be u
         
         
         // Add button and container JPanel
-        f.add(buttonContainer, BorderLayout.SOUTH);
+        f.add(buttonContainer, BorderLayout.NORTH);
         buttonContainer.add(btn1);
         buttonContainer.add(points);
         // Action Listener
         btn1.addActionListener(e -> { //
             backButton();
         });
-
+        f.setResizable(false);
         f.add(gamePanel); // Add panel to 
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //f.setLayout(new BorderLayout());
@@ -63,7 +63,7 @@ public class AlexWindow { // Must create variables at the start so they can be u
         
         @Override
         public Dimension getPreferredSize() { // Set window size
-            return new Dimension(600,500);
+            return new Dimension(1000,600);
         }
         
         @Override
