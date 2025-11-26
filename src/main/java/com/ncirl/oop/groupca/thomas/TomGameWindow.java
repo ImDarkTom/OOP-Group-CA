@@ -1,16 +1,13 @@
 package com.ncirl.oop.groupca.thomas;
 
-import com.ncirl.oop.groupca.OOPGroupCAGUI;
 import com.ncirl.oop.groupca.thomas.util.FrameUtils;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 
 public class TomGameWindow extends JFrame {
     private GameCanvas canvas;
     private JPanel controlPanel;
-    private JButton backToMenuBtn;
     private JButton placeFarmBtn;
     private JLabel buildingMaterialLbl;
     private JLabel scoreLbl;
@@ -24,7 +21,6 @@ public class TomGameWindow extends JFrame {
 
         canvas = new GameCanvas();
         controlPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        backToMenuBtn = new JButton("Menu");
         placeFarmBtn = new JButton("Place Farm [110]");
         buildingMaterialLbl = new JLabel("Materials: 0");
         scoreLbl = new JLabel("Score: 0");
@@ -35,11 +31,6 @@ public class TomGameWindow extends JFrame {
         setTitle("Game Window");
 
         canvas.setBackground(new Color(0, 127, 12));
-
-        // back to menu btn
-        controlPanel.add(backToMenuBtn);
-        backToMenuBtn.addActionListener(this::backToMenuBtnAction);
-        backToMenuBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small_icons/back.png")));
 
         // place farm btn
         controlPanel.add(placeFarmBtn);
@@ -66,20 +57,6 @@ public class TomGameWindow extends JFrame {
         // game state
         GameState.generateWorld();
         canvas.startGameLoop(this);
-    }
-
-    // button actions
-    private void backToMenuBtnAction(ActionEvent _e) {
-        if (JOptionPane.showConfirmDialog(this, "Are you sure you want to go back to menu", "Confirm", JOptionPane.YES_NO_OPTION) == 1) {
-            // If no, return
-            return;
-        }
-        OOPGroupCAGUI myGUI = new OOPGroupCAGUI();
-        myGUI.setVisible(true);
-
-        GameState.resetState();
-
-        dispose();
     }
 
     // get/set
