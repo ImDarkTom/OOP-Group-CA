@@ -6,6 +6,9 @@ package com.ncirl.oop.groupca;
 
 import com.ncirl.oop.groupca.thomas.ScoreWindow.ScoreGUI;
 
+import javax.swing.*;
+import java.awt.*;
+
 /**
  *
  * @author anton
@@ -18,6 +21,11 @@ public class OOPGroupCAGUI extends javax.swing.JFrame {
      * Creates new form OOPGroupCAGUI
      */
     public OOPGroupCAGUI() {
+        UIManager.put("text", new Color(86, 94, 89));
+        UIManager.put("control", new Color(238, 232, 214));
+        UIManager.put("nimbusBase", new Color(250, 245, 228));
+        UIManager.put("nimbusFocus", new Color(255, 180, 0));
+
         initComponents();
     }
 
