@@ -26,6 +26,14 @@ public class Player {
       posY = Y;  
     }
     
+    // Methods to change relative to present value is here to reduce calling positions back and forth
+    public void changeX(int X) {
+        posX = posX+X;
+    }
+    public void changeY(int Y) {
+        posY = posY+Y;
+    }
+    
     public int getX() {
         return posX;
     }

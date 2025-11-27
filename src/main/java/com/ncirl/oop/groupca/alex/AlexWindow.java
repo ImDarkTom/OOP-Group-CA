@@ -20,6 +20,12 @@ public class AlexWindow { // Must create variables at the start so they can be u
     private static JButton btn1;
     private static Label points;
     
+    // Booleans that track when keys are held
+    private static boolean up = false;
+    private static boolean down = false;
+    private static boolean left = false;
+    private static boolean right = false;
+    
     public AlexWindow() {
         createWindow();
     }
@@ -53,12 +59,6 @@ public class AlexWindow { // Must create variables at the start so they can be u
             f.setVisible(true);
         }
         
-        Player player = new Player(); // Create objects (will have to create arraylists here)
-        Wheat wheat = new Wheat(200, 300);
-        Onion onion = new Onion(400, 300);
-        Shovel shovel = new Shovel(100, 150);
-        Scythe scythe = new Scythe(300, 100);
-        
         @Override
         public Dimension getPreferredSize() { // Set window size
             return new Dimension(1000,600);
@@ -68,11 +68,7 @@ public class AlexWindow { // Must create variables at the start so they can be u
         public void paintComponent(Graphics g) { // Function to draw items to screen, handles graphics
             super.paintComponent(g);
             
-            player.paintPlayer(g); // Shows all objects in the game, this will change
-            wheat.paintPlant(g); // dramatically to loading from gameLoop logic/lists
-            onion.paintPlant(g);
-            shovel.paintTool(g);
-            scythe.paintTool(g);
+            game.render(g);
             
             if(game.getStatus()==false) { // Shows instructions
                 g.drawString("Welcome", 100, 100);
@@ -80,27 +76,54 @@ public class AlexWindow { // Must create variables at the start so they can be u
                 g.drawString("Pick up and drop tools with E, move with WASD", 100, 160);
                 g.drawString("The onions (purple circles), need the shovel. The wheat requires the scythe.", 100, 190);
             }
-            updatePoints();
+            updateFunc();
         }
-       @Override // Key Listeners
-       public void keyPressed(KeyEvent e) {
-           int code = e.getKeyCode();
-           System.out.println(KeyEvent.getKeyText(code));
-       }
-       
-       @Override
-       public void keyReleased(KeyEvent e) {
-           int code = e.getKeyCode();
-           System.out.println(KeyEvent.getKeyText(code));
-       }
-       
-       @Override // Key Listeners
-       public void keyTyped(KeyEvent e) {
-           // Must be overridden
-       }
+        
+        @Override // Key Listeners
+        public void keyPressed(KeyEvent e) {
+            int code = e.getKeyCode();
+            switch(code) {
+                case 87:
+                    up=true;
+                    break;
+                case 83:
+                    down=true;
+                    break;
+                case 65:
+                    left=true;
+                    break;
+                case 68:
+                    right=true;
+                    break;
+            }
+        }
+        @Override
+        public void keyReleased(KeyEvent e) {
+            int code = e.getKeyCode();
+            switch(code) {
+                case 87:
+                    up=false;
+                    break;
+                case 83:
+                    down=false;
+                    break;
+                case 65:
+                    left=false;
+                    break;
+                case 68:
+                    right=false;
+                    break;
+            }
+        }
+
+        @Override // Key Listeners
+        public void keyTyped(KeyEvent e) {
+            // Must be overridden
+        }
         
     }
-    static public void updatePoints() {
+    static public void updateFunc() {
+        game.movePlayer(up, down, left, right);
         points.setText("Points: "+game.getPoints());
     }
     
