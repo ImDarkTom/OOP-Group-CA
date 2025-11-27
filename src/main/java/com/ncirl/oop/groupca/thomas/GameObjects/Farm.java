@@ -1,11 +1,17 @@
 package com.ncirl.oop.groupca.thomas.GameObjects;
 
+import com.ncirl.oop.groupca.thomas.GameState;
 import com.ncirl.oop.groupca.thomas.util.RenderUtils;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Farm extends GameObject {
-    private int progress = 0;
+    ArrayList<Settlement> inRangeSettlements = new ArrayList<>();
+
+    private int nextDeliveryProgress = 0;
+
+    private int deliveryRange = 200;
 
     private final Image asset;
 
@@ -14,6 +20,8 @@ public class Farm extends GameObject {
 
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         asset = toolkit.getImage(getClass().getResource("/tom_game/farm.png"));
+
+        refreshInRangeSettlements();
     }
 
     @Override
@@ -25,11 +33,50 @@ public class Farm extends GameObject {
 
         g2.setColor(Color.BLACK);
         g2.setFont(new Font("SansSerif", Font.BOLD, 16));
-        g2.drawString("Progress: " + progress, pos.x, pos.y);
+        g2.drawString("Next Delivery: " + nextDeliveryProgress, pos.x, pos.y);
     }
 
     @Override
     public void tickLogic() {
-        this.progress += 1;
+        this.nextDeliveryProgress += 1;
+
+        if (nextDeliveryProgress >= 100) {
+            nextDeliveryProgress = 0;
+
+            // Get most hungry in-range settlement;
+            Settlement mostHungrySettlement = null;
+            for (Settlement settlement : inRangeSettlements) {
+                if (mostHungrySettlement == null) {
+                    mostHungrySettlement = settlement;
+                    continue;
+                }
+
+                if (settlement.getHunger() > mostHungrySettlement.getHunger()) {
+                    mostHungrySettlement = settlement;
+                }
+            }
+
+            if (mostHungrySettlement == null) {
+                return;
+            }
+
+            mostHungrySettlement.setHunger(mostHungrySettlement.getHunger() - 100);
+        }
+    }
+
+    public void refreshInRangeSettlements() {
+        ArrayList<Settlement> inRangeSettlements = new ArrayList<>();
+
+        GameState.objectsOfType(Settlement.class).forEach(settlement -> {
+            if (this.getPos().distance(settlement.getPos()) < deliveryRange) {
+                inRangeSettlements.add(settlement);
+            }
+        });
+
+        this.inRangeSettlements = inRangeSettlements;
+    }
+
+    public ArrayList<Settlement> getInRangeSettlements() {
+        return inRangeSettlements;
     }
 }

@@ -2,7 +2,9 @@ package com.ncirl.oop.groupca.thomas;
 
 import com.ncirl.oop.groupca.thomas.GameObjects.FarmGhost;
 import com.ncirl.oop.groupca.thomas.GameObjects.GameObject;
+import com.ncirl.oop.groupca.thomas.GameObjects.PathDrawer;
 import com.ncirl.oop.groupca.thomas.GameObjects.Settlement;
+import com.sun.jdi.ClassType;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -30,6 +32,8 @@ public class GameState {
                 50,
                 50
         ));
+
+        gameObjects.add(new PathDrawer(0, 0, 0));
     }
 
     public static void resetState() {
@@ -49,6 +53,18 @@ public class GameState {
 
     public static void removeGameObject(GameObject object) {
         gameObjects.remove(object);
+    }
+
+    public static <T> ArrayList<T> objectsOfType(Class<T> type) {
+        ArrayList<T> resultList = new ArrayList<>();
+
+        for (GameObject object : gameObjects) {
+            if (type.isInstance(object)) {
+                resultList.add((T) object);
+            }
+        }
+
+        return resultList;
     }
 
     // Getters & Setters

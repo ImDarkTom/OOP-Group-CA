@@ -17,6 +17,10 @@ public class Settlement extends GameObject {
 
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         asset = toolkit.getImage(getClass().getResource("/tom_game/settlement.png"));
+
+        // When we add a new settlement, refresh every farm's inRangeSettlements
+        // to account for this new settlement.
+        GameState.objectsOfType(Farm.class).forEach(Farm::refreshInRangeSettlements);
     }
 
     @Override
@@ -44,5 +48,13 @@ public class Settlement extends GameObject {
     @Override
     public void onClicked() {
         System.out.println("clicked settlement");
+    }
+
+    public int getHunger() {
+        return hunger;
+    }
+
+    public void setHunger(int hunger) {
+        this.hunger = hunger;
     }
 }
