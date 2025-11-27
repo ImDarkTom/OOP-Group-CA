@@ -7,11 +7,11 @@ public class Farm extends GameObject {
 
     private final Image asset;
 
-    public Farm(double startX, double startY) {
-        super(startX, startY, 70);
+    public Farm(int startX, int startY) {
+        super(startX, startY, 50);
 
         Toolkit toolkit = Toolkit.getDefaultToolkit();
-        asset = toolkit.getImage(getClass().getResource("/tom_game/farm.png.png"));
+        asset = toolkit.getImage(getClass().getResource("/tom_game/farm.png"));
     }
 
     @Override

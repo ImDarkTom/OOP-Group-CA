@@ -12,7 +12,7 @@ public class Settlement extends GameObject {
 
     private final Image asset;
 
-    public Settlement(double startX, double startY) {
+    public Settlement(int startX, int startY) {
         super(startX, startY, 50);
 
         Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -25,11 +25,11 @@ public class Settlement extends GameObject {
     @Override
     public void render(Graphics2D g2, Point mousePos) {
         g2.setColor(Color.RED);
-        g2.drawImage(asset, (int) pos.x, (int) pos.y, null);
+        g2.drawImage(asset, pos.x, pos.y, null);
 
         g2.setColor(Color.BLACK);
         g2.setFont(new Font("SansSerif", Font.BOLD, 16));
-        g2.drawString("Hunger: " + hunger, (int)pos.x, (int)pos.y);
+        g2.drawString("Hunger: " + hunger, pos.x, pos.y);
     }
 
     @Override

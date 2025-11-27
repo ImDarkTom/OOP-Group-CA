@@ -15,7 +15,6 @@ class GameCanvas extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 lastClickPos = e.getPoint();
-                System.out.println("clicked");
             }
         });
     }
@@ -34,7 +33,6 @@ class GameCanvas extends JPanel {
             Runnable clickAction = null;
 
             for (GameObject object : GameState.gameObjects) {
-                System.out.println(object.getPos().x + ", lastClick: " + lastClickPos.toString());
                 if (
                         (lastClickPos.x > object.getPos().x && lastClickPos.x < object.getPos().x + object.getSize()) &&
                         (lastClickPos.y > object.getPos().y && lastClickPos.y < object.getPos().y + object.getSize())

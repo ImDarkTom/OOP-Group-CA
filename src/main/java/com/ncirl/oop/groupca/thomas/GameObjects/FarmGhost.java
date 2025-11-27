@@ -1,16 +1,12 @@
 package com.ncirl.oop.groupca.thomas.GameObjects;
 
-import com.ncirl.oop.groupca.thomas.util.Vector2D;
-
 import javax.swing.*;
 import java.awt.*;
 
 public class FarmGhost extends GameObject {
     private final Image asset;
 
-    private String errorText;
-
-    public FarmGhost(double startX, double startY) {
+    public FarmGhost(int startX, int startY) {
         super(startX, startY, 70);
 
         Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -27,15 +23,12 @@ public class FarmGhost extends GameObject {
 
     @Override
     public void render(Graphics2D g2, Point mousePos) {
-        this.pos = new Vector2D(
-                mousePos.x - ((double) asset.getWidth(null) / 2),
-                mousePos.y - ((double) asset.getHeight(null) / 2)
+        this.pos = new Point(
+                mousePos.x - (asset.getWidth(null) / 2),
+                mousePos.y - (asset.getHeight(null) / 2)
         );
 
-        int centeredX = (int)this.pos.x;
-        int centeredY = (int)this.pos.y;
-
-        g2.drawImage(asset, centeredX, centeredY, null);
+        g2.drawImage(asset, pos.x, pos.y, null);
     }
 
     @Override
