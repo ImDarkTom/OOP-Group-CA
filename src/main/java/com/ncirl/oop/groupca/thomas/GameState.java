@@ -1,12 +1,10 @@
 package com.ncirl.oop.groupca.thomas;
 
 import com.ncirl.oop.groupca.thomas.GameObjects.*;
-import com.sun.jdi.ClassType;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Set;
 
 public class GameState {
     public static ArrayList<FoodDelivery> foodDeliveries = new ArrayList<>();
@@ -29,12 +27,12 @@ public class GameState {
     }
 
     public static void generateWorld() {
+        gameObjects.add(new PathDrawer(0, 0, 0));
+
         gameObjects.add(new Settlement(
                 50,
                 50
         ));
-
-        gameObjects.add(new PathDrawer(0, 0, 0));
     }
 
     public static void resetState() {
@@ -83,8 +81,8 @@ public class GameState {
         return resultList;
     }
 
-    public static void addFoodDelivery(Point from, Point to, Settlement target) {
-        foodDeliveries.add(new FoodDelivery(from, to, target));
+    public static void addFoodDelivery(Farm from, Settlement target) {
+        foodDeliveries.add(new FoodDelivery(from, target));
     }
 
     // Getters & Setters

@@ -2,15 +2,28 @@ package com.ncirl.oop.groupca.thomas.GameObjects;
 
 import com.ncirl.oop.groupca.thomas.GameState;
 
-import javax.swing.*;
 import java.awt.*;
 
+enum SettlementType {
+    SETTLEMENT,
+    TOWN,
+    CITY
+}
+
 public class Settlement extends GameObject {
-//    private final int MAX_HUNGER = 1000;
+    private SettlementType type = SettlementType.SETTLEMENT;
+
     private int hunger = 0;
+
+    private int upgradeProgress = 0;
     private int giveMaterialTick = 0;
 
-    private final Image asset;
+    // Level dependent
+    private float hungerTickAmount = 1;
+    private int materialsPerSecond = 5;
+    private int upgradeRequirement = 100;
+
+    private Image asset;
 
     public Settlement(int startX, int startY) {
         super(startX, startY, 50);
@@ -28,20 +41,30 @@ public class Settlement extends GameObject {
         g2.setColor(Color.RED);
         g2.drawImage(asset, pos.x, pos.y, null);
 
-        g2.setColor(Color.BLACK);
-        g2.setFont(new Font("SansSerif", Font.BOLD, 16));
-        g2.drawString("Hunger: " + hunger, pos.x, pos.y);
+        if (hunger > 50) {
+            g2.setColor(Color.ORANGE);
+        } else if (hunger > 20) {
+            g2.setColor(Color.YELLOW);
+        } else {
+            g2.setColor(Color.GREEN);
+        }
+        g2.setFont(new Font("SansSerif", Font.PLAIN, 14));
+        g2.drawString("Hunger: " + hunger, pos.x, pos.y - 14);
+
+        g2.setColor(Color.GREEN);
+        g2.setFont(new Font("SansSerif", Font.PLAIN, 12));
+        g2.drawString("Upgrade: " + upgradeProgress, pos.x, pos.y);
     }
 
     @Override
     public void tickLogic() {
-        this.hunger += 1;
+        this.hunger += (int) hungerTickAmount;
 
         giveMaterialTick++;
 
         if (giveMaterialTick == 10) {
             giveMaterialTick = 0;
-            GameState.setPlayerMaterials(GameState.getPlayerMaterials() + 1);
+            GameState.setPlayerMaterials(GameState.getPlayerMaterials() + materialsPerSecond);
         }
     }
 
@@ -54,7 +77,39 @@ public class Settlement extends GameObject {
         return hunger;
     }
 
-    public void setHunger(int hunger) {
-        this.hunger = hunger;
+    public void setHunger(int newHunger) {
+        if (upgradeProgress > upgradeRequirement) {
+            upgradeProgress = 0;
+            upgrade();
+            return;
+        }
+
+        if (newHunger < 20) {
+            upgradeProgress -= (newHunger - this.hunger / 10);
+            this.hunger = 0;
+            return;
+        }
+
+        this.hunger = newHunger;
+    }
+
+    private void upgrade() {
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+
+        if (type == SettlementType.SETTLEMENT) {
+            type = SettlementType.TOWN;
+            asset = toolkit.getImage(getClass().getResource("/tom_game/town.png"));
+
+            hungerTickAmount = 2f;
+            materialsPerSecond = 10;
+            upgradeRequirement = 150;
+        } else {
+            type = SettlementType.CITY;
+            asset = toolkit.getImage(getClass().getResource("/tom_game/city.png"));
+
+            hungerTickAmount = 4f;
+            materialsPerSecond = 15;
+            upgradeRequirement = 99999;
+        }
     }
 }

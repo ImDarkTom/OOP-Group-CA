@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class Farm extends GameObject {
     ArrayList<Settlement> inRangeSettlements = new ArrayList<>();
 
+    private int totalDeliveryProgress = 50;
     private int nextDeliveryProgress = 0;
 
     private int deliveryRange = 200;
@@ -33,15 +34,15 @@ public class Farm extends GameObject {
 
         g2.setColor(Color.BLACK);
         g2.setFont(new Font("SansSerif", Font.BOLD, 16));
-        g2.drawString("Next Delivery: " + nextDeliveryProgress, pos.x, pos.y);
+        g2.drawString((int)(((float)nextDeliveryProgress/(float)totalDeliveryProgress) * 100) + "%", pos.x, pos.y);
     }
 
     @Override
     public void tickLogic() {
         this.nextDeliveryProgress += 1;
 
-        if (nextDeliveryProgress >= 10) {
-            nextDeliveryProgress = -1000;
+        if (nextDeliveryProgress >= totalDeliveryProgress) {
+            nextDeliveryProgress = 0;
 
             // Get most hungry in-range settlement;
             Settlement mostHungrySettlement = null;
@@ -60,7 +61,7 @@ public class Farm extends GameObject {
                 return;
             }
 
-            GameState.addFoodDelivery(this.getPos(), mostHungrySettlement.getPos(), mostHungrySettlement);
+            GameState.addFoodDelivery(this, mostHungrySettlement);
         }
     }
 

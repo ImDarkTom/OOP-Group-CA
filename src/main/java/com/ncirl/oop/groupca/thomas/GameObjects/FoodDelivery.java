@@ -1,5 +1,6 @@
 package com.ncirl.oop.groupca.thomas.GameObjects;
 
+import com.ncirl.oop.groupca.thomas.GameValues;
 import com.ncirl.oop.groupca.thomas.util.RenderUtils;
 import com.ncirl.oop.groupca.thomas.util.Renderable;
 import com.ncirl.oop.groupca.thomas.util.Tickable;
@@ -9,19 +10,31 @@ import java.awt.*;
 public class FoodDelivery implements Renderable, Tickable {
     int progress = 0;
 
+    private Settlement targetSettlement;
+
     private Point from;
     private Point to;
-    private Settlement target;
 
     private Point ourPos;
     public boolean shouldRemove = false;
 
     private Image asset;
 
-    public FoodDelivery(Point from, Point to, Settlement target) {
-        this.from = from;
-        this.to = to;
-        this.target = target;
+    public FoodDelivery(Farm fromFarm, Settlement toSettlement) {
+        this.targetSettlement = toSettlement;
+
+        int farmSize = fromFarm.getSize();
+        this.from = new Point(
+                fromFarm.getPos().x + (farmSize / 2),
+                fromFarm.getPos().y + (farmSize / 2)
+        );
+
+        int settlementSize = toSettlement.getSize();
+        this.to = toSettlement.getPos();
+        this.to = new Point(
+                toSettlement.getPos().x + (settlementSize / 2),
+                toSettlement.getPos().y + (settlementSize / 2)
+        );
 
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         asset = toolkit.getImage(getClass().getResource("/tom_game/truck.png"));
@@ -30,16 +43,12 @@ public class FoodDelivery implements Renderable, Tickable {
     @Override
     public void render(Graphics2D g2, Point mousePos) {
         RenderUtils.drawImage(g2, asset, ourPos);
-
-        g2.setColor(Color.black);
-        g2.setFont(new Font("Arial", Font.PLAIN, 12));
-        g2.drawString(progress + "", ourPos.x, ourPos.y);
     }
 
     @Override
     public void tickLogic() {
         if (progress >= 100) {
-            target.setHunger(target.getHunger() - 100);
+            targetSettlement.setHunger(targetSettlement.getHunger() - GameValues.hungerDecreaseAmount);
 
             // We use this since `GameState.foodDeliveries.remove(this)` has
             // the potential to throw a ConcurrentModificationException as
@@ -50,9 +59,15 @@ public class FoodDelivery implements Renderable, Tickable {
             return;
         }
 
-        progress += 5;
+        progress += 1;
         System.out.println(progress);
 
-        ourPos = new Point(100, 100);
+        float xPos = from.x + (to.x - from.x) * ((float) progress / 100);
+        float yPos = from.y + (to.y - from.y) * ((float) progress / 100);
+
+        ourPos = new Point(
+                (int)xPos,
+                (int)yPos
+        );
     }
 }

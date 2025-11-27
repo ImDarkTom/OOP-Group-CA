@@ -5,6 +5,7 @@ import com.ncirl.oop.groupca.thomas.util.RenderUtils;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.Ellipse2D;
 
 /**
  * The object that appears when we start placing down a farm.
@@ -32,6 +33,10 @@ public class FarmGhost extends GameObject {
                 mousePos.x - (asset.getWidth(null) / 2),
                 mousePos.y - (asset.getHeight(null) / 2)
         );
+
+        g2.setColor(Color.RED);
+        g2.setStroke(new BasicStroke(2f));
+        g2.draw(new Ellipse2D.Double(pos.x - 175, pos.y - 175, 350, 350));
 
         RenderUtils.drawImage(g2, asset, pos, 0.5f);
     }

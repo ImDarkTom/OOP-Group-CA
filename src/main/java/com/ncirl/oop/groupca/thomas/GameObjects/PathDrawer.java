@@ -24,7 +24,12 @@ public class PathDrawer extends GameObject {
             ArrayList<Settlement> settlementsInRange = farm.getInRangeSettlements();
 
             for (Settlement settlement : settlementsInRange) {
-                g2.drawLine(farm.getPos().x, farm.getPos().y, settlement.getPos().x, settlement.getPos().y);
+                g2.drawLine(
+                        farm.getPos().x + (farm.getSize() / 2),
+                        farm.getPos().y + (farm.getSize() / 2),
+                        settlement.getPos().x + (settlement.getSize() / 2),
+                        settlement.getPos().y + (settlement.getSize() / 2)
+                );
             }
         });
     }
