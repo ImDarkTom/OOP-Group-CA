@@ -25,6 +25,10 @@ public class GameLoop {
         panel.repaint();
         
     });
+    public void resetGame() {
+        // Reset
+        points = 0;
+    }
     public void startTicks() { // Starts Timer
         ticker.start();
     }
