@@ -85,6 +85,54 @@ public class GameState {
         foodDeliveries.add(new FoodDelivery(from, target));
     }
 
+    // loop
+    static Timer frameTimer;
+    static Timer logicTimer;
+
+    public static void startGameLoop(TomGameWindow windowInstance, GameCanvas canvasInstance) {
+        // 10 ticks/s
+        logicTimer = new Timer(100, _ -> {
+            GameValues.day++;
+
+            windowInstance.setBuildingMaterialAmount(GameState.getPlayerMaterials());
+
+            windowInstance.setFarmBtnEnabled(GameState.getPlayerMaterials() >= GameState.FARM_PRICE);
+
+            windowInstance.setScoreText(GameValues.score);
+            windowInstance.setDayText();
+
+            GameState.tickLogic();
+        });
+
+        // 30 fps
+        frameTimer = new Timer(33, _ -> canvasInstance.repaint()); // this re-runs `paintComponent`
+
+        frameTimer.start();
+        logicTimer.start();
+    }
+
+    public static void pauseGame() {
+        if (frameTimer != null && logicTimer != null) {
+            frameTimer.stop();
+            logicTimer.stop();
+        }
+    }
+
+    public static void unpauseGame() {
+        if (frameTimer != null && logicTimer != null) {
+            frameTimer.start();
+            logicTimer.start();
+        }
+    }
+
+    // spawn settlements
+    public static void spawnSettlement() {
+        gameObjects.add(new Settlement(
+                (int)(Math.random() * 1000),
+                (int)(Math.random() * 600)
+        ));
+    }
+
     // Getters & Setters
     public static int getPlayerMaterials() {
         return playerMaterials;

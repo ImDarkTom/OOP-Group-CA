@@ -4,20 +4,19 @@ import com.ncirl.oop.groupca.thomas.util.FrameUtils;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class TomGameWindow extends JFrame {
-    private static final Logger LOGGER = Logger.getLogger("");
-
     private GameCanvas canvas;
     private JPanel controlPanel;
+
+    private JToggleButton pauseBtn;
     private JButton placeFarmBtn;
     private JLabel buildingMaterialLbl;
+
+    private JLabel daysLbl;
     private JLabel scoreLbl;
 
     public TomGameWindow() {
-        LOGGER.setLevel(Level.ALL);
         initComponents();
     }
 
@@ -28,8 +27,12 @@ public class TomGameWindow extends JFrame {
 
         canvas = new GameCanvas();
         controlPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+
+        pauseBtn = new JToggleButton("⏸");
         placeFarmBtn = new JButton("Place Farm [" + GameState.FARM_PRICE + "]");
         buildingMaterialLbl = new JLabel("Materials: 0");
+
+        daysLbl = new JLabel("Day 0/0");
         scoreLbl = new JLabel("Score: 0");
 
         // Frame meta#
@@ -40,6 +43,16 @@ public class TomGameWindow extends JFrame {
 
         canvas.setBackground(new Color(0, 127, 12));
 
+        // pause btn
+        controlPanel.add(pauseBtn);
+        pauseBtn.addActionListener(e -> {
+            if (pauseBtn.isSelected()) {
+                GameState.pauseGame();
+            } else {
+                GameState.unpauseGame();
+            }
+        });
+
         // place farm btn
         controlPanel.add(placeFarmBtn);
         placeFarmBtn.addActionListener(_ -> GameState.placeFarm());
@@ -48,6 +61,10 @@ public class TomGameWindow extends JFrame {
         // building material lbl
         controlPanel.add(buildingMaterialLbl);
         buildingMaterialLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small_icons/wrench.png")));
+
+        controlPanel.add(daysLbl);
+        daysLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tom_game/calendar.png")));
+        daysLbl.setBackground(new Color(181, 107, 74));
 
         controlPanel.add(scoreLbl);
 
@@ -64,7 +81,7 @@ public class TomGameWindow extends JFrame {
 
         // game state
         GameState.generateWorld();
-        canvas.startGameLoop(this);
+        GameState.startGameLoop(this, canvas);
     }
 
     // get/set
@@ -74,5 +91,13 @@ public class TomGameWindow extends JFrame {
 
     public void setFarmBtnEnabled(boolean val) {
         placeFarmBtn.setEnabled(val);
+    }
+
+    public void setScoreText(int score) {
+        this.scoreLbl.setText("Score: " + score);
+    }
+
+    public void setDayText() {
+        this.daysLbl.setText("Day " + GameValues.day + "/" + GameValues.DAYS_TOTAL);
     }
 }

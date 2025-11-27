@@ -1,6 +1,7 @@
 package com.ncirl.oop.groupca.thomas.GameObjects;
 
 import com.ncirl.oop.groupca.thomas.GameState;
+import com.ncirl.oop.groupca.thomas.GameValues;
 
 import java.awt.*;
 
@@ -103,13 +104,21 @@ public class Settlement extends GameObject {
             hungerTickAmount = 2f;
             materialsPerSecond = 10;
             upgradeRequirement = 150;
-        } else {
+
+            GameValues.addScore(10);
+        } else if (type == SettlementType.TOWN) {
             type = SettlementType.CITY;
             asset = toolkit.getImage(getClass().getResource("/tom_game/city.png"));
 
             hungerTickAmount = 4f;
             materialsPerSecond = 15;
-            upgradeRequirement = 99999;
+            upgradeRequirement = 250;
+
+            GameValues.addScore(25);
+        } else if (type == SettlementType.CITY) {
+            GameState.spawnSettlement();
+
+            GameValues.addScore(50);
         }
     }
 }

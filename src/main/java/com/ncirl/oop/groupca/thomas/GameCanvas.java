@@ -1,6 +1,5 @@
 package com.ncirl.oop.groupca.thomas;
 
-import com.ncirl.oop.groupca.thomas.GameObjects.FoodDelivery;
 import com.ncirl.oop.groupca.thomas.GameObjects.GameObject;
 import com.ncirl.oop.groupca.thomas.util.Log;
 
@@ -8,7 +7,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 
 class GameCanvas extends JPanel {
     private Point lastClickPos = null;
@@ -44,22 +42,7 @@ class GameCanvas extends JPanel {
         GameState.foodDeliveries.forEach(foodDelivery -> foodDelivery.render(g2, mousePos));
     }
 
-    public void startGameLoop(TomGameWindow windowInstance) {
-        // 10 ticks/s
-            Timer logicTimer = new Timer(100, _ -> {
-                windowInstance.setBuildingMaterialAmount(GameState.getPlayerMaterials());
 
-                windowInstance.setFarmBtnEnabled(GameState.getPlayerMaterials() >= GameState.FARM_PRICE);
-
-                GameState.tickLogic();
-            });
-
-        // 30 fps
-        Timer frameTimer = new Timer(33, _ -> repaint()); // this re-runs `paintComponent`
-
-        frameTimer.start();
-        logicTimer.start();
-    }
 
     // Utils
     /**
