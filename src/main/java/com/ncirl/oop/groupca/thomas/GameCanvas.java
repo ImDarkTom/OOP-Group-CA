@@ -1,23 +1,56 @@
 package com.ncirl.oop.groupca.thomas;
 
-import com.ncirl.oop.groupca.thomas.GameObjects.Farm;
 import com.ncirl.oop.groupca.thomas.GameObjects.GameObject;
-import com.ncirl.oop.groupca.thomas.util.Vector2D;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 class GameCanvas extends JPanel {
+    private Point lastClickPos = null;
+
+    public GameCanvas() {
+        this.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                lastClickPos = e.getPoint();
+                System.out.println("clicked");
+            }
+        });
+    }
+
+    /**
+     * - Add item to list
+     * - When we click, lastClickPos is set to non-null.
+     * -
+     * @param g2
+     */
     private void renderFrame(Graphics2D g2) {
-        for (GameObject object : GameState.gameObjects) {
-            object.render(g2);
+        Point mousePos = MouseInfo.getPointerInfo().getLocation();
+        SwingUtilities.convertPointFromScreen(mousePos, this);
+
+        if (lastClickPos != null) {
+            Runnable clickAction = null;
+
+            for (GameObject object : GameState.gameObjects) {
+                System.out.println(object.getPos().x + ", lastClick: " + lastClickPos.toString());
+                if (
+                        (lastClickPos.x > object.getPos().x && lastClickPos.x < object.getPos().x + object.getSize()) &&
+                        (lastClickPos.y > object.getPos().y && lastClickPos.y < object.getPos().y + object.getSize())
+                ) {
+                    clickAction = object::onClicked;
+                }
+            }
+
+            if (clickAction != null) {
+                clickAction.run();
+            }
+            lastClickPos = null;
         }
 
-        // Mouse-state related rendering
-        if (GameState.isPlacingFarm) {
-            Point mousePos = MouseInfo.getPointerInfo().getLocation();
-            SwingUtilities.convertPointFromScreen(mousePos, this);
-            Farm.drawGhost(g2, new Vector2D(mousePos.x, mousePos.y));
+        for (GameObject object : GameState.gameObjects) {
+            object.render(g2, mousePos);
         }
     }
 
@@ -32,7 +65,7 @@ class GameCanvas extends JPanel {
             Timer logicTimer = new Timer(100, _ -> {
                 windowInstance.setBuildingMaterialAmount(GameState.getPlayerMaterials());
 
-                windowInstance.setFarmBtnEnabled(GameState.getPlayerMaterials() >= 110);
+                windowInstance.setFarmBtnEnabled(GameState.getPlayerMaterials() >= GameState.FARM_PRICE);
 
                 GameState.tickLogic();
             });

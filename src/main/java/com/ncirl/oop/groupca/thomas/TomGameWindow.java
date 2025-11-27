@@ -21,7 +21,7 @@ public class TomGameWindow extends JFrame {
 
         canvas = new GameCanvas();
         controlPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        placeFarmBtn = new JButton("Place Farm [110]");
+        placeFarmBtn = new JButton("Place Farm [" + GameState.FARM_PRICE + "]");
         buildingMaterialLbl = new JLabel("Materials: 0");
         scoreLbl = new JLabel("Score: 0");
 

@@ -11,7 +11,7 @@ import java.awt.*;
  * @author tom
  */
 public class OOPGroupCA {
-    private static String DEV_SKIP_TO; // e.g. set to "tom" to skip menu and launch the game
+    private static String DEV_SKIP_TO = "tom"; // e.g. set to "tom" to skip menu and launch the game
     public static void main(String[] args) {
 
         if (DEV_SKIP_TO != null) {

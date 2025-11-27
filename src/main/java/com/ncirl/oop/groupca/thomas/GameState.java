@@ -1,5 +1,6 @@
 package com.ncirl.oop.groupca.thomas;
 
+import com.ncirl.oop.groupca.thomas.GameObjects.FarmGhost;
 import com.ncirl.oop.groupca.thomas.GameObjects.GameObject;
 import com.ncirl.oop.groupca.thomas.GameObjects.Settlement;
 
@@ -7,21 +8,21 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 public class GameState {
+    public static final int FARM_PRICE = 100;
+
     public static ArrayList<GameObject> gameObjects = new ArrayList<>();
     private static int playerMaterials = 100;
-
-    public static boolean isPlacingFarm = false;
 
     private GameState() {}
 
     public static void placeFarm() {
-        if (playerMaterials < 110) {
-            // TODO: maybe a popup?
+        if (playerMaterials < FARM_PRICE) {
+            // Not enough materials
             return;
         }
 
-        playerMaterials -= 110;
-        isPlacingFarm = true;
+        playerMaterials -= FARM_PRICE;
+        gameObjects.add(new FarmGhost(0, 0));
     }
 
     public static void generateWorld() {
@@ -34,7 +35,6 @@ public class GameState {
     public static void resetState() {
         gameObjects = new ArrayList<>();
         playerMaterials = 100;
-        isPlacingFarm = false;
     }
 
     public static void tickLogic() {

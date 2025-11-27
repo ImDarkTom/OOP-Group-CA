@@ -2,6 +2,7 @@ package com.ncirl.oop.groupca.thomas.GameObjects;
 
 import com.ncirl.oop.groupca.thomas.GameState;
 
+import javax.swing.*;
 import java.awt.*;
 
 public class Settlement extends GameObject {
@@ -22,9 +23,9 @@ public class Settlement extends GameObject {
     public void setup() {}
 
     @Override
-    public void render(Graphics2D g2) {
+    public void render(Graphics2D g2, Point mousePos) {
         g2.setColor(Color.RED);
-        g2.drawImage(asset, 50, 50, null);
+        g2.drawImage(asset, (int) pos.x, (int) pos.y, null);
 
         g2.setColor(Color.BLACK);
         g2.setFont(new Font("SansSerif", Font.BOLD, 16));
@@ -41,5 +42,10 @@ public class Settlement extends GameObject {
             giveMaterialTick = 0;
             GameState.setPlayerMaterials(GameState.getPlayerMaterials() + 1);
         }
+    }
+
+    @Override
+    public void onClicked() {
+        System.out.println("clicked settlement");
     }
 }
