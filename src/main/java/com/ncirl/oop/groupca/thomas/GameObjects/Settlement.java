@@ -20,9 +20,6 @@ public class Settlement extends GameObject {
     }
 
     @Override
-    public void setup() {}
-
-    @Override
     public void render(Graphics2D g2, Point mousePos) {
         g2.setColor(Color.RED);
         g2.drawImage(asset, pos.x, pos.y, null);

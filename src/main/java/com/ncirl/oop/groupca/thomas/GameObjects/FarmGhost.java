@@ -1,8 +1,14 @@
 package com.ncirl.oop.groupca.thomas.GameObjects;
 
+import com.ncirl.oop.groupca.thomas.GameState;
+import com.ncirl.oop.groupca.thomas.util.RenderUtils;
+
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * The object that appears when we start placing down a farm.
+ */
 public class FarmGhost extends GameObject {
     private final Image asset;
 
@@ -15,20 +21,19 @@ public class FarmGhost extends GameObject {
 
     @Override
     public void onClicked() {
-        System.out.println("farm ghost clicked");
+        GameState.removeGameObject(this);
+        GameState.addGameObject(new Farm(pos.x, pos.y));
     }
 
     @Override
-    public void setup() {}
-
-    @Override
     public void render(Graphics2D g2, Point mousePos) {
+        // Set pos to mouse coordinates (adjusted to put the object in the middle)
         this.pos = new Point(
                 mousePos.x - (asset.getWidth(null) / 2),
                 mousePos.y - (asset.getHeight(null) / 2)
         );
 
-        g2.drawImage(asset, pos.x, pos.y, null);
+        RenderUtils.drawImage(g2, asset, pos, 0.5f);
     }
 
     @Override

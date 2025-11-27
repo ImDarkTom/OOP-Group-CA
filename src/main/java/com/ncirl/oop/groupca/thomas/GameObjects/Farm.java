@@ -1,5 +1,7 @@
 package com.ncirl.oop.groupca.thomas.GameObjects;
 
+import com.ncirl.oop.groupca.thomas.util.RenderUtils;
+
 import java.awt.*;
 
 public class Farm extends GameObject {
@@ -18,18 +20,12 @@ public class Farm extends GameObject {
     public void onClicked() {}
 
     @Override
-    public void setup() {
-
-    }
-
-    @Override
     public void render(Graphics2D g2, Point mousePos) {
-        g2.setColor(Color.BLUE);
-        g2.fillRect((int)pos.x, (int)pos.y, size, size);
+        RenderUtils.drawImage(g2, asset, pos);
 
         g2.setColor(Color.BLACK);
         g2.setFont(new Font("SansSerif", Font.BOLD, 16));
-        g2.drawString("Progress: " + progress, (int)pos.x, (int)pos.y);
+        g2.drawString("Progress: " + progress, pos.x, pos.y);
     }
 
     @Override

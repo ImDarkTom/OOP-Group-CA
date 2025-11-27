@@ -4,15 +4,22 @@ import com.ncirl.oop.groupca.thomas.util.FrameUtils;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class TomGameWindow extends JFrame {
+    private static final Logger LOGGER = Logger.getLogger("");
+
     private GameCanvas canvas;
     private JPanel controlPanel;
     private JButton placeFarmBtn;
     private JLabel buildingMaterialLbl;
     private JLabel scoreLbl;
 
-    public TomGameWindow() { initComponents(); }
+    public TomGameWindow() {
+        LOGGER.setLevel(Level.ALL);
+        initComponents();
+    }
 
     // Even though this wasn't made through the form editor, still have an initComponents method for the sake of uniformity
     private void initComponents() {

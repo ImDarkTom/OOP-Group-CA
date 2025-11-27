@@ -43,6 +43,14 @@ public class GameState {
         }
     }
 
+    public static void addGameObject(GameObject object) {
+        gameObjects.add(object);
+    }
+
+    public static void removeGameObject(GameObject object) {
+        gameObjects.remove(object);
+    }
+
     // Getters & Setters
     public static int getPlayerMaterials() {
         return playerMaterials;
