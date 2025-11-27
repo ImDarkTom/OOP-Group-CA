@@ -35,7 +35,8 @@ public class TomGameWindow extends JFrame {
         // Frame meta#
         FrameUtils.setBackToMenuOnClose(this, GameState::resetState);
 
-        setTitle("Game Window");
+        setTitle("Tom - Food Distribution Game");
+        setResizable(false);
 
         canvas.setBackground(new Color(0, 127, 12));
 

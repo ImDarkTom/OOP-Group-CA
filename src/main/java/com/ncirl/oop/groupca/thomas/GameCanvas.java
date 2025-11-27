@@ -1,5 +1,6 @@
 package com.ncirl.oop.groupca.thomas;
 
+import com.ncirl.oop.groupca.thomas.GameObjects.FoodDelivery;
 import com.ncirl.oop.groupca.thomas.GameObjects.GameObject;
 import com.ncirl.oop.groupca.thomas.util.Log;
 
@@ -7,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 class GameCanvas extends JPanel {
     private Point lastClickPos = null;
@@ -38,6 +40,8 @@ class GameCanvas extends JPanel {
         for (GameObject object : GameState.gameObjects) {
             object.render(g2, mousePos);
         }
+
+        GameState.foodDeliveries.forEach(foodDelivery -> foodDelivery.render(g2, mousePos));
     }
 
     public void startGameLoop(TomGameWindow windowInstance) {

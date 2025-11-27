@@ -1,15 +1,16 @@
 package com.ncirl.oop.groupca.thomas;
 
-import com.ncirl.oop.groupca.thomas.GameObjects.FarmGhost;
-import com.ncirl.oop.groupca.thomas.GameObjects.GameObject;
-import com.ncirl.oop.groupca.thomas.GameObjects.PathDrawer;
-import com.ncirl.oop.groupca.thomas.GameObjects.Settlement;
+import com.ncirl.oop.groupca.thomas.GameObjects.*;
 import com.sun.jdi.ClassType;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
+import java.util.Set;
 
 public class GameState {
+    public static ArrayList<FoodDelivery> foodDeliveries = new ArrayList<>();
+
     public static final int FARM_PRICE = 100;
 
     public static ArrayList<GameObject> gameObjects = new ArrayList<>();
@@ -42,9 +43,24 @@ public class GameState {
     }
 
     public static void tickLogic() {
-        for (GameObject object : gameObjects) {
-            object.tickLogic();
+        // Shorthand for:
+        // for (GameObject object : gameObjects) {
+        //     object.tickLogic();
+        // }
+        gameObjects.forEach(GameObject::tickLogic);
+
+        // https://www.baeldung.com/java-concurrentmodificationexception
+        ArrayList<FoodDelivery> toRemove = new ArrayList<>();
+
+        for (FoodDelivery delivery : foodDeliveries) {
+            if (delivery.shouldRemove) {
+                toRemove.add(delivery);
+            }
         }
+
+        foodDeliveries.removeAll(toRemove);
+
+        foodDeliveries.forEach(FoodDelivery::tickLogic);
     }
 
     public static void addGameObject(GameObject object) {
@@ -65,6 +81,10 @@ public class GameState {
         }
 
         return resultList;
+    }
+
+    public static void addFoodDelivery(Point from, Point to, Settlement target) {
+        foodDeliveries.add(new FoodDelivery(from, to, target));
     }
 
     // Getters & Setters

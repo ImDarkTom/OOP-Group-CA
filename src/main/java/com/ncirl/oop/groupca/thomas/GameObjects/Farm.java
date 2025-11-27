@@ -40,8 +40,8 @@ public class Farm extends GameObject {
     public void tickLogic() {
         this.nextDeliveryProgress += 1;
 
-        if (nextDeliveryProgress >= 100) {
-            nextDeliveryProgress = 0;
+        if (nextDeliveryProgress >= 10) {
+            nextDeliveryProgress = -1000;
 
             // Get most hungry in-range settlement;
             Settlement mostHungrySettlement = null;
@@ -60,7 +60,7 @@ public class Farm extends GameObject {
                 return;
             }
 
-            mostHungrySettlement.setHunger(mostHungrySettlement.getHunger() - 100);
+            GameState.addFoodDelivery(this.getPos(), mostHungrySettlement.getPos(), mostHungrySettlement);
         }
     }
 
