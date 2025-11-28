@@ -1,9 +1,5 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Launch App" type="Application" factoryName="Application" activateToolWindowBeforeRun="false" show_console_on_std_out="true">
-    <envs>
-      <env name="GDK_SCALE" value="2" />
-      <env name="GDK_DPI_SCALE" value="0.75" />
-    </envs>
     <option name="MAIN_CLASS_NAME" value="com.ncirl.oop.groupca.OOPGroupCA" />
     <module name="OOP-Group-CA" />
     <method v="2">

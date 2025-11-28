@@ -35,6 +35,8 @@ class GameCanvas extends JPanel {
         Point mousePos = MouseInfo.getPointerInfo().getLocation();
         SwingUtilities.convertPointFromScreen(mousePos, this);
 
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
         for (GameObject object : GameState.gameObjects) {
             object.render(g2, mousePos);
         }
