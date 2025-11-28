@@ -24,7 +24,11 @@ public class Settlement extends GameObject {
     private int materialsPerSecond = 5;
     private int upgradeRequirement = 100;
 
+    // asset-related
     private Image asset;
+    // static is better for optimisation, as each settlement instance won't need to re-create the same font.
+    private static final Font hungerFont = new Font("SansSerif", Font.PLAIN, 14);
+    private static final Font upgradeFont = new Font("SansSerif", Font.PLAIN, 12);
 
     public Settlement(int startX, int startY) {
         super(startX, startY, 50);
@@ -49,12 +53,15 @@ public class Settlement extends GameObject {
         } else {
             g2.setColor(Color.GREEN);
         }
-        g2.setFont(new Font("SansSerif", Font.PLAIN, 14));
+        g2.setFont(hungerFont);
         g2.drawString("Hunger: " + hunger, pos.x, pos.y - 14);
 
-        g2.setColor(Color.GREEN);
-        g2.setFont(new Font("SansSerif", Font.PLAIN, 12));
-        g2.drawString("Upgrade: " + upgradeProgress, pos.x, pos.y);
+        if (upgradeProgress > -5) {
+            g2.setColor(Color.GREEN);
+            g2.setFont(upgradeFont);
+            // TODO: fix this
+            g2.drawString("Upgrading: " + ((int)((float)upgradeProgress / (float)upgradeRequirement) * 100) + "%", pos.x, pos.y);
+        }
     }
 
     @Override
@@ -78,16 +85,19 @@ public class Settlement extends GameObject {
         return hunger;
     }
 
-    public void setHunger(int newHunger) {
-        if (upgradeProgress > upgradeRequirement) {
-            upgradeProgress = 0;
-            upgrade();
-            return;
-        }
+    public void decreaseHunger(int decreaseAmount) {
+        int newHunger = hunger - decreaseAmount;
 
-        if (newHunger < 20) {
-            upgradeProgress -= (newHunger - this.hunger / 10);
+        if (newHunger < 1) {
+            // Bump upgrade progress by 10% of invested food/hunger decrease.
+            upgradeProgress += (decreaseAmount / 10);
             this.hunger = 0;
+
+            if (upgradeProgress >= upgradeRequirement) {
+                upgradeProgress = 0;
+                upgrade();
+            }
+
             return;
         }
 

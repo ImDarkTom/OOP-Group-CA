@@ -10,15 +10,15 @@ import java.awt.*;
 public class FoodDelivery implements Renderable, Tickable {
     int progress = 0;
 
-    private Settlement targetSettlement;
+    private final Settlement targetSettlement;
 
-    private Point from;
+    private final Point from;
     private Point to;
 
     private Point ourPos;
     public boolean shouldRemove = false;
 
-    private Image asset;
+    private final Image asset;
 
     public FoodDelivery(Farm fromFarm, Settlement toSettlement) {
         this.targetSettlement = toSettlement;
@@ -48,7 +48,7 @@ public class FoodDelivery implements Renderable, Tickable {
     @Override
     public void tickLogic() {
         if (progress >= 100) {
-            targetSettlement.setHunger(targetSettlement.getHunger() - GameValues.hungerDecreaseAmount);
+            targetSettlement.decreaseHunger(GameValues.hungerDecreaseAmount);
 
             // We use this since `GameState.foodDeliveries.remove(this)` has
             // the potential to throw a ConcurrentModificationException as
@@ -60,7 +60,6 @@ public class FoodDelivery implements Renderable, Tickable {
         }
 
         progress += 1;
-        System.out.println(progress);
 
         float xPos = from.x + (to.x - from.x) * ((float) progress / 100);
         float yPos = from.y + (to.y - from.y) * ((float) progress / 100);
