@@ -13,6 +13,9 @@ import com.ncirl.oop.groupca.antonio.Vehicle.Air;
 import com.ncirl.oop.groupca.antonio.Vehicle.Land;
 import com.ncirl.oop.groupca.antonio.Vehicle.Sea;
 import com.ncirl.oop.groupca.antonio.Vehicle.Vehicle;
+import com.ncirl.oop.groupca.thomas.GameState;
+import com.ncirl.oop.groupca.thomas.util.FrameUtils;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -27,6 +30,7 @@ public class AntonioGUI extends javax.swing.JFrame {
      */
     public AntonioGUI() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -42,9 +46,17 @@ public class AntonioGUI extends javax.swing.JFrame {
         Land = new javax.swing.JButton();
         Sea = new javax.swing.JButton();
         gameName = new javax.swing.JLabel();
-        Back = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("Food Delivery Game Menu");
+        setName("Delivery_Game_Menu"); // NOI18N
+        setPreferredSize(new java.awt.Dimension(435, 360));
+        setSize(new java.awt.Dimension(400, 300));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                MainMenu(evt);
+            }
+        });
 
         Air.setText("Air");
         Air.setPreferredSize(new java.awt.Dimension(80, 23));
@@ -55,6 +67,7 @@ public class AntonioGUI extends javax.swing.JFrame {
         });
 
         Land.setText("Land");
+        Land.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         Land.setPreferredSize(new java.awt.Dimension(80, 23));
         Land.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -72,60 +85,38 @@ public class AntonioGUI extends javax.swing.JFrame {
 
         gameName.setText("Food Delivery Game Name WIP");
 
-        Back.setText("Back");
-        Back.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BackActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(Back)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 120, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(Sea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Land, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Air, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(120, 120, 120))))
+                .addContainerGap(127, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(Sea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Land, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Air, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(120, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(79, Short.MAX_VALUE)
+                .addContainerGap(80, Short.MAX_VALUE)
                 .addComponent(gameName)
-                .addGap(80, 80, 80))
+                .addContainerGap(80, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addContainerGap(17, Short.MAX_VALUE)
                 .addComponent(gameName)
-                .addGap(30, 30, 30)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(Air, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(Land, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(Sea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                .addComponent(Back)
-                .addContainerGap())
+                .addContainerGap(113, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
-        // TODO add your handling code here:
-        OOPGroupCAGUI myGUI = new OOPGroupCAGUI();
-        myGUI.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_BackActionPerformed
 
     private void LandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LandActionPerformed
         // TODO add your handling code here:
@@ -160,6 +151,21 @@ public class AntonioGUI extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_SeaActionPerformed
 
+    private void MainMenu(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_MainMenu
+        // TODO add your handling code here:
+
+        if (JOptionPane.showConfirmDialog(this, "Are you sure you want to return to the main menu?", "Confirm", JOptionPane.YES_NO_OPTION) == 1) {
+            return;
+        }
+
+        GameState.resetState();
+
+        OOPGroupCAGUI mainMenu = new OOPGroupCAGUI();
+        mainMenu.setVisible(true);
+
+        dispose();
+    }//GEN-LAST:event_MainMenu
+
     /**
      * @param args the command line arguments
      */
@@ -187,7 +193,6 @@ public class AntonioGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Air;
-    private javax.swing.JButton Back;
     private javax.swing.JButton Land;
     private javax.swing.JButton Sea;
     private javax.swing.JLabel gameName;

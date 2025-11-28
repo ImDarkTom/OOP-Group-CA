@@ -4,12 +4,16 @@
  */
 package com.ncirl.oop.groupca.antonio.Map;
 
-import com.ncirl.oop.groupca.antonio.AntonioGUI;
 import com.ncirl.oop.groupca.antonio.Items.Items;
 import com.ncirl.oop.groupca.antonio.Vehicle.Vehicle;
+import com.ncirl.oop.groupca.thomas.GameState;
+import com.ncirl.oop.groupca.thomas.util.FrameUtils;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
+import java.awt.Label;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -23,6 +27,7 @@ public class Maps {
 
     JButton back;
     private javax.swing.JButton Back;
+    private static Label points;
     private int[] x;
     private int[] y;
     private String map;
@@ -42,10 +47,18 @@ public class Maps {
 
     public void createWindow() {
 
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame = new JFrame("Frame"); // Create frame and JPanel for buttons
+        JPanel buttonContainer = new JPanel(new FlowLayout(FlowLayout.LEFT));
+
+        points = new Label("Points: "); // Create label for points
+        frame.add(buttonContainer, BorderLayout.NORTH);
+        buttonContainer.add(points);
+
+        FrameUtils.setBackToMenuOnClose(frame, GameState::resetState);
 
         frame.add(new Panel());
         frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
@@ -63,17 +76,6 @@ public class Maps {
             setPreferredSize(new Dimension(1000, 600));
             setBorder(BorderFactory.createLineBorder(Color.BLACK));
             setBackground(Color.ORANGE);
-
-            back = new JButton("back");
-
-            back.setBounds(0, 0, 50, 50);
-
-            add(back);
-            back.addActionListener(e -> {
-                AntonioGUI myGUI = new AntonioGUI();
-                myGUI.setVisible(true);
-                frame.dispose();
-            });
         }
 
         @Override
