@@ -11,12 +11,14 @@ import java.awt.Color;
  * @author DELL
  */
 public class Onion extends Plant{
-    public Onion(int posX, int posY) {
+    public Onion(int posX, int posY, int arrayNum, boolean isHeld) {
         this.posX = posX;
         this.posY = posY;
         width = 25;
         height = 25;
         tool = "shovel";
+        arrayID = arrayNum;
+        held = isHeld;
     }
     
     @Override

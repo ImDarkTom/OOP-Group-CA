@@ -10,7 +10,7 @@ import java.awt.*;
  */
 public class Player {
     private int posX;private int posY;
-    private int width;private int height;
+    final private int width;final private int height;
     
     public Player() {
         posX = 100;
@@ -26,7 +26,7 @@ public class Player {
       posY = Y;  
     }
     
-    // Methods to change relative to present value is here to reduce calling positions back and forth
+    // Methods to change relative to present value are here to reduce calling positions back and forth
     public void changeX(int X) {
         posX = posX+X;
     }

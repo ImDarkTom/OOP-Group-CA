@@ -12,13 +12,14 @@ abstract public class Plant {
     protected int posX;protected int posY;
     protected int width;protected int height;
     protected String tool;protected boolean held;
+    public int arrayID;
     
     public Plant() {
         posX = 100;
         posY = 100;
         width = 50;
         height = 50;
-        held = false;
+        arrayID = 0;
     }
     
     public void setX(int X) {
@@ -34,7 +35,9 @@ abstract public class Plant {
     public int getY() {
         return posY;
     }
-    
+    public int getArrayID() {
+        return arrayID;
+    }
     public boolean toggleHeld() {
         if(held==true) {
             held=false;

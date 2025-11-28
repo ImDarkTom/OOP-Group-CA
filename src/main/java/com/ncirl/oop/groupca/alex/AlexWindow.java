@@ -45,7 +45,6 @@ public class AlexWindow { // Must create variables at the start so they can be u
 
             points = new Label("Points"); // Create label for points
             game.setPanel(this); // Pass panel to GameLoop so repaint() can be called every tick
-            game.startTicks(); // Start tick timer as GameLoop now has panel
 
             // Add button and container JPanel
             f.add(buttonContainer, BorderLayout.NORTH);
