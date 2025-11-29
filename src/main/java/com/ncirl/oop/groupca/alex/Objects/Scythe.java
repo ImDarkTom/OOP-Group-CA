@@ -20,9 +20,9 @@ public class Scythe extends Tool{
     @Override
     public void paintTool(Graphics g) {
         g.setColor(Color.gray);
-        g.fillRect(posX, posY, 6, 45);
+        g.fillRect(posX+15, posY, 8, 45);
         g.setColor(Color.black);
-        g.fillArc(posX-35, posY, 70, 10, 90, 90);
+        g.fillArc(posX-20, posY, 70, 10, 90, 90);
     }
 }
  

@@ -12,6 +12,7 @@ import java.awt.Color;
  */
 public class Wheat extends Plant{
     public Wheat(int posX, int posY, int arrayNum, boolean isHeld) {
+        type="wheat";
         this.posX = posX;
         this.posY = posY;
         width = 35;

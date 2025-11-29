@@ -94,6 +94,9 @@ public class AlexWindow { // Must create variables at the start so they can be u
                 case 68:
                     right=true;
                     break;
+                case 69:
+                    game.toolInteraction();
+                    break;
             }
         }
         @Override

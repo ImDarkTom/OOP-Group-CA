@@ -12,7 +12,7 @@ abstract public class Plant {
     protected int posX;protected int posY;
     protected int width;protected int height;
     protected String tool;protected boolean held;
-    public int arrayID;
+    protected String type;public int arrayID;
     
     public Plant() {
         posX = 100;
@@ -37,6 +37,9 @@ abstract public class Plant {
     }
     public int getArrayID() {
         return arrayID;
+    }
+    public String getType() {
+        return type;
     }
     public boolean toggleHeld() {
         if(held==true) {

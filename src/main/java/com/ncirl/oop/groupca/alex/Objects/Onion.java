@@ -12,6 +12,7 @@ import java.awt.Color;
  */
 public class Onion extends Plant{
     public Onion(int posX, int posY, int arrayNum, boolean isHeld) {
+        type="onion";
         this.posX = posX;
         this.posY = posY;
         width = 25;
@@ -23,11 +24,11 @@ public class Onion extends Plant{
     
     @Override
     public void paintPlant(Graphics g) {
-        int[] xpoints = {posX+(width/2),posX-14+(width/2),posX+14+(width/2)};
+        int[] xpoints = {posX,posX-14,posX+14};
         int[] ypoints = {posY+20,posY-30,posY-30};
         g.setColor(Color.green);
         g.fillPolygon(xpoints,ypoints,3);
         g.setColor(new Color(71, 28, 92));
-        g.fillOval(posX, posY, width, height);
+        g.fillOval(posX-(width/2), posY, width, height);
     }
 }
