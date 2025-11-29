@@ -56,11 +56,12 @@ public class Settlement extends GameObject {
         g2.setFont(hungerFont);
         g2.drawString("Hunger: " + hunger, pos.x, pos.y - 14);
 
-        if (upgradeProgress > -5) {
+        if (upgradeProgress > 0) {
             g2.setColor(Color.GREEN);
             g2.setFont(upgradeFont);
-            // TODO: fix this
-            g2.drawString("Upgrading: " + ((int)((float)upgradeProgress / (float)upgradeRequirement) * 100) + "%", pos.x, pos.y);
+
+            int upgradePercent = (int)(((float)upgradeProgress / (float)upgradeRequirement) * 100);
+            g2.drawString("Upgrading: " + upgradePercent + "%", pos.x, pos.y);
         }
     }
 
