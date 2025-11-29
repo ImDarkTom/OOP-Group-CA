@@ -14,7 +14,7 @@ public class Player {
     private String toolHeld;
     
     public Player() {
-        posX = 100;
+        posX = 900;
         posY = 100;
         width = 50;
         height = 50;

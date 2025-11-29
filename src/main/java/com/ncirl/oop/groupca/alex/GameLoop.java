@@ -5,18 +5,19 @@
 package com.ncirl.oop.groupca.alex;
 import com.ncirl.oop.groupca.alex.AlexWindow.GameWindow;
 import com.ncirl.oop.groupca.alex.Objects.*;
+import com.ncirl.oop.groupca.alex.IntroOutro;
 import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.Timer;
 import java.util.ArrayList;
-import java.util.Set;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author DELL
  */
 public class GameLoop {
-    private int ticks = 0;//Tracks ticks since starto of game.
+    private int ticks = 0; private int seconds;//Tracks ticks since starto of game.
     private boolean running = false;//Tracks if the game has started/ended
     private GameWindow panel; // Have to pass panel into here to trigger redraw
     private int points; // Track players point
@@ -36,26 +37,32 @@ public class GameLoop {
             plants.add(new Onion(ran(0,800),ran(0,550), plantID, false));
             plantID++;
         }
-        
+        IntroOutro.playIntro();
         startTicks();
     }
    
     
-    public Timer ticker = new Timer(35, (e) -> { //Runs every 35ms, which comes out to running 28.5 times a second
-        ticks++;
-        if(ticks>=20) {
+    public Timer ticker = new Timer(40, (e) -> { //Runs every 40ms, which comes out to running 25 times a second
+        if(ticks%25==0) {
+            seconds++;
+            if(seconds%5==0) {
+                plants.add(new Onion(ran(0,800),ran(0,550), plantID, false));
+                plantID++;
+                plants.add(new Wheat(ran(0,800),ran(0,550), plantID, false));
+                plantID++;
+            }
+        }
+        if(seconds<=10) { // Runs every tick while game runs.
+            ticks++;
             running=true;
             collisionHandling();
+            panel.repaint();
+        } else { // Timer has been reached, play outro
+            endTicks();
+            GameWindow.disposeWindow();
+            IntroOutro.playOutro(points);
         }
-        panel.repaint();
-        
     });
-    public void resetGame() {
-        // Reset
-        points = 0;
-        plants.clear();
-        heldPlants.clear();
-    }
     // Tick Methods
     public void startTicks() { // Starts Timer
         ticker.start();
@@ -67,7 +74,7 @@ public class GameLoop {
     // Render graphical elements to screen
     public void render(Graphics g) {
         // Sell Area, first so everything renders on top
-        g.setColor(Color.yellow);
+        g.setColor(Color.orange);
         g.fillRect(800, 0, 200, 300);
         
         for(Plant plant : heldPlants) {
@@ -79,20 +86,12 @@ public class GameLoop {
         }
         scythe.paintTool(g);
         shovel.paintTool(g);
-        
-        
+         
     }
-    
-    // Pass panel to GameLoop
-    public void setPanel(GameWindow p) { // Accepts panel from AlexWindow
-        panel = p;
-    }
-    
-    // Player Movement
+    // Player Movement and also updates positions of objects held by player, and the bounding box for the sell area
     public void movePlayer(boolean up, boolean down, boolean left, boolean right) {
-        int speed = 10;
+        int speed = 8;
         // Seperate if statements so the player can move multiple directions at once
-        // This function also updates positions of objects held by player, and the bounding box for the sell area
         if(up&&player.getY()>0) {player.changeY(-speed);} else {
             player.changeY(5);
         }
@@ -138,7 +137,7 @@ public class GameLoop {
         }
     }
     
-    // Collision
+    // Checks player position against plants, and if close enough and holding matching tool, plant is picked up
     public void collisionHandling() {
         int num = -1;
         for(Plant plant : plants) {
@@ -152,14 +151,14 @@ public class GameLoop {
                 }
             }
         }
-        if(num!=-1) {
+        if(num!=-1) { // Deletes plant from plant arraylist after it has been moved to heldPlant arraylist
             final int numFin = num;
             plants.removeIf(plant -> plant.getArrayID()==numFin);
             System.out.println("removed Called");
             System.out.println("Num "+num);
         }
     }
-    
+    // Returns true or false if player is near co-ordinates provided
     public boolean checkCollision(int X1, int Y1, Player player, int range) {
         double distance;
         distance = Math.hypot(X1-player.getX(),Y1-player.getY());
@@ -170,9 +169,14 @@ public class GameLoop {
         }
     }
     
-    public void sellPlants() {
+    public void sellPlants() { // Rewards player with points for held plants and clears arraylist
         points=points+(heldPlants.size()*2);
         heldPlants.clear();
+    }
+    
+    // Pass panel to GameLoop
+    public void setPanel(GameWindow p) { // Accepts panel from AlexWindow
+        panel = p;
     }
     
     // Lots of random values are needed, seperate function for readability
@@ -180,10 +184,11 @@ public class GameLoop {
         int random; return random = (int)(Math.random()*(max-min)+min);
     }
     // Get Statements
-    public int getTicks() { // Return ticks for display
-        return ticks;
+    public int getSeconds() { // Return ticks for display
+        return seconds;
+        
     }
-    public boolean getStatus() { // Return boolean whether game is running(for display)
+    public boolean getStatus() { // Return boolean
         return running;
     }
     public int getPoints() {

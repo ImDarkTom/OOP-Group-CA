@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.ncirl.oop.groupca.alex;
-import com.ncirl.oop.groupca.alex.Objects.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -19,6 +18,7 @@ public class AlexWindow { // Must create variables at the start so they can be u
     private static JFrame f;
     private static JButton btn1;
     private static Label points;
+    private static Label timer;
     
     // Booleans that track when keys are held
     private static boolean up = false;
@@ -30,28 +30,34 @@ public class AlexWindow { // Must create variables at the start so they can be u
         createWindow();
     }
     
-    public static void createWindow() {
+    public static void createWindow() { // Creates new GameWindow object
         GameWindow gamePanel = new GameWindow();
     }
     
-    static public class GameWindow extends JPanel implements KeyListener{ // Main panel
+    static public class GameWindow extends JPanel implements KeyListener{ 
+
+// Main panel
         public GameWindow() {
             setBorder(BorderFactory.createLineBorder(Color.black)); // Makes black border
             f = new JFrame("Frame"); // Create frame and JPanel for buttons
-            JPanel buttonContainer = new JPanel(new FlowLayout(FlowLayout.LEFT));
+            JPanel topDisplay = new JPanel(new FlowLayout(FlowLayout.LEFT));
             f.addKeyListener(this);
             f.setFocusable(true);
             f.setFocusTraversalKeysEnabled(false);
 
             points = new Label("Points"); // Create label for points
+            points.setFont(new Font("Serif",Font.PLAIN,20));
+            timer = new Label("Points"); // Create label for timer
+            timer.setFont(new Font("Serif",Font.PLAIN,20));
             game.setPanel(this); // Pass panel to GameLoop so repaint() can be called every tick
 
             // Add button and container JPanel
-            f.add(buttonContainer, BorderLayout.NORTH);
-            buttonContainer.add(points);
+            f.add(topDisplay, BorderLayout.NORTH);
+            topDisplay.add(points);
+            topDisplay.add(timer);
 
             f.setResizable(false);
-            f.add(this); // Add panel to
+            f.add(this); // Add panel
             FrameUtils.setBackToMenuOnClose(f, AlexWindow::exitButton);
             //f.setLayout(new BorderLayout());
             f.pack();
@@ -68,13 +74,6 @@ public class AlexWindow { // Must create variables at the start so they can be u
             super.paintComponent(g);
             
             game.render(g);
-            
-            if(game.getStatus()==false) { // Shows instructions
-                g.drawString("Welcome", 100, 100);
-                g.drawString("You must tend the farm.", 100, 130);
-                g.drawString("Pick up and drop tools with E, move with WASD", 100, 160);
-                g.drawString("The onions (purple circles), need the shovel. The wheat requires the scythe.", 100, 190);
-            }
             updateFunc();
         }
         
@@ -123,16 +122,20 @@ public class AlexWindow { // Must create variables at the start so they can be u
             // Must be overridden
         }
         
+        static void disposeWindow() {
+            f.dispose();
+        }
+        
     }
     static public void updateFunc() {
         game.movePlayer(up, down, left, right);
         points.setText("Points: "+game.getPoints());
+        timer.setText("Time left: "+(180-game.getSeconds()));
     }
     
     static public void exitButton() {
         game.endTicks();
- 
-   }
+    }
 }
 
 
