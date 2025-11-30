@@ -13,12 +13,12 @@ import java.awt.Graphics;
  */
 public class Vehicle {
 
-    protected int posX;
-    protected int posY;
+    protected double posX;
+    protected double posY;
     protected int width;
     protected int height;
-    protected float xVel;
-    protected float yVel;
+    protected double xVel;
+    protected double yVel;
     protected int Capacity;
 //    protected String Vehicle;
 
@@ -33,7 +33,7 @@ public class Vehicle {
 //        Vehicle = "/TBD";
     }
 
-    public Vehicle(int x, int y, int w, int h, float xV, float yV, int c) {
+    public Vehicle(double x, double y, int w, int h, double xV, double yV, int c) {
         posX = x;
         posY = y;
         width = w;
@@ -43,19 +43,19 @@ public class Vehicle {
         Capacity = c;
     }
 
-    public int getPosX() {
+    public double getPosX() {
         return posX;
     }
 
-    public void setPosX(int posX) {
+    public void setPosX(double posX) {
         this.posX = posX;
     }
 
-    public int getPosY() {
+    public double getPosY() {
         return posY;
     }
 
-    public void setPosY(int posY) {
+    public void setPosY(double posY) {
         this.posY = posY;
     }
 
@@ -75,19 +75,19 @@ public class Vehicle {
         this.height = height;
     }
 
-    public float getxVel() {
+    public double getxVel() {
         return xVel;
     }
 
-    public void setxVel(float xVel) {
+    public void setxVel(double xVel) {
         this.xVel = xVel;
     }
 
-    public float getyVel() {
+    public double getyVel() {
         return yVel;
     }
 
-    public void setyVel(float yVel) {
+    public void setyVel(double yVel) {
         this.yVel = yVel;
     }
 
@@ -101,9 +101,9 @@ public class Vehicle {
 
     public void paintVehicle(Graphics g) {
         g.setColor(Color.white);
-        g.fillRect(posX, posY, width, height);
+        g.fillRect((int)posX, (int)posY, width, height);
         g.setColor(Color.black);
-        g.drawRect(posX, posY, width, height);
+        g.drawRect((int)posX, (int)posY, width, height);
     }
 
 }

@@ -13,8 +13,10 @@ import java.awt.Graphics;
  */
 public class Delivery extends Items {
 
-    public Delivery(int radius, int[] posX, int[] posY, int time, int score) {
-        super(radius, posX, posY, time, score);
+    private int[] requested;
+    public Delivery(int radius, int x, int y, int requested) {
+        super(radius, x, y);
+        this.requested = new int[]{requested};
     }
 
     @Override
@@ -25,4 +27,11 @@ public class Delivery extends Items {
         g.drawOval(posX[0], posY[0], radius, radius);
     }
 
+    public int[] getRequested() {
+        return requested;
+    }
+
+    public void setRequested(int[] requested) {
+        this.requested = requested;
+    }
 }

@@ -13,15 +13,16 @@ import java.awt.Graphics;
  */
 public class Land extends Vehicle {
 
-    public Land(int x, int y, int w, int h, float xV, float yV, int c) {
+    private boolean full;
+    public Land(int x, int y, int w, int h, double xV, double yV, int c) {
         super(x, y, 55, 35, xV, yV, c);
     }
 
     @Override
     public void paintVehicle(Graphics g) {
         g.setColor(Color.MAGENTA);
-        g.fillRect(posX, posY, width, height);
+        g.fillRect((int)posX, (int)posY, width, height);
         g.setColor(Color.BLACK);
-        g.drawRect(posX, posY, width, height);
+        g.drawRect((int)posX, (int)posY, width, height);
     }
 }

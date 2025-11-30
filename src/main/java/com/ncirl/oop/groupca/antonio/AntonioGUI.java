@@ -9,12 +9,12 @@ import com.ncirl.oop.groupca.antonio.Items.Delivery;
 import com.ncirl.oop.groupca.antonio.Items.Items;
 import com.ncirl.oop.groupca.antonio.Items.Pickup;
 import com.ncirl.oop.groupca.antonio.Map.Maps;
+import com.ncirl.oop.groupca.antonio.Map.Obstacle;
 import com.ncirl.oop.groupca.antonio.Vehicle.Air;
 import com.ncirl.oop.groupca.antonio.Vehicle.Land;
 import com.ncirl.oop.groupca.antonio.Vehicle.Sea;
 import com.ncirl.oop.groupca.antonio.Vehicle.Vehicle;
 import com.ncirl.oop.groupca.thomas.GameState;
-import com.ncirl.oop.groupca.thomas.util.FrameUtils;
 import javax.swing.JOptionPane;
 
 /**
@@ -46,6 +46,9 @@ public class AntonioGUI extends javax.swing.JFrame {
         Land = new javax.swing.JButton();
         Sea = new javax.swing.JButton();
         gameName = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Food Delivery Game Menu");
@@ -83,35 +86,58 @@ public class AntonioGUI extends javax.swing.JFrame {
             }
         });
 
-        gameName.setText("Food Delivery Game Name WIP");
+        gameName.setText("Food Delivery Game");
+
+        jLabel1.setText("After choosing a vehicle your goal is to pick up cargo from ");
+
+        jLabel2.setText("the white circles and deliver it to the black circles while");
+
+        jLabel3.setText("avoiding the red obstacles ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(127, Short.MAX_VALUE)
+                .addGap(52, 52, 52)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(102, 102, 102)
+                                .addComponent(gameName)))
+                        .addContainerGap(69, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(165, 165, 165)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Sea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Land, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Air, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(120, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(80, Short.MAX_VALUE)
-                .addComponent(gameName)
-                .addContainerGap(80, Short.MAX_VALUE))
+                    .addComponent(Air, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Sea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(17, Short.MAX_VALUE)
+                .addGap(29, 29, 29)
                 .addComponent(gameName)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(Air, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(Land, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(Sea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
                 .addContainerGap(113, Short.MAX_VALUE))
         );
 
@@ -120,9 +146,16 @@ public class AntonioGUI extends javax.swing.JFrame {
 
     private void LandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LandActionPerformed
         // TODO add your handling code here:
-        Vehicle vehicle = new Land(300, 200, 0, 0, 0, 0, 0);
-        Items pickup = new Pickup(60, new int[]{150}, new int[]{200}, 0, 0);
-        Items delivery = new Delivery(60, new int[]{450}, new int[]{200}, 0, 0);
+//        Vehicle vehicle = new Land(300, 200, 0, 0, 0, 0, 0);
+//        Items pickup = new Pickup(60, new int[]{150}, new int[]{200}, 0);
+//        Items delivery = new Delivery(60, new int[]{450}, new int[]{200}, 0);
+//        Obstacle obstacle = new Obstacle(100, 100, 50, 50);
+//
+//        Maps map = new Maps(vehicle, pickup, delivery);
+//        map.createWindow();
+        Vehicle vehicle = new Land(300, 200, 55, 35, 0.0, 0.0, 0);
+        Items pickup = new Pickup(60, 150, 200, 0);
+        Items delivery = new Delivery(60, 450, 200, 0);
 
         Maps map = new Maps(vehicle, pickup, delivery);
         map.createWindow();
@@ -131,9 +164,16 @@ public class AntonioGUI extends javax.swing.JFrame {
 
     private void AirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AirActionPerformed
         // TODO add your handling code here:
-        Vehicle vehicle = new Air(300, 200, 0, 0, 0, 0, 0);
-        Items pickup = new Pickup(60, new int[]{150}, new int[]{200}, 0, 0);
-        Items delivery = new Delivery(60, new int[]{450}, new int[]{200}, 0, 0);
+//        Vehicle vehicle = new Air(300, 200, 0, 0, 0, 0, 0);
+//        Items pickup = new Pickup(60, new int[]{150}, new int[]{200}, 0);
+//        Items delivery = new Delivery(60, new int[]{450}, new int[]{200}, 0);
+//        Obstacle obstacle = new Obstacle(100, 100, 50, 50);
+//
+//        Maps map = new Maps(vehicle, pickup, delivery);
+//        map.createWindow();
+        Vehicle vehicle = new Air(300, 200, 60, 40, 0.0, 0.0, 0);
+        Items pickup = new Pickup(60, 150, 200, 0);
+        Items delivery = new Delivery(60, 450, 200, 0);
 
         Maps map = new Maps(vehicle, pickup, delivery);
         map.createWindow();
@@ -142,16 +182,23 @@ public class AntonioGUI extends javax.swing.JFrame {
 
     private void SeaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeaActionPerformed
         // TODO add your handling code here:
-        Vehicle vehicle = new Sea(300, 200, 0, 0, 0, 0, 0);
-        Items pickup = new Pickup(60, new int[]{150}, new int[]{200}, 0, 0);
-        Items delivery = new Delivery(60, new int[]{450}, new int[]{200}, 0, 0);
+//        Vehicle vehicle = new Sea(300, 200, 0, 0, 0, 0, 0);
+//        Items pickup = new Pickup(60, new int[]{150}, new int[]{200}, 0);
+//        Items delivery = new Delivery(60, new int[]{450}, new int[]{200}, 0);
+//        Obstacle obstacle = new Obstacle(100, 100, 50, 50);
+//
+//        Maps map = new Maps(vehicle, pickup, delivery);
+//        map.createWindow();
+        Vehicle vehicle = new Sea(400, 300, 50, 50, 0, 0, 0);
+        Items pickup = new Pickup(60, 150, 200, 0);
+        Items delivery = new Delivery(60, 450, 200, 0);
 
         Maps map = new Maps(vehicle, pickup, delivery);
         map.createWindow();
         dispose();
     }//GEN-LAST:event_SeaActionPerformed
 
-    private void MainMenu(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_MainMenu
+    private void MainMenu(java.awt.event.WindowEvent evt) {
         // TODO add your handling code here:
 
         if (JOptionPane.showConfirmDialog(this, "Are you sure you want to return to the main menu?", "Confirm", JOptionPane.YES_NO_OPTION) == 1) {
@@ -164,7 +211,7 @@ public class AntonioGUI extends javax.swing.JFrame {
         mainMenu.setVisible(true);
 
         dispose();
-    }//GEN-LAST:event_MainMenu
+    }
 
     /**
      * @param args the command line arguments
@@ -196,5 +243,8 @@ public class AntonioGUI extends javax.swing.JFrame {
     private javax.swing.JButton Land;
     private javax.swing.JButton Sea;
     private javax.swing.JLabel gameName;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 }
