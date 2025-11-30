@@ -19,6 +19,8 @@ public class TomGameWindow extends JFrame {
         final int WINDOW_WIDTH = 1000;
         final int WINDOW_HEIGHT = 600;
 
+        setLayout(new BorderLayout());
+
         canvas = new GameCanvas();
         controlPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         canvas.setBackground(new Color(0, 127, 12));
@@ -33,7 +35,6 @@ public class TomGameWindow extends JFrame {
         setTitle("Tom - Food Distribution Game");
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         setResizable(false);
-        setLayout(new BorderLayout());
         setLocationRelativeTo(null);
         FrameUtils.setBackToMenuOnClose(this, GameObjectManager::resetState);
 

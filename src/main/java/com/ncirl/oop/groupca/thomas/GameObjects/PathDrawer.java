@@ -6,14 +6,12 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class PathDrawer extends GameObject {
-    public PathDrawer(int startX, int startY, int size) {
-        super(startX, startY, size);
+    public PathDrawer() {
+        super(0, 0, 0);
     }
 
     @Override
-    public void onClicked() {
-
-    }
+    public void onClicked() {}
 
     @Override
     public void render(Graphics2D g2, Point mousePos) {
@@ -35,7 +33,5 @@ public class PathDrawer extends GameObject {
     }
 
     @Override
-    public void tickLogic() {
-
-    }
+    public void tickLogic() {}
 }

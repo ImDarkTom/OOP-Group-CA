@@ -19,7 +19,9 @@ public class GameObjectManager {
     }
 
     public static void generateWorld() {
-        gameObjects.add(new PathDrawer(0, 0, 0));
+        gameObjects.add(new PathDrawer());
+        gameObjects.add(new RiverDrawer());
+
         gameObjects.add(new Settlement(50, 50));
     }
 

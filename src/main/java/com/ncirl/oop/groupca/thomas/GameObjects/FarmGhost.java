@@ -17,10 +17,13 @@ public class FarmGhost extends GameObject {
 
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         asset = toolkit.getImage(getClass().getResource("/tom_game/farm.png"));
+        RiverDrawer.showPlacementOverlay();
     }
 
     @Override
     public void onClicked() {
+        RiverDrawer.isNearRiver(pos, 200);
+        RiverDrawer.hidePlacementOverlay();
         GameObjectManager.removeGameObject(this);
         GameObjectManager.addGameObject(new Farm(pos.x, pos.y));
     }
