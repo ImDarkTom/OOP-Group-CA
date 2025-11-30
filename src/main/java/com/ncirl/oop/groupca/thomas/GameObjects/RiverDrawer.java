@@ -97,6 +97,25 @@ public class RiverDrawer extends GameObject {
     }
 
     public static boolean isNearRiver(Point point, int range) {
-        return false;
+        // https://en.wikipedia.org/wiki/Distance_from_a_point_to_a_line#Line_defined_by_two_points
+
+        // First, lets jut assume the river only has two points.
+        Point p1 = riverPoints.get(0);
+        Point p2 = riverPoints.get(1);
+
+        int x1 = p1.x;
+        int y1 = p1.y;
+
+        int x2 = p2.x;
+        int y2 = p2.y;
+
+        int x0 = point.x;
+        int y0 = point.y;
+
+        double distanceToLine =
+                Math.abs((y2 - y1) * x0 - (x2 -x1) * y0 + (x2 * y1) - (y2 * x1))
+                / Math.sqrt(Math.pow((y2 - y1), 2) + Math.pow((x2 - x1), 2));
+
+        return distanceToLine > 40 && distanceToLine < range;
     }
 }

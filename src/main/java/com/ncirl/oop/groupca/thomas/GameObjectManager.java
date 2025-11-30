@@ -9,12 +9,12 @@ public class GameObjectManager {
     public static ArrayList<FoodDelivery> foodDeliveries = new ArrayList<>();
 
     public static void placeFarm() {
-        if (GameValues.getPlayerMaterials() < GameValues.FARM_PRICE) {
-            // Not enough materials
-            return;
-        }
-
-        GameValues.adjustPlayerMaterials(-GameValues.FARM_PRICE);
+//        if (GameValues.getPlayerMaterials() < GameValues.FARM_PRICE) {
+//            // Not enough materials
+//            return;
+//        }
+//
+//        GameValues.adjustPlayerMaterials(-GameValues.FARM_PRICE);
         gameObjects.add(new FarmGhost(0, 0));
     }
 
