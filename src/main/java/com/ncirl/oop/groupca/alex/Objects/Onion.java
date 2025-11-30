@@ -19,11 +19,10 @@ public class Onion extends Plant{
         height = 25;
         tool = "shovel";
         arrayID = arrayNum;
-        held = isHeld;
     }
     
     @Override
-    public void paintPlant(Graphics g) {
+    public void paintPlant(Graphics g) { // Draw onion to screen
         int[] xpoints = {posX,posX-14,posX+14};
         int[] ypoints = {posY+20,posY-30,posY-30};
         g.setColor(Color.green);

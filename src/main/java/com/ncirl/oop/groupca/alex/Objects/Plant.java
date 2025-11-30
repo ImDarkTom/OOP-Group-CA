@@ -11,8 +11,8 @@ import java.awt.*;
 abstract public class Plant {
     protected int posX;protected int posY;
     protected int width;protected int height;
-    protected String tool;protected boolean held;
-    protected String type;public int arrayID;
+    protected String tool;protected String type;
+    public int arrayID;
     
     public Plant() {
         posX = 100;
@@ -41,15 +41,7 @@ abstract public class Plant {
     public String getType() {
         return type;
     }
-    public boolean toggleHeld() {
-        if(held==true) {
-            held=false;
-        } else {
-            held=true;
-        }
-        return held;
-    }
-    
+    // Paint function
     public void paintPlant(Graphics g) {
     }
 }

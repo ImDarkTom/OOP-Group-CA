@@ -19,11 +19,10 @@ public class Wheat extends Plant{
         height = 35;
         tool = "scythe";
         arrayID = arrayNum;
-        held = isHeld;
     }
     
     @Override
-    public void paintPlant(Graphics g) {
+    public void paintPlant(Graphics g) { // Draw Wheat to screen
         g.setColor(new Color(250, 227, 22));
         g.fillRect(posX-(width/4),posY+(height/3),(width/2),height);
         g.setColor(new Color(214, 172, 19));

@@ -18,7 +18,7 @@ public class Scythe extends Tool{
         equipped=false;
     }
     @Override
-    public void paintTool(Graphics g) {
+    public void paintTool(Graphics g) { // Draw Scythe to screen
         g.setColor(Color.gray);
         g.fillRect(posX+15, posY, 8, 45);
         g.setColor(Color.black);

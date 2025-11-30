@@ -21,6 +21,7 @@ public class Player {
         toolHeld="none";
     }
     
+    // Setters
     public void setPosX(int X) {
       posX = X;  
     }
@@ -44,6 +45,7 @@ public class Player {
         posY = posY+Y;
     }
     
+    // Getters
     public int getX() {
         return posX;
     }
@@ -54,7 +56,7 @@ public class Player {
         return toolHeld;
     }
      
-    public void paintPlayer(Graphics g) {
+    public void paintPlayer(Graphics g) { // Render / draw function
         g.setColor(Color.blue);
         g.fillRect(posX, posY+(height/4), width, height/2);
         g.setColor(Color.yellow);
