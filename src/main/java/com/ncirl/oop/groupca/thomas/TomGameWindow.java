@@ -74,6 +74,37 @@ public class TomGameWindow extends JFrame {
 
         gameWindow = this;
 
+        // tutorial popup
+        JOptionPane.showMessageDialog(
+                this,
+                """
+                        Hello and welcome to the Food Distribution Game! In this game, your task is to feed the settlements \s
+                        on the map by providing them with food. To do this, you will need to construct farms near water sources \s
+                        that will then start distributing food to nearby settlements. Once a settlement is fed enough, it will begin \s
+                        upgrading, and transform into a bigger and more prosperous town. This means more building materials, \s
+                        but also higher food requirements. Once you upgrade a town enough, it will turn into a city, and if \s
+                        you get a city's upgrade meter to 100%, it will spawn another settlement to take care of. \s
+                        
+                        You gain score by upgrading the settlements, each settlement upgrade level increases score by \s
+                        a set amount, therefore, more settlements = higher score potential. You may purchase upgrades to \s
+                        improve various aspects of your farms, such as the delivery speed of your distribution trucks, \s
+                        the range of your roads, the delay between trucks, and more. \s
+                        
+                        The game lasts 10 in-game years, or approximately 6 real minutes. After this, you will get \s
+                        a final score, and the game will end. \s
+                        
+                        Some tips: \s
+                        - Farms can't be built too close to each other or directly on top of the river.
+                        - Settlements increase materials/sec by 5, towns by 10, and cities by 20.
+                        - Clicking a farm will prompt to to delete it (in case you build too far from a settlement).
+                        - Roads may cross rivers.
+                        
+                        Have fun! \s
+                        """,
+                "Food Distribution Game Tutorial",
+                JOptionPane.INFORMATION_MESSAGE
+        );
+
         // game state
         GameObjectManager.generateWorld();
         GameLoop.startGameLoop(canvas);

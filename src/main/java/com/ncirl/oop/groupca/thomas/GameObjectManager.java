@@ -2,6 +2,7 @@ package com.ncirl.oop.groupca.thomas;
 
 import com.ncirl.oop.groupca.thomas.GameObjects.*;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class GameObjectManager {
@@ -25,8 +26,8 @@ public class GameObjectManager {
     }
 
     public static void generateWorld() {
-        gameObjects.add(new PathDrawer());
         gameObjects.add(new RiverDrawer());
+        gameObjects.add(new PathDrawer());
 
         gameObjects.add(new Settlement(
                 50 + (int)(Math.random() * 50),
@@ -90,5 +91,25 @@ public class GameObjectManager {
                 (int)(Math.random() * TomGameWindow.getCanvasWidth()),
                 (int)(Math.random() * TomGameWindow.getCanvasHeight())
         ));
+    }
+
+    // collision
+    public static boolean checkCollision(Point point) {
+        for (GameObject object : gameObjects) {
+            Point boundingTL = object.getPos();
+            Point boundingBR = new Point(
+                    object.getPos().x + object.getSize(),
+                    object.getPos().y + object.getSize()
+            );
+
+            if (
+                    (point.x > boundingTL.x && point.y > boundingTL.y)
+                    && (point.x < boundingBR.x && point.y < boundingBR.y)
+            ) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

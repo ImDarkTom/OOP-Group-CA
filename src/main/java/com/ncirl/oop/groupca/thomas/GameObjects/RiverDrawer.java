@@ -25,42 +25,13 @@ public class RiverDrawer extends GameObject {
         overlayStroke = new BasicStroke(GameValues.irrigationDistance.getValue());
     }
 
-    //    private static Point generateSourcePoint(Random random, int edgeThreshold) {
-//        int genX = random.nextInt(edgeThreshold);
-//        int genY = random.nextInt(edgeThreshold);
-//
-//        // If they are greater than half of the threshold, move them to the other edge of the screen
-//        if (genX > (edgeThreshold / 2)) {
-//            genX += TomGameWindow.getCanvasWidth() / 2;
-//        }
-//
-//        if (genY > (edgeThreshold / 2)) {
-//            genY += TomGameWindow.getCanvasHeight() / 2;
-//        }
-//
-//        return new Point(genX, genY);
-//    }
-
     private static void generateRiver() {
         riverPoints.add(new Point(200, 0));
         riverPoints.add(new Point(800, 600));
 
-        // TODO: fancy logic for river generation
-//        Random random = new Random();
-//
-//        // start at random edge of the map
-//
-//        Point sourcePoint = generateSourcePoint(random, 300);
-//        riverPoints.add(sourcePoint);
-//
-//
-//
-//        // start going towards middle
-//        // away from source
-//
-//        riverPoints.add(PointUtils.multiply(sourcePoint, -2));
-////        riverPoints.add(new Point(random.nextInt(1000), random.nextInt(600)));
-////        riverPoints.add(new Point(random.nextInt(1000), random.nextInt(600)));
+        // maybe river generation
+        // riverPoints.add(new Point(random.nextInt(1000), random.nextInt(600)));
+        // riverPoints.add(new Point(random.nextInt(1000), random.nextInt(600)));
     }
 
     @Override

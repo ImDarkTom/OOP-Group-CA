@@ -23,7 +23,7 @@ public class FarmGhost extends GameObject {
 
     @Override
     public void onClicked() {
-        if (RiverDrawer.isNearRiver(pos)) {
+        if (RiverDrawer.isNearRiver(pos) && GameObjectManager.checkCollision(pos)) {
             RiverDrawer.hidePlacementOverlay();
             GameObjectManager.removeGameObject(this);
 
@@ -42,7 +42,12 @@ public class FarmGhost extends GameObject {
 
         g2.setColor(Color.RED);
         g2.setStroke(new BasicStroke(2f));
-        g2.draw(new Ellipse2D.Double(pos.x - 150, pos.y - 150, 350, 350));
+        int deliveryRange = GameValues.getDeliveryRange();
+        g2.draw(new Ellipse2D.Double(
+                pos.x + 25 - deliveryRange,
+                pos.y + 25 - deliveryRange,
+                GameValues.getDeliveryRange() * 2,
+                GameValues.getDeliveryRange() * 2));
 
         RenderUtils.drawImage(g2, asset, pos, 0.5f);
     }

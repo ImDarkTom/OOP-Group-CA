@@ -2,10 +2,7 @@ package com.ncirl.oop.groupca.thomas;
 
 import com.ncirl.oop.groupca.thomas.util.UpgradeableValue;
 
-import java.awt.event.ActionEvent;
-
 public class GameValues {
-
     // Constants
     public static final int DAYS_TOTAL = 3650;
     public static final int FARM_PRICE = 100;
@@ -26,8 +23,8 @@ public class GameValues {
             "How far deliveries can be made.",
             200,
             200,
-            50,
-            150
+            100,
+            25
     );
 
     public static UpgradeableValue deliveryDelay = new UpgradeableValue(

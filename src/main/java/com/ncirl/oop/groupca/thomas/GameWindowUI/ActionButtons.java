@@ -13,10 +13,8 @@ public class ActionButtons {
     // UI Elements
     private static JToggleButton pauseBtn;
     private static JButton placeFarmBtn;
-    private static JLabel buildingMaterialsAmountLbl;
-
     private static JButton upgradeBtn;
-
+    private static JLabel buildingMaterialsAmountLbl;
 
     private static JLabel daysLbl;
     private static JLabel scoreLbl;
@@ -26,8 +24,8 @@ public class ActionButtons {
         // Set values for the buttons.
         pauseBtn = new JToggleButton("⏸");
         placeFarmBtn = new JButton("Place Farm [" + GameValues.FARM_PRICE + "]");
-        buildingMaterialsAmountLbl = new JLabel("Materials: 0");
         upgradeBtn = new JButton("Upgrades");
+        buildingMaterialsAmountLbl = new JLabel("Materials: 0");
 
         daysLbl = new JLabel("Day 0/0");
         scoreLbl = new JLabel("Score: 0");
@@ -47,14 +45,14 @@ public class ActionButtons {
         placeFarmBtn.addActionListener(_ -> GameObjectManager.placeFarm());
         placeFarmBtn.setIcon(new javax.swing.ImageIcon(ActionButtons.class.getResource("/tom_game/contruct.png")));
 
-        // building material lbl
-        panel.add(buildingMaterialsAmountLbl);
-        buildingMaterialsAmountLbl.setIcon(new javax.swing.ImageIcon(ActionButtons.class.getResource("/small_icons/wrench.png")));
-
         // upgrade irrigation distance
         panel.add(upgradeBtn);
         upgradeBtn.setIcon(new ImageIcon(ActionButtons.class.getResource("/tom_game/upgrade.png")));
         upgradeBtn.addActionListener(ActionButtons::showUpgradeMenu);
+
+        // building material lbl
+        panel.add(buildingMaterialsAmountLbl);
+        buildingMaterialsAmountLbl.setIcon(new javax.swing.ImageIcon(ActionButtons.class.getResource("/small_icons/wrench.png")));
 
         panel.add(daysLbl);
         daysLbl.setIcon(new javax.swing.ImageIcon(ActionButtons.class.getResource("/tom_game/calendar.png")));
