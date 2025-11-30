@@ -1,5 +1,6 @@
 package com.ncirl.oop.groupca.thomas;
 
+import com.ncirl.oop.groupca.OOPGroupCAGUI;
 import com.ncirl.oop.groupca.thomas.GameWindowUI.ActionButtons;
 
 import javax.swing.*;
@@ -20,6 +21,10 @@ public class GameLoop {
             ActionButtons.updateScoreText();
 
             GameObjectManager.tickLogic();
+
+            if (GameValues.day >= GameValues.DAYS_TOTAL) {
+                handleEndGame();
+            }
         });
 
         // Frames: 30 fps
@@ -42,5 +47,17 @@ public class GameLoop {
             frameTimer.start();
             logicTimer.start();
         }
+    }
+
+    public static void handleEndGame() {
+        frameTimer.stop();
+        logicTimer.stop();
+
+        JOptionPane.showMessageDialog(TomGameWindow.gameWindow, "Game Over! Your score was " + GameValues.score + ". Press OK to go back to main menu.");
+
+        TomGameWindow.gameWindow.dispose();
+
+        OOPGroupCAGUI mainMenu = new OOPGroupCAGUI();
+        mainMenu.setVisible(true);
     }
 }

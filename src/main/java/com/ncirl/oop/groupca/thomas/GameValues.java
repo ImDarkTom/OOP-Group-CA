@@ -7,12 +7,19 @@ import java.awt.event.ActionEvent;
 public class GameValues {
 
     // Constants
-    public static final int DAYS_TOTAL = 3000;
+    public static final int DAYS_TOTAL = 3650;
     public static final int FARM_PRICE = 100;
 
     // Game Values, changed with upgrades
     // delivery
-    public static int deliveryHungerDecreaseAmount = 25;
+    public static UpgradeableValue deliveryHungerDecreaseAmount = new UpgradeableValue(
+            "Delivery Size",
+            "How much hunger is decreased per delivery.",
+            25,
+            175,
+            3,
+            50
+    );
 
     public static UpgradeableValue deliveryRange = new UpgradeableValue(
             "Delivery Range",
@@ -35,7 +42,7 @@ public class GameValues {
     public static UpgradeableValue deliverySpeed = new UpgradeableValue(
             "Delivery Speed",
             "The speed at which delivery vans travel across the road.",
-            1,
+            2,
             150,
             1,
             125);
@@ -50,7 +57,7 @@ public class GameValues {
             500
     );
 
-    public static UpgradeableValue[] upgradesRegistry = { deliveryDelay, deliverySpeed, irrigationDistance };
+    public static UpgradeableValue[] upgradesRegistry = { deliveryDelay, deliveryRange, deliverySpeed, deliveryHungerDecreaseAmount, irrigationDistance };
 
     // Player values
     public static int day = 0;
@@ -80,5 +87,9 @@ public class GameValues {
 
     public static int getDeliveryDelay() {
         return deliveryDelay.getValue();
+    }
+
+    public static int getDeliveryHungerDecreaseAmount() {
+        return deliveryHungerDecreaseAmount.getValue();
     }
 }

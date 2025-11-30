@@ -55,7 +55,7 @@ public class FoodDelivery implements Renderable, Tickable {
         if (neededProgress == -1) return;
 
         if (progress >= neededProgress) {
-            targetSettlement.decreaseHunger(GameValues.deliveryHungerDecreaseAmount);
+            targetSettlement.decreaseHunger(GameValues.getDeliveryHungerDecreaseAmount());
 
             // We use this since `GameState.foodDeliveries.remove(this)` has
             // the potential to throw a ConcurrentModificationException as
