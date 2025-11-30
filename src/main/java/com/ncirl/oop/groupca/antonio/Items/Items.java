@@ -17,7 +17,6 @@ public class Items {
     protected int[] posX;
     protected int[] posY;
     protected int time;
-    protected int score;
 //    protected String style;
 
     public Items() {
@@ -25,19 +24,14 @@ public class Items {
         int[] posX = {0};
         int[] posY = {0};
         time = 0;
-        score = 0;
 //                        style = "/TBD";
     }
 
-    public Items(int radius, int[] posX, int[] posY, int time, int score) {
+    public Items(int radius, int x, int y) {
         this.radius = radius;
-        this.posX = posX;
-        this.posY = posY;
-        this.time = time;
-        this.score = score;
-    
-
-    ////        this.style = style;
+        this.posX = new int[] {x};
+        this.posY = new int[] {y};
+        this.time = 0;
     }
 
     public int getRadius() {
@@ -72,14 +66,6 @@ public class Items {
         this.time = time;
     }
 
-    public int getScore() {
-        return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
-    }
-
 //    public String getStyle() {
 //        return style;
 //    }
@@ -87,6 +73,7 @@ public class Items {
 //    public void setStyle(String style) {
 //        this.style = style;
 //    }
+
     public void paintItem(Graphics g) {
         g.setColor(Color.white);
         g.fillOval(posX[0], posY[0], radius, radius);

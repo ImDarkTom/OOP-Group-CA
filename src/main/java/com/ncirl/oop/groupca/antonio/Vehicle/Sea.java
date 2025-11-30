@@ -13,15 +13,18 @@ import java.awt.Graphics;
  */
 public class Sea extends Vehicle {
 
-    public Sea(int x, int y, int w, int h, float xV, float yV, int c) {
+    private boolean aground;
+    public Sea(int x, int y, int w, int h, double xV, double yV, int c) {
         super(x, y, 55, 65, xV, yV, c);
     }
 
     @Override
     public void paintVehicle(Graphics g) {
         g.setColor(Color.BLUE);
-        g.fillOval(posX, posY, width, height);
+        g.fillOval((int)posX, (int)posY, width, height);
         g.setColor(Color.BLACK);
-        g.drawOval(posX, posY, width, height);
+        g.drawOval((int)posX, (int)posY, width, height);
+        g.setColor(Color.ORANGE);
+        g.drawRect((int)posX, (int)posY, width, height);
     }
 }
