@@ -8,7 +8,8 @@ import com.ncirl.oop.groupca.thomas.util.Tickable;
 import java.awt.*;
 
 public class FoodDelivery implements Renderable, Tickable {
-    int progress = 0;
+    private float neededProgress = -1;
+    private float progress = 0;
 
     private final Settlement targetSettlement;
 
@@ -36,6 +37,9 @@ public class FoodDelivery implements Renderable, Tickable {
                 toSettlement.getPos().y + (settlementSize / 2)
         );
 
+        // https://www.geeksforgeeks.org/maths/euclidean-distance/
+        neededProgress = (float) Math.sqrt(Math.pow(to.x - from.x, 2) + Math.pow(to.y - from.y, 2));
+
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         asset = toolkit.getImage(getClass().getResource("/tom_game/truck.png"));
     }
@@ -47,7 +51,10 @@ public class FoodDelivery implements Renderable, Tickable {
 
     @Override
     public void tickLogic() {
-        if (progress >= 100) {
+        // Prevent null exception
+        if (neededProgress == -1) return;
+
+        if (progress >= neededProgress) {
             targetSettlement.decreaseHunger(GameValues.deliveryHungerDecreaseAmount);
 
             // We use this since `GameState.foodDeliveries.remove(this)` has
@@ -59,10 +66,10 @@ public class FoodDelivery implements Renderable, Tickable {
             return;
         }
 
-        progress += 1;
+        progress += GameValues.deliverySpeed;
 
-        float xPos = from.x + (to.x - from.x) * ((float) progress / 100);
-        float yPos = from.y + (to.y - from.y) * ((float) progress / 100);
+        float xPos = from.x + (to.x - from.x) * ((float) progress / neededProgress);
+        float yPos = from.y + (to.y - from.y) * ((float) progress / neededProgress);
 
         ourPos = new Point(
                 (int)xPos,

@@ -1,18 +1,18 @@
 package com.ncirl.oop.groupca.thomas.GameObjects;
 
-import com.ncirl.oop.groupca.thomas.GameObjectManager;
+import com.ncirl.oop.groupca.thomas.*;
 import com.ncirl.oop.groupca.thomas.util.RenderUtils;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
 public class Farm extends GameObject {
+    private static final Font DELIVERY_PROGRESS_FONT = new Font("SansSerif", Font.BOLD, 16);
+
     ArrayList<Settlement> inRangeSettlements = new ArrayList<>();
 
-    private int totalDeliveryProgress = 50;
     private int nextDeliveryProgress = 0;
-
-    private int deliveryRange = 200;
 
     private final Image asset;
 
@@ -26,22 +26,44 @@ public class Farm extends GameObject {
     }
 
     @Override
-    public void onClicked() {}
+    public void onClicked() {
+        GameLoop.pauseGame();
+
+        if (JOptionPane.showConfirmDialog(
+                TomGameWindow.gameWindow,
+                "Are you sure you want to delete this farm? (Returns 50 materials)",
+                "Confirm delete farm",
+                JOptionPane.YES_NO_OPTION) == 0
+        ) {
+            GameObjectManager.removeGameObject(this);
+            GameValues.adjustPlayerMaterials(50);
+        }
+
+        GameLoop.unpauseGame();
+    }
 
     @Override
     public void render(Graphics2D g2, Point mousePos) {
         RenderUtils.drawImage(g2, asset, pos);
 
         g2.setColor(Color.BLACK);
-        g2.setFont(new Font("SansSerif", Font.BOLD, 16));
-        g2.drawString((int)(((float)nextDeliveryProgress/(float)totalDeliveryProgress) * 100) + "%", pos.x, pos.y);
+        g2.setFont(DELIVERY_PROGRESS_FONT);
+        if (inRangeSettlements.isEmpty()) {
+            g2.drawString("No farms in range", pos.x, pos.y);
+        } else {
+            g2.drawString((int)(((float)nextDeliveryProgress/(float) GameValues.getDeliveryDelay()) * 100) + "%", pos.x, pos.y);
+        }
     }
 
     @Override
     public void tickLogic() {
+        if (inRangeSettlements.isEmpty()) {
+            return;
+        }
+
         this.nextDeliveryProgress += 1;
 
-        if (nextDeliveryProgress >= totalDeliveryProgress) {
+        if (nextDeliveryProgress >= GameValues.getDeliveryDelay()) {
             nextDeliveryProgress = 0;
 
             // Get most hungry in-range settlement;
@@ -69,7 +91,7 @@ public class Farm extends GameObject {
         ArrayList<Settlement> inRangeSettlements = new ArrayList<>();
 
         GameObjectManager.objectsOfType(Settlement.class).forEach(settlement -> {
-            if (this.getPos().distance(settlement.getPos()) < deliveryRange) {
+            if (this.getPos().distance(settlement.getPos()) < GameValues.getDeliveryRange()) {
                 inRangeSettlements.add(settlement);
             }
         });

@@ -22,7 +22,7 @@ public class FarmGhost extends GameObject {
 
     @Override
     public void onClicked() {
-        if (RiverDrawer.isNearRiver(pos, 200)) {
+        if (RiverDrawer.isNearRiver(pos)) {
             RiverDrawer.hidePlacementOverlay();
             GameObjectManager.removeGameObject(this);
             GameObjectManager.addGameObject(new Farm(pos.x, pos.y));

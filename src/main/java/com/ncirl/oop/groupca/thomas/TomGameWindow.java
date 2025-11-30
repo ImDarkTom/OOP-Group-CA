@@ -7,8 +7,10 @@ import javax.swing.*;
 import java.awt.*;
 
 public class TomGameWindow extends JFrame {
-    private GameCanvas canvas;
-    private JPanel controlPanel;
+    private static int canvasWidth;
+    private static int canvasHeight;
+
+    public static JFrame gameWindow;
 
     public TomGameWindow() {
         initComponents();
@@ -21,10 +23,10 @@ public class TomGameWindow extends JFrame {
 
         setLayout(new BorderLayout());
 
-        canvas = new GameCanvas();
-        controlPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        GameCanvas canvas = new GameCanvas();
         canvas.setBackground(new Color(0, 127, 12));
 
+        JPanel controlPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         ActionButtons.placeActionButtons(controlPanel);
 
         add(controlPanel, BorderLayout.NORTH);
@@ -38,8 +40,23 @@ public class TomGameWindow extends JFrame {
         setLocationRelativeTo(null);
         FrameUtils.setBackToMenuOnClose(this, GameObjectManager::resetState);
 
+        // Validating lets us calculate the size of the canvas before it's rendered
+        validate();
+        canvasWidth = canvas.getHeight();
+        canvasHeight = canvas.getHeight();
+
+        gameWindow = this;
+
         // game state
         GameObjectManager.generateWorld();
         GameLoop.startGameLoop(canvas);
+    }
+
+    public static int getCanvasHeight() {
+        return canvasHeight;
+    }
+
+    public static int getCanvasWidth() {
+        return canvasWidth;
     }
 }

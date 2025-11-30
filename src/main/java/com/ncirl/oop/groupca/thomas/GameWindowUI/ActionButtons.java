@@ -12,6 +12,10 @@ public class ActionButtons {
     private static JToggleButton pauseBtn;
     private static JButton placeFarmBtn;
     private static JLabel buildingMaterialsAmountLbl;
+
+    private static JButton upgradeIrrigationBtn;
+
+
     private static JLabel daysLbl;
     private static JLabel scoreLbl;
 
@@ -21,6 +25,7 @@ public class ActionButtons {
         pauseBtn = new JToggleButton("⏸");
         placeFarmBtn = new JButton("Place Farm [" + GameValues.FARM_PRICE + "]");
         buildingMaterialsAmountLbl = new JLabel("Materials: 0");
+        upgradeIrrigationBtn = new JButton("Irrigation [50 mat.] (200)");
 
         daysLbl = new JLabel("Day 0/0");
         scoreLbl = new JLabel("Score: 0");
@@ -43,6 +48,11 @@ public class ActionButtons {
         // building material lbl
         panel.add(buildingMaterialsAmountLbl);
         buildingMaterialsAmountLbl.setIcon(new javax.swing.ImageIcon(ActionButtons.class.getResource("/small_icons/wrench.png")));
+
+        // upgrade irrigation distance
+        panel.add(upgradeIrrigationBtn);
+        upgradeIrrigationBtn.setIcon(new ImageIcon(ActionButtons.class.getResource("/tom_game/upgrade.png")));
+        upgradeIrrigationBtn.addActionListener(GameValues::upgradeIrrigationDistance);
 
         panel.add(daysLbl);
         daysLbl.setIcon(new javax.swing.ImageIcon(ActionButtons.class.getResource("/tom_game/calendar.png")));

@@ -70,10 +70,13 @@ public class GameCanvas extends JPanel {
                 }
             }
 
-            if (clickAction != null) {
-                clickAction.run();
-            }
             lastClickPos = null;
+            if (clickAction != null) {
+                // Invoke later, that way any click events don't block the render thread
+                // and cause issues like `showConfirmDialogs` not rendering in `Farm` since
+                // Swing will block rendering it until we close the menu.
+                SwingUtilities.invokeLater(clickAction);
+            }
         }
     }
 }
