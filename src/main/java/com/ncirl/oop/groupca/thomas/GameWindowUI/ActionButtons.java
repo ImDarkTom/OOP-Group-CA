@@ -3,9 +3,11 @@ package com.ncirl.oop.groupca.thomas.GameWindowUI;
 import com.ncirl.oop.groupca.thomas.GameLoop;
 import com.ncirl.oop.groupca.thomas.GameObjectManager;
 import com.ncirl.oop.groupca.thomas.GameValues;
+import com.ncirl.oop.groupca.thomas.TomGameWindow;
+import com.ncirl.oop.groupca.thomas.util.UpgradeableValue;
 
 import javax.swing.*;
-import java.awt.*;
+import java.awt.event.ActionEvent;
 
 public class ActionButtons {
     // UI Elements
@@ -13,7 +15,7 @@ public class ActionButtons {
     private static JButton placeFarmBtn;
     private static JLabel buildingMaterialsAmountLbl;
 
-    private static JButton upgradeIrrigationBtn;
+    private static JButton upgradeBtn;
 
 
     private static JLabel daysLbl;
@@ -25,7 +27,7 @@ public class ActionButtons {
         pauseBtn = new JToggleButton("⏸");
         placeFarmBtn = new JButton("Place Farm [" + GameValues.FARM_PRICE + "]");
         buildingMaterialsAmountLbl = new JLabel("Materials: 0");
-        upgradeIrrigationBtn = new JButton("Irrigation [50 mat.] (200)");
+        upgradeBtn = new JButton("Upgrades");
 
         daysLbl = new JLabel("Day 0/0");
         scoreLbl = new JLabel("Score: 0");
@@ -50,15 +52,43 @@ public class ActionButtons {
         buildingMaterialsAmountLbl.setIcon(new javax.swing.ImageIcon(ActionButtons.class.getResource("/small_icons/wrench.png")));
 
         // upgrade irrigation distance
-        panel.add(upgradeIrrigationBtn);
-        upgradeIrrigationBtn.setIcon(new ImageIcon(ActionButtons.class.getResource("/tom_game/upgrade.png")));
-        upgradeIrrigationBtn.addActionListener(GameValues::upgradeIrrigationDistance);
+        panel.add(upgradeBtn);
+        upgradeBtn.setIcon(new ImageIcon(ActionButtons.class.getResource("/tom_game/upgrade.png")));
+        upgradeBtn.addActionListener(ActionButtons::showUpgradeMenu);
 
         panel.add(daysLbl);
         daysLbl.setIcon(new javax.swing.ImageIcon(ActionButtons.class.getResource("/tom_game/calendar.png")));
-        daysLbl.setBackground(new Color(181, 107, 74));
 
         panel.add(scoreLbl);
+    }
+
+    private static void showUpgradeMenu(ActionEvent _event) {
+        UpgradeableValue[] options = GameValues.upgradesRegistry;
+
+        GameLoop.pauseGame();
+
+        UpgradeableValue selectedUpgrade = (UpgradeableValue) JOptionPane.showInputDialog(
+                TomGameWindow.gameWindow,
+                "Select an aspect to upgrade:",
+                "Upgrade",
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[0]
+        );
+
+        if (selectedUpgrade == null) {
+            GameLoop.unpauseGame();
+            return;
+        }
+
+        if (selectedUpgrade.upgrade()) {
+            JOptionPane.showMessageDialog(TomGameWindow.gameWindow, "Upgrade success!");
+        } else {
+            JOptionPane.showMessageDialog(TomGameWindow.gameWindow, "Not enough materials");
+        }
+
+        GameLoop.unpauseGame();
     }
 
     // Text setters

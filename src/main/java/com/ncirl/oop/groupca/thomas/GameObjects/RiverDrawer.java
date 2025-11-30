@@ -12,7 +12,7 @@ public class RiverDrawer extends GameObject {
     private static final Stroke RIVER_STROKE = new BasicStroke(24f);
     private static final Stroke RIVER_DEEP_STROKE = new BasicStroke(14f);
 
-    private static Stroke overlayStroke = new BasicStroke(GameValues.irrigationDistance);
+    private static Stroke overlayStroke = new BasicStroke(GameValues.irrigationDistance.getValue());
 
     private static boolean showPlacementOverlay = false;
 
@@ -22,7 +22,7 @@ public class RiverDrawer extends GameObject {
     }
 
     public static void updateOverlayStroke() {
-        overlayStroke = new BasicStroke(GameValues.irrigationDistance);
+        overlayStroke = new BasicStroke(GameValues.irrigationDistance.getValue());
     }
 
     //    private static Point generateSourcePoint(Random random, int edgeThreshold) {
@@ -133,6 +133,6 @@ public class RiverDrawer extends GameObject {
                 / Math.sqrt(Math.pow((y2 - y1), 2) + Math.pow((x2 - x1), 2));
 
         // Divide by half since the distance is for total, not just one side of the river
-        return distanceToLine > 40 && distanceToLine < (GameValues.irrigationDistance * 0.5);
+        return distanceToLine > 40 && distanceToLine < (GameValues.irrigationDistance.getValue() * 0.5);
     }
 }
