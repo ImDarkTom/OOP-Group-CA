@@ -6,6 +6,33 @@ import com.ncirl.oop.groupca.thomas.util.FrameUtils;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Group Requirements:
+ * - Design consistency (shared custom Nimbus theme) ✔️
+ * - Connected navigation (main menu) ✔️
+ * - Inheritance & Polymorphism (`GameObject` extended in `Farm`, `Renderable` interface) ✔️
+ * .
+ * .
+ * Individual requirements:
+ * - More than 3 classes ✔️
+ * - At least 3 features (placing farm, upgrade menu, river, delivery trucks, etc.) ✔️
+ * - Data Input (clicking & selecting upgrade) & output (displaying placed farms on screen, showing upgrade success/fail) ✔️
+ * - More than 1 user input form (control panel at top of game, and upgrade menu) ✔️
+ * - ArrayLists use with objects (`gameObjects` & `foodDeliveries` arraylists in `GameObjectManager`) ✔️
+ * - 1+ Instantiable class (Farm, Settlement, GameObject) ✔️
+ * - Data structure functionality:
+ *   - Add (placing farm)
+ *   - Display (rendering farm on screen)
+ *   - Search (looking for Settlement GameObjects when connecting them to farm - Farm.java#refreshInRangeSettlements)
+ *   - Delete (clicking on a farm to delete it)
+ * .
+ * .
+ * Final requirements:
+ * - File I/O todo
+ * -
+ *
+ * @author tom
+ */
 public class TomGameWindow extends JFrame {
     private static int canvasWidth;
     private static int canvasHeight;
