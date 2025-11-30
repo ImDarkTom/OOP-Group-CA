@@ -48,7 +48,7 @@ public class FoodDelivery implements Renderable, Tickable {
     @Override
     public void tickLogic() {
         if (progress >= 100) {
-            targetSettlement.decreaseHunger(GameValues.hungerDecreaseAmount);
+            targetSettlement.decreaseHunger(GameValues.deliveryHungerDecreaseAmount);
 
             // We use this since `GameState.foodDeliveries.remove(this)` has
             // the potential to throw a ConcurrentModificationException as

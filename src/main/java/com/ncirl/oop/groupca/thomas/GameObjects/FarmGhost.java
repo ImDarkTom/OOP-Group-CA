@@ -1,9 +1,8 @@
 package com.ncirl.oop.groupca.thomas.GameObjects;
 
-import com.ncirl.oop.groupca.thomas.GameState;
+import com.ncirl.oop.groupca.thomas.GameObjectManager;
 import com.ncirl.oop.groupca.thomas.util.RenderUtils;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 
@@ -22,8 +21,8 @@ public class FarmGhost extends GameObject {
 
     @Override
     public void onClicked() {
-        GameState.removeGameObject(this);
-        GameState.addGameObject(new Farm(pos.x, pos.y));
+        GameObjectManager.removeGameObject(this);
+        GameObjectManager.addGameObject(new Farm(pos.x, pos.y));
     }
 
     @Override

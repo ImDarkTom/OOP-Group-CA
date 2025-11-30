@@ -8,7 +8,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-class GameCanvas extends JPanel {
+public class GameCanvas extends JPanel {
     private Point lastClickPos = null;
 
     public GameCanvas() {
@@ -37,14 +37,12 @@ class GameCanvas extends JPanel {
 
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        for (GameObject object : GameState.gameObjects) {
+        for (GameObject object : GameObjectManager.gameObjects) {
             object.render(g2, mousePos);
         }
 
-        GameState.foodDeliveries.forEach(foodDelivery -> foodDelivery.render(g2, mousePos));
+        GameObjectManager.foodDeliveries.forEach(foodDelivery -> foodDelivery.render(g2, mousePos));
     }
-
-
 
     // Utils
     /**
@@ -63,7 +61,7 @@ class GameCanvas extends JPanel {
         if (lastClickPos != null) {
             Runnable clickAction = null;
 
-            for (GameObject object : GameState.gameObjects) {
+            for (GameObject object : GameObjectManager.gameObjects) {
                 if (
                         (lastClickPos.x > object.getPos().x && lastClickPos.x < object.getPos().x + object.getSize()) &&
                                 (lastClickPos.y > object.getPos().y && lastClickPos.y < object.getPos().y + object.getSize())

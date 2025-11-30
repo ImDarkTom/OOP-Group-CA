@@ -1,6 +1,6 @@
 package com.ncirl.oop.groupca.thomas.GameObjects;
 
-import com.ncirl.oop.groupca.thomas.GameState;
+import com.ncirl.oop.groupca.thomas.GameObjectManager;
 import com.ncirl.oop.groupca.thomas.util.RenderUtils;
 
 import java.awt.*;
@@ -61,14 +61,14 @@ public class Farm extends GameObject {
                 return;
             }
 
-            GameState.addFoodDelivery(this, mostHungrySettlement);
+            GameObjectManager.addFoodDelivery(this, mostHungrySettlement);
         }
     }
 
     public void refreshInRangeSettlements() {
         ArrayList<Settlement> inRangeSettlements = new ArrayList<>();
 
-        GameState.objectsOfType(Settlement.class).forEach(settlement -> {
+        GameObjectManager.objectsOfType(Settlement.class).forEach(settlement -> {
             if (this.getPos().distance(settlement.getPos()) < deliveryRange) {
                 inRangeSettlements.add(settlement);
             }

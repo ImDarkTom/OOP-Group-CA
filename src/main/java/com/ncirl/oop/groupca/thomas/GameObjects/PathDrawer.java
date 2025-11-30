@@ -1,6 +1,6 @@
 package com.ncirl.oop.groupca.thomas.GameObjects;
 
-import com.ncirl.oop.groupca.thomas.GameState;
+import com.ncirl.oop.groupca.thomas.GameObjectManager;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ public class PathDrawer extends GameObject {
         g2.setColor(new Color(133, 77, 54));
         g2.setStroke(new BasicStroke(12f));
 
-        GameState.objectsOfType(Farm.class).forEach(farm -> {
+        GameObjectManager.objectsOfType(Farm.class).forEach(farm -> {
             ArrayList<Settlement> settlementsInRange = farm.getInRangeSettlements();
 
             for (Settlement settlement : settlementsInRange) {

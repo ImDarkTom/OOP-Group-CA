@@ -2,42 +2,30 @@ package com.ncirl.oop.groupca.thomas;
 
 import com.ncirl.oop.groupca.thomas.GameObjects.*;
 
-import javax.swing.*;
-import java.awt.*;
 import java.util.ArrayList;
 
-public class GameState {
+public class GameObjectManager {
+    public static ArrayList<GameObject> gameObjects = new ArrayList<>();
     public static ArrayList<FoodDelivery> foodDeliveries = new ArrayList<>();
 
-    public static final int FARM_PRICE = 100;
-
-    public static ArrayList<GameObject> gameObjects = new ArrayList<>();
-    private static int playerMaterials = 100;
-
-    private GameState() {}
-
     public static void placeFarm() {
-        if (playerMaterials < FARM_PRICE) {
+        if (GameValues.getPlayerMaterials() < GameValues.FARM_PRICE) {
             // Not enough materials
             return;
         }
 
-        playerMaterials -= FARM_PRICE;
+        GameValues.adjustPlayerMaterials(-GameValues.FARM_PRICE);
         gameObjects.add(new FarmGhost(0, 0));
     }
 
     public static void generateWorld() {
         gameObjects.add(new PathDrawer(0, 0, 0));
-
-        gameObjects.add(new Settlement(
-                50,
-                50
-        ));
+        gameObjects.add(new Settlement(50, 50));
     }
 
     public static void resetState() {
         gameObjects = new ArrayList<>();
-        playerMaterials = 100;
+        GameValues.setPlayerMaterials(100);
     }
 
     public static void tickLogic() {
@@ -85,60 +73,11 @@ public class GameState {
         foodDeliveries.add(new FoodDelivery(from, target));
     }
 
-    // loop
-    static Timer frameTimer;
-    static Timer logicTimer;
-
-    public static void startGameLoop(TomGameWindow windowInstance, GameCanvas canvasInstance) {
-        // 10 ticks/s
-        logicTimer = new Timer(100, _ -> {
-            GameValues.day++;
-
-            windowInstance.setBuildingMaterialAmount(GameState.getPlayerMaterials());
-
-            windowInstance.setFarmBtnEnabled(GameState.getPlayerMaterials() >= GameState.FARM_PRICE);
-
-            windowInstance.setScoreText(GameValues.score);
-            windowInstance.setDayText();
-
-            GameState.tickLogic();
-        });
-
-        // 30 fps
-        frameTimer = new Timer(33, _ -> canvasInstance.repaint()); // this re-runs `paintComponent`
-
-        frameTimer.start();
-        logicTimer.start();
-    }
-
-    public static void pauseGame() {
-        if (frameTimer != null && logicTimer != null) {
-            frameTimer.stop();
-            logicTimer.stop();
-        }
-    }
-
-    public static void unpauseGame() {
-        if (frameTimer != null && logicTimer != null) {
-            frameTimer.start();
-            logicTimer.start();
-        }
-    }
-
     // spawn settlements
     public static void spawnSettlement() {
         gameObjects.add(new Settlement(
                 (int)(Math.random() * 1000),
                 (int)(Math.random() * 600)
         ));
-    }
-
-    // Getters & Setters
-    public static int getPlayerMaterials() {
-        return playerMaterials;
-    }
-
-    public static void setPlayerMaterials(int playerMaterials) {
-        GameState.playerMaterials = playerMaterials;
     }
 }

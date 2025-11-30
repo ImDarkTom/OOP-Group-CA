@@ -1,5 +1,6 @@
 package com.ncirl.oop.groupca.thomas;
 
+import com.ncirl.oop.groupca.thomas.GameWindowUI.ActionButtons;
 import com.ncirl.oop.groupca.thomas.util.FrameUtils;
 
 import javax.swing.*;
@@ -8,13 +9,6 @@ import java.awt.*;
 public class TomGameWindow extends JFrame {
     private GameCanvas canvas;
     private JPanel controlPanel;
-
-    private JToggleButton pauseBtn;
-    private JButton placeFarmBtn;
-    private JLabel buildingMaterialLbl;
-
-    private JLabel daysLbl;
-    private JLabel scoreLbl;
 
     public TomGameWindow() {
         initComponents();
@@ -27,77 +21,24 @@ public class TomGameWindow extends JFrame {
 
         canvas = new GameCanvas();
         controlPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-
-        pauseBtn = new JToggleButton("⏸");
-        placeFarmBtn = new JButton("Place Farm [" + GameState.FARM_PRICE + "]");
-        buildingMaterialLbl = new JLabel("Materials: 0");
-
-        daysLbl = new JLabel("Day 0/0");
-        scoreLbl = new JLabel("Score: 0");
-
-        // Frame meta#
-        FrameUtils.setBackToMenuOnClose(this, GameState::resetState);
-
-        setTitle("Tom - Food Distribution Game");
-        setResizable(false);
-
         canvas.setBackground(new Color(0, 127, 12));
 
-        // pause btn
-        controlPanel.add(pauseBtn);
-        pauseBtn.addActionListener(e -> {
-            if (pauseBtn.isSelected()) {
-                GameState.pauseGame();
-            } else {
-                GameState.unpauseGame();
-            }
-        });
+        ActionButtons.placeActionButtons(controlPanel);
 
-        // place farm btn
-        controlPanel.add(placeFarmBtn);
-        placeFarmBtn.addActionListener(_ -> GameState.placeFarm());
-        placeFarmBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tom_game/contruct.png")));
-
-        // building material lbl
-        controlPanel.add(buildingMaterialLbl);
-        buildingMaterialLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small_icons/wrench.png")));
-
-        controlPanel.add(daysLbl);
-        daysLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tom_game/calendar.png")));
-        daysLbl.setBackground(new Color(181, 107, 74));
-
-        controlPanel.add(scoreLbl);
-
-        // frame ui
-        setLayout(new BorderLayout());
         add(controlPanel, BorderLayout.NORTH);
         add(canvas, BorderLayout.CENTER);
-
         pack();
 
-        // set size & set location has to be after pack
+        // frame ui
+        setTitle("Tom - Food Distribution Game");
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+        setResizable(false);
+        setLayout(new BorderLayout());
         setLocationRelativeTo(null);
+        FrameUtils.setBackToMenuOnClose(this, GameObjectManager::resetState);
 
         // game state
-        GameState.generateWorld();
-        GameState.startGameLoop(this, canvas);
-    }
-
-    // get/set
-    public void setBuildingMaterialAmount(int amount) {
-        buildingMaterialLbl.setText("Materials: " + amount);
-    }
-
-    public void setFarmBtnEnabled(boolean val) {
-        placeFarmBtn.setEnabled(val);
-    }
-
-    public void setScoreText(int score) {
-        this.scoreLbl.setText("Score: " + score);
-    }
-
-    public void setDayText() {
-        this.daysLbl.setText("Day " + GameValues.day + "/" + GameValues.DAYS_TOTAL);
+        GameObjectManager.generateWorld();
+        GameLoop.startGameLoop(canvas);
     }
 }

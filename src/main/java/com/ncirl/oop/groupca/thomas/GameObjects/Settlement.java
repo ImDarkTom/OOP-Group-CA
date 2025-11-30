@@ -1,6 +1,6 @@
 package com.ncirl.oop.groupca.thomas.GameObjects;
 
-import com.ncirl.oop.groupca.thomas.GameState;
+import com.ncirl.oop.groupca.thomas.GameObjectManager;
 import com.ncirl.oop.groupca.thomas.GameValues;
 
 import java.awt.*;
@@ -38,7 +38,7 @@ public class Settlement extends GameObject {
 
         // When we add a new settlement, refresh every farm's inRangeSettlements
         // to account for this new settlement.
-        GameState.objectsOfType(Farm.class).forEach(Farm::refreshInRangeSettlements);
+        GameObjectManager.objectsOfType(Farm.class).forEach(Farm::refreshInRangeSettlements);
     }
 
     @Override
@@ -73,7 +73,7 @@ public class Settlement extends GameObject {
 
         if (giveMaterialTick == 10) {
             giveMaterialTick = 0;
-            GameState.setPlayerMaterials(GameState.getPlayerMaterials() + materialsPerSecond);
+            GameValues.adjustPlayerMaterials(materialsPerSecond);
         }
     }
 
@@ -127,7 +127,7 @@ public class Settlement extends GameObject {
 
             GameValues.addScore(25);
         } else if (type == SettlementType.CITY) {
-            GameState.spawnSettlement();
+            GameObjectManager.spawnSettlement();
 
             GameValues.addScore(50);
         }
