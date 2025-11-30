@@ -11,13 +11,46 @@ public class GameValues {
     public static final int FARM_PRICE = 100;
 
     // Game Values, changed with upgrades
+    // delivery
     public static int deliveryHungerDecreaseAmount = 25;
-    public static int deliveryRange = 200;
-    public static int deliveryDelay = 50;
-    public static float deliverySpeed = 1f;
 
-    public static UpgradeableValue irrigationDistance = new UpgradeableValue("Irrigation Distance", 200, 100, 100, 500);
-    public static UpgradeableValue[] upgradesRegistry = { irrigationDistance };
+    public static UpgradeableValue deliveryRange = new UpgradeableValue(
+            "Delivery Range",
+            "How far deliveries can be made.",
+            200,
+            200,
+            50,
+            150
+    );
+
+    public static UpgradeableValue deliveryDelay = new UpgradeableValue(
+            "Delivery Delay",
+            "How fast new deliveries are sent out.",
+            50,
+            125,
+            -5,
+            50
+    );
+
+    public static UpgradeableValue deliverySpeed = new UpgradeableValue(
+            "Delivery Speed",
+            "The speed at which delivery vans travel across the road.",
+            1,
+            150,
+            1,
+            125);
+
+    // irrigation
+    public static UpgradeableValue irrigationDistance = new UpgradeableValue(
+            "Irrigation Distance",
+            "Distance from the river farms can be built at.",
+            200,
+            1000,
+            100,
+            500
+    );
+
+    public static UpgradeableValue[] upgradesRegistry = { deliveryDelay, deliverySpeed, irrigationDistance };
 
     // Player values
     public static int day = 0;
@@ -42,10 +75,10 @@ public class GameValues {
     }
 
     public static int getDeliveryRange() {
-        return deliveryRange;
+        return deliveryRange.getValue();
     }
 
     public static int getDeliveryDelay() {
-        return deliveryDelay;
+        return deliveryDelay.getValue();
     }
 }

@@ -14,21 +14,21 @@ enum SettlementType {
 public class Settlement extends GameObject {
     private SettlementType type = SettlementType.SETTLEMENT;
 
-    private int hunger = 0;
+    private float hunger = 0;
 
     private int upgradeProgress = 0;
     private int giveMaterialTick = 0;
 
     // Level dependent
-    private float hungerTickAmount = 1;
+    private float hungerTickAmount = 0.4f;
     private int materialsPerSecond = 5;
     private int upgradeRequirement = 100;
 
     // asset-related
     private Image asset;
     // static is better for optimisation, as each settlement instance won't need to re-create the same font.
-    private static final Font hungerFont = new Font("SansSerif", Font.PLAIN, 14);
-    private static final Font upgradeFont = new Font("SansSerif", Font.PLAIN, 12);
+    private static final Font HUNGER_FONT = new Font("SansSerif", Font.PLAIN, 14);
+    private static final Font UPGRADE_FONT = new Font("SansSerif", Font.PLAIN, 12);
 
     public Settlement(int startX, int startY) {
         super(startX, startY, 50);
@@ -46,19 +46,21 @@ public class Settlement extends GameObject {
         g2.setColor(Color.RED);
         g2.drawImage(asset, pos.x, pos.y, null);
 
-        if (hunger > 50) {
+        if (hunger > 200) {
+            g2.setColor(Color.RED);
+        } else if (hunger > 50) {
             g2.setColor(Color.ORANGE);
         } else if (hunger > 20) {
             g2.setColor(Color.YELLOW);
         } else {
             g2.setColor(Color.GREEN);
         }
-        g2.setFont(hungerFont);
-        g2.drawString("Hunger: " + hunger, pos.x, pos.y - 14);
+        g2.setFont(HUNGER_FONT);
+        g2.drawString("Hunger: " + (int)hunger, pos.x, pos.y - 14);
 
         if (upgradeProgress > 0) {
             g2.setColor(Color.GREEN);
-            g2.setFont(upgradeFont);
+            g2.setFont(UPGRADE_FONT);
 
             int upgradePercent = (int)(((float)upgradeProgress / (float)upgradeRequirement) * 100);
             g2.drawString("Upgrading: " + upgradePercent + "%", pos.x, pos.y);
@@ -67,7 +69,7 @@ public class Settlement extends GameObject {
 
     @Override
     public void tickLogic() {
-        this.hunger += (int) hungerTickAmount;
+        this.hunger += hungerTickAmount;
 
         giveMaterialTick++;
 
@@ -82,12 +84,12 @@ public class Settlement extends GameObject {
         System.out.println("clicked settlement");
     }
 
-    public int getHunger() {
+    public float getHunger() {
         return hunger;
     }
 
     public void decreaseHunger(int decreaseAmount) {
-        int newHunger = hunger - decreaseAmount;
+        float newHunger = hunger - decreaseAmount;
 
         if (newHunger < 1) {
             // Bump upgrade progress by 10% of invested food/hunger decrease.
@@ -112,7 +114,7 @@ public class Settlement extends GameObject {
             type = SettlementType.TOWN;
             asset = toolkit.getImage(getClass().getResource("/tom_game/town.png"));
 
-            hungerTickAmount = 2f;
+            hungerTickAmount = 1f;
             materialsPerSecond = 10;
             upgradeRequirement = 150;
 
@@ -122,7 +124,7 @@ public class Settlement extends GameObject {
             asset = toolkit.getImage(getClass().getResource("/tom_game/city.png"));
 
             hungerTickAmount = 4f;
-            materialsPerSecond = 15;
+            materialsPerSecond = 20;
             upgradeRequirement = 250;
 
             GameValues.addScore(25);

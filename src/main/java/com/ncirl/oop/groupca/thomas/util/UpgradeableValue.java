@@ -3,14 +3,16 @@ package com.ncirl.oop.groupca.thomas.util;
 import com.ncirl.oop.groupca.thomas.GameValues;
 
 public class UpgradeableValue {
-    private String label;
+    private final String label;
+    private final String description;
     private int value;
     private int neededForUpgrade;
     private final int upgradeChange;
     private final int neededChange;
 
-    public UpgradeableValue(String label, int defaultValue, int defaultNeededForUpgrade, int upgradeChange, int neededChange) {
+    public UpgradeableValue(String label, String description, int defaultValue, int defaultNeededForUpgrade, int upgradeChange, int neededChange) {
         this.label = label;
+        this.description = description;
         value = defaultValue;
         neededForUpgrade = defaultNeededForUpgrade;
         this.upgradeChange = upgradeChange;
@@ -23,6 +25,10 @@ public class UpgradeableValue {
 
     public String getLabel() {
         return label + " [" + neededForUpgrade + " mat.] (" + value + ")";
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     @Override

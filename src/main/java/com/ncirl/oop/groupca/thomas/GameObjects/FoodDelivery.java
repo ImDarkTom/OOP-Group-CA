@@ -66,10 +66,10 @@ public class FoodDelivery implements Renderable, Tickable {
             return;
         }
 
-        progress += GameValues.deliverySpeed;
+        progress += GameValues.deliverySpeed.getValue();
 
-        float xPos = from.x + (to.x - from.x) * ((float) progress / neededProgress);
-        float yPos = from.y + (to.y - from.y) * ((float) progress / neededProgress);
+        float xPos = from.x + (to.x - from.x) * (progress / neededProgress);
+        float yPos = from.y + (to.y - from.y) * (progress / neededProgress);
 
         ourPos = new Point(
                 (int)xPos,

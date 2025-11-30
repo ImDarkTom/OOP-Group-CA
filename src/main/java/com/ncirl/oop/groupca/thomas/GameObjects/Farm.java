@@ -49,7 +49,7 @@ public class Farm extends GameObject {
         g2.setColor(Color.BLACK);
         g2.setFont(DELIVERY_PROGRESS_FONT);
         if (inRangeSettlements.isEmpty()) {
-            g2.drawString("No farms in range", pos.x, pos.y);
+            g2.drawString("No settlements in range", pos.x, pos.y);
         } else {
             g2.drawString((int)(((float)nextDeliveryProgress/(float) GameValues.getDeliveryDelay()) * 100) + "%", pos.x, pos.y);
         }

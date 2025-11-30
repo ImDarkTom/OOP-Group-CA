@@ -1,6 +1,7 @@
 package com.ncirl.oop.groupca.thomas.GameObjects;
 
 import com.ncirl.oop.groupca.thomas.GameObjectManager;
+import com.ncirl.oop.groupca.thomas.GameValues;
 import com.ncirl.oop.groupca.thomas.util.RenderUtils;
 
 import java.awt.*;
@@ -25,6 +26,8 @@ public class FarmGhost extends GameObject {
         if (RiverDrawer.isNearRiver(pos)) {
             RiverDrawer.hidePlacementOverlay();
             GameObjectManager.removeGameObject(this);
+
+            GameValues.adjustPlayerMaterials(-GameValues.FARM_PRICE);
             GameObjectManager.addGameObject(new Farm(pos.x, pos.y));
         }
     }
@@ -39,7 +42,7 @@ public class FarmGhost extends GameObject {
 
         g2.setColor(Color.RED);
         g2.setStroke(new BasicStroke(2f));
-        g2.draw(new Ellipse2D.Double(pos.x - 175, pos.y - 175, 350, 350));
+        g2.draw(new Ellipse2D.Double(pos.x - 150, pos.y - 150, 350, 350));
 
         RenderUtils.drawImage(g2, asset, pos, 0.5f);
     }

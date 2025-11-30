@@ -9,12 +9,18 @@ public class GameObjectManager {
     public static ArrayList<FoodDelivery> foodDeliveries = new ArrayList<>();
 
     public static void placeFarm() {
-//        if (GameValues.getPlayerMaterials() < GameValues.FARM_PRICE) {
-//            // Not enough materials
-//            return;
-//        }
-//
-//        GameValues.adjustPlayerMaterials(-GameValues.FARM_PRICE);
+        for (FarmGhost ghost : GameObjectManager.objectsOfType(FarmGhost.class)) {
+            // If a ghost is already being placed down, cancel it
+            GameObjectManager.removeGameObject(ghost);
+            RiverDrawer.hidePlacementOverlay();
+            return;
+        }
+
+        if (GameValues.getPlayerMaterials() < GameValues.FARM_PRICE) {
+            // Not enough materials
+            return;
+        }
+
         gameObjects.add(new FarmGhost(0, 0));
     }
 
@@ -22,7 +28,10 @@ public class GameObjectManager {
         gameObjects.add(new PathDrawer());
         gameObjects.add(new RiverDrawer());
 
-        gameObjects.add(new Settlement(50, 50));
+        gameObjects.add(new Settlement(
+                50 + (int)(Math.random() * 50),
+                100 + (int)(Math.random() * 100)
+        ));
     }
 
     public static void resetState() {
@@ -78,8 +87,8 @@ public class GameObjectManager {
     // spawn settlements
     public static void spawnSettlement() {
         gameObjects.add(new Settlement(
-                (int)(Math.random() * 1000),
-                (int)(Math.random() * 600)
+                (int)(Math.random() * TomGameWindow.getCanvasWidth()),
+                (int)(Math.random() * TomGameWindow.getCanvasHeight())
         ));
     }
 }

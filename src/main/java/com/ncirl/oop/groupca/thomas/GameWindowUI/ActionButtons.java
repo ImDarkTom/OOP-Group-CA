@@ -65,8 +65,6 @@ public class ActionButtons {
     private static void showUpgradeMenu(ActionEvent _event) {
         UpgradeableValue[] options = GameValues.upgradesRegistry;
 
-        GameLoop.pauseGame();
-
         UpgradeableValue selectedUpgrade = (UpgradeableValue) JOptionPane.showInputDialog(
                 TomGameWindow.gameWindow,
                 "Select an aspect to upgrade:",
@@ -78,7 +76,6 @@ public class ActionButtons {
         );
 
         if (selectedUpgrade == null) {
-            GameLoop.unpauseGame();
             return;
         }
 
@@ -87,8 +84,6 @@ public class ActionButtons {
         } else {
             JOptionPane.showMessageDialog(TomGameWindow.gameWindow, "Not enough materials");
         }
-
-        GameLoop.unpauseGame();
     }
 
     // Text setters
