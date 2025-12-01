@@ -11,14 +11,15 @@ import java.awt.*;
 abstract public class Plant {
     protected int posX;protected int posY;
     protected int width;protected int height;
-    protected String tool;protected boolean held;
+    protected String tool;protected String type;
+    public int arrayID;
     
     public Plant() {
         posX = 100;
         posY = 100;
         width = 50;
         height = 50;
-        held = false;
+        arrayID = 0;
     }
     
     public void setX(int X) {
@@ -34,16 +35,13 @@ abstract public class Plant {
     public int getY() {
         return posY;
     }
-    
-    public boolean toggleHeld() {
-        if(held==true) {
-            held=false;
-        } else {
-            held=true;
-        }
-        return held;
+    public int getArrayID() {
+        return arrayID;
     }
-    
+    public String getType() {
+        return type;
+    }
+    // Paint function
     public void paintPlant(Graphics g) {
     }
 }

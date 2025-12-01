@@ -3,10 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.ncirl.oop.groupca.alex;
-import com.ncirl.oop.groupca.alex.Objects.*;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 import com.ncirl.oop.groupca.OOPGroupCAGUI;
+import com.ncirl.oop.groupca.thomas.util.FrameUtils;
 
 /**
  *
@@ -17,83 +18,114 @@ public class AlexWindow { // Must create variables at the start so they can be u
     private static JFrame f;
     private static JButton btn1;
     private static Label points;
+    private static Label timer;
     
-    public AlexWindow() {
-        createWindow();
+    // Booleans that track when keys are held
+    private static boolean up = false;
+    private static boolean down = false;
+    private static boolean left = false;
+    private static boolean right = false;
+    
+    public AlexWindow() { // Create window
+        GameWindow gamePanel = new GameWindow();
     }
     
-    public static void createWindow() {
-        f = new JFrame("Frame"); // Create frame and JPanel for buttons
-        JPanel buttonContainer = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        btn1 = new JButton("Back"); // Create back button
-        GameWindow gamePanel = new GameWindow(); // Create panel to handle painting to screen
-        
-        points = new Label("Points"); // Create label for points
-        game.setPanel(gamePanel); // Pass panel to GameLoop so repaint() can be called every tick
-        game.startTicks(); // Start tick timer as GameLoop now has panel
-        
-        
-        // Add button and container JPanel
-        f.add(buttonContainer, BorderLayout.NORTH);
-        buttonContainer.add(btn1);
-        buttonContainer.add(points);
-        // Action Listener
-        btn1.addActionListener(e -> { //
-            backButton();
-        });
-        f.setResizable(false);
-        f.add(gamePanel); // Add panel to 
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //f.setLayout(new BorderLayout());
-        f.pack();
-        f.setVisible(true);
-    }
-    
-    static public class GameWindow extends JPanel { // Main panel
-        public GameWindow() {
+    static public class GameWindow extends JPanel implements KeyListener{ 
+        // Main panel
+        public GameWindow() { // Create and populate game screen
             setBorder(BorderFactory.createLineBorder(Color.black)); // Makes black border
+            f = new JFrame("Frame"); // Create frame and JPanel for buttons
+            JPanel topDisplay = new JPanel(new FlowLayout(FlowLayout.LEFT));
+            f.addKeyListener(this);
+            f.setFocusable(true);
+            f.setFocusTraversalKeysEnabled(false);
+            //Points, timer and pass panel obj to gameLoop
+            points = new Label("Points"); // Create label for points
+            points.setFont(new Font("Serif",Font.PLAIN,20));
+            timer = new Label("Points"); // Create label for timer
+            timer.setFont(new Font("Serif",Font.PLAIN,20));
+            game.setPanel(this); // Pass panel to GameLoop so repaint() can be called every tick
+
+            // Layout and add labels to topdisplay
+            f.add(topDisplay, BorderLayout.NORTH);
+            topDisplay.add(points);
+            topDisplay.add(timer);
+
+            f.setResizable(false);
+            f.add(this); // Add panel
+            FrameUtils.setBackToMenuOnClose(f, AlexWindow::exitButton);
+            f.pack();
+            f.setVisible(true);
         }
-       
-        Player player = new Player(); // Create objects (will have to create arraylists here)
-        Wheat wheat = new Wheat(200, 300);
-        Onion onion = new Onion(400, 300);
-        Shovel shovel = new Shovel(100, 150);
-        Scythe scythe = new Scythe(300, 100);
         
-        
-        @Override
-        public Dimension getPreferredSize() { // Set window size
+        @Override // Set window size
+        public Dimension getPreferredSize() {
             return new Dimension(1000,600);
         }
         
-        @Override
-        public void paintComponent(Graphics g) { // Function to draw items to screen, handles graphics
+        @Override // Paint/Display function, draws onto the screen
+        public void paintComponent(Graphics g) {
             super.paintComponent(g);
-            
-            player.paintPlayer(g); // Shows all objects in the game, this will change
-            wheat.paintPlant(g); // dramatically to loading from gameLoop logic/lists
-            onion.paintPlant(g);
-            shovel.paintTool(g);
-            scythe.paintTool(g);
-            
-            if(game.getStatus()==false) { // Shows instructions
-                g.drawString("Welcome", 100, 100);
-                g.drawString("You must tend the farm.", 100, 130);
-                g.drawString("Pick up and drop tools with E, move with WASD", 100, 160);
-                g.drawString("The onions (purple circles), need the shovel. The wheat requires the scythe.", 100, 190);
+            game.render(g);
+            updateFunc(); // Updates values
+        }
+        
+        @Override // Key Listeners
+        public void keyPressed(KeyEvent e) { // Detects when keys are pressed down
+            int code = e.getKeyCode();
+            switch(code) {
+                case 87:
+                    up=true;
+                    break;
+                case 83:
+                    down=true;
+                    break;
+                case 65:
+                    left=true;
+                    break;
+                case 68:
+                    right=true;
+                    break;
+                case 69:
+                    game.toolInteraction();
+                    break;
             }
-            updatePoints();
+        }
+        @Override
+        public void keyReleased(KeyEvent e) { // Detects when keys are released
+            int code = e.getKeyCode();
+            switch(code) {
+                case 87:
+                    up=false;
+                    break;
+                case 83:
+                    down=false;
+                    break;
+                case 65:
+                    left=false;
+                    break;
+                case 68:
+                    right=false;
+                    break;
+            }
+        }
+
+        @Override
+        public void keyTyped(KeyEvent e) {
+            // Cannot be left blank, must be overridden
+        }
+        // Must dispose of the window from the gameLoop
+        static void disposeWindow() {
+            f.dispose();
         }
     }
-    static public void updatePoints() {
+    static public void updateFunc() { // Updates text every tick
+        game.movePlayer(up, down, left, right);
         points.setText("Points: "+game.getPoints());
+        timer.setText("Time left: "+(180-game.getSeconds()));
     }
-    
-    static public void backButton() {
-        OOPGroupCAGUI mainMenu = new OOPGroupCAGUI();
-        mainMenu.setVisible(true);
-        game.endTicks();
-        f.dispose();
+    static public void exitButton() {
+        game.endTicks(); // Stops timer when the window closes
     }
 }
 

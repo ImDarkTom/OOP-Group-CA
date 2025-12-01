@@ -11,16 +11,18 @@ import java.awt.Color;
  * @author DELL
  */
 public class Wheat extends Plant{
-    public Wheat(int posX, int posY) {
+    public Wheat(int posX, int posY, int arrayNum, boolean isHeld) {
+        type="wheat";
         this.posX = posX;
         this.posY = posY;
         width = 35;
         height = 35;
         tool = "scythe";
+        arrayID = arrayNum;
     }
     
     @Override
-    public void paintPlant(Graphics g) {
+    public void paintPlant(Graphics g) { // Draw Wheat to screen
         g.setColor(new Color(250, 227, 22));
         g.fillRect(posX-(width/4),posY+(height/3),(width/2),height);
         g.setColor(new Color(214, 172, 19));

@@ -18,10 +18,10 @@ public class Shovel extends Tool{
         equipped=false;
     }
     @Override
-    public void paintTool(Graphics g) {
+    public void paintTool(Graphics g) { // Draw Shovel to screen
         g.setColor(Color.gray);
-        g.fillRect(posX+7, posY+40, 6, 35);
+        g.fillRect(posX-4, posY, 8, 35);
         g.setColor(Color.black);
-        g.fillRect(posX, posY+15, 20, 25);
+        g.fillRect(posX-10, posY-15, 20, 25);
     }
 }
