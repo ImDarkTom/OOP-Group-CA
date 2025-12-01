@@ -9,12 +9,10 @@ import com.ncirl.oop.groupca.antonio.Items.Delivery;
 import com.ncirl.oop.groupca.antonio.Items.Items;
 import com.ncirl.oop.groupca.antonio.Items.Pickup;
 import com.ncirl.oop.groupca.antonio.Map.Maps;
-import com.ncirl.oop.groupca.antonio.Map.Obstacle;
 import com.ncirl.oop.groupca.antonio.Vehicle.Air;
 import com.ncirl.oop.groupca.antonio.Vehicle.Land;
 import com.ncirl.oop.groupca.antonio.Vehicle.Sea;
 import com.ncirl.oop.groupca.antonio.Vehicle.Vehicle;
-import com.ncirl.oop.groupca.thomas.GameState;
 import javax.swing.JOptionPane;
 
 /**
@@ -204,8 +202,6 @@ public class AntonioGUI extends javax.swing.JFrame {
         if (JOptionPane.showConfirmDialog(this, "Are you sure you want to return to the main menu?", "Confirm", JOptionPane.YES_NO_OPTION) == 1) {
             return;
         }
-
-        GameState.resetState();
 
         OOPGroupCAGUI mainMenu = new OOPGroupCAGUI();
         mainMenu.setVisible(true);
