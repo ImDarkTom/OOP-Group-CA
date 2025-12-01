@@ -27,7 +27,7 @@ public class GameLoop {
     private Scythe scythe = new Scythe(ran(800,950),ran(300,550)); // Init tool objects
     private Shovel shovel = new Shovel(ran(800,950),ran(300,550));
     
-    public GameLoop() { 
+    public GameLoop() {
         for(int i=0;i<5;i++) {// Create plants
             plants.add(new Wheat(ran(0,800),ran(0,550), plantID, false));
             plantID++;
