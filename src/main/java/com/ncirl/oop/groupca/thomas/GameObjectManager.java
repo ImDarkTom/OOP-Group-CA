@@ -29,6 +29,9 @@ public class GameObjectManager {
         gameObjects.add(new RiverDrawer());
         gameObjects.add(new PathDrawer());
 
+//        for (int i = 0; i < 200; i++) {
+//            spawnSettlement();
+//        }
         gameObjects.add(new Settlement(
                 50 + (int)(Math.random() * 50),
                 100 + (int)(Math.random() * 100)
@@ -84,10 +87,26 @@ public class GameObjectManager {
 
     // spawn settlements
     public static void spawnSettlement() {
-        gameObjects.add(new Settlement(
-                (int)(Math.random() * TomGameWindow.getCanvasWidth()),
-                (int)(Math.random() * TomGameWindow.getCanvasHeight())
-        ));
+        // 50px margin at edge of screen where it can't generate
+        int generatedX = (int) (50 + (Math.random() * (TomGameWindow.getCanvasWidth() - 100)));
+        int generatedY = (int) (50 + (Math.random() * (TomGameWindow.getCanvasHeight() - 100)));
+
+        Point generatedPoint = new Point(generatedX, generatedY);
+
+        // Repeat until we have a settlement between 100 and 300 px away from the river
+        // todo: collision check
+        while (
+                (RiverDrawer.distanceToRiver(generatedPoint) > 300d ||
+                        RiverDrawer.distanceToRiver(generatedPoint) < 200d)
+        ) {
+            System.out.println("Invalid distance to river: " + RiverDrawer.distanceToRiver(generatedPoint));
+            generatedX = (int) (50 + (Math.random() * (TomGameWindow.getCanvasWidth() - 100)));
+            generatedY = (int) (50 + (Math.random() * (TomGameWindow.getCanvasHeight() - 100)));
+
+            generatedPoint.setLocation(generatedX, generatedY);
+        }
+
+        gameObjects.add(new Settlement(generatedX, generatedY));
 
         // When we add a new settlement, refresh every farm's inRangeSettlements
         // to account for this new settlement.

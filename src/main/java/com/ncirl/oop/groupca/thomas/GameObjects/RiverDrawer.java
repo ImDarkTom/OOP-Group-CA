@@ -87,6 +87,13 @@ public class RiverDrawer extends GameObject {
     }
 
     public static boolean isNearRiver(Point point) {
+        double distanceToLine = distanceToRiver(point);
+
+        // Divide by half since the distance is for total, not just one side of the river
+        return distanceToLine > 40 && distanceToLine < (GameValues.getIrrigationDistance() * 0.5);
+    }
+
+    public static double distanceToRiver(Point point) {
         // https://en.wikipedia.org/wiki/Distance_from_a_point_to_a_line#Line_defined_by_two_points
 
         // First, lets jut assume the river only has two points.
@@ -102,11 +109,8 @@ public class RiverDrawer extends GameObject {
         int x0 = point.x;
         int y0 = point.y;
 
-        double distanceToLine =
-                Math.abs((y2 - y1) * x0 - (x2 -x1) * y0 + (x2 * y1) - (y2 * x1))
-                / Math.sqrt(Math.pow((y2 - y1), 2) + Math.pow((x2 - x1), 2));
-
         // Divide by half since the distance is for total, not just one side of the river
-        return distanceToLine > 40 && distanceToLine < (GameValues.getIrrigationDistance() * 0.5);
+        return Math.abs((y2 - y1) * x0 - (x2 -x1) * y0 + (x2 * y1) - (y2 * x1))
+            / Math.sqrt(Math.pow((y2 - y1), 2) + Math.pow((x2 - x1), 2));
     }
 }
