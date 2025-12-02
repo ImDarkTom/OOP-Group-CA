@@ -4,6 +4,7 @@
  */
 package com.ncirl.oop.groupca.alex.Objects;
 import java.awt.*;
+import com.ncirl.oop.groupca.alex.util.*;
 /**
  * Player.java
  * @author Alex
@@ -12,6 +13,8 @@ public class Player {
     private int posX;private int posY;
     final private int width;final private int height;
     private String toolHeld;
+    Serializer serial = new Serializer();
+    Customisation custom = serial.getCustom();
     
     public Player() {
         posX = 900;
@@ -57,9 +60,9 @@ public class Player {
     }
      
     public void paintPlayer(Graphics g) { // Render / draw function
-        g.setColor(Color.blue);
+        g.setColor(custom.getAlexBody());
         g.fillRect(posX, posY+(height/4), width, height/2);
-        g.setColor(Color.yellow);
+        g.setColor(custom.getAlexHead());
         g.fillRect(posX+(width/4), posY-(height/4), width/2, height/2);
         
         

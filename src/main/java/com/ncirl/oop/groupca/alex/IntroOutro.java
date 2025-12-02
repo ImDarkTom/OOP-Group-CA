@@ -33,6 +33,6 @@ public class IntroOutro {
         }
         JOptionPane.showMessageDialog(null, "You have completed The Farming Game congratulations!\nYou earned "+points+" points!\n"+endMsg, "Intro", JOptionPane.INFORMATION_MESSAGE);
         score.setAlexInt(points);
-        SerializeScore.Serialize(score, "Scores");
+        Serializer.serialize(score, "Scores");
     }
 }
