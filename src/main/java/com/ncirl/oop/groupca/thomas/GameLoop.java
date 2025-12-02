@@ -49,9 +49,13 @@ public class GameLoop {
         }
     }
 
-    public static void handleEndGame() {
+    public static void stopLoops() {
         frameTimer.stop();
         logicTimer.stop();
+    }
+
+    public static void handleEndGame() {
+        stopLoops();
 
         JOptionPane.showMessageDialog(TomGameWindow.gameWindow, "Game Over! Your score was " + GameValues.getScore() + ". Press OK to go back to main menu.");
 

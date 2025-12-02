@@ -1,9 +1,6 @@
 package com.ncirl.oop.groupca.thomas.GameWindowUI;
 
-import com.ncirl.oop.groupca.thomas.GameLoop;
-import com.ncirl.oop.groupca.thomas.GameObjectManager;
-import com.ncirl.oop.groupca.thomas.GameValues;
-import com.ncirl.oop.groupca.thomas.TomGameWindow;
+import com.ncirl.oop.groupca.thomas.*;
 import com.ncirl.oop.groupca.thomas.util.UpgradeableValue;
 
 import javax.swing.*;
@@ -43,19 +40,19 @@ public class ActionButtons {
         // place farm btn
         panel.add(placeFarmBtn);
         placeFarmBtn.addActionListener(_ -> GameObjectManager.placeFarm());
-        placeFarmBtn.setIcon(new javax.swing.ImageIcon(ActionButtons.class.getResource("/tom_game/contruct.png")));
+        placeFarmBtn.setIcon(ImageLoader.loadAsIcon("/tom_game/construct.png"));
 
         // upgrade irrigation distance
         panel.add(upgradeBtn);
-        upgradeBtn.setIcon(new ImageIcon(ActionButtons.class.getResource("/tom_game/upgrade.png")));
+        upgradeBtn.setIcon(ImageLoader.loadAsIcon("/tom_game/upgrade.png"));
         upgradeBtn.addActionListener(ActionButtons::showUpgradeMenu);
 
         // building material lbl
         panel.add(buildingMaterialsAmountLbl);
-        buildingMaterialsAmountLbl.setIcon(new javax.swing.ImageIcon(ActionButtons.class.getResource("/small_icons/wrench.png")));
+        buildingMaterialsAmountLbl.setIcon(ImageLoader.loadAsIcon("/small_icons/wrench.png"));
 
         panel.add(daysLbl);
-        daysLbl.setIcon(new javax.swing.ImageIcon(ActionButtons.class.getResource("/tom_game/calendar.png")));
+        daysLbl.setIcon(ImageLoader.loadAsIcon("/tom_game/calendar.png"));
 
         panel.add(scoreLbl);
     }

@@ -1,6 +1,6 @@
 package com.ncirl.oop.groupca.thomas.GameObjects;
 
-import com.ncirl.oop.groupca.thomas.AssetLoader;
+import com.ncirl.oop.groupca.thomas.ImageLoader;
 import com.ncirl.oop.groupca.thomas.GameObjectManager;
 import com.ncirl.oop.groupca.thomas.GameValues;
 import com.ncirl.oop.groupca.thomas.util.RenderUtils;
@@ -13,10 +13,10 @@ import java.awt.geom.Ellipse2D;
  */
 public class FarmGhost extends GameObject {
     // Assets
-    private static final Image ASSET = AssetLoader.loadAsset("/tom_game/farm.png");
+    private static final Image ASSET = ImageLoader.load("/tom_game/farm.png");
 
-    public FarmGhost(int startX, int startY) {
-        super(startX, startY, 70);
+    public FarmGhost() {
+        super(0, 0, 70);
 
         RiverDrawer.showPlacementOverlay();
     }

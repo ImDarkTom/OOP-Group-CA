@@ -1,6 +1,6 @@
 package com.ncirl.oop.groupca.thomas.GameObjects;
 
-import com.ncirl.oop.groupca.thomas.AssetLoader;
+import com.ncirl.oop.groupca.thomas.ImageLoader;
 import com.ncirl.oop.groupca.thomas.GameValues;
 import com.ncirl.oop.groupca.thomas.util.RenderUtils;
 import com.ncirl.oop.groupca.thomas.util.Renderable;
@@ -13,7 +13,7 @@ import java.awt.*;
  */
 public class FoodDelivery implements Renderable, Tickable {
     // Assets
-    private static final Image ASSET = AssetLoader.loadAsset("/tom_game/truck.png");
+    private static final Image ASSET = ImageLoader.load("/tom_game/truck.png");
 
     private final Point pos;
     private final Point from;

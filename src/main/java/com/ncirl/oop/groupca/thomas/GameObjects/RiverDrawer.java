@@ -11,6 +11,9 @@ public class RiverDrawer extends GameObject {
 
     private static final Stroke RIVER_STROKE = new BasicStroke(24f);
     private static final Stroke RIVER_DEEP_STROKE = new BasicStroke(14f);
+    private static final Color OVERLAY_COLOR = new Color(123, 255, 0, 108);
+    private static final Color RIVER_COLOR = new Color(61, 160, 205);
+    private static final Color RIVER_DEEP_COLOR = new Color(8, 96, 128);
 
     private static Stroke overlayStroke = new BasicStroke(GameValues.getIrrigationDistance());
 
@@ -40,7 +43,7 @@ public class RiverDrawer extends GameObject {
     @Override
     public void render(Graphics2D g2, Point mousePos) {
         if (showPlacementOverlay) {
-            g2.setColor(new Color(123, 255, 0, 108));
+            g2.setColor(OVERLAY_COLOR);
             g2.setStroke(overlayStroke);
 
             for (int i = 0; i < riverPoints.size() - 1; i++) {
@@ -51,7 +54,7 @@ public class RiverDrawer extends GameObject {
             }
         }
 
-        g2.setColor(new Color(61, 160, 205));
+        g2.setColor(RIVER_COLOR);
         g2.setStroke(RIVER_STROKE);
 
         for (int i = 0; i < riverPoints.size() - 1; i++) {
@@ -61,7 +64,7 @@ public class RiverDrawer extends GameObject {
             g2.drawLine(point.x, point.y, nextPoint.x, nextPoint.y);
         }
 
-        g2.setColor(new Color(8, 96, 128));
+        g2.setColor(RIVER_DEEP_COLOR);
         g2.setStroke(RIVER_DEEP_STROKE);
 
         for (int i = 0; i < riverPoints.size() - 1; i++) {

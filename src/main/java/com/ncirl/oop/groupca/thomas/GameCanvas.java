@@ -1,7 +1,6 @@
 package com.ncirl.oop.groupca.thomas;
 
 import com.ncirl.oop.groupca.thomas.GameObjects.GameObject;
-import com.ncirl.oop.groupca.thomas.util.Log;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,7 +14,6 @@ public class GameCanvas extends JPanel {
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                Log.info("Detected click at " + e.getX() + ", " + e.getY());
                 lastClickPos = e.getPoint();
             }
         });

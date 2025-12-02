@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 public class Farm extends GameObject {
     // Assets
-    private static final Image ASSET = AssetLoader.loadAsset("/tom_game/farm.png");
+    private static final Image ASSET = ImageLoader.load("/tom_game/farm.png");
     private static final Font DELIVERY_PROGRESS_FONT = new Font("SansSerif", Font.BOLD, 16);
 
     private ArrayList<Settlement> inRangeSettlements = new ArrayList<>();
