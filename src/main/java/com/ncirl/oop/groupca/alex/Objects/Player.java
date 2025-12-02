@@ -13,7 +13,7 @@ public class Player {
     private int posX;private int posY;
     final private int width;final private int height;
     private String toolHeld;
-    Customisation custom = FileLoader.getCustom();
+    Customisation custom = FileLoader.loadFromFile("Customisation.esr", Customisation.class);
 
     public Player() {
         posX = 900;

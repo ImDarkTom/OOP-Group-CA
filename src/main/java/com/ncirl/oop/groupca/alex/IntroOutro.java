@@ -5,6 +5,7 @@
 package com.ncirl.oop.groupca.alex;
 import javax.swing.JOptionPane;
 import com.ncirl.oop.groupca.alex.util.*;
+import com.ncirl.oop.groupca.OOPGroupCAGUI;
 /**
  * IntroOutro.java
  * @author Alex
@@ -33,6 +34,8 @@ public class IntroOutro {
         }
         JOptionPane.showMessageDialog(null, "You have completed The Farming Game congratulations!\nYou earned "+points+" points!\n"+endMsg, "Intro", JOptionPane.INFORMATION_MESSAGE);
         score.setAlexScore(points);
-        FileLoader.saveToFile(score, "Scores");
+        FileLoader.saveToFile(score, "Scores.esr");
+        OOPGroupCAGUI mainMenu = new OOPGroupCAGUI();
+        mainMenu.setVisible(true);
     }
 }
