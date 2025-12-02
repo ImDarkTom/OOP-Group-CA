@@ -9,6 +9,7 @@ public class UpgradeableValue {
     private int neededForUpgrade;
     private final int upgradeChange;
     private final int neededChange;
+    private Runnable onUpgrade;
 
     public UpgradeableValue(String label, String description, int defaultValue, int defaultNeededForUpgrade, int upgradeChange, int neededChange) {
         this.label = label;
@@ -17,6 +18,16 @@ public class UpgradeableValue {
         neededForUpgrade = defaultNeededForUpgrade;
         this.upgradeChange = upgradeChange;
         this.neededChange = neededChange;
+    }
+
+    public UpgradeableValue(String label, String description, int defaultValue, int defaultNeededForUpgrade, int upgradeChange, int neededChange, Runnable onUpgrade) {
+        this.label = label;
+        this.description = description;
+        value = defaultValue;
+        neededForUpgrade = defaultNeededForUpgrade;
+        this.upgradeChange = upgradeChange;
+        this.neededChange = neededChange;
+        this.onUpgrade = onUpgrade;
     }
 
     public int getValue() {
@@ -43,6 +54,10 @@ public class UpgradeableValue {
 
             this.value += upgradeChange;
             this.neededForUpgrade += neededChange;
+
+            if (this.onUpgrade != null) {
+                this.onUpgrade.run();
+            }
 
             return true;
         } else {

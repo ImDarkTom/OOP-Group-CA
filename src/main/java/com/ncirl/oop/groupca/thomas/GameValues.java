@@ -1,5 +1,6 @@
 package com.ncirl.oop.groupca.thomas;
 
+import com.ncirl.oop.groupca.thomas.GameObjects.RiverDrawer;
 import com.ncirl.oop.groupca.thomas.util.UpgradeableValue;
 
 public class GameValues {
@@ -9,7 +10,7 @@ public class GameValues {
 
     // Game Values, changed with upgrades
     // delivery
-    public static UpgradeableValue deliveryHungerDecreaseAmount = new UpgradeableValue(
+    private static final UpgradeableValue deliveryHungerDecreaseAmount = new UpgradeableValue(
             "Delivery Size",
             "How much hunger is decreased per delivery.",
             25,
@@ -18,7 +19,7 @@ public class GameValues {
             50
     );
 
-    public static UpgradeableValue deliveryRange = new UpgradeableValue(
+    private static final UpgradeableValue deliveryRange = new UpgradeableValue(
             "Delivery Range",
             "How far deliveries can be made.",
             200,
@@ -27,7 +28,7 @@ public class GameValues {
             25
     );
 
-    public static UpgradeableValue deliveryDelay = new UpgradeableValue(
+    private static final UpgradeableValue deliveryDelay = new UpgradeableValue(
             "Delivery Delay",
             "How fast new deliveries are sent out.",
             50,
@@ -36,7 +37,7 @@ public class GameValues {
             50
     );
 
-    public static UpgradeableValue deliverySpeed = new UpgradeableValue(
+    private static final UpgradeableValue deliverySpeed = new UpgradeableValue(
             "Delivery Speed",
             "The speed at which delivery vans travel across the road.",
             2,
@@ -45,23 +46,44 @@ public class GameValues {
             125);
 
     // irrigation
-    public static UpgradeableValue irrigationDistance = new UpgradeableValue(
+    private static final UpgradeableValue irrigationDistance = new UpgradeableValue(
             "Irrigation Distance",
             "Distance from the river farms can be built at.",
             200,
-            1000,
+            500,
             100,
-            500
+            100,
+            RiverDrawer::updateOverlayStroke
     );
 
     public static UpgradeableValue[] upgradesRegistry = { deliveryDelay, deliveryRange, deliverySpeed, deliveryHungerDecreaseAmount, irrigationDistance };
 
     // Player values
-    public static int day = 0;
-    public static int score = 0;
+    private static int day = 0;
+    private static int score = 0;
     private static int playerMaterials = 100;
 
     // Getters/setters
+    public static int getDeliveryHungerDecreaseAmount() {
+        return deliveryHungerDecreaseAmount.getValue();
+    }
+
+    public static int getDeliveryRange() {
+        return deliveryRange.getValue();
+    }
+
+    public static int getDeliveryDelay() {
+        return deliveryDelay.getValue();
+    }
+
+    public static int getDeliverySpeed() {
+        return deliverySpeed.getValue();
+    }
+
+    public static int getIrrigationDistance() {
+        return irrigationDistance.getValue();
+    }
+
     public static int getPlayerMaterials() {
         return playerMaterials;
     }
@@ -78,15 +100,17 @@ public class GameValues {
         GameValues.score += score;
     }
 
-    public static int getDeliveryRange() {
-        return deliveryRange.getValue();
+    // day
+    public static int getDay() {
+        return day;
     }
 
-    public static int getDeliveryDelay() {
-        return deliveryDelay.getValue();
+    public static void bumpDay() {
+        GameValues.day++;
     }
 
-    public static int getDeliveryHungerDecreaseAmount() {
-        return deliveryHungerDecreaseAmount.getValue();
+    // score
+    public static int getScore() {
+        return score;
     }
 }

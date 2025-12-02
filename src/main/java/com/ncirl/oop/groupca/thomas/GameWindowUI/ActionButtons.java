@@ -94,10 +94,10 @@ public class ActionButtons {
     }
 
     public static void updateScoreText() {
-        scoreLbl.setText("Score: " + GameValues.score);
+        scoreLbl.setText("Score: " + GameValues.getScore());
     }
 
     public static void updateDayText() {
-        daysLbl.setText("Day " + GameValues.day + "/" + GameValues.DAYS_TOTAL);
+        daysLbl.setText("Day " + GameValues.getDay() + "/" + GameValues.DAYS_TOTAL);
     }
 }
