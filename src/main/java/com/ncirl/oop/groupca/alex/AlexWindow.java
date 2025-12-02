@@ -52,10 +52,12 @@ public class AlexWindow { // Must create variables at the start so they can be u
             topDisplay.add(timer);
 
             f.setResizable(false);
+            
             f.add(this); // Add panel
             FrameUtils.setBackToMenuOnClose(f, AlexWindow::exitButton);
             f.pack();
             f.setVisible(true);
+            f.setLocationRelativeTo(null);
         }
         
         @Override // Set window size
