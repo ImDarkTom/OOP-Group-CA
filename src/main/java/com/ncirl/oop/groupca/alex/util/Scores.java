@@ -9,56 +9,52 @@ import java.io.Serializable;
  * @author DELL
  */
 public class Scores implements Serializable {
-    private static int alexScore = 0;
-    private static int thomasScore = 0;
-    private static int antonioScore = 0;
-    private static String alexMsg = "";
-    private static String thomasMsg = "";
-    private static String antonioMsg = "";
+    private int alexScore = 0;
+    private int thomasScore = 0;
+    private int antonioScore = 0;
+    private String alexMsg = "You have not yet played.";
+    private String thomasMsg = "You have not yet played.";
+    private String antonioMsg = "You have not yet played.";
 
-    public Scores() {
-        FileLoader.saveToFile(this, "Scores.esr");
-    }
-    
     // Setters
-    public static void setAlexScore(int alexInt) {
-        alexScore = alexInt;
+    public void setAlexScore(int alexInt) {
+        this.alexScore = alexInt;
     }
 
-    public static void setThomasScore(int thomasInt) {
-        thomasScore = thomasInt;
+    public void setThomasScore(int thomasInt) {
+        this.thomasScore = thomasInt;
     }
 
-    public static void setAntonioScore(int antonioInt) {
-        antonioScore = antonioInt;
+    public void setAntonioScore(int antonioInt) {
+        this.antonioScore = antonioInt;
     }
 
-    public static void setAlexMsg(String alexMsg) {
-        Scores.alexMsg = alexMsg;
+    public void setAlexMsg(String alexMsg) {
+        this.alexMsg = alexMsg;
     }
 
-    public static void setThomasMsg(String thomasMsg) {
-        Scores.thomasMsg = thomasMsg;
+    public void setThomasMsg(String thomasMsg) {
+        this.thomasMsg = thomasMsg;
     }
 
-    public static void setAntonioMsg(String antonioMsg) {
-        Scores.antonioMsg = antonioMsg;
+    public void setAntonioMsg(String antonioMsg) {
+        this.antonioMsg = antonioMsg;
     }
 
     //
-    public static String getAlexScoreText() {
-        return "Growing Food: " + alexScore + " points. You done " + alexMsg;
+    public String getAlexScoreText() {
+        return "Growing Food: " + this.alexScore + " points. " + this.alexMsg;
     }
 
-    public static String getAntonioScoreText() {
-        return "Delivering Food: " + antonioScore + " points. You done " + antonioMsg;
+    public String getAntonioScoreText() {
+        return "Delivering Food: " + this.antonioScore + " points." + this.antonioMsg;
     }
 
-    public static String getThomasScoreText() {
-        return "Supplying Food: " + thomasScore + " points. You done " + thomasMsg;
+    public String getThomasScoreText() {
+        return "Supplying Food: " + this.thomasScore + " points. " + this.thomasMsg;
     }
 
-    public static String getFullScoreText() {
-        return "Total Score: " + (alexScore + antonioScore + thomasScore) + " points";
+    public String getFullScoreText() {
+        return "Total Score: " + (this.alexScore + this.antonioScore + this.thomasScore) + " points";
     }
 }

@@ -15,6 +15,7 @@ import java.io.ObjectInputStream;
  */
 public class FileLoader { // Saves object
     static public void saveToFile(Object obj, String fileName) {
+//        System.out.println("SAVING SCORES TO FILE: "+ fileName + " contents " + obj);
         try {
             ObjectOutputStream objOut = new ObjectOutputStream(new FileOutputStream(fileName));
             objOut.writeObject(obj);
@@ -31,16 +32,22 @@ public class FileLoader { // Saves object
             objIn.close(); // Close streams
 
             if (type.isInstance(readObject)) {
+//                System.out.println("LOADED SCORES FROM FILE: " + readObject);
                 return (T) readObject;
             } else {
                 throw new Error("Could not assert that returned object was of type.");
             }
-        } catch (Exception e) {
+        } catch (Exception _e) {
+            System.out.println(_e.getMessage());
             try {
-                // Get the constructor for the class type we pass
-                return type.getDeclaredConstructor().newInstance();
-            } catch (Exception ex) {
-                ex.printStackTrace();
+                // Create a new instance of the class we passed with blank params
+                T instance = type.getDeclaredConstructor().newInstance();
+
+                saveToFile(instance, fileName);
+
+                return instance;
+            } catch (Exception e) {
+                e.printStackTrace();
                 return null;
             }
         }

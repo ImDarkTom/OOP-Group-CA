@@ -7,6 +7,8 @@ package com.ncirl.oop.groupca.thomas.ScoreWindow;
 import com.ncirl.oop.groupca.OOPGroupCAGUI;
 import com.ncirl.oop.groupca.alex.util.Scores;
 import com.ncirl.oop.groupca.alex.util.FileLoader;
+import com.ncirl.oop.groupca.thomas.shared.ScoreManager;
+
 import javax.swing.JOptionPane;
 
 /**
@@ -14,7 +16,7 @@ import javax.swing.JOptionPane;
  * @author tom
  */
 public class ScoreGUI extends javax.swing.JFrame {
-    private final Scores scores = FileLoader.loadFromFile("Scores.esr", Scores.class);
+    private final Scores scores = ScoreManager.getInstance();
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ScoreGUI.class.getName());
 

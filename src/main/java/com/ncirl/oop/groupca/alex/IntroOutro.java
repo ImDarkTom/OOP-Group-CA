@@ -6,6 +6,8 @@ package com.ncirl.oop.groupca.alex;
 import javax.swing.JOptionPane;
 import com.ncirl.oop.groupca.alex.util.*;
 import com.ncirl.oop.groupca.OOPGroupCAGUI;
+import com.ncirl.oop.groupca.thomas.shared.ScoreManager;
+
 /**
  * IntroOutro.java
  * @author Alex
@@ -18,23 +20,21 @@ public class IntroOutro {
         JOptionPane.showMessageDialog(null, "You can only hold 5 plants at a time, so you must sell them.\nGo to the top right of the screen to sell held plants.", "Intro", JOptionPane.INFORMATION_MESSAGE);
     }
     public static void playOutro(int points) { // Plays outro dialog boxes
-        Scores score = new Scores();
         String endMsg = "";
         if(points<40){
             endMsg="You grew little food...";
-            score.setAlexMsg("You did not grow enough food to feed everyone...");
+            ScoreManager.setAlexMsg("You did not grow enough food to feed everyone...");
         }
         else if(points<80){
             endMsg="You grew a decent amount of food.";
-            score.setAlexMsg("You grew just enough food for everyone...");
+            ScoreManager.setAlexMsg("You grew just enough food for everyone...");
         }
         else if(points>80){
             endMsg="You grew lots of food! Good job!";
-            score.setAlexMsg("You grew more than enough food! Good job!");
+            ScoreManager.setAlexMsg("You grew more than enough food! Good job!");
         }
         JOptionPane.showMessageDialog(null, "You have completed The Farming Game congratulations!\nYou earned "+points+" points!\n"+endMsg, "Intro", JOptionPane.INFORMATION_MESSAGE);
-        score.setAlexScore(points);
-        FileLoader.saveToFile(score, "Scores.esr");
+        ScoreManager.setAlexScore(points);
         OOPGroupCAGUI mainMenu = new OOPGroupCAGUI();
         mainMenu.setVisible(true);
     }
