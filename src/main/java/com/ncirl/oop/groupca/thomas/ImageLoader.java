@@ -1,5 +1,6 @@
 package com.ncirl.oop.groupca.thomas;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -7,11 +8,11 @@ import java.util.Map;
 /**
  * Handles loading assets from the <code>resources</code> folder.
  */
-public class AssetLoader {
+public class ImageLoader {
     private static final Toolkit TOOLKIT = Toolkit.getDefaultToolkit();
     private static final Map<String, Image> cachedAssets = new HashMap<>();
 
-    public static Image loadAsset(String path) {
+    public static Image load(String path) {
         Image objectInMap = cachedAssets.get(path);
 
         // If the asset was already loaded, return it from the map
@@ -19,9 +20,13 @@ public class AssetLoader {
             return objectInMap;
         }
 
-        Image loadedAsset = TOOLKIT.getImage(AssetLoader.class.getResource(path));
+        Image loadedAsset = TOOLKIT.getImage(ImageLoader.class.getResource(path));
         cachedAssets.put(path, loadedAsset);
 
         return loadedAsset;
+    }
+
+    public static ImageIcon loadAsIcon(String path) {
+        return new ImageIcon(ImageLoader.load(path));
     }
 }

@@ -1,6 +1,6 @@
 package com.ncirl.oop.groupca.thomas.GameObjects;
 
-import com.ncirl.oop.groupca.thomas.AssetLoader;
+import com.ncirl.oop.groupca.thomas.ImageLoader;
 import com.ncirl.oop.groupca.thomas.GameObjectManager;
 import com.ncirl.oop.groupca.thomas.GameValues;
 import com.ncirl.oop.groupca.thomas.util.RenderUtils;
@@ -16,7 +16,7 @@ enum SettlementType {
 public class Settlement extends GameObject {
     // Assets
     // asset will be changed individually with each settlement
-    private Image asset = AssetLoader.loadAsset("/tom_game/settlement.png");
+    private Image asset = ImageLoader.load("/tom_game/settlement.png");
     // static is better for optimisation, as each settlement instance won't need to re-create the same font.
     private static final Font HUNGER_FONT = new Font("SansSerif", Font.PLAIN, 14);
     private static final Font UPGRADE_FONT = new Font("SansSerif", Font.PLAIN, 12);
@@ -86,7 +86,7 @@ public class Settlement extends GameObject {
         switch (settlementType) {
             case SETTLEMENT -> {
                 settlementType = SettlementType.TOWN;
-                asset = AssetLoader.loadAsset("/tom_game/town.png");
+                asset = ImageLoader.load("/tom_game/town.png");
 
                 hungerTickAmount = 1f;
                 materialsPerSecond = 10;
@@ -96,7 +96,7 @@ public class Settlement extends GameObject {
             }
             case TOWN -> {
                 settlementType = SettlementType.CITY;
-                asset = AssetLoader.loadAsset("/tom_game/city.png");
+                asset = ImageLoader.load("/tom_game/city.png");
 
                 hungerTickAmount = 4f;
                 materialsPerSecond = 20;

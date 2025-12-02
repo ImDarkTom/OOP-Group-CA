@@ -22,7 +22,7 @@ public class GameObjectManager {
             return;
         }
 
-        gameObjects.add(new FarmGhost(0, 0));
+        gameObjects.add(new FarmGhost());
     }
 
     public static void generateWorld() {
@@ -36,15 +36,12 @@ public class GameObjectManager {
     }
 
     public static void resetState() {
+        GameLoop.stopLoops();
         gameObjects = new ArrayList<>();
         GameValues.setPlayerMaterials(100);
     }
 
     public static void tickLogic() {
-        // Shorthand for:
-        // for (GameObject object : gameObjects) {
-        //     object.tickLogic();
-        // }
         gameObjects.forEach(GameObject::tickLogic);
 
         // https://www.baeldung.com/java-concurrentmodificationexception

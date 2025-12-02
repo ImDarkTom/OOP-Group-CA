@@ -12,7 +12,7 @@ public class GameLoop {
     public static void startGameLoop(GameCanvas canvasInstance) {
         // Logic: 10 ticks/s
         logicTimer = new Timer(100, _ -> {
-            GameValues.day++;
+            GameValues.bumpDay();
             
             ActionButtons.updateFarmBtn();
 
@@ -22,7 +22,7 @@ public class GameLoop {
 
             GameObjectManager.tickLogic();
 
-            if (GameValues.day >= GameValues.DAYS_TOTAL) {
+            if (GameValues.getDay() >= GameValues.DAYS_TOTAL) {
                 handleEndGame();
             }
         });
@@ -49,11 +49,15 @@ public class GameLoop {
         }
     }
 
-    public static void handleEndGame() {
+    public static void stopLoops() {
         frameTimer.stop();
         logicTimer.stop();
+    }
 
-        JOptionPane.showMessageDialog(TomGameWindow.gameWindow, "Game Over! Your score was " + GameValues.score + ". Press OK to go back to main menu.");
+    public static void handleEndGame() {
+        stopLoops();
+
+        JOptionPane.showMessageDialog(TomGameWindow.gameWindow, "Game Over! Your score was " + GameValues.getScore() + ". Press OK to go back to main menu.");
 
         TomGameWindow.gameWindow.dispose();
 
