@@ -45,18 +45,4 @@ public class FileLoader { // Saves object
             }
         }
     }
-
-    public static Customisation getCustom() { // Returns score object
-        Customisation custom = new Customisation();
-        try {
-            ObjectInputStream objIn = new ObjectInputStream(new FileInputStream("Customisation.esr"));
-            custom = (Customisation) objIn.readObject();
-            objIn.close(); // Close streams
-        } catch (IOException i) { // Catch errors
-            i.printStackTrace();
-        } catch (ClassNotFoundException c) {
-            c.printStackTrace();
-        }
-        return custom;
-    }
 }
