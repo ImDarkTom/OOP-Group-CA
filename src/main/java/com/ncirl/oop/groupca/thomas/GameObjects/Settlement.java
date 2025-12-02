@@ -1,7 +1,9 @@
 package com.ncirl.oop.groupca.thomas.GameObjects;
 
+import com.ncirl.oop.groupca.thomas.AssetLoader;
 import com.ncirl.oop.groupca.thomas.GameObjectManager;
 import com.ncirl.oop.groupca.thomas.GameValues;
+import com.ncirl.oop.groupca.thomas.util.RenderUtils;
 
 import java.awt.*;
 
@@ -12,7 +14,14 @@ enum SettlementType {
 }
 
 public class Settlement extends GameObject {
-    private SettlementType type = SettlementType.SETTLEMENT;
+    // Assets
+    // asset will be changed individually with each settlement
+    private Image asset = AssetLoader.loadAsset("/tom_game/settlement.png");
+    // static is better for optimisation, as each settlement instance won't need to re-create the same font.
+    private static final Font HUNGER_FONT = new Font("SansSerif", Font.PLAIN, 14);
+    private static final Font UPGRADE_FONT = new Font("SansSerif", Font.PLAIN, 12);
+
+    private SettlementType settlementType = SettlementType.SETTLEMENT;
 
     private float hunger = 0;
 
@@ -24,17 +33,8 @@ public class Settlement extends GameObject {
     private int materialsPerSecond = 5;
     private int upgradeRequirement = 100;
 
-    // asset-related
-    private Image asset;
-    // static is better for optimisation, as each settlement instance won't need to re-create the same font.
-    private static final Font HUNGER_FONT = new Font("SansSerif", Font.PLAIN, 14);
-    private static final Font UPGRADE_FONT = new Font("SansSerif", Font.PLAIN, 12);
-
     public Settlement(int startX, int startY) {
         super(startX, startY, 50);
-
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        asset = toolkit.getImage(getClass().getResource("/tom_game/settlement.png"));
 
         // When we add a new settlement, refresh every farm's inRangeSettlements
         // to account for this new settlement.
@@ -43,8 +43,7 @@ public class Settlement extends GameObject {
 
     @Override
     public void render(Graphics2D g2, Point mousePos) {
-        g2.setColor(Color.RED);
-        g2.drawImage(asset, pos.x, pos.y, null);
+        RenderUtils.drawImage(g2, asset, pos);
 
         if (hunger > 200) {
             g2.setColor(Color.RED);
@@ -55,6 +54,7 @@ public class Settlement extends GameObject {
         } else {
             g2.setColor(Color.GREEN);
         }
+
         g2.setFont(HUNGER_FONT);
         g2.drawString("Hunger: " + (int)hunger, pos.x, pos.y - 14);
 
@@ -80,10 +80,42 @@ public class Settlement extends GameObject {
     }
 
     @Override
-    public void onClicked() {
-        System.out.println("clicked settlement");
+    public void onClicked() {}
+
+    private void upgrade() {
+        switch (settlementType) {
+            case SETTLEMENT -> {
+                settlementType = SettlementType.TOWN;
+                asset = AssetLoader.loadAsset("/tom_game/town.png");
+
+                hungerTickAmount = 1f;
+                materialsPerSecond = 10;
+                upgradeRequirement = 150;
+
+                GameValues.addScore(10);
+            }
+            case TOWN -> {
+                settlementType = SettlementType.CITY;
+                asset = AssetLoader.loadAsset("/tom_game/city.png");
+
+                hungerTickAmount = 4f;
+                materialsPerSecond = 20;
+                upgradeRequirement = 250;
+
+                GameValues.addScore(25);
+            }
+            case CITY -> {
+                GameObjectManager.spawnSettlement();
+
+                GameValues.addScore(50);
+            }
+            default -> {
+                System.err.println("Error upgrading settlement: Invalid type.");
+            }
+        }
     }
 
+    // Get/set
     public float getHunger() {
         return hunger;
     }
@@ -92,46 +124,17 @@ public class Settlement extends GameObject {
         float newHunger = hunger - decreaseAmount;
 
         if (newHunger < 1) {
+            this.hunger = 0;
             // Bump upgrade progress by 10% of invested food/hunger decrease.
             upgradeProgress += (decreaseAmount / 10);
-            this.hunger = 0;
 
             if (upgradeProgress >= upgradeRequirement) {
                 upgradeProgress = 0;
                 upgrade();
             }
-
-            return;
+        } else {
+            this.hunger = newHunger;
         }
 
-        this.hunger = newHunger;
-    }
-
-    private void upgrade() {
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-
-        if (type == SettlementType.SETTLEMENT) {
-            type = SettlementType.TOWN;
-            asset = toolkit.getImage(getClass().getResource("/tom_game/town.png"));
-
-            hungerTickAmount = 1f;
-            materialsPerSecond = 10;
-            upgradeRequirement = 150;
-
-            GameValues.addScore(10);
-        } else if (type == SettlementType.TOWN) {
-            type = SettlementType.CITY;
-            asset = toolkit.getImage(getClass().getResource("/tom_game/city.png"));
-
-            hungerTickAmount = 4f;
-            materialsPerSecond = 20;
-            upgradeRequirement = 250;
-
-            GameValues.addScore(25);
-        } else if (type == SettlementType.CITY) {
-            GameObjectManager.spawnSettlement();
-
-            GameValues.addScore(50);
-        }
     }
 }

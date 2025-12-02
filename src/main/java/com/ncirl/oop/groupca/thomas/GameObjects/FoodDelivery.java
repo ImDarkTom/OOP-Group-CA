@@ -1,5 +1,6 @@
 package com.ncirl.oop.groupca.thomas.GameObjects;
 
+import com.ncirl.oop.groupca.thomas.AssetLoader;
 import com.ncirl.oop.groupca.thomas.GameValues;
 import com.ncirl.oop.groupca.thomas.util.RenderUtils;
 import com.ncirl.oop.groupca.thomas.util.Renderable;
@@ -7,19 +8,23 @@ import com.ncirl.oop.groupca.thomas.util.Tickable;
 
 import java.awt.*;
 
+/**
+ * The trucks that deliver food from the farms to the towns.
+ */
 public class FoodDelivery implements Renderable, Tickable {
-    private float neededProgress = -1;
+    // Assets
+    private static final Image ASSET = AssetLoader.loadAsset("/tom_game/truck.png");
+
+    private final Point pos;
+    private final Point from;
+    private final Point to;
+
+    private final float requiredProgress;
     private float progress = 0;
 
     private final Settlement targetSettlement;
 
-    private final Point from;
-    private Point to;
-
-    private Point ourPos;
     public boolean shouldRemove = false;
-
-    private final Image asset;
 
     public FoodDelivery(Farm fromFarm, Settlement toSettlement) {
         this.targetSettlement = toSettlement;
@@ -30,31 +35,30 @@ public class FoodDelivery implements Renderable, Tickable {
                 fromFarm.getPos().y + (farmSize / 2)
         );
 
+        // Set the initial position to the `from` pos.
+        this.pos = this.from.getLocation();
+
         int settlementSize = toSettlement.getSize();
-        this.to = toSettlement.getPos();
         this.to = new Point(
                 toSettlement.getPos().x + (settlementSize / 2),
                 toSettlement.getPos().y + (settlementSize / 2)
         );
 
         // https://www.geeksforgeeks.org/maths/euclidean-distance/
-        neededProgress = (float) Math.sqrt(Math.pow(to.x - from.x, 2) + Math.pow(to.y - from.y, 2));
-
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        asset = toolkit.getImage(getClass().getResource("/tom_game/truck.png"));
+        requiredProgress = (float) Math.sqrt(Math.pow(to.x - from.x, 2) + Math.pow(to.y - from.y, 2));
     }
 
     @Override
     public void render(Graphics2D g2, Point mousePos) {
-        RenderUtils.drawImage(g2, asset, ourPos);
+        RenderUtils.drawImage(g2, ASSET, pos);
     }
 
     @Override
     public void tickLogic() {
         // Prevent null exception
-        if (neededProgress == -1) return;
+        if (requiredProgress == -1) return;
 
-        if (progress >= neededProgress) {
+        if (progress >= requiredProgress) {
             targetSettlement.decreaseHunger(GameValues.getDeliveryHungerDecreaseAmount());
 
             // We use this since `GameState.foodDeliveries.remove(this)` has
@@ -68,12 +72,9 @@ public class FoodDelivery implements Renderable, Tickable {
 
         progress += GameValues.deliverySpeed.getValue();
 
-        float xPos = from.x + (to.x - from.x) * (progress / neededProgress);
-        float yPos = from.y + (to.y - from.y) * (progress / neededProgress);
+        float xPos = from.x + (to.x - from.x) * (progress / requiredProgress);
+        float yPos = from.y + (to.y - from.y) * (progress / requiredProgress);
 
-        ourPos = new Point(
-                (int)xPos,
-                (int)yPos
-        );
+        pos.setLocation(xPos, yPos);
     }
 }

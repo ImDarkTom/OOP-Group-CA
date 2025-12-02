@@ -1,5 +1,6 @@
 package com.ncirl.oop.groupca.thomas.GameObjects;
 
+import com.ncirl.oop.groupca.thomas.AssetLoader;
 import com.ncirl.oop.groupca.thomas.GameObjectManager;
 import com.ncirl.oop.groupca.thomas.GameValues;
 import com.ncirl.oop.groupca.thomas.util.RenderUtils;
@@ -11,13 +12,12 @@ import java.awt.geom.Ellipse2D;
  * The object that appears when we start placing down a farm.
  */
 public class FarmGhost extends GameObject {
-    private final Image asset;
+    // Assets
+    private static final Image ASSET = AssetLoader.loadAsset("/tom_game/farm.png");
 
     public FarmGhost(int startX, int startY) {
         super(startX, startY, 70);
 
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        asset = toolkit.getImage(getClass().getResource("/tom_game/farm.png"));
         RiverDrawer.showPlacementOverlay();
     }
 
@@ -36,8 +36,8 @@ public class FarmGhost extends GameObject {
     public void render(Graphics2D g2, Point mousePos) {
         // Set pos to mouse coordinates (adjusted to put the object in the middle)
         this.pos = new Point(
-                mousePos.x - (asset.getWidth(null) / 2),
-                mousePos.y - (asset.getHeight(null) / 2)
+                mousePos.x - (ASSET.getWidth(null) / 2),
+                mousePos.y - (ASSET.getHeight(null) / 2)
         );
 
         g2.setColor(Color.RED);
@@ -49,7 +49,7 @@ public class FarmGhost extends GameObject {
                 GameValues.getDeliveryRange() * 2,
                 GameValues.getDeliveryRange() * 2));
 
-        RenderUtils.drawImage(g2, asset, pos, 0.5f);
+        RenderUtils.drawImage(g2, ASSET, pos, 0.5f);
     }
 
     @Override

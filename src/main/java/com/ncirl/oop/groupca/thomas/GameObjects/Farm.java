@@ -7,20 +7,19 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * Farms generate food and send deliveries to settlements.
+ */
 public class Farm extends GameObject {
+    // Assets
+    private static final Image ASSET = AssetLoader.loadAsset("/tom_game/farm.png");
     private static final Font DELIVERY_PROGRESS_FONT = new Font("SansSerif", Font.BOLD, 16);
 
-    ArrayList<Settlement> inRangeSettlements = new ArrayList<>();
-
+    private ArrayList<Settlement> inRangeSettlements = new ArrayList<>();
     private int nextDeliveryProgress = 0;
-
-    private final Image asset;
 
     public Farm(int startX, int startY) {
         super(startX, startY, 50);
-
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        asset = toolkit.getImage(getClass().getResource("/tom_game/farm.png"));
 
         refreshInRangeSettlements();
     }
@@ -44,7 +43,7 @@ public class Farm extends GameObject {
 
     @Override
     public void render(Graphics2D g2, Point mousePos) {
-        RenderUtils.drawImage(g2, asset, pos);
+        RenderUtils.drawImage(g2, ASSET, pos);
 
         g2.setColor(Color.BLACK);
         g2.setFont(DELIVERY_PROGRESS_FONT);
