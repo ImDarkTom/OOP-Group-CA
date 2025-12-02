@@ -8,8 +8,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 /**
- *
- * @author DELL
+ * Scythe.java
+ * @author Alex
  */
 public class Scythe extends Tool{
     public Scythe(int posX, int posY) {

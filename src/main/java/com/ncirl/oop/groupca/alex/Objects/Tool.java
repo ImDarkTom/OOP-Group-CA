@@ -7,8 +7,8 @@ package com.ncirl.oop.groupca.alex.Objects;
 import java.awt.Graphics;
 
 /**
- *
- * @author DELL
+ * Tool.java
+ * @author Alex
  */
 abstract public class Tool {
     protected int posX;protected int posY;

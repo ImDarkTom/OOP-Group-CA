@@ -5,8 +5,8 @@
 package com.ncirl.oop.groupca.alex.Objects;
 import java.awt.*;
 /**
- *
- * @author DELL
+ * Player.java
+ * @author Alex
  */
 public class Player {
     private int posX;private int posY;

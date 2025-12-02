@@ -6,17 +6,15 @@ package com.ncirl.oop.groupca.alex;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import com.ncirl.oop.groupca.OOPGroupCAGUI;
 import com.ncirl.oop.groupca.thomas.util.FrameUtils;
 
 /**
- *
- * @author DELL
+ * AlexWindow.java
+ * @author Alex
  */
 public class AlexWindow { // Must create variables at the start so they can be used outside of creatWindow()
     private static GameLoop game = new GameLoop(); 
     private static JFrame f;
-    private static JButton btn1;
     private static Label points;
     private static Label timer;
     
@@ -59,7 +57,6 @@ public class AlexWindow { // Must create variables at the start so they can be u
             f.setVisible(true);
             f.setLocationRelativeTo(null);
         }
-        
         @Override // Set window size
         public Dimension getPreferredSize() {
             return new Dimension(1000,600);
@@ -111,7 +108,6 @@ public class AlexWindow { // Must create variables at the start so they can be u
                     break;
             }
         }
-
         @Override
         public void keyTyped(KeyEvent e) {
             // Cannot be left blank, must be overridden

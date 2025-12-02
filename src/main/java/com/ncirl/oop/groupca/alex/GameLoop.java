@@ -12,8 +12,8 @@ import javax.swing.Timer;
 import java.util.ArrayList;
 
 /**
- *
- * @author DELL
+ * GameLoop.java
+ * @author Alex
  */
 public class GameLoop {
     private int ticks = 0; private int seconds;//Tracks ticks since starto of game.

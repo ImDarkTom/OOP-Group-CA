@@ -8,8 +8,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 /**
- *
- * @author DELL
+ * Shovel.java
+ * @author Alex
  */
 public class Shovel extends Tool{
     public Shovel(int posX, int posY) {
