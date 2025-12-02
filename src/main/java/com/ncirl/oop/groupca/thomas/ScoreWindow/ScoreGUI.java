@@ -5,6 +5,8 @@
 package com.ncirl.oop.groupca.thomas.ScoreWindow;
 
 import com.ncirl.oop.groupca.OOPGroupCAGUI;
+import com.ncirl.oop.groupca.alex.util.Scores;
+import com.ncirl.oop.groupca.alex.util.FileLoader;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,6 +14,7 @@ import javax.swing.JOptionPane;
  * @author tom
  */
 public class ScoreGUI extends javax.swing.JFrame {
+    private final Scores scores = FileLoader.loadFromFile("Scores.esr", Scores.class);
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ScoreGUI.class.getName());
 
@@ -53,11 +56,11 @@ public class ScoreGUI extends javax.swing.JFrame {
         titleLbl.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
         titleLbl.setText("Your Score");
 
-        growScoreLbl.setText("Growing Food: 999 points. You done ----");
+        growScoreLbl.setText(scores.getAlexScoreText());
 
-        deliverScoreLbl.setText("Delivering Food: 999 points. You done ----");
+        deliverScoreLbl.setText(scores.getAntonioScoreText());
 
-        manageScoreLbl.setText("Managing Food: 999 points. You done ----");
+        manageScoreLbl.setText(scores.getThomasScoreText());
 
         resetScoreBtn.setText("Reset Score");
         resetScoreBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -67,7 +70,7 @@ public class ScoreGUI extends javax.swing.JFrame {
         });
 
         totalScoreLbl.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
-        totalScoreLbl.setText("Total Score: 999 points. You done ---");
+        totalScoreLbl.setText(scores.getFullScoreText());
 
         dogImageLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dog_thumbs_up_scaled.png"))); // NOI18N
 
@@ -89,7 +92,7 @@ public class ScoreGUI extends javax.swing.JFrame {
                             .addComponent(growScoreLbl)
                             .addComponent(deliverScoreLbl)
                             .addComponent(manageScoreLbl))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 160, Short.MAX_VALUE)
                         .addComponent(dogImageLbl)))
                 .addContainerGap())
         );
@@ -153,6 +156,7 @@ public class ScoreGUI extends javax.swing.JFrame {
         }
         //</editor-fold>
 
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new ScoreGUI().setVisible(true));
     }

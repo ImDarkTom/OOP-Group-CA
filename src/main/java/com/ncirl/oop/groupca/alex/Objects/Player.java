@@ -13,9 +13,8 @@ public class Player {
     private int posX;private int posY;
     final private int width;final private int height;
     private String toolHeld;
-    Serializer serial = new Serializer();
-    Customisation custom = serial.getCustom();
-    
+    Customisation custom = FileLoader.getCustom();
+
     public Player() {
         posX = 900;
         posY = 100;

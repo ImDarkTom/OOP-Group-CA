@@ -8,16 +8,15 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
-import com.ncirl.oop.groupca.alex.util.*;
 
 /*
  *
- * @author DELL
+ * @author Alex + Thomas
  */
-public class Serializer { // Saves object
-    static public void serialize(Object obj, String file) {
+public class FileLoader { // Saves object
+    static public void saveToFile(Object obj, String fileName) {
         try {
-            ObjectOutputStream objOut = new ObjectOutputStream(new FileOutputStream(file+".esr"));
+            ObjectOutputStream objOut = new ObjectOutputStream(new FileOutputStream(fileName));
             objOut.writeObject(obj);
             objOut.close(); // Close streams
         } catch (IOException i) { // Catch errors
@@ -25,20 +24,29 @@ public class Serializer { // Saves object
         }
     }
     
-    public Scores getScore() { // Returns score object
-        Scores score = new Scores();
+    public static <T> T loadFromFile(String fileName, Class<T> type) { // Returns score object
         try {
-            ObjectInputStream objIn = new ObjectInputStream(new FileInputStream("Scores.esr"));
-            score = (Scores) objIn.readObject();
+            ObjectInputStream objIn = new ObjectInputStream(new FileInputStream(fileName));
+            Object readObject = objIn.readObject();
             objIn.close(); // Close streams
-        } catch (IOException i) { // Catch errors
-            i.printStackTrace();
-        } catch (ClassNotFoundException c) {
-            c.printStackTrace();
+
+            if (type.isInstance(readObject)) {
+                return (T) readObject;
+            } else {
+                throw new Error("Could not assert that returned object was of type.");
+            }
+        } catch (Exception e) {
+            try {
+                // Get the constructor for the class type we pass
+                return type.getDeclaredConstructor().newInstance();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                return null;
+            }
         }
-        return score;
     }
-    public Customisation getCustom() { // Returns score object
+
+    public static Customisation getCustom() { // Returns score object
         Customisation custom = new Customisation();
         try {
             ObjectInputStream objIn = new ObjectInputStream(new FileInputStream("Customisation.esr"));

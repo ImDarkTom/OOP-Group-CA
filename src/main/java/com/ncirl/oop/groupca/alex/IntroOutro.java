@@ -32,7 +32,7 @@ public class IntroOutro {
             score.setAlexMsg("You grew more than enough food! Good job!");
         }
         JOptionPane.showMessageDialog(null, "You have completed The Farming Game congratulations!\nYou earned "+points+" points!\n"+endMsg, "Intro", JOptionPane.INFORMATION_MESSAGE);
-        score.setAlexInt(points);
-        Serializer.serialize(score, "Scores");
+        score.setAlexScore(points);
+        FileLoader.saveToFile(score, "Scores");
     }
 }
