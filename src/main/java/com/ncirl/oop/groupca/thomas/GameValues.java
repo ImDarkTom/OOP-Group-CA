@@ -25,7 +25,8 @@ public class GameValues {
             200,
             200,
             100,
-            25
+            25,
+            GameObjectManager::refreshInRangeSettlements
     );
 
     private static final UpgradeableValue deliveryDelay = new UpgradeableValue(
@@ -43,7 +44,8 @@ public class GameValues {
             2,
             150,
             1,
-            125);
+            125
+    );
 
     // irrigation
     private static final UpgradeableValue irrigationDistance = new UpgradeableValue(

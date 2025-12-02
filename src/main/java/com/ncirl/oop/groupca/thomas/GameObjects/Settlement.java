@@ -35,10 +35,6 @@ public class Settlement extends GameObject {
 
     public Settlement(int startX, int startY) {
         super(startX, startY, 50);
-
-        // When we add a new settlement, refresh every farm's inRangeSettlements
-        // to account for this new settlement.
-        GameObjectManager.objectsOfType(Farm.class).forEach(Farm::refreshInRangeSettlements);
     }
 
     @Override

@@ -88,6 +88,14 @@ public class GameObjectManager {
                 (int)(Math.random() * TomGameWindow.getCanvasWidth()),
                 (int)(Math.random() * TomGameWindow.getCanvasHeight())
         ));
+
+        // When we add a new settlement, refresh every farm's inRangeSettlements
+        // to account for this new settlement.
+        refreshInRangeSettlements();
+    }
+
+    public static void refreshInRangeSettlements() {
+        GameObjectManager.objectsOfType(Farm.class).forEach(Farm::refreshInRangeSettlements);
     }
 
     // collision
