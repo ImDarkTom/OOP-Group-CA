@@ -10,10 +10,11 @@ import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.Timer;
 import java.util.ArrayList;
+import com.ncirl.oop.groupca.alex.util.*;
 
 /**
- *
- * @author DELL
+ * GameLoop.java
+ * @author Alex
  */
 public class GameLoop {
     private int ticks = 0; private int seconds;//Tracks ticks since starto of game.
@@ -51,7 +52,7 @@ public class GameLoop {
                 plantID++;
             }
         }
-        if(seconds<=180) { // Calls functions that run the game, stops when timer runs out
+        if(seconds<=10) { // Calls functions that run the game, stops when timer runs out
             ticks++;
             running=true;
             collisionHandling();

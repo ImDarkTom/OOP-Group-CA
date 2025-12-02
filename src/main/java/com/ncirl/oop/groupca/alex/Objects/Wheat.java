@@ -7,8 +7,8 @@ package com.ncirl.oop.groupca.alex.Objects;
 import java.awt.Graphics;
 import java.awt.Color;
 /**
- *
- * @author DELL
+ * Wheat.java
+ * @author Alex
  */
 public class Wheat extends Plant{
     public Wheat(int posX, int posY, int arrayNum, boolean isHeld) {
@@ -20,7 +20,6 @@ public class Wheat extends Plant{
         tool = "scythe";
         arrayID = arrayNum;
     }
-    
     @Override
     public void paintPlant(Graphics g) { // Draw Wheat to screen
         g.setColor(new Color(250, 227, 22));

@@ -5,8 +5,8 @@
 package com.ncirl.oop.groupca.alex.Objects;
 import java.awt.*;
 /**
- *
- * @author DELL
+ * Plant.java
+ * @author Alex
  */
 abstract public class Plant {
     protected int posX;protected int posY;
