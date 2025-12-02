@@ -12,6 +12,7 @@ import java.io.ObjectInputStream;
 import com.ncirl.oop.groupca.alex.util.Scores;
 
 /**
+<<<<<<< Updated upstream
  *
  * @author DELL
  */
@@ -38,11 +39,37 @@ public class SerializeScore {
             objIn.close();
             fileIn.close();
         } catch (IOException i) {
+=======
+ * SerializeScore.java
+ * @author Alex
+ */
+public class SerializeScore { // Saves object
+    static public void Serialize(Data dataObj, String file) {
+        try {
+            ObjectOutputStream objOut = new ObjectOutputStream(new FileOutputStream(file+".esr"));
+            objOut.writeObject(dataObj);
+            objOut.close(); // Close streams
+        } catch (IOException i) { // Catch errors
+            i.printStackTrace();
+        }
+    }
+    static public Data Deserialize(String file) { // Returns score object
+        Data data = new Data();
+        try {
+            ObjectInputStream objIn = new ObjectInputStream(new FileInputStream(file));
+            data = (Data) objIn.readObject();
+            objIn.close(); // Close streams
+        } catch (IOException i) { // Catch errors
+>>>>>>> Stashed changes
             i.printStackTrace();
         } catch (ClassNotFoundException c) {
             c.printStackTrace();
         }
+<<<<<<< Updated upstream
         return score;
+=======
+        return data;
+>>>>>>> Stashed changes
         
     }
 }

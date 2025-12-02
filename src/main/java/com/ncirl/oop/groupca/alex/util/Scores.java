@@ -5,10 +5,17 @@
 package com.ncirl.oop.groupca.alex.util;
 import java.io.Serializable;
 /**
+<<<<<<< Updated upstream
  *
  * @author DELL
  */
 public class Scores implements Serializable {
+=======
+ * Scores.java
+ * @author Alex
+ */
+public class Scores extends Data implements Serializable {
+>>>>>>> Stashed changes
     private int alexInt = 0;
     private int thomasInt = 0;
     private int antonioInt = 0;
