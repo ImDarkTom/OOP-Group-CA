@@ -102,7 +102,7 @@ public class OOPGroupCAGUI extends javax.swing.JFrame {
         titleLbl.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         titleLbl.setText("People Shouldn't Starve");
 
-        showCustomisationBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small_icons/arrow_right.png"))); // NOI18N
+        showCustomisationBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small_icons/tophat.png"))); // NOI18N
         showCustomisationBtn.setText("Customisation");
         showCustomisationBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         showCustomisationBtn.addActionListener(new java.awt.event.ActionListener() {

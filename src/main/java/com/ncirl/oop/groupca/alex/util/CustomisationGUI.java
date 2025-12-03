@@ -6,6 +6,7 @@ package com.ncirl.oop.groupca.alex.util;
 import com.ncirl.oop.groupca.OOPGroupCAGUI;
 import com.ncirl.oop.groupca.thomas.shared.CustomisationManager;
 import javax.swing.JComboBox;
+import java.awt.Color;
 /**
  *
  * @author DELL
@@ -33,6 +34,9 @@ public class CustomisationGUI extends javax.swing.JFrame {
         title = new java.awt.Label();
         hatList = new javax.swing.JComboBox<>();
         backBtn = new javax.swing.JButton();
+        hatLabel = new javax.swing.JLabel();
+        hatLabel1 = new javax.swing.JLabel();
+        shirtList = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -51,10 +55,27 @@ public class CustomisationGUI extends javax.swing.JFrame {
             }
         });
 
+        backBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small_icons/back.png"))); // NOI18N
         backBtn.setText("Back");
         backBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backBtnActionPerformed(evt);
+            }
+        });
+
+        hatLabel.setText("Select a hat!");
+
+        hatLabel1.setText("Select a shirt colour!");
+
+        shirtList.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Blue", "Cyan", "Red", "Magenta", "Pink", "Gray", "Black" }));
+        shirtList.addHierarchyListener(new java.awt.event.HierarchyListener() {
+            public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
+                shirtListHierarchyChanged(evt);
+            }
+        });
+        shirtList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                shirtListActionPerformed(evt);
             }
         });
 
@@ -63,26 +84,42 @@ public class CustomisationGUI extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(59, 59, 59)
-                .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(59, 59, 59))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(backBtn)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(hatList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(147, 147, 147))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(backBtn))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(59, 59, 59)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(19, 19, 19)
+                                        .addComponent(hatLabel))
+                                    .addComponent(hatList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(71, 71, 71)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(hatLabel1)
+                                    .addComponent(shirtList, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(hatList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
+                .addGap(13, 13, 13)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(hatLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(hatList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(hatLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(shirtList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
                 .addComponent(backBtn)
                 .addContainerGap())
         );
@@ -93,18 +130,20 @@ public class CustomisationGUI extends javax.swing.JFrame {
 
     private void hatListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hatListActionPerformed
         JComboBox comboBox = (JComboBox) evt.getSource();
-        String hat = (String)comboBox.getSelectedItem();
-        if(hat=="None") {
-            CustomisationManager.setHat(0);
-        } else if(hat=="Top Hat") {
-            CustomisationManager.setHat(1);
-        } else if(hat=="Straw Hat") {
-            CustomisationManager.setHat(2);
-        } else if(hat=="Propeller Hat") {
-            CustomisationManager.setHat(3);
-        } else if(hat=="Delivery Hat") {
-            CustomisationManager.setHat(4);
-        }
+        switch((String)comboBox.getSelectedItem()) {
+            case "Top Hat":
+                CustomisationManager.setHat(1);
+                break;
+            case "Straw Hat":
+                CustomisationManager.setHat(2);
+                break;
+            case "Propeller Hat":
+                CustomisationManager.setHat(3);
+                break;
+            case "Delivery Hat":
+                CustomisationManager.setHat(4);
+                break;    
+        }      
     }//GEN-LAST:event_hatListActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
@@ -114,10 +153,19 @@ public class CustomisationGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_backBtnActionPerformed
 
     private void hatListHierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_hatListHierarchyChanged
-        int hat = CustomisationManager.getHat();
         JComboBox comboBox = (JComboBox) evt.getSource();
-        comboBox.setSelectedIndex(hat);
+        comboBox.setSelectedIndex(CustomisationManager.getHat());
     }//GEN-LAST:event_hatListHierarchyChanged
+
+    private void shirtListHierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_shirtListHierarchyChanged
+        JComboBox comboBox = (JComboBox) evt.getSource();
+        comboBox.setSelectedIndex(CustomisationManager.getBodyNum());
+    }//GEN-LAST:event_shirtListHierarchyChanged
+
+    private void shirtListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shirtListActionPerformed
+        JComboBox comboBox = (JComboBox) evt.getSource();
+        CustomisationManager.setBody(comboBox.getSelectedIndex());
+    }//GEN-LAST:event_shirtListActionPerformed
 
     /**
      * @param args the command line arguments
@@ -146,7 +194,10 @@ public class CustomisationGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backBtn;
+    private javax.swing.JLabel hatLabel;
+    private javax.swing.JLabel hatLabel1;
     private javax.swing.JComboBox<String> hatList;
+    private javax.swing.JComboBox<String> shirtList;
     private java.awt.Label title;
     // End of variables declaration//GEN-END:variables
 }

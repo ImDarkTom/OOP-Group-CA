@@ -35,7 +35,7 @@ public class GameLoop {
     public Timer ticker = new Timer(40, (e) -> { //Runs every 40ms, which comes out to running 25 times a second
         if(ticks%25==0) {
             seconds++;
-            if(plants.size()<=8) { // Every 5 seconds add 2 new plants
+            if(plants.size()<=12) { // Every 5 seconds add 2 new plants
                 plants.add(new Onion(ran(0,800),ran(0,550), plantID, false));
                 plantID++;
                 plants.add(new Wheat(ran(0,800),ran(0,550), plantID, false));
@@ -154,7 +154,7 @@ public class GameLoop {
     public void collisionHandling() {
         int num = -1;
         for(Plant plant : plants) {
-            if((checkCollision(plant.getX(),plant.getY(),player)<=50)&&heldPlants.size()<5) { // If player holds less than 5 plants and is close enough
+            if((checkCollision(plant.getX(),plant.getY(),player)<=50)&&heldPlants.size()<6) { // If player holds less than 5 plants and is close enough
                 if(plant.getType()=="wheat"&&player.getTool()=="scythe") { // Tool check
                     num = plant.getArrayID();
                     heldPlants.add(new Wheat(plant.getX(),plant.getY(),plant.getArrayID(), true));
