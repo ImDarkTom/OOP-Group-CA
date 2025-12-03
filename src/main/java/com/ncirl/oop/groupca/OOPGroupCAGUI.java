@@ -5,6 +5,7 @@
 package com.ncirl.oop.groupca;
 
 import com.ncirl.oop.groupca.thomas.ScoreWindow.ScoreGUI;
+import com.ncirl.oop.groupca.alex.util.CustomisationGUI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -51,6 +52,7 @@ public class OOPGroupCAGUI extends javax.swing.JFrame {
         supplyFoodGameBtn = new javax.swing.JButton();
         showScoreBtn = new javax.swing.JButton();
         titleLbl = new javax.swing.JLabel();
+        showCustomisationBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("OOP Group Project");
@@ -100,6 +102,15 @@ public class OOPGroupCAGUI extends javax.swing.JFrame {
         titleLbl.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         titleLbl.setText("People Shouldn't Starve");
 
+        showCustomisationBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small_icons/arrow_right.png"))); // NOI18N
+        showCustomisationBtn.setText("Customisation");
+        showCustomisationBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        showCustomisationBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showCustomisationBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -107,7 +118,9 @@ public class OOPGroupCAGUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap()
+                        .addComponent(showCustomisationBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(showScoreBtn))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(92, Short.MAX_VALUE)
@@ -134,7 +147,9 @@ public class OOPGroupCAGUI extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(supplyFoodGameBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
-                .addComponent(showScoreBtn)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(showScoreBtn)
+                    .addComponent(showCustomisationBtn))
                 .addContainerGap())
         );
 
@@ -162,6 +177,12 @@ public class OOPGroupCAGUI extends javax.swing.JFrame {
         scoreGUI.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_showScoreBtnActionPerformed
+
+    private void showCustomisationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showCustomisationBtnActionPerformed
+        CustomisationGUI customGUI = new CustomisationGUI();
+        customGUI.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_showCustomisationBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -191,6 +212,7 @@ public class OOPGroupCAGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton deliverFoodNameBtn;
     private javax.swing.JButton growFoodGameBtn;
+    private javax.swing.JButton showCustomisationBtn;
     private javax.swing.JButton showScoreBtn;
     private javax.swing.JButton supplyFoodGameBtn;
     private javax.swing.JLabel titleLbl;

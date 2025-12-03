@@ -48,15 +48,8 @@ public class CustomisationManager {
         // loadImage();
     }
 
-    public static void setAlexWheat(Color alexWheat) {
-        getInstance().setAlexWheat(alexWheat);
-        // loadImage();
-    }
-
-    public static void setAlexOnion(Color alexOnion) {
-
-        getInstance().setAlexOnion(alexOnion);
-        // loadImage();
+    public static void setHat(int hat) {
+        getInstance().setHat(hat);
     }
 
     public static int getHat() {

@@ -26,7 +26,9 @@ public class Player {
         width = 50;
         height = 50;
         toolHeld="none";
-        ASSET = ImageLoader.load("/hats/"+CustomisationManager.getHat()+".png");
+        if(CustomisationManager.getHat()!=0) {
+            ASSET = ImageLoader.loadWithSize("/hats/"+CustomisationManager.getHat()+".png",40,40);
+        }
     }
     
     // Setters
@@ -68,7 +70,7 @@ public class Player {
         g.setColor(Color.yellow);
         g.fillRect(posX+(width/4), posY-(height/4), width/2, height/2);
         g.setColor(Color.black);
-        Point hatPos = new Point(posX,posY);
+        Point hatPos = new Point(posX+5,posY-40);
         RenderUtils.drawImage((Graphics2D)g, ASSET, hatPos);
     }
 }

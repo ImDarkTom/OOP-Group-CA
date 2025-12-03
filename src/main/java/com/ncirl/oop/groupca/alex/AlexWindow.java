@@ -15,7 +15,7 @@ import com.ncirl.oop.groupca.thomas.util.FrameUtils;
  */
 public class AlexWindow { // Must create variables at the start so they can be used outside of creatWindow()
     private static Color bgColour = new Color(70, 145, 0);
-    private static GameLoop game = new GameLoop();
+    private static GameLoop game;
     private static JFrame f;
     private static Label points;
     private static Label timer;
@@ -28,24 +28,25 @@ public class AlexWindow { // Must create variables at the start so they can be u
     
     public AlexWindow() { // Create window
         GameWindow gamePanel = new GameWindow();
+        
     }
     
     static public class GameWindow extends JPanel implements KeyListener{ 
         // Main panel
         public GameWindow() { // Create and populate game screen
+            game = new GameLoop(this); // Create GameLoop and pass this into it
             setBorder(BorderFactory.createLineBorder(Color.black)); // Makes black border
             f = new JFrame("Frame"); // Create frame and JPanel for buttons
             JPanel topDisplay = new JPanel(new FlowLayout(FlowLayout.LEFT));
-            f.addKeyListener(this);
             f.setFocusable(true);
             f.setFocusTraversalKeysEnabled(false);
+            f.addKeyListener(this);
             //Points, timer and pass panel obj to gameLoop
             points = new Label("Points"); // Create label for points
             points.setFont(new Font("Serif",Font.PLAIN,20));
             timer = new Label("Points"); // Create label for timer
             timer.setFont(new Font("Serif",Font.PLAIN,20));
-            game.setPanel(this); // Pass panel to GameLoop so repaint() can be called every tick
-
+            
             // Layout and add labels to topdisplay
             f.add(topDisplay, BorderLayout.NORTH);
             topDisplay.add(points);
@@ -126,7 +127,7 @@ public class AlexWindow { // Must create variables at the start so they can be u
         timer.setText("Time left: "+(180-game.getSeconds()));
     }
     static public void exitButton() {
-        game.endTicks(); // Stops timer when the window closes
+        game.resetGame(); // Resets game so new instance is loaded next time
     }
 }
 

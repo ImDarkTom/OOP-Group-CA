@@ -18,29 +18,19 @@ import com.ncirl.oop.groupca.alex.util.*;
  */
 public class GameLoop {
     private int ticks = 0; private int seconds;//Tracks ticks since starto of game.
-    private boolean running = false;//Tracks if the game has started/ended
     private GameWindow panel; // Have to pass panel into here to trigger redraw
     private int points; // Track players point
-    private Player player = new Player(); // Player
-    private ArrayList<Plant> plants = new ArrayList<Plant>(); // Stores plants
-    private ArrayList<Plant> heldPlants = new ArrayList<Plant>(); // Stores held plants
+    private Player player;
+    private ArrayList<Plant> plants;// Stores plants
+    private ArrayList<Plant> heldPlants;// Stores held plants
     private int plantID = 0; // Serial plant identifier
-    private Scythe scythe = new Scythe(ran(800,950),ran(300,550)); // Init tool objects
-    private Shovel shovel = new Shovel(ran(800,950),ran(300,550));
+    private Scythe scythe;// Init tool objects
+    private Shovel shovel;
     
-    public GameLoop() {
-        for(int i=0;i<5;i++) {// Create plants
-            plants.add(new Wheat(ran(0,800),ran(0,550), plantID, false));
-            plantID++;
-        }
-        for(int i=0;i<5;i++) {// Create plants
-            plants.add(new Onion(ran(0,800),ran(0,550), plantID, false));
-            plantID++;
-        }
-        IntroOutro.playIntro();
-        startTicks();
+    public GameLoop(GameWindow p) {
+        initGame();
+        panel=p;
     }
-   
     
     public Timer ticker = new Timer(40, (e) -> { //Runs every 40ms, which comes out to running 25 times a second
         if(ticks%25==0) {
@@ -54,7 +44,6 @@ public class GameLoop {
         }
         if(seconds<=30) { // Calls functions that run the game, stops when timer runs out
             ticks++;
-            running=true;
             collisionHandling();
             panel.repaint();
         } else { // Timer has ended, play outro
@@ -63,14 +52,39 @@ public class GameLoop {
             IntroOutro.playOutro(points);
         }
     });
+    public void initGame() { // Start game by 
+        resetGame();
+        IntroOutro.playIntro();
+        startTicks();
+    }
+    public void resetGame() {// Creates new values for game components
+        endTicks();// Timer is ended here so it can never stop without resetting game
+        points=0;
+        seconds=0;
+        ticks=0;
+        player = new Player(); // Player
+        plants = new ArrayList<Plant>(); // Stores plants
+        heldPlants = new ArrayList<Plant>(); // Stores held plants
+        plantID = 0; // Serial plant identifier
+        scythe = new Scythe(ran(800,950),ran(300,550)); // Init tool objects
+        shovel = new Shovel(ran(800,950),ran(300,550));
+        for(int i=0;i<5;i++) {// Create plants
+            plants.add(new Wheat(ran(0,800),ran(0,550), plantID, false));
+            plantID++;
+        }
+        for(int i=0;i<5;i++) {// Create plants
+            plants.add(new Onion(ran(0,800),ran(0,550), plantID, false));
+            plantID++;
+        }
+    }
     // Tick Methods
     public void startTicks() { // Starts timer
         ticker.start();
     }
-    public void endTicks() { // Ends timer
+    public void endTicks() {
         ticker.stop();
     }
-    
+
     // Render graphical elements to screen
     public void render(Graphics g) {
         // Sell Area, first so everything renders on top
@@ -168,12 +182,6 @@ public class GameLoop {
         points=points+(heldPlants.size()*2);
         heldPlants.clear();
     }
-    
-    // Pass panel from window to GameLoop
-    public void setPanel(GameWindow p) {
-        panel = p;
-    }
-    
     // Lots of random values are needed, seperate function for readability
     public int ran(int min, int max) {
         int random; return random = (int)(Math.random()*(max-min)+min);
@@ -181,9 +189,6 @@ public class GameLoop {
     // Get Statements
     public int getSeconds() { // Return ticks for display
         return seconds;
-    }
-    public boolean getStatus() { // Return boolean
-        return running;
     }
     public int getPoints() { // Points...
         return points;
