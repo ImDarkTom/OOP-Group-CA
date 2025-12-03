@@ -5,6 +5,8 @@
 package com.ncirl.oop.groupca.alex.Objects;
 import java.awt.*;
 import com.ncirl.oop.groupca.alex.util.*;
+import com.ncirl.oop.groupca.antonio.util.Customisations;
+
 /**
  * Player.java
  * @author Alex
@@ -13,7 +15,7 @@ public class Player {
     private int posX;private int posY;
     final private int width;final private int height;
     private String toolHeld;
-    Customisation custom = FileLoader.loadFromFile("Customisation.esr", Customisation.class);
+    Customisations custom = FileLoader.loadFromFile("Customisations.esr", Customisation.class);
 
     public Player() {
         posX = 900;

@@ -4,6 +4,7 @@ import java.awt.*;
 
 public class RenderUtils {
     public static void drawImage(Graphics2D g2, Image asset, Point pos) {
+
         g2.drawImage(asset, pos.x, pos.y, null);
     }
 
