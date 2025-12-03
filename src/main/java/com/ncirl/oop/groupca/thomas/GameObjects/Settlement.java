@@ -3,6 +3,7 @@ package com.ncirl.oop.groupca.thomas.GameObjects;
 import com.ncirl.oop.groupca.thomas.ImageLoader;
 import com.ncirl.oop.groupca.thomas.GameObjectManager;
 import com.ncirl.oop.groupca.thomas.GameValues;
+import com.ncirl.oop.groupca.thomas.shared.FontManager;
 import com.ncirl.oop.groupca.thomas.util.RenderUtils;
 
 import java.awt.*;
@@ -18,8 +19,8 @@ public class Settlement extends GameObject {
     // asset will be changed individually with each settlement
     private Image asset = ImageLoader.load("/tom_game/settlement.png");
     // static is better for optimisation, as each settlement instance won't need to re-create the same font.
-    private static final Font HUNGER_FONT = new Font("SansSerif", Font.PLAIN, 14);
-    private static final Font UPGRADE_FONT = new Font("SansSerif", Font.PLAIN, 12);
+    private static final Font HUNGER_FONT = FontManager.getFont(14);
+    private static final Font UPGRADE_FONT = FontManager.getFont(12);
 
     private SettlementType settlementType = SettlementType.SETTLEMENT;
 
