@@ -277,14 +277,18 @@ public class Maps {
             vehicle.setPosY(10);
             vehicle.setyVel(0);
             vehicle.setxVel(0);
-        } else if (!isColliding()) {
+        }
+        else if (!isColliding()) {
             return;
-        } else {
+        }
+        else {
             if (last.equals("acc")) vehicle.setyVel(vehicle.getPosY() * 0.01);
-            if (last.equals("dec")) vehicle.setyVel(vehicle.getPosY() * -0.01);
-            if (last.equals("l")) vehicle.setxVel(vehicle.getPosX() * 0.01);
-            if (last.equals("r")) vehicle.setxVel(vehicle.getPosX() * -0.01);
-            points -= 1;
+           else if (last.equals("dec")) vehicle.setyVel(vehicle.getPosY() * -0.01);
+           else if (last.equals("l")) vehicle.setxVel(vehicle.getPosX() * 0.01);
+           else if (last.equals("r")) vehicle.setxVel(vehicle.getPosX() * -0.01);
+            if(points>1){
+                points -= 1;
+            }
             pointsLabel.setText("Points: " + points);
         }
     }
