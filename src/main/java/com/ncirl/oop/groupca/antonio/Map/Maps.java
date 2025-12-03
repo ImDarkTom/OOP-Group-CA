@@ -68,11 +68,14 @@ public class Maps {
             int y;
             int w;
             int h;
+            int attempts = 0;
             do {
                 x = random.nextInt(900);
                 y = random.nextInt(500);
                 w = random.nextInt(40) + 30;
                 h = random.nextInt(40) + 30;
+                attempts++;
+                if (attempts > 1000) break;
             } while (isColliding());
             obstacle.add(new Obstacle(x, y, w, h));
         }
@@ -309,7 +312,7 @@ public class Maps {
             py = random.nextInt(500 - radius);
             amount = random.nextInt(16) + 5;
             attempts++;
-            if (attempts > 300) break;
+            if (attempts > 1000) break;
         } while (CheckOverlap(px, py, radius));
         pickups.set(index, new Pickup(radius, px, py, amount));
     }
@@ -326,7 +329,7 @@ public class Maps {
             dy = random.nextInt(500 - radius);
             amount = random.nextInt(16) + 5;
             attempts++;
-            if (attempts > 300) break;
+            if (attempts > 1000) break;
         } while (CheckOverlap(dx, dy, radius));
         deliveries.set(index, new Delivery(radius, dx, dy, amount));
     }
