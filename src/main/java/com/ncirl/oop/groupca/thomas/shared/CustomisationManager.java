@@ -59,22 +59,13 @@ public class CustomisationManager {
         // loadImage();
     }
 
-    public static void isHat1(boolean hat1) {
-        getInstance().isHat1(hat1);
-        loadImage();
+    public static int getHat() {
+        return getInstance().getHat();
     }
-
-    public static void isHat2(boolean hat2) {
-
-        getInstance().isHat2(hat2);
-        loadImage();
+    
+    public static Color getAlexBody() {
+        return getInstance().getAlexBody();
     }
-
-    public static void isHat3(boolean hat3) {
-        getInstance().isHat3(hat3);
-        loadImage();
-    }
-
 //    public static void resetScores() {
 //        FileLoader.saveToFile(new Scores(), SCORE_FILENAME);
 //

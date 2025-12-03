@@ -18,9 +18,7 @@ public class Customisations implements Serializable {
     Color alexHead = Color.yellow;
     Color alexWheat;
     Color alexOnion;
-    boolean hat1 = false;;
-    boolean hat2 = false;
-    boolean hat3 = false;
+    int hat = 1;
 
     public Customisations() { // Set default values
         FileLoader.saveToFile(this, "Customisations.esr");
@@ -45,16 +43,8 @@ public class Customisations implements Serializable {
         this.alexOnion = alexOnion;
     }
 
-    public void setHat1(boolean hat1) {
-        this.hat1 = hat1;
-    }
-
-    public void setHat2(boolean hat2) {
-        this.hat2 = hat2;
-    }
-
-    public void setHat3(boolean hat3) {
-        this.hat3 = hat3;
+    public void setHat(int hat) {
+        this.hat = hat;
     }
 
 
@@ -77,16 +67,8 @@ public class Customisations implements Serializable {
         return alexOnion;
     }
 
-    public boolean isHat1(boolean hat1) {
-        return this.hat1;
-    }
-
-    public boolean isHat2(boolean hat2) {
-        return this.hat2;
-    }
-
-    public boolean isHat3(boolean hat3) {
-        return this.hat3;
+    public int getHat() {
+        return hat;
     }
 
 }

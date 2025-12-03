@@ -4,18 +4,21 @@
  */
 package com.ncirl.oop.groupca.alex.Objects;
 import java.awt.*;
-import com.ncirl.oop.groupca.alex.util.*;
-import com.ncirl.oop.groupca.antonio.util.Customisations;
+import com.ncirl.oop.groupca.thomas.shared.CustomisationManager;
+import com.ncirl.oop.groupca.thomas.ImageLoader;
+import com.ncirl.oop.groupca.thomas.util.RenderUtils;
 
 /**
  * Player.java
  * @author Alex
  */
 public class Player {
+    Image ASSET;
+
     private int posX;private int posY;
     final private int width;final private int height;
     private String toolHeld;
-    Customisations custom = FileLoader.loadFromFile("Customisations.esr", Customisation.class);
+    
 
     public Player() {
         posX = 900;
@@ -23,6 +26,7 @@ public class Player {
         width = 50;
         height = 50;
         toolHeld="none";
+        ASSET = ImageLoader.load("/hats/"+CustomisationManager.getHat()+".png");
     }
     
     // Setters
@@ -59,10 +63,12 @@ public class Player {
     }
      
     public void paintPlayer(Graphics g) { // Render / draw function
-        g.setColor(custom.getAlexBody());
+        g.setColor(CustomisationManager.getAlexBody());
         g.fillRect(posX, posY+(height/4), width, height/2);
-        g.setColor(custom.getAlexHead());
+        g.setColor(Color.yellow);
         g.fillRect(posX+(width/4), posY-(height/4), width/2, height/2);
         g.setColor(Color.black);
+        Point hatPos = new Point(posX,posY);
+        RenderUtils.drawImage((Graphics2D)g, ASSET, hatPos);
     }
 }
