@@ -1,6 +1,7 @@
 package com.ncirl.oop.groupca.thomas.GameObjects;
 
 import com.ncirl.oop.groupca.thomas.*;
+import com.ncirl.oop.groupca.thomas.shared.FontManager;
 import com.ncirl.oop.groupca.thomas.util.RenderUtils;
 
 import javax.swing.*;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 public class Farm extends GameObject {
     // Assets
     private static final Image ASSET = ImageLoader.load("/tom_game/farm.png");
-    private static final Font DELIVERY_PROGRESS_FONT = new Font("SansSerif", Font.BOLD, 16);
+    private static final Font DELIVERY_PROGRESS_FONT = FontManager.getFont(16, Font.BOLD);
 
     private ArrayList<Settlement> inRangeSettlements = new ArrayList<>();
     private int nextDeliveryProgress = 0;
