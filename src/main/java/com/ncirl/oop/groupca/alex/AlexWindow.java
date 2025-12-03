@@ -5,6 +5,7 @@
 package com.ncirl.oop.groupca.alex;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.Color;
 import java.awt.event.*;
 import com.ncirl.oop.groupca.thomas.util.FrameUtils;
 
@@ -13,7 +14,8 @@ import com.ncirl.oop.groupca.thomas.util.FrameUtils;
  * @author Alex
  */
 public class AlexWindow { // Must create variables at the start so they can be used outside of creatWindow()
-    private static GameLoop game = new GameLoop(); 
+    private static Color bgColour = new Color(70, 145, 0);
+    private static GameLoop game = new GameLoop();
     private static JFrame f;
     private static Label points;
     private static Label timer;
@@ -53,6 +55,7 @@ public class AlexWindow { // Must create variables at the start so they can be u
             
             f.add(this); // Add panel
             FrameUtils.setBackToMenuOnClose(f, AlexWindow::exitButton);
+            this.setBackground(bgColour);
             f.pack();
             f.setVisible(true);
             f.setLocationRelativeTo(null);
@@ -64,7 +67,7 @@ public class AlexWindow { // Must create variables at the start so they can be u
         
         @Override // Paint/Display function, draws onto the screen
         public void paintComponent(Graphics g) {
-            super.paintComponent(g);
+            super.paintComponent(g); 
             game.render(g);
             updateFunc(); // Updates values
         }

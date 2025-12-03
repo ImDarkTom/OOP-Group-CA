@@ -40,10 +40,8 @@ public class Player {
     }
     
     // Methods to change relative to present value are here to reduce calling positions back and forth
-    public void changeX(int X) {
+    public void changePos(int X, int Y) {
         posX = posX+X;
-    }
-    public void changeY(int Y) {
         posY = posY+Y;
     }
     
@@ -63,8 +61,6 @@ public class Player {
         g.fillRect(posX, posY+(height/4), width, height/2);
         g.setColor(custom.getAlexHead());
         g.fillRect(posX+(width/4), posY-(height/4), width/2, height/2);
-        
-        
         g.setColor(Color.black);
     }
 }

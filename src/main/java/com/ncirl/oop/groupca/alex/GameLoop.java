@@ -45,14 +45,14 @@ public class GameLoop {
     public Timer ticker = new Timer(40, (e) -> { //Runs every 40ms, which comes out to running 25 times a second
         if(ticks%25==0) {
             seconds++;
-            if(seconds%5==0) { // Every 5 seconds add 2 new plants
+            if(plants.size()<=8) { // Every 5 seconds add 2 new plants
                 plants.add(new Onion(ran(0,800),ran(0,550), plantID, false));
                 plantID++;
                 plants.add(new Wheat(ran(0,800),ran(0,550), plantID, false));
                 plantID++;
             }
         }
-        if(seconds<=10) { // Calls functions that run the game, stops when timer runs out
+        if(seconds<=30) { // Calls functions that run the game, stops when timer runs out
             ticks++;
             running=true;
             collisionHandling();
@@ -91,17 +91,17 @@ public class GameLoop {
     public void movePlayer(boolean up, boolean down, boolean left, boolean right) {
         int speed = 8;
         // Seperate if statements so the player can move multiple directions at once
-        if(up&&player.getY()>0) {player.changeY(-speed);} else {
-            player.changeY(5);
+        if(up&&player.getY()>0) {player.changePos(0,-speed);} else {
+            player.changePos(0,5);
         }
-        if(down&&player.getY()<570) {player.changeY(speed);} else {
-            player.changeY(-5);
+        if(down&&player.getY()<570) {player.changePos(0,speed);} else {
+            player.changePos(0,-5);
         }
-        if(left&&player.getX()>0) {player.changeX(-speed);} else {
-            player.changeX(5);
+        if(left&&player.getX()>0) {player.changePos(-speed,0);} else {
+            player.changePos(5,0);
         }
-        if(right&&player.getX()<950) {player.changeX(speed);} else {
-            player.changeX(-5);
+        if(right&&player.getX()<950) {player.changePos(speed,0);} else {
+            player.changePos(-5,0);
         }
         // Held plants and tool positions must be updated so they are consistent
         int playerX = player.getX(); int playerY = (player.getY()+40)-(heldPlants.size())*20;
@@ -125,9 +125,11 @@ public class GameLoop {
     }
     public void toolInteraction() {
         if(player.getTool()=="none") {
-            if(checkCollision(scythe.getX(),scythe.getY(),player, 100)) {
+            double scytheDist = checkCollision(scythe.getX(),scythe.getY(),player);
+            double shovelDist = checkCollision(shovel.getX(),shovel.getY(),player);
+            if(scytheDist<=100&&scytheDist<shovelDist) {
                 player.setTool("scythe");
-            } else if(checkCollision(shovel.getX(),shovel.getY(),player, 100)) {
+            } else if(shovelDist<=100&&shovelDist<scytheDist) {
                 player.setTool("shovel");
             }
         } else {
@@ -138,7 +140,7 @@ public class GameLoop {
     public void collisionHandling() {
         int num = -1;
         for(Plant plant : plants) {
-            if(checkCollision(plant.getX(),plant.getY(),player, 50)&&heldPlants.size()<5) { // If player holds less than 5 plants and is close enough
+            if((checkCollision(plant.getX(),plant.getY(),player)<=50)&&heldPlants.size()<5) { // If player holds less than 5 plants and is close enough
                 if(plant.getType()=="wheat"&&player.getTool()=="scythe") { // Tool check
                     num = plant.getArrayID();
                     heldPlants.add(new Wheat(plant.getX(),plant.getY(),plant.getArrayID(), true));
@@ -156,14 +158,10 @@ public class GameLoop {
         }
     }
     // Returns true or false if player is near co-ordinates provided
-    public boolean checkCollision(int X1, int Y1, Player player, int range) {
+    public double checkCollision(int X1, int Y1, Player player) {
         double distance;
         distance = Math.hypot(X1-player.getX(),Y1-player.getY()); // distance between points
-        if(distance<= range) {
-            return true;
-        } else {
-            return false;
-        }
+        return distance;
     }
     // Rewards player with points for held plants and clears arraylist
     public void sellPlants() {         
