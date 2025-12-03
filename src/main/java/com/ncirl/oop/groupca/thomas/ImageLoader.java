@@ -26,6 +26,18 @@ public class ImageLoader {
         return loadedAsset;
     }
 
+    public static Image loadWithSize(String path, int width, int height) {
+        Image originalImage = load(path);
+
+        return originalImage.getScaledInstance(width, height, Image.SCALE_DEFAULT);
+    }
+
+    public static Image loadWithSize(String path, int width, int height, int scaleHint) {
+        Image originalImage = load(path);
+
+        return originalImage.getScaledInstance(width, height, scaleHint);
+    }
+
     public static ImageIcon loadAsIcon(String path) {
         return new ImageIcon(ImageLoader.load(path));
     }
