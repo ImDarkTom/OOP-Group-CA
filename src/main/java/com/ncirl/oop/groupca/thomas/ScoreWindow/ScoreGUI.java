@@ -5,19 +5,15 @@
 package com.ncirl.oop.groupca.thomas.ScoreWindow;
 
 import com.ncirl.oop.groupca.OOPGroupCAGUI;
-import com.ncirl.oop.groupca.alex.util.Scores;
-import com.ncirl.oop.groupca.alex.util.FileLoader;
 import com.ncirl.oop.groupca.thomas.shared.ScoreManager;
 
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 /**
  *
  * @author tom
  */
 public class ScoreGUI extends javax.swing.JFrame {
-    private final Scores scores = ScoreManager.getInstance();
-    
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ScoreGUI.class.getName());
 
     /**
@@ -58,11 +54,11 @@ public class ScoreGUI extends javax.swing.JFrame {
         titleLbl.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
         titleLbl.setText("Your Score");
 
-        growScoreLbl.setText(scores.getAlexScoreText());
+        growScoreLbl.setText(ScoreManager.getAlexScoreText());
 
-        deliverScoreLbl.setText(scores.getAntonioScoreText());
+        deliverScoreLbl.setText(ScoreManager.getAntonioScoreText());
 
-        manageScoreLbl.setText(scores.getThomasScoreText());
+        manageScoreLbl.setText(ScoreManager.getThomasScoreText());
 
         resetScoreBtn.setText("Reset Score");
         resetScoreBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -72,7 +68,7 @@ public class ScoreGUI extends javax.swing.JFrame {
         });
 
         totalScoreLbl.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
-        totalScoreLbl.setText(scores.getFullScoreText());
+        totalScoreLbl.setText(ScoreManager.getFullScoreText());
 
         dogImageLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dog_thumbs_up_scaled.png"))); // NOI18N
 
@@ -134,7 +130,18 @@ public class ScoreGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_backBtnActionPerformed
 
     private void resetScoreBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetScoreBtnActionPerformed
-        JOptionPane.showConfirmDialog(this, "Are you sure you want to reset your score?");
+        int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to reset your score?", "Reset Score", JOptionPane.YES_NO_OPTION);
+
+        System.out.println(confirm);
+
+        // Clicked yes
+        if (confirm == 0) {
+            ScoreManager.resetScores();
+            dispose();
+
+            ScoreGUI scoreGUI = new ScoreGUI();
+            scoreGUI.setVisible(true);
+        }
     }//GEN-LAST:event_resetScoreBtnActionPerformed
 
     /**

@@ -11,7 +11,7 @@ public class ScoreManager {
     private static Scores scoresInstance;
     private static final String SCORE_FILENAME = "scores.ser";
 
-    public static Scores getInstance() {
+    private static Scores getInstance() {
         if (scoresInstance == null) {
             // This will automatically create a blank file for us if needed
             scoresInstance = FileLoader.loadFromFile(SCORE_FILENAME, Scores.class);
@@ -52,6 +52,13 @@ public class ScoreManager {
     public static void setAntonioMsg(String antonioMsg) {
         getInstance().setAntonioMsg(antonioMsg);
         save();
+    }
+
+    public static void resetScores() {
+        FileLoader.saveToFile(new Scores(), SCORE_FILENAME);
+
+        scoresInstance = null;
+        getInstance();
     }
 
     //

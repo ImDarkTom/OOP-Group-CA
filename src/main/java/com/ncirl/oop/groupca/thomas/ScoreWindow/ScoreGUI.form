@@ -100,21 +100,21 @@
     <Component class="javax.swing.JLabel" name="growScoreLbl">
       <Properties>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="scores.getAlexScoreText()" type="code"/>
+          <Connection code="ScoreManager.getAlexScoreText()" type="code"/>
         </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="deliverScoreLbl">
       <Properties>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="scores.getAntonioScoreText()" type="code"/>
+          <Connection code="ScoreManager.getAntonioScoreText()" type="code"/>
         </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="manageScoreLbl">
       <Properties>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="scores.getThomasScoreText()" type="code"/>
+          <Connection code="ScoreManager.getThomasScoreText()" type="code"/>
         </Property>
       </Properties>
     </Component>
@@ -132,7 +132,7 @@
           <Font name="Liberation Sans" size="13" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="scores.getFullScoreText()" type="code"/>
+          <Connection code="ScoreManager.getFullScoreText()" type="code"/>
         </Property>
       </Properties>
     </Component>
