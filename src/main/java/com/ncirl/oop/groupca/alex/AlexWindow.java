@@ -49,6 +49,7 @@ public class AlexWindow { // Must create variables at the start so they can be u
             
             // Layout and add labels to topdisplay
             f.add(topDisplay, BorderLayout.NORTH);
+            points.setPreferredSize(new Dimension(130,40));
             topDisplay.add(points);
             topDisplay.add(timer);
 

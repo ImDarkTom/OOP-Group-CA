@@ -41,7 +41,7 @@ public class Scores implements Serializable {
         this.antonioMsg = antonioMsg;
     }
 
-    //
+    // Getters return all saved info out at once
     public String getAlexScoreText() {
         return "Growing Food: " + this.alexScore + " points. " + this.alexMsg;
     }

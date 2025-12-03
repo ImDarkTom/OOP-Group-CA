@@ -130,7 +130,7 @@ public class CustomisationGUI extends javax.swing.JFrame {
 
     private void hatListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hatListActionPerformed
         JComboBox comboBox = (JComboBox) evt.getSource();
-        switch((String)comboBox.getSelectedItem()) {
+        switch((String)comboBox.getSelectedItem()) { // Transfers hat choice to Customisation Manager
             case "Top Hat":
                 CustomisationManager.setHat(1);
                 break;
@@ -147,23 +147,23 @@ public class CustomisationGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_hatListActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
-        OOPGroupCAGUI mainMenuGUI = new OOPGroupCAGUI();
+        OOPGroupCAGUI mainMenuGUI = new OOPGroupCAGUI(); // Back button functionality
         mainMenuGUI.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_backBtnActionPerformed
 
     private void hatListHierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_hatListHierarchyChanged
-        JComboBox comboBox = (JComboBox) evt.getSource();
+        JComboBox comboBox = (JComboBox) evt.getSource(); // Load saved choice of hat to customisations dropdown
         comboBox.setSelectedIndex(CustomisationManager.getHat());
     }//GEN-LAST:event_hatListHierarchyChanged
 
     private void shirtListHierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_shirtListHierarchyChanged
-        JComboBox comboBox = (JComboBox) evt.getSource();
+        JComboBox comboBox = (JComboBox) evt.getSource(); // Load saved choice of shirt to customisations dropdown
         comboBox.setSelectedIndex(CustomisationManager.getBodyNum());
     }//GEN-LAST:event_shirtListHierarchyChanged
 
     private void shirtListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shirtListActionPerformed
-        JComboBox comboBox = (JComboBox) evt.getSource();
+        JComboBox comboBox = (JComboBox) evt.getSource(); // Sends shirt choice to customisations manager
         CustomisationManager.setBody(comboBox.getSelectedIndex());
     }//GEN-LAST:event_shirtListActionPerformed
 

@@ -10,7 +10,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.Timer;
 import java.util.ArrayList;
-import com.ncirl.oop.groupca.alex.util.*;
 
 /**
  * GameLoop.java
@@ -42,7 +41,7 @@ public class GameLoop {
                 plantID++;
             }
         }
-        if(seconds<=30) { // Calls functions that run the game, stops when timer runs out
+        if(seconds<=180) { // Calls functions that run the game, stops when timer runs out
             ticks++;
             collisionHandling();
             panel.repaint();
@@ -91,14 +90,14 @@ public class GameLoop {
         g.setColor(Color.orange);
         g.fillRect(800, 0, 200, 300);
         
-        for(Plant plant : heldPlants) {
+        for(Plant plant : heldPlants) { // Paints held plants
             plant.paintPlant(g);
         }
-        player.paintPlayer(g);
-        for(Plant plant : plants) {
+        player.paintPlayer(g); // Paints player
+        for(Plant plant : plants) { // Paints plants
             plant.paintPlant(g);
         }
-        scythe.paintTool(g);
+        scythe.paintTool(g); // Tool painting
         shovel.paintTool(g);
     }
     // Player Movement and also updates positions of objects held by player, and the bounding box for the sell area
@@ -179,7 +178,7 @@ public class GameLoop {
     }
     // Rewards player with points for held plants and clears arraylist
     public void sellPlants() {         
-        points=points+(heldPlants.size()*2);
+        points=points+(heldPlants.size()*3);
         heldPlants.clear();
     }
     // Lots of random values are needed, seperate function for readability
