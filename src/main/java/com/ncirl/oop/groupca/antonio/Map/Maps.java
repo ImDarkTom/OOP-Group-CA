@@ -8,6 +8,7 @@ import com.ncirl.oop.groupca.OOPGroupCAGUI;
 import com.ncirl.oop.groupca.antonio.Items.Items;
 import com.ncirl.oop.groupca.antonio.Items.Pickup;
 import com.ncirl.oop.groupca.antonio.Items.Delivery;
+import com.ncirl.oop.groupca.antonio.Vehicle.Sea;
 import com.ncirl.oop.groupca.antonio.Vehicle.Vehicle;
 import com.ncirl.oop.groupca.antonio.Vehicle.Air;
 import com.ncirl.oop.groupca.antonio.Vehicle.Land;
@@ -206,13 +207,17 @@ public class Maps {
     }
 
     private void updateMovement() {
-        double acceleration = 1.0;
+        double acceleration = 1;
+
+        if(vehicle instanceof Air && ((vehicle.getxVel() + vehicle.getyVel())<0.8) && ((vehicle.getxVel() + vehicle.getyVel())>-0.8)){
+            acceleration = 0.5;
+        }
         double friction = 0.94;
 
         if (accelerate) vehicle.setyVel(vehicle.getyVel() - acceleration);
-        if (decelerate) vehicle.setyVel(vehicle.getyVel() + acceleration);
-        if (left) vehicle.setxVel(vehicle.getxVel() - acceleration);
-        if (right) vehicle.setxVel(vehicle.getxVel() + acceleration);
+        else if (decelerate) vehicle.setyVel(vehicle.getyVel() + acceleration);
+        else if (left) vehicle.setxVel(vehicle.getxVel() - acceleration);
+        else if (right) vehicle.setxVel(vehicle.getxVel() + acceleration);
 
         vehicle.setPosX(vehicle.getPosX() + vehicle.getxVel());
         vehicle.setPosY(vehicle.getPosY() + vehicle.getyVel());
@@ -268,6 +273,22 @@ public class Maps {
             vehicle.setyVel(0);
             vehicle.setxVel(0);
         }
+        else if(isColliding() && (vehicle instanceof Sea)){
+            switch (last) {
+                case "acc":
+                    vehicle.setyVel(vehicle.getPosY() * 0.02);
+                    break;
+                case "dec":
+                    vehicle.setyVel(vehicle.getPosY() * -0.02);
+                    break;
+                case "l":
+                    vehicle.setxVel(vehicle.getPosX() * 0.02);
+                    break;
+                default:
+                    vehicle.setxVel(vehicle.getPosX() * -0.02);
+                    break;
+            }
+        }
         else if (isColliding()) {
             switch (last) {
                 case "acc":
@@ -288,10 +309,14 @@ public class Maps {
             }
             pointsLabel.setText("Points: " + points);
         }
+
     }
 
-    private int getMaxCargoForVehicle() {
-        return (vehicle instanceof Land) ? 20 : Integer.MAX_VALUE;
+    private int getCapacity() {
+        if (vehicle instanceof Land landVehicle) {
+            return landVehicle.getCapacity();
+        }
+        return Integer.MAX_VALUE;
     }
 
     private void respawnPickupAt(int index) {
@@ -320,7 +345,7 @@ public class Maps {
     private void checkPickupDelivery() {
 
 
-        int maxCargo = getMaxCargoForVehicle();
+        int maxCargo = getCapacity();
 
         for (int i = 0; i < pickups.size(); i++) {
             Pickup p = pickups.get(i);

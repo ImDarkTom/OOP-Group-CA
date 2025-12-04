@@ -17,7 +17,7 @@ public class Land extends Vehicle {
 
     private boolean full;
     public Land(int x, int y, int w, int h, double xV, double yV, int c, Image hat, Color color) {
-        super(x, y, 55, 35, xV, yV, c, hat, color);
+        super(x, y, 55, 35, xV, yV, 35, hat, color);
     }
 
     @Override
@@ -31,5 +31,9 @@ public class Land extends Vehicle {
             Point hatPos = new Point((int) posX + 10, (int) posY - 30);
             RenderUtils.drawImage((Graphics2D) g, ASSET, hatPos);
         }
+    }
+
+    public int getCapacity() {
+        return 35;
     }
 }

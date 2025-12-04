@@ -159,6 +159,7 @@ public class AntonioGUI extends javax.swing.JFrame {
 //
 //        Maps map = new Maps(vehicle, pickup, delivery);
 //        map.createWindow();
+        JOptionPane.showMessageDialog(null, "When using a land vehicle you have a maximum cargo capacity of 35 items", "Land", JOptionPane.INFORMATION_MESSAGE);
         Vehicle vehicle = new Land(300, 200, 55, 35, 0.0, 0.0, 0, ASSET, CustomisationManager.getBodyCol());
         Items pickup = new Pickup(60, 150, 200, 0);
         Items delivery = new Delivery(60, 450, 200, 0);
@@ -177,6 +178,7 @@ public class AntonioGUI extends javax.swing.JFrame {
 //
 //        Maps map = new Maps(vehicle, pickup, delivery);
 //        map.createWindow();
+        JOptionPane.showMessageDialog(null, "When using an air vehicle you have a slower acceleration when landed", "Air", JOptionPane.INFORMATION_MESSAGE);
         Vehicle vehicle = new Air(300, 200, 60, 40, 0.0, 0.0, 0, ASSET, CustomisationManager.getBodyCol());
         Items pickup = new Pickup(60, 150, 200, 0);
         Items delivery = new Delivery(60, 450, 200, 0);
@@ -195,6 +197,7 @@ public class AntonioGUI extends javax.swing.JFrame {
 //
 //        Maps map = new Maps(vehicle, pickup, delivery);
 //        map.createWindow();
+        JOptionPane.showMessageDialog(null, "When using a seafaring vessel encountering an obstacle makes you rebound further", "Sea", JOptionPane.INFORMATION_MESSAGE);
         Vehicle vehicle = new Sea(400, 300, 50, 50, 0, 0, 0, ASSET, CustomisationManager.getBodyCol());
         Items pickup = new Pickup(60, 150, 200, 0);
         Items delivery = new Delivery(60, 450, 200, 0);
