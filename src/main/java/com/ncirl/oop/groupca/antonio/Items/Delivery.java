@@ -13,7 +13,7 @@ import java.awt.Graphics;
  */
 public class Delivery extends Items {
 
-    private int[] requested;
+    private final int[] requested;
     public Delivery(int radius, int x, int y, int requested) {
         super(radius, x, y);
         this.requested = new int[]{requested};
@@ -22,16 +22,13 @@ public class Delivery extends Items {
     @Override
     public void paintItem(Graphics g) {
         g.setColor(new Color(53, 35, 109));
-        g.fillOval(posX[0], posY[0], radius, radius);
+        g.fillOval(posX[0], posY[0], itemRadius, itemRadius);
         g.setColor(Color.white);
-        g.drawOval(posX[0], posY[0], radius, radius);
+        g.drawOval(posX[0], posY[0], itemRadius, itemRadius);
     }
 
     public int[] getRequested() {
         return requested;
     }
 
-    public void setRequested(int[] requested) {
-        this.requested = requested;
-    }
 }

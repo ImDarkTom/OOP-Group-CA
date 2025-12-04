@@ -15,7 +15,7 @@ import java.awt.*;
 public class Air extends Vehicle {
 
     public Air(int x, int y, int w, int h, double xV, double yV, int c, Image hat, Color color) {
-        super(x, y, 60, 40, xV, yV, c, hat, color);
+        super(x, y, w, h, xV, yV, c, hat, color);
     }
 
     @Override

@@ -13,7 +13,7 @@ import java.awt.Graphics;
  */
 public class Pickup extends Items {
 
-    private int[] amount;
+    private final int[] amount;
 
     public Pickup(int radius, int x, int y, int amount) {
         super(radius, x, y);
@@ -23,16 +23,13 @@ public class Pickup extends Items {
     @Override
     public void paintItem(Graphics g) {
         g.setColor(Color.white);
-        g.fillOval(posX[0], posY[0], radius, radius);
+        g.fillOval(posX[0], posY[0], itemRadius, itemRadius);
         g.setColor(Color.black);
-        g.drawOval(posX[0], posY[0], radius, radius);
+        g.drawOval(posX[0], posY[0], itemRadius, itemRadius);
     }
 
     public int[] getAmount() {
         return amount;
     }
 
-    public void setAmount(int[] amount) {
-        this.amount = amount;
-    }
 }

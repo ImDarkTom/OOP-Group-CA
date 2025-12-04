@@ -4,7 +4,6 @@
  */
 package com.ncirl.oop.groupca.antonio.Map;
 
-import com.ncirl.oop.groupca.OOPGroupCAGUI;
 import com.ncirl.oop.groupca.antonio.Items.Items;
 import com.ncirl.oop.groupca.antonio.Items.Pickup;
 import com.ncirl.oop.groupca.antonio.Items.Delivery;
@@ -80,7 +79,7 @@ public class Maps {
                 h = random.nextInt(40) + 30;
                 attempts++;
                 if (attempts > 1000) break;
-            } while (isColliding());
+            } while (vehicleHitbox(x, y, w, h));
             obstacle.add(new Obstacle(x, y, w, h));
         }
     }
@@ -254,6 +253,20 @@ public class Maps {
         }
         return false;
     }
+    private boolean vehicleHitbox(int x, int y, int w, int h) {
+        double vCenterX = designateVehicle()[0];
+        double vCenterY = designateVehicle()[1];
+
+        double oCenterX = x + w / 2.0;
+        double oCenterY = y + h / 2.0;
+
+        double distance = Math.hypot(vCenterX - oCenterX, vCenterY - oCenterY);
+
+        double vehicleRadius = Math.max(vehicle.getWidth(), vehicle.getHeight()) / 2.0;
+        double obstacleRadius = Math.min(w, h) / 2.0;
+
+        return distance < (vehicleRadius + obstacleRadius);
+    }
 
     private void checkCollision() {
         if (vehicle.getPosX() > 1000) {
@@ -381,17 +394,22 @@ public class Maps {
         cargoLabel.setText("Cargo: " + vehicleCargo);
     }
 
-    private double[] items(Items item) {
-        double vCenterX;
-        double vCenterY;
+    private double[] designateVehicle(){
+        double[] vCenters = new double[2];
         if (vehicle instanceof Air) {
-            vCenterX = vehicle.getPosX();
-            vCenterY = vehicle.getPosY();
+            vCenters[0] = vehicle.getPosX();
+            vCenters[1] = vehicle.getPosY();
         }
         else{
-            vCenterX = vehicle.getPosX() + vehicle.getWidth() / 2.0;
-            vCenterY = vehicle.getPosY() + vehicle.getHeight() / 2.0;
+            vCenters[0] = vehicle.getPosX() + vehicle.getWidth() / 2.0;
+            vCenters[1] = vehicle.getPosY() + vehicle.getHeight() / 2.0;
         }
+        return vCenters;
+    }
+    private double[] items(Items item) {
+        double vCenterX = designateVehicle()[0];
+        double vCenterY = designateVehicle()[1];
+
         double[] values = new double[4];
         values[0] = item.getPosX()[0] + item.getRadius() / 2.0;
         values[1] = item.getPosY()[0] + item.getRadius() / 2.0;

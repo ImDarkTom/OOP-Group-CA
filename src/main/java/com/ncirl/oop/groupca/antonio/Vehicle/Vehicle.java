@@ -6,7 +6,6 @@ package com.ncirl.oop.groupca.antonio.Vehicle;
 
 import java.awt.*;
 import com.ncirl.oop.groupca.thomas.shared.CustomisationManager;
-import com.ncirl.oop.groupca.thomas.ImageLoader;
 import com.ncirl.oop.groupca.thomas.util.RenderUtils;
 
 /**
@@ -26,21 +25,6 @@ public class Vehicle {
     protected double xVel;
     protected double yVel;
     protected int Capacity;
-
-    public Vehicle() {
-        posX = 0;
-        posY = 0;
-        width = 0;
-        height = 0;
-        xVel = 0;
-        yVel = 0;
-        Capacity = 0;
-        if (CustomisationManager.getHat() != 0){
-            ASSET = ImageLoader.loadWithSize("/hats/" + CustomisationManager.getHat() + ".png", 40, 40);
-    }
-        vehicleColor = CustomisationManager.getBodyCol();
-
-    }
 
     public Vehicle(double x, double y, int w, int h, double xV, double yV, int c, Image hat, Color color) {
         posX = x;
@@ -76,16 +60,8 @@ public class Vehicle {
         return width;
     }
 
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
     public int getHeight() {
         return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
     }
 
     public double getxVel() {
@@ -106,26 +82,6 @@ public class Vehicle {
 
     public int getCapacity() {
         return Capacity;
-    }
-
-    public void setCapacity(int Capacity) {
-        this.Capacity = Capacity;
-    }
-
-    public Image getASSET() {
-        return ASSET;
-    }
-
-    public void setASSET(Image ASSET) {
-        this.ASSET = ASSET;
-    }
-
-    public Color getVehicleColor() {
-        return vehicleColor;
-    }
-
-    public void setVehicleColor(Color vehicleColor) {
-        this.vehicleColor = vehicleColor;
     }
 
     public void paintVehicle(Graphics g) {
