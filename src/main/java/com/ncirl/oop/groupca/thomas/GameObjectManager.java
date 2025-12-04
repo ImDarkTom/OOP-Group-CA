@@ -29,9 +29,9 @@ public class GameObjectManager {
         gameObjects.add(new RiverDrawer());
         gameObjects.add(new PathDrawer());
 
-//        for (int i = 0; i < 200; i++) {
-//            spawnSettlement();
-//        }
+        for (int i = 0; i < 200; i++) {
+            spawnSettlement();
+        }
         gameObjects.add(new Settlement(
                 50 + (int)(Math.random() * 50),
                 100 + (int)(Math.random() * 100)
@@ -88,13 +88,14 @@ public class GameObjectManager {
     // spawn settlements
     public static void spawnSettlement() {
         // 50px margin at edge of screen where it can't generate
-        int generatedX = (int) (50 + (Math.random() * (TomGameWindow.getCanvasWidth() - 100)));
-        int generatedY = (int) (50 + (Math.random() * (TomGameWindow.getCanvasHeight() - 100)));
+        int generatedX = (int) ((Math.random() * (TomGameWindow.getCanvasWidth())));
+        int generatedY = (int) ((Math.random() * (TomGameWindow.getCanvasHeight())));
 
         Point generatedPoint = new Point(generatedX, generatedY);
 
         // Repeat until we have a settlement between 100 and 300 px away from the river
         // todo: collision check
+        System.out.println(RiverDrawer.distanceToRiver(generatedPoint));
         while (
                 (RiverDrawer.distanceToRiver(generatedPoint) > 300d ||
                         RiverDrawer.distanceToRiver(generatedPoint) < 200d)
@@ -102,6 +103,7 @@ public class GameObjectManager {
             System.out.println("Invalid distance to river: " + RiverDrawer.distanceToRiver(generatedPoint));
             generatedX = (int) (50 + (Math.random() * (TomGameWindow.getCanvasWidth() - 100)));
             generatedY = (int) (50 + (Math.random() * (TomGameWindow.getCanvasHeight() - 100)));
+            System.out.println(RiverDrawer.distanceToRiver(generatedPoint));
 
             generatedPoint.setLocation(generatedX, generatedY);
         }

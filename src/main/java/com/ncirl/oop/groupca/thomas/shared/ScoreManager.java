@@ -77,4 +77,7 @@ public class ScoreManager {
     public static String getFullScoreText() {
         return getInstance().getFullScoreText();
     }
+    public static int getTotalScore() {
+        return getInstance().getTotalScore();
+    }
 }

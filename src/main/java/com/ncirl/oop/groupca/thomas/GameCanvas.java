@@ -1,6 +1,7 @@
 package com.ncirl.oop.groupca.thomas;
 
 import com.ncirl.oop.groupca.thomas.GameObjects.GameObject;
+import com.ncirl.oop.groupca.thomas.GameObjects.RiverDrawer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -68,6 +69,7 @@ public class GameCanvas extends JPanel {
                 }
             }
 
+            System.out.println(RiverDrawer.distanceToRiver(lastClickPos));
             lastClickPos = null;
             if (clickAction != null) {
                 // Invoke later, that way any click events don't block the render thread

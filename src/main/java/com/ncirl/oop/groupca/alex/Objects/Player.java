@@ -73,6 +73,8 @@ public class Player {
         g.fillRect(posX+(width/4), posY-(height/4), width/2, height/2);
         g.setColor(Color.black);
         Point hatPos = new Point(posX+5,posY-40);
-        RenderUtils.drawImage((Graphics2D)g, ASSET, hatPos);
+        if(CustomisationManager.getHat()!=0) {
+            RenderUtils.drawImage((Graphics2D)g, ASSET, hatPos);
+        }
     }
 }
