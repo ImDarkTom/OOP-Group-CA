@@ -5,7 +5,6 @@
 package com.ncirl.oop.groupca.alex;
 import com.ncirl.oop.groupca.alex.AlexWindow.GameWindow;
 import com.ncirl.oop.groupca.alex.Objects.*;
-import com.ncirl.oop.groupca.alex.IntroOutro;
 import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.Timer;
@@ -51,7 +50,7 @@ public class GameLoop {
             IntroOutro.playOutro(points);
         }
     });
-    public void initGame() { // Start game by 
+    private void initGame() { // Start game by 
         resetGame();
         IntroOutro.playIntro();
         startTicks();
@@ -124,10 +123,10 @@ public class GameLoop {
             playerY=playerY+20;
         }
         playerY=player.getY(); // Equipped tool must be by the player
-        if(player.getTool()=="scythe") {
+        if(player.getTool().equals("scythe")) {
             scythe.setX(playerX+40);
             scythe.setY(playerY);
-        } else if(player.getTool()=="shovel") {
+        } else if(player.getTool().equals("shovel")) {
             shovel.setX(playerX+40);
             shovel.setY(playerY);
         }
@@ -137,7 +136,7 @@ public class GameLoop {
         }
     }
     public void toolInteraction() {
-        if(player.getTool()=="none") {
+        if(player.getTool().equals("none")) {
             double scytheDist = checkCollision(scythe.getX(),scythe.getY(),player);
             double shovelDist = checkCollision(shovel.getX(),shovel.getY(),player);
             if(scytheDist<=100&&scytheDist<shovelDist) {
@@ -154,10 +153,10 @@ public class GameLoop {
         int num = -1;
         for(Plant plant : plants) {
             if((checkCollision(plant.getX(),plant.getY(),player)<=50)&&heldPlants.size()<6) { // If player holds less than 5 plants and is close enough
-                if(plant.getType()=="wheat"&&player.getTool()=="scythe") { // Tool check
+                if(plant.getType().equals("wheat")&&player.getTool().equals("scythe")) { // Tool check
                     num = plant.getArrayID();
                     heldPlants.add(new Wheat(plant.getX(),plant.getY(),plant.getArrayID(), true));
-                } else if (plant.getType()=="onion"&&player.getTool()=="shovel") { // Tool check
+                } else if (plant.getType().equals("onion")&&player.getTool().equals("shovel")) { // Tool check
                     num = plant.getArrayID();
                     heldPlants.add(new Onion(plant.getX(),plant.getY(),plant.getArrayID(), true));
                 }

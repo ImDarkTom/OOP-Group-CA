@@ -23,14 +23,6 @@ public class CustomisationManager {
 
         return customisationsInstance;
     }
-
-
-
-    private static void loadImage() {
-
-        FileLoader.saveToFile(getInstance(), CUSTOMISATION_FILENAME);
-    }
-
     // Setters
     public static void setBody(int bodyNum) {
         getInstance().setBody(bodyNum);
