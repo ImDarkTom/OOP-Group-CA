@@ -13,33 +13,18 @@ import java.awt.Graphics;
  */
 public class Items {
 
-    protected int radius;
+    protected int itemRadius;
     protected int[] posX;
     protected int[] posY;
-    protected int time;
-//    protected String style;
-
-    public Items() {
-        radius = 0;
-        int[] posX = {0};
-        int[] posY = {0};
-        time = 0;
-//                        style = "/TBD";
-    }
 
     public Items(int radius, int x, int y) {
-        this.radius = radius;
-        this.posX = new int[] {x};
-        this.posY = new int[] {y};
-        this.time = 0;
+        itemRadius = radius;
+        posX = new int[] {x};
+        posY = new int[] {y};
     }
 
     public int getRadius() {
-        return radius;
-    }
-
-    public void setRadius(int radius) {
-        this.radius = radius;
+        return itemRadius;
     }
 
     public int[] getPosX() {
@@ -58,27 +43,11 @@ public class Items {
         this.posY = posY;
     }
 
-    public int getTime() {
-        return time;
-    }
-
-    public void setTime(int time) {
-        this.time = time;
-    }
-
-//    public String getStyle() {
-//        return style;
-//    }
-//
-//    public void setStyle(String style) {
-//        this.style = style;
-//    }
-
     public void paintItem(Graphics g) {
-        g.setColor(Color.white);
-        g.fillOval(posX[0], posY[0], radius, radius);
+        g.setColor(Color.BLACK);
+        g.fillOval(posX[0], posY[0], itemRadius, itemRadius);
         g.setColor(Color.black);
-        g.drawOval(posX[0], posY[0], radius, radius);
+        g.drawOval(posX[0], posY[0], itemRadius, itemRadius);
     }
 
 }

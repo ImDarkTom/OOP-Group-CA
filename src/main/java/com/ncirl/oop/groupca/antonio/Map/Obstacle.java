@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package com.ncirl.oop.groupca.antonio.Map;
 
 import java.awt.Color;
@@ -6,16 +10,9 @@ import java.awt.Graphics;
 public class Obstacle {
     private int x;
     private int y;
-    private int width;
-    private int height;
+    private final int width;
+    private final int height;
 
-
-    public Obstacle() {
-        this.x = 100;
-        this.y = 100;
-        this.width = 50;
-        this.height = 50;
-    }
 
     public Obstacle(int x, int y, int width, int height) {
         this.x = x;
@@ -52,15 +49,8 @@ public class Obstacle {
         return width;
     }
 
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
     public int getHeight() {
         return height;
     }
 
-    public void setHeight(int height) {
-        this.height = height;
-    }
 }

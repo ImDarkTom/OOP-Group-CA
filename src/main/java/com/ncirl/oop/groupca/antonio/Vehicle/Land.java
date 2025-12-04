@@ -15,9 +15,8 @@ import java.awt.*;
  */
 public class Land extends Vehicle {
 
-    private boolean full;
     public Land(int x, int y, int w, int h, double xV, double yV, int c, Image hat, Color color) {
-        super(x, y, 55, 35, xV, yV, 35, hat, color);
+        super(x, y, w, h, xV, yV, c, hat, color);
     }
 
     @Override

@@ -15,9 +15,8 @@ import java.awt.*;
  */
 public class Sea extends Vehicle {
 
-    private boolean aground;
     public Sea(int x, int y, int w, int h, double xV, double yV, int c, Image hat, Color color) {
-        super(x, y, 55, 65, xV, yV, c, hat, color);
+        super(x, y, w, h, xV, yV, c, hat, color);
     }
 
     @Override

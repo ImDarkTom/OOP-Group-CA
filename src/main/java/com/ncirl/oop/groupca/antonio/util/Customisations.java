@@ -13,8 +13,7 @@ import java.io.Serializable;
  */
 public class Customisations implements Serializable {
     int bodyNum = 0;
-    Color alexOnion;
-    int hat = 0; 
+    int hat = 0;
 
     public Customisations() {}
 
@@ -22,9 +21,7 @@ public class Customisations implements Serializable {
     public void setBody(int bodyCol) {
         bodyNum = bodyCol;
     }
-    public void setAlexOnion(Color alexOnion) {
-        this.alexOnion = alexOnion;
-    }
+
     public void setHat(int hat) {
         this.hat = hat;
     }
