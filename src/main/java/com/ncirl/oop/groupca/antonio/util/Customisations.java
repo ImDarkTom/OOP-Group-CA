@@ -4,26 +4,21 @@
  */
 package com.ncirl.oop.groupca.antonio.util;
 
-import com.ncirl.oop.groupca.alex.util.FileLoader;
 import java.awt.Color;
 import java.io.Serializable;
 
 /**
  *
- * @author anton
+ * @author Anton + Thomas + Alex
  */
 public class Customisations implements Serializable {
     int bodyNum = 0;
     Color alexOnion;
     int hat = 0; 
 
-    public Customisations() { // Set default values
-        FileLoader.saveToFile(this, "Customisations.esr");
-    }
-
+    public Customisations() {}
 
     // Setters
-
     public void setBody(int bodyCol) {
         bodyNum = bodyCol;
     }
@@ -37,23 +32,15 @@ public class Customisations implements Serializable {
 
     // Getters
     public Color getBodyCol() { // Returns number according to int
-        switch(bodyNum) {
-            case 0:
-                return Color.BLUE;
-            case 1:
-                return Color.CYAN;
-            case 2:
-                return Color.RED;
-            case 3:
-                return  Color.MAGENTA;
-            case 4:
-                return Color.PINK;
-            case 5:
-                return Color.GRAY;
-            case 6:
-                return Color.BLACK;
-        }
-        return Color.BLUE;
+        return switch (bodyNum) {
+            case 1 -> Color.CYAN;
+            case 2 -> Color.RED;
+            case 3 -> Color.MAGENTA;
+            case 4 -> Color.PINK;
+            case 5 -> Color.GRAY;
+            case 6 -> Color.BLACK;
+            default -> Color.BLUE;
+        };
     }
     public int getBodyNum() { // Returns number
         return bodyNum;
