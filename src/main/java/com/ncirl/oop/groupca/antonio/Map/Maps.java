@@ -10,7 +10,6 @@ import com.ncirl.oop.groupca.antonio.Items.Delivery;
 import com.ncirl.oop.groupca.antonio.Vehicle.Vehicle;
 import com.ncirl.oop.groupca.antonio.Vehicle.Air;
 import com.ncirl.oop.groupca.antonio.Vehicle.Land;
-import com.ncirl.oop.groupca.antonio.Vehicle.Sea;
 import com.ncirl.oop.groupca.antonio.AntonioGUI;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -32,11 +31,11 @@ import java.util.Random;
 public class Maps {
 
     private Panel panel;
-    private Vehicle vehicle;
-    private ArrayList<Pickup> pickups = new ArrayList<>();
-    private ArrayList<Delivery> deliveries = new ArrayList<>();
-    private ArrayList<Obstacle> obstacle = new ArrayList<>();
-    private Random random = new Random();
+    private final Vehicle vehicle;
+    private final ArrayList<Pickup> pickups = new ArrayList<>();
+    private final ArrayList<Delivery> deliveries = new ArrayList<>();
+    private final ArrayList<Obstacle> obstacle = new ArrayList<>();
+    private final Random random = new Random();
 
     private int points = 0;
     private int timeLeft = 120;
@@ -55,7 +54,7 @@ public class Maps {
 
     private int vehicleCargo = 0;
 
-    public Maps(Vehicle vehicle, Items pickupStub, Items deliveryStub) {
+    public Maps(Vehicle vehicle) {
         this.vehicle = vehicle;
         generateObstacles();
         generateItems();
@@ -81,47 +80,14 @@ public class Maps {
         }
     }
 
-    private boolean CheckOverlap(int x, int y, int radius) {
-        double itemCenterX = x + radius / 2.0;
-        double itemCenterY = y + radius / 2.0;
-        double itemRadius = radius / 2.0;
-        for (Obstacle obstacle : obstacle) {
-            double oCenterX = obstacle.getX() + obstacle.getWidth() / 2.0;
-            double oCenterY = obstacle.getY() + obstacle.getHeight() / 2.0;
-            double oRadius = Math.max(obstacle.getWidth(), obstacle.getHeight()) / 2.0;
-            double dist = Math.hypot(itemCenterX - oCenterX, itemCenterY - oCenterY);
-            if (dist < (itemRadius + oRadius + 4)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     private void generateItems() {
         pickups.clear();
         deliveries.clear();
         for (int i = 0; i < 3; i++) {
-            int px;
-            int py;
-            int pAmount;
-            int radius = random.nextInt(20) + 40;
-            do {
-                px = random.nextInt(900);
-                py = random.nextInt(500);
-                pAmount = random.nextInt(16) + 5;
-            } while (CheckOverlap(px, py, radius));
-            pickups.add(new Pickup(radius, px, py, pAmount));
-
-            int dx;
-            int dy;
-            int dAmount;
-            radius = random.nextInt(20) + 40;
-            do {
-                dx = random.nextInt(900);
-                dy = random.nextInt(500);
-                dAmount = random.nextInt(16) + 5;
-            } while (CheckOverlap(dx, dy, radius));
-            deliveries.add(new Delivery(radius, dx, dy, dAmount));
+            int[] valuesDelivery = spawnItem();
+            deliveries.add(new Delivery(valuesDelivery[0], valuesDelivery[1], valuesDelivery[2], valuesDelivery[3]));
+            int[] valuesPickup = spawnItem();
+            pickups.add(new Pickup(valuesPickup[0], valuesPickup[1], valuesPickup[2], valuesPickup[3]));
         }
     }
 
@@ -249,14 +215,17 @@ public class Maps {
             vCenterY = vehicle.getPosY() + vehicle.getHeight() / 2.5;
         }
 
-        double vehicleRadius = Math.max(vehicle.getWidth(), vehicle.getHeight()) / 3;
+        double vehicleRadius = (double) Math.max(vehicle.getWidth(), vehicle.getHeight()) / 2;
 
+        return obstacleHitbox(vCenterX, vCenterY, vehicleRadius);
+    }
+    private boolean obstacleHitbox(double X, double Y, double rad) {
         for (Obstacle obstacle : obstacle) {
-            double oCenterX = obstacle.getX() + obstacle.getWidth() / 2.0;
-            double oCenterY = obstacle.getY() + obstacle.getHeight() / 2.0;
-            double obstacleRadius = Math.max(obstacle.getWidth(), obstacle.getHeight()) / 2.0;
-            double dist = Math.hypot(vCenterX - oCenterX, vCenterY - oCenterY);
-            if (dist < (vehicleRadius + obstacleRadius)) {
+            double oX = obstacle.getX() + obstacle.getWidth() / 2.0;
+            double oY = obstacle.getY() + obstacle.getHeight() / 2.0;
+            double oRad = Math.min(obstacle.getWidth(), obstacle.getHeight()) / 2.0;
+            double dist = Math.hypot(X - oX, Y - oY);
+            if (dist < (rad + oRad)) {
                 return true;
             }
         }
@@ -281,14 +250,21 @@ public class Maps {
             vehicle.setyVel(0);
             vehicle.setxVel(0);
         }
-        else if (!isColliding()) {
-            return;
-        }
-        else {
-            if (last.equals("acc")) vehicle.setyVel(vehicle.getPosY() * 0.01);
-           else if (last.equals("dec")) vehicle.setyVel(vehicle.getPosY() * -0.01);
-           else if (last.equals("l")) vehicle.setxVel(vehicle.getPosX() * 0.01);
-           else if (last.equals("r")) vehicle.setxVel(vehicle.getPosX() * -0.01);
+        else if (isColliding()) {
+            switch (last) {
+                case "acc":
+                    vehicle.setyVel(vehicle.getPosY() * 0.01);
+                    break;
+                case "dec":
+                    vehicle.setyVel(vehicle.getPosY() * -0.01);
+                    break;
+                case "l":
+                    vehicle.setxVel(vehicle.getPosX() * 0.01);
+                    break;
+                default:
+                    vehicle.setxVel(vehicle.getPosX() * -0.01);
+                    break;
+            }
             if(points>1){
                 points -= 1;
             }
@@ -301,56 +277,37 @@ public class Maps {
     }
 
     private void respawnPickupAt(int index) {
-        int radius;
-        int px;
-        int py;
-        int amount;
-        int attempts = 0;
-        do {
-            radius = random.nextInt(20) + 40;
-            px = random.nextInt(900 - radius);
-            py = random.nextInt(500 - radius);
-            amount = random.nextInt(16) + 5;
-            attempts++;
-            if (attempts > 1000) break;
-        } while (CheckOverlap(px, py, radius));
-        pickups.set(index, new Pickup(radius, px, py, amount));
+        int[] values = spawnItem();
+        pickups.set(index, new Pickup(values[0], values[1], values[2], values[3]));
     }
 
-    private void respawnDeliveryAt(int index) {
-        int radius;
-        int dx;
-        int dy;
-        int amount;
+    private int[] spawnItem(){
+        int[] values = new int[4];
         int attempts = 0;
         do {
-            radius = random.nextInt(20) + 40;
-            dx = random.nextInt(900 - radius);
-            dy = random.nextInt(500 - radius);
-            amount = random.nextInt(16) + 5;
+            values[0] = random.nextInt(20) + 40;
+            values[1] = random.nextInt(900 - values[0]);
+            values[2] = random.nextInt(500 - values[0]);
+            values[3] = random.nextInt(16) + 5;
             attempts++;
             if (attempts > 1000) break;
-        } while (CheckOverlap(dx, dy, radius));
-        deliveries.set(index, new Delivery(radius, dx, dy, amount));
+        } while (obstacleHitbox(values[1], values[2], values[0]));
+        return values;
+    }
+    private void respawnDeliveryAt(int index) {
+        int[] values = spawnItem();
+        deliveries.set(index, new Delivery(values[0], values[1], values[2], values[3]));
     }
 
     private void checkPickupDelivery() {
-        double vCenterX = vehicle.getPosX() + vehicle.getWidth() / 2.0;
-        double vCenterY = vehicle.getPosY() + vehicle.getHeight() / 2.0;
-        if (vehicle instanceof Air) {
-            vCenterX = vehicle.getPosX();
-            vCenterY = vehicle.getPosY();
-        }
+
 
         int maxCargo = getMaxCargoForVehicle();
 
         for (int i = 0; i < pickups.size(); i++) {
             Pickup p = pickups.get(i);
-            double pCenterX = p.getPosX()[0] + p.getRadius() / 2.0;
-            double pCenterY = p.getPosY()[0] + p.getRadius() / 2.0;
-            double dist = Math.hypot(vCenterX - pCenterX, vCenterY - pCenterY);
-            double threshold = (vehicle.getWidth() + p.getRadius()) / 2.0;
-            if (dist < threshold) {
+            double[] itemAllowance = items(p);
+            if (itemAllowance[2] < itemAllowance[3]) {
                 int[] amtArr = p.getAmount();
                 if (amtArr != null && amtArr[0] > 0 && vehicleCargo < maxCargo) {
                     amtArr[0] -= 1;
@@ -364,11 +321,8 @@ public class Maps {
 
         for (int i = 0; i < deliveries.size(); i++) {
             Delivery d = deliveries.get(i);
-            double dCenterX = d.getPosX()[0] + d.getRadius() / 2.0;
-            double dCenterY = d.getPosY()[0] + d.getRadius() / 2.0;
-            double dist = Math.hypot(vCenterX - dCenterX, vCenterY - dCenterY);
-            double threshold = (vehicle.getWidth() + d.getRadius()) / 2.0;
-            if (dist < threshold) {
+            double[] itemAllowance = items(d);
+            if (itemAllowance[2] < itemAllowance[3]) {
                 int[] reqArr = d.getRequested();
                 if (reqArr != null && reqArr[0] > 0 && vehicleCargo > 0) {
                     reqArr[0] -= 1;
@@ -382,6 +336,26 @@ public class Maps {
             }
         }
         cargoLabel.setText("Cargo: " + vehicleCargo);
+    }
+
+    private double[] items(Items item) {
+        double vCenterX;
+        double vCenterY;
+        if (vehicle instanceof Air) {
+            vCenterX = vehicle.getPosX();
+            vCenterY = vehicle.getPosY();
+        }
+        else{
+            vCenterX = vehicle.getPosX() + vehicle.getWidth() / 2.0;
+            vCenterY = vehicle.getPosY() + vehicle.getHeight() / 2.0;
+        }
+        double[] values = new double[4];
+        values[0] = item.getPosX()[0] + item.getRadius() / 2.0;
+        values[1] = item.getPosY()[0] + item.getRadius() / 2.0;
+        values[2] = Math.hypot(vCenterX - values[0], vCenterY - values[1]);
+        values[3] = (vehicle.getWidth() + item.getRadius()) / 2.0;
+
+        return values;
     }
 
     class Panel extends JPanel {
@@ -406,99 +380,6 @@ public class Maps {
         }
     }
 
-    public Panel getPanel() {
-        return panel;
-    }
 
-    public void setPanel(Panel panel) {
-        this.panel = panel;
-    }
 
-    public Vehicle getVehicle() {
-        return vehicle;
-    }
-
-    public void setVehicle(Vehicle vehicle) {
-        this.vehicle = vehicle;
-    }
-
-    public int getPoints() {
-        return points;
-    }
-
-    public void setPoints(int points) {
-        this.points = points;
-    }
-
-    public int getTimeLeft() {
-        return timeLeft;
-    }
-
-    public void setTimeLeft(int timeLeft) {
-        this.timeLeft = timeLeft;
-    }
-
-    public boolean isAccelerate() {
-        return accelerate;
-    }
-
-    public void setAccelerate(boolean accelerate) {
-        this.accelerate = accelerate;
-    }
-
-    public boolean isDecelerate() {
-        return decelerate;
-    }
-
-    public void setDecelerate(boolean decelerate) {
-        this.decelerate = decelerate;
-    }
-
-    public boolean isLeft() {
-        return left;
-    }
-
-    public void setLeft(boolean left) {
-        this.left = left;
-    }
-
-    public boolean isRight() {
-        return right;
-    }
-
-    public void setRight(boolean right) {
-        this.right = right;
-    }
-
-    public Timer getLoop() {
-        return loop;
-    }
-
-    public void setLoop(Timer loop) {
-        this.loop = loop;
-    }
-
-    public Timer getCountdown() {
-        return countdown;
-    }
-
-    public void setCountdown(Timer countdown) {
-        this.countdown = countdown;
-    }
-
-    public JLabel getPointsLabel() {
-        return pointsLabel;
-    }
-
-    public void setPointsLabel(JLabel pointsLabel) {
-        this.pointsLabel = pointsLabel;
-    }
-
-    public JLabel getTimerLabel() {
-        return timerLabel;
-    }
-
-    public void setTimerLabel(JLabel timerLabel) {
-        this.timerLabel = timerLabel;
-    }
 }

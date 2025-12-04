@@ -155,7 +155,7 @@ public class AntonioGUI extends javax.swing.JFrame {
         Items pickup = new Pickup(60, 150, 200, 0);
         Items delivery = new Delivery(60, 450, 200, 0);
 
-        Maps map = new Maps(vehicle, pickup, delivery);
+        Maps map = new Maps(vehicle);
         map.createWindow();
         dispose();
     }//GEN-LAST:event_LandActionPerformed
@@ -173,7 +173,7 @@ public class AntonioGUI extends javax.swing.JFrame {
         Items pickup = new Pickup(60, 150, 200, 0);
         Items delivery = new Delivery(60, 450, 200, 0);
 
-        Maps map = new Maps(vehicle, pickup, delivery);
+        Maps map = new Maps(vehicle);
         map.createWindow();
         dispose();
     }//GEN-LAST:event_AirActionPerformed
@@ -191,7 +191,7 @@ public class AntonioGUI extends javax.swing.JFrame {
         Items pickup = new Pickup(60, 150, 200, 0);
         Items delivery = new Delivery(60, 450, 200, 0);
 
-        Maps map = new Maps(vehicle, pickup, delivery);
+        Maps map = new Maps(vehicle);
         map.createWindow();
         dispose();
     }//GEN-LAST:event_SeaActionPerformed
