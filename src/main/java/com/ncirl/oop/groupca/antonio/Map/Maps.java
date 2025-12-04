@@ -4,6 +4,7 @@
  */
 package com.ncirl.oop.groupca.antonio.Map;
 
+import com.ncirl.oop.groupca.OOPGroupCAGUI;
 import com.ncirl.oop.groupca.antonio.Items.Items;
 import com.ncirl.oop.groupca.antonio.Items.Pickup;
 import com.ncirl.oop.groupca.antonio.Items.Delivery;
@@ -11,6 +12,8 @@ import com.ncirl.oop.groupca.antonio.Vehicle.Vehicle;
 import com.ncirl.oop.groupca.antonio.Vehicle.Air;
 import com.ncirl.oop.groupca.antonio.Vehicle.Land;
 import com.ncirl.oop.groupca.antonio.AntonioGUI;
+import com.ncirl.oop.groupca.thomas.shared.ScoreManager;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -53,6 +56,7 @@ public class Maps {
     private JLabel cargoLabel;
 
     private int vehicleCargo = 0;
+
 
     public Maps(Vehicle vehicle) {
         this.vehicle = vehicle;
@@ -175,12 +179,26 @@ public class Maps {
             pointsLabel.setText("Points: " + points);
             cargoLabel.setText("Cargo: " + vehicleCargo);
             if (timeLeft <= 0) {
+                String message = "";
                 accelerate = decelerate = left = right = false;
                 loop.stop();
                 countdown.stop();
-                JOptionPane.showMessageDialog(panel, "Time's up! Final points: " + points);
-                AntonioGUI gui = new AntonioGUI();
-                gui.setVisible(true);
+                if(points<150){
+                    message="you could have made more delivery's with less mistakes";
+                    ScoreManager.setAntonioMsg("you could have made more delivery's with less mistakes");
+                }
+                else if(points<350){
+                    message="you made an acceptable amount of delivery's";
+                    ScoreManager.setAntonioMsg("you made an acceptable amount of delivery's");
+                }
+                else if(points>350){
+                    message="you made an exceptional amount of delivery's";
+                    ScoreManager.setAntonioMsg("you made an exceptional amount of delivery's");
+                }
+                JOptionPane.showMessageDialog(null, "Well done on finishing the delivery game!\nYou scored "+points+" points!\n"+message, "Final point score", JOptionPane.INFORMATION_MESSAGE);
+                ScoreManager.setAntonioScore(points);
+                AntonioGUI MyGUI = new AntonioGUI();
+                MyGUI.setVisible(true);
                 frame.dispose();
             }
         });
@@ -265,7 +283,7 @@ public class Maps {
                     vehicle.setxVel(vehicle.getPosX() * -0.01);
                     break;
             }
-            if(points>1){
+            if(points>0){
                 points -= 1;
             }
             pointsLabel.setText("Points: " + points);
