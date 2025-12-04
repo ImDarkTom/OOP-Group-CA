@@ -125,7 +125,7 @@ public class AlexWindow { // Must create variables at the start so they can be u
     static public void updateFunc() { // Updates text every tick
         game.movePlayer(up, down, left, right);
         points.setText("Points: "+game.getPoints());
-        timer.setText("Time left: "+(180-game.getSeconds()));
+        timer.setText("Time left: "+(120-game.getSeconds()));
     }
     static public void exitButton() {
         game.resetGame(); // Resets game so new instance is loaded next time

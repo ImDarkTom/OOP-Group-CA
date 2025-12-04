@@ -33,14 +33,17 @@ public class GameLoop {
     public Timer ticker = new Timer(40, (e) -> { //Runs every 40ms, which comes out to running 25 times a second
         if(ticks%25==0) {
             seconds++;
-            if(plants.size()<=12) { // Every 5 seconds add 2 new plants
-                plants.add(new Onion(ran(0,800),ran(0,550), plantID, false));
-                plantID++;
-                plants.add(new Wheat(ran(0,800),ran(0,550), plantID, false));
-                plantID++;
-            }
         }
-        if(seconds<=180) { // Calls functions that run the game, stops when timer runs out
+        if(seconds<=120) { // Calls functions that run the game, stops when timer runs out
+            if(plants.size()<=12) { // Every 5 seconds add 2 new plants
+                if((ran(1,6)%2)==0) {
+                    plants.add(new Onion(ran(0,800),ran(0,550), plantID, false));
+                    plantID++;
+                } else {
+                    plants.add(new Wheat(ran(0,800),ran(0,550), plantID, false));
+                    plantID++;
+                }
+            }
             ticks++;
             collisionHandling();
             panel.repaint();

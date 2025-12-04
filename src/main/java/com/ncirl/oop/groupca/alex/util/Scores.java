@@ -40,6 +40,9 @@ public class Scores implements Serializable {
     public void setAntonioMsg(String antonioMsg) {
         this.antonioMsg = antonioMsg;
     }
+    public int getTotalScore() {
+        return alexScore+antonioScore+thomasScore;
+    }
 
     // Getters return all saved info out at once
     public String getAlexScoreText() {

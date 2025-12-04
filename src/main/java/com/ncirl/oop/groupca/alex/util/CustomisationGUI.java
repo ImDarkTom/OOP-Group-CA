@@ -5,23 +5,24 @@
 package com.ncirl.oop.groupca.alex.util;
 import com.ncirl.oop.groupca.OOPGroupCAGUI;
 import com.ncirl.oop.groupca.thomas.shared.CustomisationManager;
+import com.ncirl.oop.groupca.thomas.shared.ScoreManager;
 import javax.swing.JComboBox;
-import java.awt.Color;
+import javax.swing.JOptionPane;
 /**
  *
- * @author DELL
+ * @author Alex
  */
 public class CustomisationGUI extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(CustomisationGUI.class.getName());
-
+    
     /**
      * Creates new form CustomisationGUI
      */
+    private boolean itemsAdded = false;
     public CustomisationGUI() {
         initComponents();
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -142,7 +143,19 @@ public class CustomisationGUI extends javax.swing.JFrame {
                 break;
             case "Delivery Hat":
                 CustomisationManager.setHat(4);
-                break;    
+                break; 
+            case "Cowboy Hat":
+                CustomisationManager.setHat(5);
+                break;
+            case "Cowboy Hat (800 points)":
+                JOptionPane.showMessageDialog(null, "You do not have enough points to use this item.");
+                break;
+            case "Pirate Hat":
+                CustomisationManager.setHat(6);
+                break;
+            case "Pirate Hat (1000 points)":
+                JOptionPane.showMessageDialog(null, "You do not have enough points to use this item.");
+                break;
         }      
     }//GEN-LAST:event_hatListActionPerformed
 
@@ -154,6 +167,19 @@ public class CustomisationGUI extends javax.swing.JFrame {
 
     private void hatListHierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_hatListHierarchyChanged
         JComboBox comboBox = (JComboBox) evt.getSource(); // Load saved choice of hat to customisations dropdown
+        if(!itemsAdded) {
+            if(ScoreManager.getTotalScore()>=800) {
+                comboBox.addItem("Cowboy Hat");
+            } else {
+                comboBox.addItem("Cowboy Hat (800 points)");
+            }
+            if(ScoreManager.getTotalScore()>=1000) {
+                comboBox.addItem("Pirate Hat");
+            } else {
+                comboBox.addItem("Pirate Hat (1000 points)");
+            }
+            itemsAdded=true;
+        }
         comboBox.setSelectedIndex(CustomisationManager.getHat());
     }//GEN-LAST:event_hatListHierarchyChanged
 
