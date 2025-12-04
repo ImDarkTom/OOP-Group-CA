@@ -18,6 +18,7 @@ public class Player {
     private int posX;private int posY;
     final private int width;final private int height;
     private String toolHeld;
+    private Color shirtColor;
     
 
     public Player() {
@@ -26,7 +27,10 @@ public class Player {
         width = 50;
         height = 50;
         toolHeld="none";
-        ASSET = ImageLoader.load("/hats/"+CustomisationManager.getHat()+".png");
+        if(CustomisationManager.getHat()!=0) {
+            ASSET = ImageLoader.loadWithSize("/hats/"+CustomisationManager.getHat()+".png",40,40);
+        }
+        shirtColor = CustomisationManager.getBodyCol(); // Not happy about using "Color" spelling :(( someone must know
     }
     
     // Setters
@@ -63,12 +67,12 @@ public class Player {
     }
      
     public void paintPlayer(Graphics g) { // Render / draw function
-        g.setColor(CustomisationManager.getAlexBody());
+        g.setColor(shirtColor);
         g.fillRect(posX, posY+(height/4), width, height/2);
         g.setColor(Color.yellow);
         g.fillRect(posX+(width/4), posY-(height/4), width/2, height/2);
         g.setColor(Color.black);
-        Point hatPos = new Point(posX,posY);
+        Point hatPos = new Point(posX+5,posY-40);
         RenderUtils.drawImage((Graphics2D)g, ASSET, hatPos);
     }
 }

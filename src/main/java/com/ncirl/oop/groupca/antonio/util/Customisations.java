@@ -5,8 +5,7 @@
 package com.ncirl.oop.groupca.antonio.util;
 
 import com.ncirl.oop.groupca.alex.util.FileLoader;
-
-import java.awt.*;
+import java.awt.Color;
 import java.io.Serializable;
 
 /**
@@ -14,11 +13,9 @@ import java.io.Serializable;
  * @author anton
  */
 public class Customisations implements Serializable {
-    Color alexBody = Color.blue;
-    Color alexHead = Color.yellow;
-    Color alexWheat;
+    int bodyNum = 0;
     Color alexOnion;
-    int hat = 1;
+    int hat = 0; 
 
     public Customisations() { // Set default values
         FileLoader.saveToFile(this, "Customisations.esr");
@@ -27,46 +24,40 @@ public class Customisations implements Serializable {
 
     // Setters
 
-    public void setAlexBody(Color alexBody) {
-        this.alexBody = alexBody;
+    public void setBody(int bodyCol) {
+        bodyNum = bodyCol;
     }
-
-    public void setAlexHead(Color alexHead) {
-        this.alexHead = alexHead;
-    }
-
-    public void setAlexWheat(Color alexWheat) {
-        this.alexWheat = alexWheat;
-    }
-
     public void setAlexOnion(Color alexOnion) {
         this.alexOnion = alexOnion;
     }
-
     public void setHat(int hat) {
         this.hat = hat;
     }
 
 
     // Getters
-
-
-    public Color getAlexBody() {
-        return alexBody;
+    public Color getBodyCol() { // Returns number according to int
+        switch(bodyNum) {
+            case 0:
+                return Color.BLUE;
+            case 1:
+                return Color.CYAN;
+            case 2:
+                return Color.RED;
+            case 3:
+                return  Color.MAGENTA;
+            case 4:
+                return Color.PINK;
+            case 5:
+                return Color.GRAY;
+            case 6:
+                return Color.BLACK;
+        }
+        return Color.BLUE;
     }
-
-    public Color getAlexHead() {
-        return alexHead;
+    public int getBodyNum() { // Returns number
+        return bodyNum;
     }
-
-    public Color getAlexWheat() {
-        return alexWheat;
-    }
-
-    public Color getAlexOnion() {
-        return alexOnion;
-    }
-
     public int getHat() {
         return hat;
     }

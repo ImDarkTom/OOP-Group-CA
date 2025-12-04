@@ -31,34 +31,24 @@ public class CustomisationManager {
         FileLoader.saveToFile(getInstance(), CUSTOMISATION_FILENAME);
     }
 
-
-    public static void setAlexBody(Color alexBody) {
-        getInstance().setAlexBody(alexBody);
+    // Setters
+    public static void setBody(int bodyNum) {
+        getInstance().setBody(bodyNum);
         // loadImage();
     }
-
-    public static void setAlexHead(Color alexHead) {
-        getInstance().setAlexHead(alexHead);
-        // loadImage();
+    public static void setHat(int hat) {
+        getInstance().setHat(hat);
     }
-
-    public static void setAlexWheat(Color alexWheat) {
-        getInstance().setAlexWheat(alexWheat);
-        // loadImage();
-    }
-
-    public static void setAlexOnion(Color alexOnion) {
-
-        getInstance().setAlexOnion(alexOnion);
-        // loadImage();
-    }
-
+    // Getters
     public static int getHat() {
         return getInstance().getHat();
     }
     
-    public static Color getAlexBody() {
-        return getInstance().getAlexBody();
+    public static int getBodyNum() {
+        return getInstance().getBodyNum();
+    }
+    public static Color getBodyCol() {
+        return getInstance().getBodyCol();
     }
 //    public static void resetScores() {
 //        FileLoader.saveToFile(new Scores(), SCORE_FILENAME);

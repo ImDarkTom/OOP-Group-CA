@@ -30,6 +30,8 @@
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="showCustomisationBtn" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="showScoreBtn" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -64,7 +66,10 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="supplyFoodGameBtn" max="-2" attributes="0"/>
               <EmptySpace pref="95" max="32767" attributes="0"/>
-              <Component id="showScoreBtn" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="showScoreBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="showCustomisationBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -152,6 +157,20 @@
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="OOPGroupCAGUI_titleLbl"/>
       </AuxValues>
+    </Component>
+    <Component class="javax.swing.JButton" name="showCustomisationBtn">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/small_icons/tophat.png"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Customisation"/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Hand Cursor"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="showCustomisationBtnActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

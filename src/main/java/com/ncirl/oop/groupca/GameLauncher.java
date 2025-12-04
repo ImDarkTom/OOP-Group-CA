@@ -29,8 +29,7 @@ public class GameLauncher {
     }
     
     public static void launchAlexGame() {
-        // copied from original launch method in commit
-        new AlexWindow();
+        AlexWindow alexWindow = new AlexWindow();
     }
 }
 
