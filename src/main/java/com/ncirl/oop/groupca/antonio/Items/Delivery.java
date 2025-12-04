@@ -21,7 +21,7 @@ public class Delivery extends Items {
 
     @Override
     public void paintItem(Graphics g) {
-        g.setColor(Color.black);
+        g.setColor(new Color(53, 35, 109));
         g.fillOval(posX[0], posY[0], radius, radius);
         g.setColor(Color.white);
         g.drawOval(posX[0], posY[0], radius, radius);

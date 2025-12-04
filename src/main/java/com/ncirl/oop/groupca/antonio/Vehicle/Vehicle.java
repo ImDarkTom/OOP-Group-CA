@@ -4,8 +4,10 @@
  */
 package com.ncirl.oop.groupca.antonio.Vehicle;
 
-import java.awt.Color;
-import java.awt.Graphics;
+import java.awt.*;
+import com.ncirl.oop.groupca.thomas.shared.CustomisationManager;
+import com.ncirl.oop.groupca.thomas.ImageLoader;
+import com.ncirl.oop.groupca.thomas.util.RenderUtils;
 
 /**
  *
@@ -13,6 +15,10 @@ import java.awt.Graphics;
  */
 public class Vehicle {
 
+
+
+    protected Image ASSET;
+    protected Color vehicleColor;
     protected double posX;
     protected double posY;
     protected int width;
@@ -20,7 +26,6 @@ public class Vehicle {
     protected double xVel;
     protected double yVel;
     protected int Capacity;
-//    protected String Vehicle;
 
     public Vehicle() {
         posX = 0;
@@ -30,10 +35,14 @@ public class Vehicle {
         xVel = 0;
         yVel = 0;
         Capacity = 0;
-//        Vehicle = "/TBD";
+        if (CustomisationManager.getHat() != 0){
+            ASSET = ImageLoader.loadWithSize("/hats/" + CustomisationManager.getHat() + ".png", 40, 40);
+    }
+        vehicleColor = CustomisationManager.getBodyCol();
+
     }
 
-    public Vehicle(double x, double y, int w, int h, double xV, double yV, int c) {
+    public Vehicle(double x, double y, int w, int h, double xV, double yV, int c, Image hat, Color color) {
         posX = x;
         posY = y;
         width = w;
@@ -41,6 +50,10 @@ public class Vehicle {
         xVel = xV;
         yVel = yV;
         Capacity = c;
+        if(CustomisationManager.getHat()!=0) {
+            ASSET = hat;
+        }
+        vehicleColor = color;
     }
 
     public double getPosX() {
@@ -99,11 +112,32 @@ public class Vehicle {
         this.Capacity = Capacity;
     }
 
+    public Image getASSET() {
+        return ASSET;
+    }
+
+    public void setASSET(Image ASSET) {
+        this.ASSET = ASSET;
+    }
+
+    public Color getVehicleColor() {
+        return vehicleColor;
+    }
+
+    public void setVehicleColor(Color vehicleColor) {
+        this.vehicleColor = vehicleColor;
+    }
+
     public void paintVehicle(Graphics g) {
-        g.setColor(Color.white);
+        g.setColor(vehicleColor);
         g.fillRect((int)posX, (int)posY, width, height);
         g.setColor(Color.black);
         g.drawRect((int)posX, (int)posY, width, height);
+        g.setColor(Color.black);
+        if(CustomisationManager.getHat()!=0) {
+           Point hatPos = new Point((int)posX+5,(int)posY-40);
+            RenderUtils.drawImage((Graphics2D) g, ASSET, hatPos);
+        }
     }
 
 }

@@ -4,8 +4,9 @@
  */
 package com.ncirl.oop.groupca.antonio.Vehicle;
 
-import java.awt.Color;
-import java.awt.Graphics;
+import com.ncirl.oop.groupca.thomas.shared.CustomisationManager;
+import com.ncirl.oop.groupca.thomas.util.RenderUtils;
+import java.awt.*;
 
 /**
  *
@@ -13,16 +14,16 @@ import java.awt.Graphics;
  */
 public class Air extends Vehicle {
 
-    public Air(int x, int y, int w, int h, double xV, double yV, int c) {
-        super(x, y, 60, 40, xV, yV, c);
+    public Air(int x, int y, int w, int h, double xV, double yV, int c, Image hat, Color color) {
+        super(x, y, 60, 40, xV, yV, c, hat, color);
     }
 
     @Override
     public void paintVehicle(Graphics g) {
-        g.setColor(Color.GREEN);
         int centerX = (int) posX;
         int centerY = (int) posY;
 
+        g.setColor(vehicleColor);
         int[] xFill = {centerX, centerX + (width/2), centerX - (width/2)};
         int[] yFill = {centerY + (height/2), centerY - (height/2), centerY - (height/2)};
         g.fillPolygon(xFill, yFill, 3);
@@ -30,5 +31,10 @@ public class Air extends Vehicle {
         g.drawPolygon(xFill, yFill, 3);
         g.setColor(Color.ORANGE);
         g.drawRect((int)posX-(width/2), (int)posY-(height/2), width, height);
+        g.setColor(Color.black);
+        if (CustomisationManager.getHat() != 0) {
+            Point hatPos = new Point((int) posX - 20, (int) posY - 50);
+            RenderUtils.drawImage((Graphics2D) g, ASSET, hatPos);
+        }
     }
 }

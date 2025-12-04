@@ -4,13 +4,17 @@
  */
 package com.ncirl.oop.groupca.antonio.Map;
 
+import com.ncirl.oop.groupca.OOPGroupCAGUI;
 import com.ncirl.oop.groupca.antonio.Items.Items;
 import com.ncirl.oop.groupca.antonio.Items.Pickup;
 import com.ncirl.oop.groupca.antonio.Items.Delivery;
+import com.ncirl.oop.groupca.antonio.Vehicle.Sea;
 import com.ncirl.oop.groupca.antonio.Vehicle.Vehicle;
 import com.ncirl.oop.groupca.antonio.Vehicle.Air;
 import com.ncirl.oop.groupca.antonio.Vehicle.Land;
 import com.ncirl.oop.groupca.antonio.AntonioGUI;
+import com.ncirl.oop.groupca.thomas.shared.ScoreManager;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -53,6 +57,7 @@ public class Maps {
     private JLabel cargoLabel;
 
     private int vehicleCargo = 0;
+
 
     public Maps(Vehicle vehicle) {
         this.vehicle = vehicle;
@@ -175,12 +180,26 @@ public class Maps {
             pointsLabel.setText("Points: " + points);
             cargoLabel.setText("Cargo: " + vehicleCargo);
             if (timeLeft <= 0) {
+                String message = "";
                 accelerate = decelerate = left = right = false;
                 loop.stop();
                 countdown.stop();
-                JOptionPane.showMessageDialog(panel, "Time's up! Final points: " + points);
-                AntonioGUI gui = new AntonioGUI();
-                gui.setVisible(true);
+                if(points<150){
+                    message="you could have made more delivery's with less mistakes";
+                    ScoreManager.setAntonioMsg("you could have made more delivery's with less mistakes");
+                }
+                else if(points<350){
+                    message="you made an acceptable amount of delivery's";
+                    ScoreManager.setAntonioMsg("you made an acceptable amount of delivery's");
+                }
+                else if(points>350){
+                    message="you made an exceptional amount of delivery's";
+                    ScoreManager.setAntonioMsg("you made an exceptional amount of delivery's");
+                }
+                JOptionPane.showMessageDialog(null, "Well done on finishing the delivery game!\nYou scored "+points+" points!\n"+message, "Final point score", JOptionPane.INFORMATION_MESSAGE);
+                ScoreManager.setAntonioScore(points);
+                AntonioGUI MyGUI = new AntonioGUI();
+                MyGUI.setVisible(true);
                 frame.dispose();
             }
         });
@@ -188,13 +207,17 @@ public class Maps {
     }
 
     private void updateMovement() {
-        double acceleration = 1.0;
+        double acceleration = 1;
+
+        if(vehicle instanceof Air && ((vehicle.getxVel() + vehicle.getyVel())<0.8) && ((vehicle.getxVel() + vehicle.getyVel())>-0.8)){
+            acceleration = 0.5;
+        }
         double friction = 0.94;
 
         if (accelerate) vehicle.setyVel(vehicle.getyVel() - acceleration);
-        if (decelerate) vehicle.setyVel(vehicle.getyVel() + acceleration);
-        if (left) vehicle.setxVel(vehicle.getxVel() - acceleration);
-        if (right) vehicle.setxVel(vehicle.getxVel() + acceleration);
+        else if (decelerate) vehicle.setyVel(vehicle.getyVel() + acceleration);
+        else if (left) vehicle.setxVel(vehicle.getxVel() - acceleration);
+        else if (right) vehicle.setxVel(vehicle.getxVel() + acceleration);
 
         vehicle.setPosX(vehicle.getPosX() + vehicle.getxVel());
         vehicle.setPosY(vehicle.getPosY() + vehicle.getyVel());
@@ -250,6 +273,22 @@ public class Maps {
             vehicle.setyVel(0);
             vehicle.setxVel(0);
         }
+        else if(isColliding() && (vehicle instanceof Sea)){
+            switch (last) {
+                case "acc":
+                    vehicle.setyVel(vehicle.getPosY() * 0.02);
+                    break;
+                case "dec":
+                    vehicle.setyVel(vehicle.getPosY() * -0.02);
+                    break;
+                case "l":
+                    vehicle.setxVel(vehicle.getPosX() * 0.02);
+                    break;
+                default:
+                    vehicle.setxVel(vehicle.getPosX() * -0.02);
+                    break;
+            }
+        }
         else if (isColliding()) {
             switch (last) {
                 case "acc":
@@ -265,15 +304,19 @@ public class Maps {
                     vehicle.setxVel(vehicle.getPosX() * -0.01);
                     break;
             }
-            if(points>1){
+            if(points>0){
                 points -= 1;
             }
             pointsLabel.setText("Points: " + points);
         }
+
     }
 
-    private int getMaxCargoForVehicle() {
-        return (vehicle instanceof Land) ? 20 : Integer.MAX_VALUE;
+    private int getCapacity() {
+        if (vehicle instanceof Land landVehicle) {
+            return landVehicle.getCapacity();
+        }
+        return Integer.MAX_VALUE;
     }
 
     private void respawnPickupAt(int index) {
@@ -302,7 +345,7 @@ public class Maps {
     private void checkPickupDelivery() {
 
 
-        int maxCargo = getMaxCargoForVehicle();
+        int maxCargo = getCapacity();
 
         for (int i = 0; i < pickups.size(); i++) {
             Pickup p = pickups.get(i);
