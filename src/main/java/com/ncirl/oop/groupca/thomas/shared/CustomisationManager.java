@@ -12,12 +12,6 @@ import java.awt.*;
  * @author anton
  */
 public class CustomisationManager {
-    // "/tom_game/farm.png"
-    //temp Asset and image values change to better variables for hats
-    private static Point pos;
-    private static String imageOne = "/tom_game/farm.png";
-    private static Image ASSET = ImageLoader.load(imageOne);
-
     private static Customisations customisationsInstance;
     private static final String CUSTOMISATION_FILENAME = "customisations.ser";
 
