@@ -22,18 +22,24 @@ public class CustomisationManager {
         return customisationsInstance;
     }
 
+    private static void save() {
+        FileLoader.saveToFile(getInstance(), CUSTOMISATION_FILENAME);
+    }
+
     // Setters
     public static void setBody(int bodyNum) {
         getInstance().setBody(bodyNum);
-        // loadImage();
+        save();
     }
 
     public static void setHat(int hat) {
         getInstance().setHat(hat);
+        save();
     }
 
     public static void setTruckStyle(int truckStyle) {
         getInstance().setTruckStyleIndex(truckStyle);
+        save();
     }
 
     // Getters
@@ -44,6 +50,7 @@ public class CustomisationManager {
     public static int getBodyNum() {
         return getInstance().getBodyNum();
     }
+
     public static Color getBodyCol() {
         return getInstance().getBodyCol();
     }
@@ -63,5 +70,4 @@ public class CustomisationManager {
         customisationsInstance = null;
         getInstance();
     }
-
 }
