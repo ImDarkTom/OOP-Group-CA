@@ -65,6 +65,8 @@ public class TomGameWindow extends JFrame {
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         setResizable(false);
         setLocationRelativeTo(null);
+
+        // we run reset after the window closes so it stops logic and improves perf
         FrameUtils.setBackToMenuOnClose(this, GameObjectManager::resetState);
 
         // Validating lets us calculate the size of the canvas before it's rendered
@@ -95,8 +97,10 @@ public class TomGameWindow extends JFrame {
                         
                         Some tips: \s
                         - Farms can't be built too close to each other or directly on top of the river.
+                        - Farms will prioritize settlements with the highest hunger.
                         - Settlements increase materials/sec by 5, towns by 10, and cities by 20.
                         - Clicking a farm will prompt to to delete it (in case you build too far from a settlement).
+                        - Progression may be slow at first, but will grow exponentially towards the end.
                         - Roads may cross rivers.
                         
                         Have fun! \s
@@ -107,6 +111,7 @@ public class TomGameWindow extends JFrame {
 
         // refresh the truck asset, since the user might have changed it before re-entering the game
         FoodDelivery.refreshTruckAsset();
+        GameObjectManager.resetState();
 
         // game state
         GameObjectManager.generateWorld();

@@ -22,7 +22,7 @@ public class ActionButtons {
 
     public static void placeActionButtons(JPanel panel) {
         // Set values for the buttons.
-        pauseBtn = new JToggleButton("⏸");
+        pauseBtn = new JToggleButton("");
         placeFarmBtn = new JButton("Place Farm [" + GameValues.FARM_PRICE + "]");
         upgradeBtn = new JButton("Upgrades");
         buildingMaterialsAmountLbl = new JLabel("Materials: 0");
@@ -32,7 +32,8 @@ public class ActionButtons {
 
         // Add them to the UI
         panel.add(pauseBtn);
-        pauseBtn.addActionListener(e -> {
+        pauseBtn.setIcon(ImageLoader.loadAsIcon("/tom_game/pause.png"));
+        pauseBtn.addActionListener(_ -> {
             if (pauseBtn.isSelected()) {
                 GameLoop.pauseGame();
             } else {
@@ -61,7 +62,7 @@ public class ActionButtons {
     }
 
     private static void showUpgradeMenu(ActionEvent _event) {
-        UpgradeableValue[] options = GameValues.upgradesRegistry;
+        UpgradeableValue[] upgradeOptions = GameValues.upgradesRegistry;
 
         UpgradeableValue selectedUpgrade = (UpgradeableValue) JOptionPane.showInputDialog(
                 TomGameWindow.gameWindow,
@@ -69,8 +70,8 @@ public class ActionButtons {
                 "Upgrade",
                 JOptionPane.QUESTION_MESSAGE,
                 null,
-                options,
-                options[0]
+                upgradeOptions,
+                upgradeOptions[0]
         );
 
         if (selectedUpgrade == null) {
