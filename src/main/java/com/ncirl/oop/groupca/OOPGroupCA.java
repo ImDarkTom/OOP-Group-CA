@@ -32,6 +32,7 @@ public class OOPGroupCA {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     UIManager.setLookAndFeel(info.getClassName());
+                    UIManager.getLookAndFeelDefaults().put("defaultFont", new Font("Aptos", Font.BOLD, 12));
                     break;
                 }
             }

@@ -22,7 +22,7 @@ public class FontManager {
             return objectInMap;
         }
 
-        Font newFont = new Font("Arial", style, 14);
+        Font newFont = new Font("Aptos", style, 14);
 
         cachedFonts.put(size, newFont);
 
