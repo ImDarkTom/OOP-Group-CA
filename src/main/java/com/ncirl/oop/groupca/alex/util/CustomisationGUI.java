@@ -7,7 +7,6 @@ import com.ncirl.oop.groupca.OOPGroupCAGUI;
 import com.ncirl.oop.groupca.thomas.enums.TruckStyle;
 import com.ncirl.oop.groupca.thomas.shared.CustomisationManager;
 import com.ncirl.oop.groupca.thomas.shared.ScoreManager;
-import java.util.Arrays;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
@@ -178,7 +177,7 @@ public class CustomisationGUI extends javax.swing.JFrame {
 
     private void hatCmbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hatCmbActionPerformed
         JComboBox comboBox = (JComboBox) evt.getSource();
-        switch((String)comboBox.getSelectedItem()) { // Transfers hat choice to Customisation Manager
+        switch((String)comboBox.getSelectedItem()) { // Transfers hat choice to Customisation Manager, shows message to player if they havent unlocked hat
             case "Top Hat":
                 CustomisationManager.setHat(1);
                 break;
@@ -213,9 +212,9 @@ public class CustomisationGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_backBtnActionPerformed
 
     private void hatCmbHierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_hatCmbHierarchyChanged
-        JComboBox comboBox = (JComboBox) evt.getSource(); // Load saved choice of hat to customisations dropdown
+        JComboBox comboBox = (JComboBox) evt.getSource(); // Load saved choice of hat to customisations dropdown when window is opened
         if(!itemsAdded) {
-            if(ScoreManager.getTotalScore()>=800) {
+            if(ScoreManager.getTotalScore()>=800) { // Adds hats to the dropdown list
                 comboBox.addItem("Cowboy Hat");
             } else {
                 comboBox.addItem("Cowboy Hat (800 points)");
@@ -225,7 +224,7 @@ public class CustomisationGUI extends javax.swing.JFrame {
             } else {
                 comboBox.addItem("Pirate Hat (1000 points)");
             }
-            itemsAdded=true;
+            itemsAdded=true; // Stops duplication of items in the list
         }
         comboBox.setSelectedIndex(CustomisationManager.getHat());
     }//GEN-LAST:event_hatCmbHierarchyChanged
