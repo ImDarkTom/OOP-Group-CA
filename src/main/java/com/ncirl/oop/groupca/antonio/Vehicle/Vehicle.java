@@ -14,8 +14,7 @@ import com.ncirl.oop.groupca.thomas.util.RenderUtils;
  */
 public class Vehicle {
 
-
-
+    //variables
     protected Image ASSET;
     protected Color vehicleColor;
     protected double posX;
@@ -26,6 +25,7 @@ public class Vehicle {
     protected double yVel;
     protected int Capacity;
 
+    //constructor
     public Vehicle(double x, double y, int w, int h, double xV, double yV, int c, Image hat, Color color) {
         posX = x;
         posY = y;
@@ -34,12 +34,26 @@ public class Vehicle {
         xVel = xV;
         yVel = yV;
         Capacity = c;
-        if(CustomisationManager.getHat()!=0) {
+        if (CustomisationManager.getHat() != 0) {
             ASSET = hat;
         }
         vehicleColor = color;
     }
 
+    //overrideable paint method
+    public void paintVehicle(Graphics g) {
+        g.setColor(vehicleColor);
+        g.fillRect((int) posX, (int) posY, width, height);
+        g.setColor(Color.black);
+        g.drawRect((int) posX, (int) posY, width, height);
+        g.setColor(Color.black);
+        if (CustomisationManager.getHat() != 0) {
+            Point hatPos = new Point((int) posX + 5, (int) posY - 40);
+            RenderUtils.drawImage((Graphics2D) g, ASSET, hatPos);
+        }
+    }
+
+    //getters and setters
     public double getPosX() {
         return posX;
     }
@@ -82,18 +96,6 @@ public class Vehicle {
 
     public int getCapacity() {
         return Capacity;
-    }
-
-    public void paintVehicle(Graphics g) {
-        g.setColor(vehicleColor);
-        g.fillRect((int)posX, (int)posY, width, height);
-        g.setColor(Color.black);
-        g.drawRect((int)posX, (int)posY, width, height);
-        g.setColor(Color.black);
-        if(CustomisationManager.getHat()!=0) {
-           Point hatPos = new Point((int)posX+5,(int)posY-40);
-            RenderUtils.drawImage((Graphics2D) g, ASSET, hatPos);
-        }
     }
 
 }

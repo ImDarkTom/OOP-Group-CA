@@ -15,16 +15,18 @@ import java.awt.*;
  */
 public class Land extends Vehicle {
 
+    //constructor
     public Land(int x, int y, int w, int h, double xV, double yV, int c, Image hat, Color color) {
         super(x, y, w, h, xV, yV, c, hat, color);
     }
 
+    //paint land
     @Override
     public void paintVehicle(Graphics g) {
         g.setColor(vehicleColor);
-        g.fillRect((int)posX, (int)posY, width, height);
+        g.fillRect((int) posX, (int) posY, width, height);
         g.setColor(Color.BLACK);
-        g.drawRect((int)posX, (int)posY, width, height);
+        g.drawRect((int) posX, (int) posY, width, height);
         g.setColor(Color.black);
         if (CustomisationManager.getHat() != 0) {
             Point hatPos = new Point((int) posX + 10, (int) posY - 30);
@@ -32,6 +34,7 @@ public class Land extends Vehicle {
         }
     }
 
+    //capacity getter
     public int getCapacity() {
         return 35;
     }

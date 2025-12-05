@@ -15,18 +15,20 @@ import java.awt.*;
  */
 public class Sea extends Vehicle {
 
+    //constructor
     public Sea(int x, int y, int w, int h, double xV, double yV, int c, Image hat, Color color) {
         super(x, y, w, h, xV, yV, c, hat, color);
     }
 
+    //paint sea
     @Override
     public void paintVehicle(Graphics g) {
         g.setColor(vehicleColor);
-        g.fillOval((int)posX, (int)posY, width, height);
+        g.fillOval((int) posX, (int) posY, width, height);
         g.setColor(Color.BLACK);
-        g.drawOval((int)posX, (int)posY, width, height);
+        g.drawOval((int) posX, (int) posY, width, height);
         g.setColor(Color.ORANGE);
-        g.drawRect((int)posX, (int)posY, width, height);
+        g.drawRect((int) posX, (int) posY, width, height);
         g.setColor(Color.black);
         if (CustomisationManager.getHat() != 0) {
             Point hatPos = new Point((int) posX + 5, (int) posY - 30);

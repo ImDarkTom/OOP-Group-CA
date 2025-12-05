@@ -14,23 +14,25 @@ import java.awt.*;
  */
 public class Air extends Vehicle {
 
+    //constructor
     public Air(int x, int y, int w, int h, double xV, double yV, int c, Image hat, Color color) {
         super(x, y, w, h, xV, yV, c, hat, color);
     }
 
+    //paint method for air
     @Override
     public void paintVehicle(Graphics g) {
         int centerX = (int) posX;
         int centerY = (int) posY;
 
         g.setColor(vehicleColor);
-        int[] xFill = {centerX, centerX + (width/2), centerX - (width/2)};
-        int[] yFill = {centerY + (height/2), centerY - (height/2), centerY - (height/2)};
+        int[] xFill = {centerX, centerX + (width / 2), centerX - (width / 2)};
+        int[] yFill = {centerY + (height / 2), centerY - (height / 2), centerY - (height / 2)};
         g.fillPolygon(xFill, yFill, 3);
         g.setColor(Color.BLACK);
         g.drawPolygon(xFill, yFill, 3);
         g.setColor(Color.ORANGE);
-        g.drawRect((int)posX-(width/2), (int)posY-(height/2), width, height);
+        g.drawRect((int) posX - (width / 2), (int) posY - (height / 2), width, height);
         g.setColor(Color.black);
         if (CustomisationManager.getHat() != 0) {
             Point hatPos = new Point((int) posX - 20, (int) posY - 50);

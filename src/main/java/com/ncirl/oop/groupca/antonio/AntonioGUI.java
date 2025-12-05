@@ -28,14 +28,16 @@ public class AntonioGUI extends javax.swing.JFrame {
      * Creates new form AntonioGUI
      */
     Image ASSET;
+
     public AntonioGUI() {
-        if(CustomisationManager.getHat() != 0){
+        if (CustomisationManager.getHat() != 0) {
             ASSET = ImageLoader.loadWithSize("/hats/" + CustomisationManager.getHat() + ".png", 40, 40);
         }
         initComponents();
         setLocationRelativeTo(null);
 
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -194,7 +196,6 @@ public class AntonioGUI extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        //look and feel
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

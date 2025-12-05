@@ -8,6 +8,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class Obstacle {
+
     // obstacle variables
     private int x;
     private int y;

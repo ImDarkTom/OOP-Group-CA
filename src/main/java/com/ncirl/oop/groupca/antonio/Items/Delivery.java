@@ -15,6 +15,7 @@ public class Delivery extends Items {
 
     // amount of items requested
     private final int[] requested;
+
     public Delivery(int radius, int x, int y, int requested) {
         super(radius, x, y);
         this.requested = new int[]{requested};

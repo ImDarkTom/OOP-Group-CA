@@ -58,7 +58,6 @@ public class Maps {
 
     private int vehicleCargo = 0;
 
-
     public Maps(Vehicle vehicle) {
         //generating objects on game start
         this.vehicle = vehicle;
@@ -81,7 +80,9 @@ public class Maps {
                 w = random.nextInt(40) + 30;
                 h = random.nextInt(40) + 30;
                 attempts++;
-                if (attempts > 1000) break;
+                if (attempts > 1000) {
+                    break;
+                }
             } while (vehicleHitbox(x, y, w, h));
             obstacle.add(new Obstacle(x, y, w, h));
         }
@@ -113,7 +114,6 @@ public class Maps {
         buttonContainer.add(timerLabel);
         frame.add(buttonContainer, BorderLayout.NORTH);
 
-
         frame.setResizable(false);
         frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         frame.addWindowListener(new WindowAdapter() {
@@ -135,7 +135,9 @@ public class Maps {
         frame.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                if (timeLeft <= 0) return;
+                if (timeLeft <= 0) {
+                    return;
+                }
                 switch (e.getKeyCode()) {
                     case KeyEvent.VK_W -> {
                         accelerate = true;
@@ -159,10 +161,14 @@ public class Maps {
             @Override
             public void keyReleased(KeyEvent e) {
                 switch (e.getKeyCode()) {
-                    case KeyEvent.VK_W -> accelerate = false;
-                    case KeyEvent.VK_S -> decelerate = false;
-                    case KeyEvent.VK_A -> left = false;
-                    case KeyEvent.VK_D -> right = false;
+                    case KeyEvent.VK_W ->
+                        accelerate = false;
+                    case KeyEvent.VK_S ->
+                        decelerate = false;
+                    case KeyEvent.VK_A ->
+                        left = false;
+                    case KeyEvent.VK_D ->
+                        right = false;
                 }
             }
         });
@@ -196,20 +202,18 @@ public class Maps {
                 loop.stop();
                 countdown.stop();
                 //checking final scored points
-                if(points<150){
-                    message="you could have made more delivery's with less mistakes";
+                if (points < 150) {
+                    message = "you could have made more delivery's with less mistakes";
                     ScoreManager.setAntonioMsg("you could have made more delivery's with less mistakes");
-                }
-                else if(points<350){
-                    message="you made an acceptable amount of delivery's";
+                } else if (points < 350) {
+                    message = "you made an acceptable amount of delivery's";
                     ScoreManager.setAntonioMsg("you made an acceptable amount of delivery's");
-                }
-                else if(points>350){
-                    message="you made an exceptional amount of delivery's";
+                } else if (points > 350) {
+                    message = "you made an exceptional amount of delivery's";
                     ScoreManager.setAntonioMsg("you made an exceptional amount of delivery's");
                 }
                 //takes you back to selection menu on game end
-                JOptionPane.showMessageDialog(null, "Well done on finishing the delivery game!\nYou scored "+points+" points!\n"+message, "Final point score", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Well done on finishing the delivery game!\nYou scored " + points + " points!\n" + message, "Final point score", JOptionPane.INFORMATION_MESSAGE);
                 ScoreManager.setAntonioScore(points);
                 AntonioGUI MyGUI = new AntonioGUI();
                 MyGUI.setVisible(true);
@@ -224,7 +228,7 @@ public class Maps {
         double acceleration = 1;
 
         //unique movement rules for air vehicles
-        if(vehicle instanceof Air && ((vehicle.getxVel() + vehicle.getyVel())<0.8) && ((vehicle.getxVel() + vehicle.getyVel())>-0.8)){
+        if (vehicle instanceof Air && ((vehicle.getxVel() + vehicle.getyVel()) < 0.8) && ((vehicle.getxVel() + vehicle.getyVel()) > -0.8)) {
             acceleration = 0.5;
         }
         double friction = 0.94;
@@ -232,14 +236,11 @@ public class Maps {
         //checking vehicle direction input and moving coordinates according to velocity and reducing velocity due to friction
         if (accelerate) {
             vehicle.setyVel(vehicle.getyVel() - acceleration);
-        }
-        else if (decelerate){
+        } else if (decelerate) {
             vehicle.setyVel(vehicle.getyVel() + acceleration);
-            }
-        else if (left) {
+        } else if (left) {
             vehicle.setxVel(vehicle.getxVel() - acceleration);
-        }
-        else if (right) {
+        } else if (right) {
             vehicle.setxVel(vehicle.getxVel() + acceleration);
         }
 
@@ -275,6 +276,7 @@ public class Maps {
         }
         return false;
     }
+
     //vehicle hitbox check used mainly for obstacle generation on game start since you can't check collision without first generating and obstacle otherwise
     private boolean vehicleHitbox(int x, int y, int w, int h) {
         double vCenterX = designateVehicle()[0];
@@ -310,9 +312,8 @@ public class Maps {
             vehicle.setPosY(10);
             vehicle.setyVel(0);
             vehicle.setxVel(0);
-        }
-        //special rule for sea vehicles as if obstacles were waves
-        else if(isColliding() && (vehicle instanceof Sea)){
+        } //special rule for sea vehicles as if obstacles were waves
+        else if (isColliding() && (vehicle instanceof Sea)) {
             switch (last) {
                 case "acc":
                     vehicle.setyVel(vehicle.getPosY() * 0.02);
@@ -327,8 +328,7 @@ public class Maps {
                     vehicle.setxVel(vehicle.getPosX() * -0.02);
                     break;
             }
-        }
-        //regular collision calculation for other vehicles
+        } //regular collision calculation for other vehicles
         else if (isColliding()) {
             switch (last) {
                 case "acc":
@@ -345,7 +345,7 @@ public class Maps {
                     break;
             }
             //point deduction and update
-            if(points>0){
+            if (points > 0) {
                 points -= 1;
             }
             pointsLabel.setText("Points: " + points);
@@ -370,7 +370,7 @@ public class Maps {
     }
 
     //item respawn logic making items variable in size and location and preventing obstacle overlap
-    private int[] spawnItem(){
+    private int[] spawnItem() {
         int[] values = new int[4];
         int attempts = 0;
         do {
@@ -379,10 +379,13 @@ public class Maps {
             values[2] = random.nextInt(500 - values[0]);
             values[3] = random.nextInt(16) + 5;
             attempts++;
-            if (attempts > 1000) break;
+            if (attempts > 1000) {
+                break;
+            }
         } while (obstacleHitbox(values[1], values[2], values[0]));
         return values;
     }
+
     //delivery respawn on delivery completed
     private void respawnDeliveryAt(int index) {
         int[] values = spawnItem();
@@ -392,7 +395,6 @@ public class Maps {
 
     //checking if player has cargo or can hold more while overlapping item point for variable changes
     private void checkPickupDelivery() {
-
 
         //getting cargo cap used for land vehicle special rule
         int maxCargo = getCapacity();
@@ -442,14 +444,13 @@ public class Maps {
     }
 
     //assigning vehicle values according to vehicle type
-    private double[] designateVehicle(){
+    private double[] designateVehicle() {
         double[] vCenters = new double[2];
         //air drawn using polygon thus different logic
         if (vehicle instanceof Air) {
             vCenters[0] = vehicle.getPosX();
             vCenters[1] = vehicle.getPosY();
-        }
-        else{
+        } else {
             vCenters[0] = vehicle.getPosX() + vehicle.getWidth() / 2.0;
             vCenters[1] = vehicle.getPosY() + vehicle.getHeight() / 2.0;
         }
@@ -472,6 +473,7 @@ public class Maps {
 
     //window Panel
     class Panel extends JPanel {
+
         public Panel() {
             setPreferredSize(new Dimension(1000, 600));
             setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -493,7 +495,5 @@ public class Maps {
             vehicle.paintVehicle(g);
         }
     }
-
-
 
 }

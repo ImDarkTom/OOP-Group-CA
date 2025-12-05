@@ -21,8 +21,8 @@ public class Items {
     // default superclass constructor
     public Items(int radius, int x, int y) {
         itemRadius = radius;
-        posX = new int[] {x};
-        posY = new int[] {y};
+        posX = new int[]{x};
+        posY = new int[]{y};
     }
 
     //draw method to call and override
@@ -53,7 +53,5 @@ public class Items {
     public void setPosY(int[] posY) {
         this.posY = posY;
     }
-
-
 
 }
