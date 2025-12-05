@@ -154,7 +154,7 @@ public class GameLoop {
     public void collisionHandling() {
         int num = -1;
         for(Plant plant : plants) {
-            if((checkCollision(plant.getX(),plant.getY(),player)<=50)&&heldPlants.size()<6) { // If player holds less than 5 plants and is close enough
+            if((checkCollision(plant.getX(),plant.getY(),player)<=50)&&heldPlants.size()<5) { // If player holds less than 5 plants and is close enough
                 if(plant.getType().equals("wheat")&&player.getTool().equals("scythe")) { // Tool check
                     num = plant.getArrayID();
                     heldPlants.add(new Wheat(plant.getX(),plant.getY(),plant.getArrayID(), true));
