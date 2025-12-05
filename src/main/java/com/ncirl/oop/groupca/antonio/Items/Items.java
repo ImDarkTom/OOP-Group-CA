@@ -13,16 +13,27 @@ import java.awt.Graphics;
  */
 public class Items {
 
+    // default variables for superclass
     protected int itemRadius;
     protected int[] posX;
     protected int[] posY;
 
+    // default superclass constructor
     public Items(int radius, int x, int y) {
         itemRadius = radius;
         posX = new int[] {x};
         posY = new int[] {y};
     }
 
+    //draw method to call and override
+    public void paintItem(Graphics g) {
+        g.setColor(Color.BLACK);
+        g.fillOval(posX[0], posY[0], itemRadius, itemRadius);
+        g.setColor(Color.black);
+        g.drawOval(posX[0], posY[0], itemRadius, itemRadius);
+    }
+
+    //getters and setters
     public int getRadius() {
         return itemRadius;
     }
@@ -43,11 +54,6 @@ public class Items {
         this.posY = posY;
     }
 
-    public void paintItem(Graphics g) {
-        g.setColor(Color.BLACK);
-        g.fillOval(posX[0], posY[0], itemRadius, itemRadius);
-        g.setColor(Color.black);
-        g.drawOval(posX[0], posY[0], itemRadius, itemRadius);
-    }
+
 
 }

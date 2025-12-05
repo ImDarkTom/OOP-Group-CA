@@ -13,6 +13,7 @@ import java.awt.Graphics;
  */
 public class Pickup extends Items {
 
+    //amount of items available
     private final int[] amount;
 
     public Pickup(int radius, int x, int y, int amount) {
@@ -20,6 +21,7 @@ public class Pickup extends Items {
         this.amount = new int[]{amount};
     }
 
+    //draw method to call
     @Override
     public void paintItem(Graphics g) {
         g.setColor(Color.white);
@@ -28,6 +30,7 @@ public class Pickup extends Items {
         g.drawOval(posX[0], posY[0], itemRadius, itemRadius);
     }
 
+    //getter for unique value
     public int[] getAmount() {
         return amount;
     }
