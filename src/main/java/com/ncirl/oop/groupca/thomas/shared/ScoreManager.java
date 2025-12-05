@@ -6,6 +6,8 @@ import com.ncirl.oop.groupca.alex.util.Scores;
 /**
  * Singleton ScoreManager to interface with the scores file.
  * <code>getInstance()</code> is used to interact with the single instance of the scores.
+ *
+ * @author Thomas + Alex
  */
 public class ScoreManager {
     private static Scores scoresInstance;
@@ -77,6 +79,8 @@ public class ScoreManager {
     public static String getFullScoreText() {
         return getInstance().getFullScoreText();
     }
+
+    // Alex
     public static int getTotalScore() {
         return getInstance().getTotalScore();
     }

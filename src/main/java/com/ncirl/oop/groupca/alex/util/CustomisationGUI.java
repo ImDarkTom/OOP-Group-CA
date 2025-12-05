@@ -10,7 +10,7 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 /**
  *
- * @author Alex
+ * @author Alex + Thomas
  */
 public class CustomisationGUI extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(CustomisationGUI.class.getName());

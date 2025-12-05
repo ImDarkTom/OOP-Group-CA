@@ -5,6 +5,9 @@ import com.ncirl.oop.groupca.thomas.GameObjectManager;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * @author Thomas
+ */
 public class PathDrawer extends GameObject {
     public PathDrawer() {
         super(0, 0, 0);

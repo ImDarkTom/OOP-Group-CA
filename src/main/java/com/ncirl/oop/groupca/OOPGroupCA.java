@@ -8,7 +8,7 @@ import java.awt.*;
 
 /**
  *
- * @author tom
+ * @author Thomas + Antonio
  */
 public class OOPGroupCA {
     private static String DEV_SKIP_TO; // e.g. set to "tom" to skip menu and launch the game

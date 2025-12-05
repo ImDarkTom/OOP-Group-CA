@@ -5,6 +5,9 @@ import com.ncirl.oop.groupca.thomas.GameValues;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * @author Thomas
+ */
 public class RiverDrawer extends GameObject {
     // Can be final as we aren't changing the value directly , just modifying the arraylist
     private static final ArrayList<Point> riverPoints = new ArrayList<>();

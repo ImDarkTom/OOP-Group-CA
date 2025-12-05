@@ -5,6 +5,9 @@ import com.ncirl.oop.groupca.thomas.GameObjects.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * @author Thomas
+ */
 public class GameObjectManager {
     public static ArrayList<GameObject> gameObjects = new ArrayList<>();
     public static ArrayList<FoodDelivery> foodDeliveries = new ArrayList<>();

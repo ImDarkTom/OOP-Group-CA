@@ -1,5 +1,8 @@
-package com.ncirl.oop.groupca.thomas.util;
+package com.ncirl.oop.groupca.thomas.enums;
 
+/**
+ * @author Thomas
+ */
 public enum TruckStyle {
     DEFAULT("Default", "default.png"),
     CHRISTMAS("Christmas", "christmas.png");

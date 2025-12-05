@@ -2,6 +2,9 @@ package com.ncirl.oop.groupca.thomas.util;
 
 import com.ncirl.oop.groupca.thomas.GameValues;
 
+/**
+ * @author Thomas
+ */
 public class UpgradeableValue {
     private final String label;
     private final String description;

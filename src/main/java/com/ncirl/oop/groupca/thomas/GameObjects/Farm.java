@@ -10,6 +10,8 @@ import java.util.ArrayList;
 
 /**
  * Farms generate food and send deliveries to settlements.
+ *
+ * @author Thomas
  */
 public class Farm extends GameObject {
     // Assets

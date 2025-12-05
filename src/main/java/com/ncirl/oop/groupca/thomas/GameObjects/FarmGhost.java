@@ -10,6 +10,8 @@ import java.awt.geom.Ellipse2D;
 
 /**
  * The object that appears when we start placing down a farm.
+ *
+ * @author Thomas
  */
 public class FarmGhost extends GameObject {
     // Assets

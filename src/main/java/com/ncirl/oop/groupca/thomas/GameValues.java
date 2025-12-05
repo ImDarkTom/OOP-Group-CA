@@ -3,6 +3,9 @@ package com.ncirl.oop.groupca.thomas;
 import com.ncirl.oop.groupca.thomas.GameObjects.RiverDrawer;
 import com.ncirl.oop.groupca.thomas.util.UpgradeableValue;
 
+/**
+ * @author Thomas
+ */
 public class GameValues {
     // Constants
     public static final int DAYS_TOTAL = 3650;

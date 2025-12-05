@@ -6,6 +6,9 @@ import com.ncirl.oop.groupca.thomas.util.UpgradeableValue;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
+/**
+ * @author Thomas
+ */
 public class ActionButtons {
     // UI Elements
     private static JToggleButton pauseBtn;

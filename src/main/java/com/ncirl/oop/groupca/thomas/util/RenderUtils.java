@@ -2,6 +2,9 @@ package com.ncirl.oop.groupca.thomas.util;
 
 import java.awt.*;
 
+/**
+ * @author Thomas
+ */
 public class RenderUtils {
     public static void drawImage(Graphics2D g2, Image asset, Point pos) {
 

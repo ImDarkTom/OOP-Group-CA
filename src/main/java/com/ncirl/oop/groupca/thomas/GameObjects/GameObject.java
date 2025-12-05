@@ -6,6 +6,9 @@ import com.ncirl.oop.groupca.thomas.util.Tickable;
 
 import java.awt.*;
 
+/**
+ * @author Thomas
+ */
 public abstract class GameObject implements Renderable, Tickable, ClickHandler {
     Point pos;
     int size;

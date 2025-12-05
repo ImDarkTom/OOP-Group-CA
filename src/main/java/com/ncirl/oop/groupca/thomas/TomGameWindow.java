@@ -30,7 +30,7 @@ import java.awt.*;
  * Final requirements:
  * - File I/O (FileLoader, CustomisationManager, ScoreManager) ✔️
  * .
- * @author tom
+ * @author Thomas
  */
 public class TomGameWindow extends JFrame {
     private static int canvasWidth;

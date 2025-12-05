@@ -7,6 +7,9 @@ import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+/**
+ * @author Thomas
+ */
 public class FrameUtils {
     public static void setBackToMenuOnClose(JFrame currentFrame, Runnable onClose) {
         currentFrame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);

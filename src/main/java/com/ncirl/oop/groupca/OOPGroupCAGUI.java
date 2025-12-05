@@ -20,7 +20,7 @@ import java.awt.*;
  *
  * Amen.
  * 
- * @author anton
+ * @author Antonio + Thomas
  */
 public class OOPGroupCAGUI extends javax.swing.JFrame {
 
