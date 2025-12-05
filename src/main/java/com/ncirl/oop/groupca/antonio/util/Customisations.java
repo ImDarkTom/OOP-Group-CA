@@ -4,7 +4,7 @@
  */
 package com.ncirl.oop.groupca.antonio.util;
 
-import com.ncirl.oop.groupca.thomas.util.TruckStyle;
+import com.ncirl.oop.groupca.thomas.enums.TruckStyle;
 
 import java.awt.Color;
 import java.io.Serializable;

@@ -11,6 +11,8 @@ import java.awt.*;
 
 /**
  * The trucks that deliver food from the farms to the towns.
+ *
+ * @author Thomas
  */
 public class FoodDelivery implements Renderable, Tickable {
     // Assets

@@ -8,6 +8,9 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * @author Thomas
+ */
 public class GameCanvas extends JPanel {
     private Point lastClickPos = null;
 

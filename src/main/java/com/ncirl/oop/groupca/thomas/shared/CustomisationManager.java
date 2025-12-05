@@ -2,12 +2,13 @@ package com.ncirl.oop.groupca.thomas.shared;
 
 import com.ncirl.oop.groupca.alex.util.FileLoader;
 import com.ncirl.oop.groupca.antonio.util.Customisations;
-import com.ncirl.oop.groupca.thomas.util.TruckStyle;
+import com.ncirl.oop.groupca.thomas.enums.TruckStyle;
 
 import java.awt.*;
+
 /**
  *
- * @author anton
+ * @author Thomas + Antonio + Alex
  */
 public class CustomisationManager {
     private static Customisations customisationsInstance;

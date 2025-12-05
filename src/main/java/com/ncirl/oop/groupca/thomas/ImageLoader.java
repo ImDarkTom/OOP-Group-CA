@@ -7,6 +7,8 @@ import java.util.Map;
 
 /**
  * Handles loading assets from the <code>resources</code> folder.
+ *
+ * @author Thomas
  */
 public class ImageLoader {
     private static final Toolkit TOOLKIT = Toolkit.getDefaultToolkit();

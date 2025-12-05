@@ -6,6 +6,9 @@ import com.ncirl.oop.groupca.thomas.shared.ScoreManager;
 
 import javax.swing.*;
 
+/**
+ * @author Thomas
+ */
 public class GameLoop {
     private static Timer frameTimer;
     private static Timer logicTimer;

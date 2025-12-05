@@ -4,6 +4,9 @@ import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author Thomas
+ */
 public class FontManager {
     private static final Map<Integer, Font> cachedFonts = new HashMap<>();
 

@@ -11,7 +11,7 @@ import javax.swing.*;
 
 /**
  *
- * @author tom
+ * @author Thomas
  */
 public class ScoreGUI extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ScoreGUI.class.getName());

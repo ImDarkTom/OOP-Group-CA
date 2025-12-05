@@ -6,7 +6,7 @@ package com.ncirl.oop.groupca.alex.util;
 import java.io.Serializable;
 /**
  *
- * @author DELL
+ * @author Alex + Thomas
  */
 public class Scores implements Serializable {
     private int alexScore = 0;

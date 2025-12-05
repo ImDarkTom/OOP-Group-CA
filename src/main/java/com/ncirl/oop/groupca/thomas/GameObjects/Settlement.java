@@ -3,16 +3,11 @@ package com.ncirl.oop.groupca.thomas.GameObjects;
 import com.ncirl.oop.groupca.thomas.ImageLoader;
 import com.ncirl.oop.groupca.thomas.GameObjectManager;
 import com.ncirl.oop.groupca.thomas.GameValues;
+import com.ncirl.oop.groupca.thomas.enums.SettlementType;
 import com.ncirl.oop.groupca.thomas.shared.FontManager;
 import com.ncirl.oop.groupca.thomas.util.RenderUtils;
 
 import java.awt.*;
-
-enum SettlementType {
-    SETTLEMENT,
-    TOWN,
-    CITY
-}
 
 public class Settlement extends GameObject {
     // Assets

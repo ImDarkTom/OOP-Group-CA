@@ -12,7 +12,7 @@ import com.ncirl.oop.groupca.thomas.TomGameWindow;
 
 /**
  *
- * @author tom
+ * @author Thomas
  */
 public class GameLauncher {
     public GameLauncher() {}
