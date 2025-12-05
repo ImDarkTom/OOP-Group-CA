@@ -42,6 +42,7 @@ public class ScoreGUI extends javax.swing.JFrame {
         dogImageLbl = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Your Score");
 
         backBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small_icons/back.png"))); // NOI18N
         backBtn.setText("Back");
@@ -51,8 +52,8 @@ public class ScoreGUI extends javax.swing.JFrame {
             }
         });
 
-        titleLbl.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
-        titleLbl.setText("Your Score");
+        titleLbl.setFont(titleLbl.getFont().deriveFont(titleLbl.getFont().getSize()+11f));
+        titleLbl.setText("You got...");
 
         growScoreLbl.setText(ScoreManager.getAlexScoreText());
 
@@ -81,17 +82,18 @@ public class ScoreGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(backBtn)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(resetScoreBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
+                        .addComponent(dogImageLbl))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(resetScoreBtn)
-                            .addComponent(totalScoreLbl)
-                            .addComponent(titleLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(growScoreLbl)
                             .addComponent(deliverScoreLbl)
-                            .addComponent(manageScoreLbl))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 160, Short.MAX_VALUE)
-                        .addComponent(dogImageLbl)))
+                            .addComponent(manageScoreLbl)
+                            .addComponent(totalScoreLbl)
+                            .addComponent(titleLbl))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -100,10 +102,8 @@ public class ScoreGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(backBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(titleLbl)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(growScoreLbl)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(deliverScoreLbl)
@@ -111,8 +111,10 @@ public class ScoreGUI extends javax.swing.JFrame {
                         .addComponent(manageScoreLbl)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(totalScoreLbl)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
-                        .addComponent(resetScoreBtn))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(backBtn)
+                            .addComponent(resetScoreBtn)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(dogImageLbl)))
