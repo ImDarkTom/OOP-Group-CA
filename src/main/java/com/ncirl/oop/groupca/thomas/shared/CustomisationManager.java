@@ -7,6 +7,7 @@ import com.ncirl.oop.groupca.thomas.enums.TruckStyle;
 import java.awt.*;
 
 /**
+ * Files are saved to `.ser` files as those appear to be the common filetype for serialized classes.
  *
  * @author Thomas + Antonio + Alex
  */
