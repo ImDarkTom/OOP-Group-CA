@@ -54,8 +54,10 @@ public class GameLoop {
     }
 
     public static void stopLoops() {
-        frameTimer.stop();
-        logicTimer.stop();
+        if (frameTimer != null && logicTimer != null) {
+            frameTimer.stop();
+            logicTimer.stop();
+        }
     }
 
     public static void handleEndGame() {
