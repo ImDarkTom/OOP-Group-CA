@@ -93,9 +93,9 @@ public class AntonioGUI extends javax.swing.JFrame {
 
         jLabel1.setText("After choosing a vehicle your goal is to pick up cargo from ");
 
-        jLabel2.setText("the white circles and deliver it to the black circles while");
+        jLabel2.setText("the white circles and deliver it to the purpleish circles while");
 
-        jLabel3.setText("avoiding the red obstacles ");
+        jLabel3.setText("avoiding the rectangular obstacles ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -148,7 +148,7 @@ public class AntonioGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void LandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LandActionPerformed
-        // TODO add your handling code here:
+        // calling map and setting vehicle type to land
         JOptionPane.showMessageDialog(null, "When using a land vehicle you have a maximum cargo capacity of 35 items", "Land", JOptionPane.INFORMATION_MESSAGE);
         Vehicle vehicle = new Land(300, 200, 55, 35, 0.0, 0.0, 0, ASSET, CustomisationManager.getBodyCol());
 
@@ -158,7 +158,7 @@ public class AntonioGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_LandActionPerformed
 
     private void AirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AirActionPerformed
-        // TODO add your handling code here:
+        // calling map and setting vehicle type to air
         JOptionPane.showMessageDialog(null, "When using an air vehicle you have a slower acceleration when landed", "Air", JOptionPane.INFORMATION_MESSAGE);
         Vehicle vehicle = new Air(300, 200, 60, 40, 0.0, 0.0, 0, ASSET, CustomisationManager.getBodyCol());
 
@@ -168,7 +168,7 @@ public class AntonioGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_AirActionPerformed
 
     private void SeaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeaActionPerformed
-        // TODO add your handling code here:
+        // calling map and setting vehicle type to sea
         JOptionPane.showMessageDialog(null, "When using a seafaring vessel encountering an obstacle makes you rebound further", "Sea", JOptionPane.INFORMATION_MESSAGE);
         Vehicle vehicle = new Sea(400, 300, 50, 50, 0, 0, 0, ASSET, CustomisationManager.getBodyCol());
 
@@ -178,7 +178,7 @@ public class AntonioGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_SeaActionPerformed
 
     private void MainMenu(java.awt.event.WindowEvent evt) {
-        // TODO add your handling code here:
+        // calling confirmation dialog for a return window to main menu on pressing x in top right corner
 
         if (JOptionPane.showConfirmDialog(this, "Are you sure you want to return to the main menu?", "Confirm", JOptionPane.YES_NO_OPTION) == 1) {
             return;
@@ -194,6 +194,7 @@ public class AntonioGUI extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        //look and feel
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

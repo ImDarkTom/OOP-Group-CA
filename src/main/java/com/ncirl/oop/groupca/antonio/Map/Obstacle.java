@@ -8,12 +8,13 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class Obstacle {
+    // obstacle variables
     private int x;
     private int y;
     private final int width;
     private final int height;
 
-
+    //obstacle constructor
     public Obstacle(int x, int y, int width, int height) {
         this.x = x;
         this.y = y;
@@ -21,7 +22,7 @@ public class Obstacle {
         this.height = height;
     }
 
-
+    //paint method to call
     public void paintObstacle(Graphics g) {
         g.setColor(new Color(128, 0, 63));
         g.fillRect(x, y, width, height);
@@ -29,6 +30,7 @@ public class Obstacle {
         g.drawRect(x, y, width, height);
     }
 
+    //setters and getters
     public int getX() {
         return x;
     }

@@ -13,12 +13,14 @@ import java.awt.Graphics;
  */
 public class Delivery extends Items {
 
+    // amount of items requested
     private final int[] requested;
     public Delivery(int radius, int x, int y, int requested) {
         super(radius, x, y);
         this.requested = new int[]{requested};
     }
 
+    //draw method to call
     @Override
     public void paintItem(Graphics g) {
         g.setColor(new Color(53, 35, 109));
@@ -27,6 +29,7 @@ public class Delivery extends Items {
         g.drawOval(posX[0], posY[0], itemRadius, itemRadius);
     }
 
+    //getter for unique value
     public int[] getRequested() {
         return requested;
     }

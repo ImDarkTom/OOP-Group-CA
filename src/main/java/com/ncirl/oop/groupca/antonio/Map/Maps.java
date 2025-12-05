@@ -33,6 +33,7 @@ import java.util.Random;
  */
 public class Maps {
 
+    //setting variables
     private Panel panel;
     private final Vehicle vehicle;
     private final ArrayList<Pickup> pickups = new ArrayList<>();
@@ -59,11 +60,13 @@ public class Maps {
 
 
     public Maps(Vehicle vehicle) {
+        //generating objects on game start
         this.vehicle = vehicle;
         generateObstacles();
         generateItems();
     }
 
+    //start and final obstacle generation
     private void generateObstacles() {
         int count = random.nextInt(9) + 12;
         for (int i = 0; i < count; i++) {
@@ -84,6 +87,7 @@ public class Maps {
         }
     }
 
+    //start item generation
     private void generateItems() {
         pickups.clear();
         deliveries.clear();
@@ -95,9 +99,11 @@ public class Maps {
         }
     }
 
+    //creating actual game window
     public void createWindow() {
         panel = new Panel();
         JFrame frame = new JFrame("Delivery Game");
+        //adding top bar for values
         JPanel buttonContainer = new JPanel(new FlowLayout(FlowLayout.LEFT));
         pointsLabel = new JLabel("Points: 0");
         timerLabel = new JLabel("Time: 120s");
@@ -107,9 +113,11 @@ public class Maps {
         buttonContainer.add(timerLabel);
         frame.add(buttonContainer, BorderLayout.NORTH);
 
+
         frame.setResizable(false);
         frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         frame.addWindowListener(new WindowAdapter() {
+            //on pressing x prompts player to go back to selection menu
             public void windowClosing(WindowEvent e) {
                 if (JOptionPane.showConfirmDialog(frame, "Return to selection menu?", "Confirm", JOptionPane.YES_NO_OPTION) == 1) {
                     return;
@@ -123,6 +131,7 @@ public class Maps {
         });
 
         frame.add(panel);
+        //added listener for keyboard inputs W,A,S,D
         frame.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -165,6 +174,7 @@ public class Maps {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
+        //loop timer works ~30fps to check for collision and move vehicle
         loop = new Timer(33, e -> {
             updateMovement();
             checkPickupDelivery();
@@ -173,16 +183,19 @@ public class Maps {
         });
         loop.start();
 
+        //timer for game duration updating every second
         countdown = new Timer(1000, e -> {
             timeLeft--;
             timerLabel.setText("Time: " + timeLeft + "s");
             pointsLabel.setText("Points: " + points);
             cargoLabel.setText("Cargo: " + vehicleCargo);
+            //stops game when time runs out
             if (timeLeft <= 0) {
                 String message = "";
                 accelerate = decelerate = left = right = false;
                 loop.stop();
                 countdown.stop();
+                //checking final scored points
                 if(points<150){
                     message="you could have made more delivery's with less mistakes";
                     ScoreManager.setAntonioMsg("you could have made more delivery's with less mistakes");
@@ -195,6 +208,7 @@ public class Maps {
                     message="you made an exceptional amount of delivery's";
                     ScoreManager.setAntonioMsg("you made an exceptional amount of delivery's");
                 }
+                //takes you back to selection menu on game end
                 JOptionPane.showMessageDialog(null, "Well done on finishing the delivery game!\nYou scored "+points+" points!\n"+message, "Final point score", JOptionPane.INFORMATION_MESSAGE);
                 ScoreManager.setAntonioScore(points);
                 AntonioGUI MyGUI = new AntonioGUI();
@@ -205,18 +219,29 @@ public class Maps {
         countdown.start();
     }
 
+    //movement application
     private void updateMovement() {
         double acceleration = 1;
 
+        //unique movement rules for air vehicles
         if(vehicle instanceof Air && ((vehicle.getxVel() + vehicle.getyVel())<0.8) && ((vehicle.getxVel() + vehicle.getyVel())>-0.8)){
             acceleration = 0.5;
         }
         double friction = 0.94;
 
-        if (accelerate) vehicle.setyVel(vehicle.getyVel() - acceleration);
-        else if (decelerate) vehicle.setyVel(vehicle.getyVel() + acceleration);
-        else if (left) vehicle.setxVel(vehicle.getxVel() - acceleration);
-        else if (right) vehicle.setxVel(vehicle.getxVel() + acceleration);
+        //checking vehicle direction input and moving coordinates according to velocity and reducing velocity due to friction
+        if (accelerate) {
+            vehicle.setyVel(vehicle.getyVel() - acceleration);
+        }
+        else if (decelerate){
+            vehicle.setyVel(vehicle.getyVel() + acceleration);
+            }
+        else if (left) {
+            vehicle.setxVel(vehicle.getxVel() - acceleration);
+        }
+        else if (right) {
+            vehicle.setxVel(vehicle.getxVel() + acceleration);
+        }
 
         vehicle.setPosX(vehicle.getPosX() + vehicle.getxVel());
         vehicle.setPosY(vehicle.getPosY() + vehicle.getyVel());
@@ -225,22 +250,19 @@ public class Maps {
         vehicle.setyVel(vehicle.getyVel() * friction);
     }
 
+    //vehicle to obstacle collision check
+    //all collision is checked as if every object is a circle for consistency and ease of use
     private boolean isColliding() {
-        double vCenterX;
-        double vCenterY;
-
-        if (vehicle instanceof Air) {
-            vCenterX = vehicle.getPosX();
-            vCenterY = vehicle.getPosY();
-        } else {
-            vCenterX = vehicle.getPosX() + vehicle.getWidth() / 2.5;
-            vCenterY = vehicle.getPosY() + vehicle.getHeight() / 2.5;
-        }
+        double vCenterX = designateVehicle()[0];
+        double vCenterY = designateVehicle()[1];
 
         double vehicleRadius = (double) Math.max(vehicle.getWidth(), vehicle.getHeight()) / 2;
 
+        //calling code that checks if vehicle is actually overlapping hitbox and is colliding
         return obstacleHitbox(vCenterX, vCenterY, vehicleRadius);
     }
+
+    //obstacle hitbox calculation
     private boolean obstacleHitbox(double X, double Y, double rad) {
         for (Obstacle obstacle : obstacle) {
             double oX = obstacle.getX() + obstacle.getWidth() / 2.0;
@@ -253,6 +275,7 @@ public class Maps {
         }
         return false;
     }
+    //vehicle hitbox check used mainly for obstacle generation on game start since you can't check collision without first generating and obstacle otherwise
     private boolean vehicleHitbox(int x, int y, int w, int h) {
         double vCenterX = designateVehicle()[0];
         double vCenterY = designateVehicle()[1];
@@ -268,7 +291,9 @@ public class Maps {
         return distance < (vehicleRadius + obstacleRadius);
     }
 
+    //code that checks for vehicle collision with map edge and calls obstacle collision in order to rebound and lose points or reset velocity
     private void checkCollision() {
+        //map edge checks
         if (vehicle.getPosX() > 1000) {
             vehicle.setPosX(990);
             vehicle.setyVel(0);
@@ -286,6 +311,7 @@ public class Maps {
             vehicle.setyVel(0);
             vehicle.setxVel(0);
         }
+        //special rule for sea vehicles as if obstacles were waves
         else if(isColliding() && (vehicle instanceof Sea)){
             switch (last) {
                 case "acc":
@@ -302,6 +328,7 @@ public class Maps {
                     break;
             }
         }
+        //regular collision calculation for other vehicles
         else if (isColliding()) {
             switch (last) {
                 case "acc":
@@ -317,6 +344,7 @@ public class Maps {
                     vehicle.setxVel(vehicle.getPosX() * -0.01);
                     break;
             }
+            //point deduction and update
             if(points>0){
                 points -= 1;
             }
@@ -325,18 +353,23 @@ public class Maps {
 
     }
 
+    //vehicle pickup point max cargo capacity
     private int getCapacity() {
+        //land vehicle special rule application
         if (vehicle instanceof Land landVehicle) {
             return landVehicle.getCapacity();
         }
         return Integer.MAX_VALUE;
     }
 
+    //respawns pickups if pickup point is depleted
     private void respawnPickupAt(int index) {
+        //spawn items function plus index for replacing specific depleted pickup
         int[] values = spawnItem();
         pickups.set(index, new Pickup(values[0], values[1], values[2], values[3]));
     }
 
+    //item respawn logic making items variable in size and location and preventing obstacle overlap
     private int[] spawnItem(){
         int[] values = new int[4];
         int attempts = 0;
@@ -350,24 +383,33 @@ public class Maps {
         } while (obstacleHitbox(values[1], values[2], values[0]));
         return values;
     }
+    //delivery respawn on delivery completed
     private void respawnDeliveryAt(int index) {
         int[] values = spawnItem();
+        //spawn items function plus index for replacing specific finished delivery's
         deliveries.set(index, new Delivery(values[0], values[1], values[2], values[3]));
     }
 
+    //checking if player has cargo or can hold more while overlapping item point for variable changes
     private void checkPickupDelivery() {
 
 
+        //getting cargo cap used for land vehicle special rule
         int maxCargo = getCapacity();
 
+        //pickup
         for (int i = 0; i < pickups.size(); i++) {
+
             Pickup p = pickups.get(i);
             double[] itemAllowance = items(p);
+            //checking distance between item and vehicle
             if (itemAllowance[2] < itemAllowance[3]) {
                 int[] amtArr = p.getAmount();
-                if (amtArr != null && amtArr[0] > 0 && vehicleCargo < maxCargo) {
+                //checking to see if vehicle can hold cargo and pickup has cargo available
+                if (amtArr[0] > 0 && vehicleCargo < maxCargo) {
                     amtArr[0] -= 1;
                     vehicleCargo += 1;
+                    //calling respawn to overwrite depleted pickup
                     if (amtArr[0] <= 0) {
                         respawnPickupAt(i);
                     }
@@ -375,16 +417,21 @@ public class Maps {
             }
         }
 
+        //delivery
         for (int i = 0; i < deliveries.size(); i++) {
             Delivery d = deliveries.get(i);
             double[] itemAllowance = items(d);
+            //checking distance between items and vehicle
             if (itemAllowance[2] < itemAllowance[3]) {
                 int[] reqArr = d.getRequested();
-                if (reqArr != null && reqArr[0] > 0 && vehicleCargo > 0) {
+                //checking to see if vehicle has cargo and delivery is requesting any more cargo
+                if (reqArr[0] > 0 && vehicleCargo > 0) {
+                    //reducing requested cargo and cargo available while increasing score
                     reqArr[0] -= 1;
                     vehicleCargo -= 1;
                     points += 1;
                     pointsLabel.setText("Points: " + points);
+                    //calling respawn to overwrite completed delivery
                     if (reqArr[0] <= 0) {
                         respawnDeliveryAt(i);
                     }
@@ -394,8 +441,10 @@ public class Maps {
         cargoLabel.setText("Cargo: " + vehicleCargo);
     }
 
+    //assigning vehicle values according to vehicle type
     private double[] designateVehicle(){
         double[] vCenters = new double[2];
+        //air drawn using polygon thus different logic
         if (vehicle instanceof Air) {
             vCenters[0] = vehicle.getPosX();
             vCenters[1] = vehicle.getPosY();
@@ -406,6 +455,8 @@ public class Maps {
         }
         return vCenters;
     }
+
+    //checks vehicle to item collision/overlap
     private double[] items(Items item) {
         double vCenterX = designateVehicle()[0];
         double vCenterY = designateVehicle()[1];
@@ -419,6 +470,7 @@ public class Maps {
         return values;
     }
 
+    //window Panel
     class Panel extends JPanel {
         public Panel() {
             setPreferredSize(new Dimension(1000, 600));
@@ -426,6 +478,7 @@ public class Maps {
             setBackground(Color.ORANGE);
         }
 
+        //paints everything including going through all objects with multiple instances
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
             for (Obstacle obstacle : obstacle) {
