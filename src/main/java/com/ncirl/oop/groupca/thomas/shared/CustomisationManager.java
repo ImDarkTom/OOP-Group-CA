@@ -2,6 +2,7 @@ package com.ncirl.oop.groupca.thomas.shared;
 
 import com.ncirl.oop.groupca.alex.util.FileLoader;
 import com.ncirl.oop.groupca.antonio.util.Customisations;
+import com.ncirl.oop.groupca.thomas.util.TruckStyle;
 
 import java.awt.*;
 /**
@@ -31,6 +32,10 @@ public class CustomisationManager {
         getInstance().setHat(hat);
     }
 
+    public static void setTruckStyle(int truckStyle) {
+        getInstance().setTruckStyleIndex(truckStyle);
+    }
+
     // Getters
     public static int getHat() {
         return getInstance().getHat();
@@ -42,6 +47,15 @@ public class CustomisationManager {
     public static Color getBodyCol() {
         return getInstance().getBodyCol();
     }
+
+    public static int getTruckStyleIndex() {
+        return getInstance().getTruckStyleIndex();
+    }
+
+    public static TruckStyle getTruckStyle() {
+        return getInstance().getTruckStyle();
+    }
+
 
     public static void resetCustomisations() {
         FileLoader.saveToFile(new Customisations(), CUSTOMISATION_FILENAME);

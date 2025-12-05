@@ -13,13 +13,14 @@ import javax.swing.JOptionPane;
  * @author Alex
  */
 public class CustomisationGUI extends javax.swing.JFrame {
-    
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(CustomisationGUI.class.getName());
-    
+   
     /**
      * Creates new form CustomisationGUI
      */
     private boolean itemsAdded = false;
+    private boolean truckItemsAdded = false;
+    
     public CustomisationGUI() {
         initComponents();
     }
@@ -32,27 +33,31 @@ public class CustomisationGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        title = new java.awt.Label();
-        hatList = new javax.swing.JComboBox<>();
+        titleLbl = new java.awt.Label();
+        hatCmb = new javax.swing.JComboBox<>();
         backBtn = new javax.swing.JButton();
-        hatLabel = new javax.swing.JLabel();
-        hatLabel1 = new javax.swing.JLabel();
-        shirtList = new javax.swing.JComboBox<>();
+        hatLbl = new javax.swing.JLabel();
+        shirtLbl = new javax.swing.JLabel();
+        shirtCmb = new javax.swing.JComboBox<>();
+        truckCmb = new javax.swing.JComboBox<>();
+        truckLbl = new javax.swing.JLabel();
+        resetCustomisationsBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        title.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        title.setText("Customise your character!");
+        titleLbl.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        titleLbl.setForeground(new java.awt.Color(0, 0, 0));
+        titleLbl.setText("Customise your character!");
 
-        hatList.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None", "Top Hat", "Straw Hat", "Propeller Hat", "Delivery Hat" }));
-        hatList.addHierarchyListener(new java.awt.event.HierarchyListener() {
+        hatCmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None", "Top Hat", "Straw Hat", "Propeller Hat", "Delivery Hat" }));
+        hatCmb.addHierarchyListener(new java.awt.event.HierarchyListener() {
             public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
-                hatListHierarchyChanged(evt);
+                hatCmbHierarchyChanged(evt);
             }
         });
-        hatList.addActionListener(new java.awt.event.ActionListener() {
+        hatCmb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                hatListActionPerformed(evt);
+                hatCmbActionPerformed(evt);
             }
         });
 
@@ -64,19 +69,49 @@ public class CustomisationGUI extends javax.swing.JFrame {
             }
         });
 
-        hatLabel.setText("Select a hat!");
+        hatLbl.setText("Select a hat!");
 
-        hatLabel1.setText("Select a shirt colour!");
+        shirtLbl.setText("Select a shirt colour!");
 
-        shirtList.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Blue", "Cyan", "Red", "Magenta", "Pink", "Gray", "Black" }));
-        shirtList.addHierarchyListener(new java.awt.event.HierarchyListener() {
+        shirtCmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Blue", "Cyan", "Red", "Magenta", "Pink", "Gray", "Black" }));
+        shirtCmb.addHierarchyListener(new java.awt.event.HierarchyListener() {
             public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
-                shirtListHierarchyChanged(evt);
+                shirtCmbHierarchyChanged(evt);
             }
         });
-        shirtList.addActionListener(new java.awt.event.ActionListener() {
+        shirtCmb.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+                shirtCmbAncestorRemoved(evt);
+            }
+        });
+        shirtCmb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                shirtListActionPerformed(evt);
+                shirtCmbActionPerformed(evt);
+            }
+        });
+
+        truckCmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Default", "Christmas" }));
+        truckCmb.addHierarchyListener(new java.awt.event.HierarchyListener() {
+            public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
+                truckCmbHierarchyChanged(evt);
+            }
+        });
+        truckCmb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                truckCmbActionPerformed(evt);
+            }
+        });
+
+        truckLbl.setText("Select a truck style!");
+
+        resetCustomisationsBtn.setText("Reset Customisations");
+        resetCustomisationsBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetCustomisationsBtnActionPerformed(evt);
             }
         });
 
@@ -85,43 +120,51 @@ public class CustomisationGUI extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(backBtn))
+                        .addGap(0, 41, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(hatCmb, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(hatLbl))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(shirtCmb, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(shirtLbl))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(truckCmb, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(truckLbl))
+                        .addContainerGap(43, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(19, 19, 19)
-                                        .addComponent(hatLabel))
-                                    .addComponent(hatList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(71, 71, 71)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(hatLabel1)
-                                    .addComponent(shirtList, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(59, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(titleLbl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(backBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(resetCustomisationsBtn)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(13, 13, 13)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(hatLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(hatList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(hatLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(shirtList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
-                .addComponent(backBtn)
+                .addContainerGap(56, Short.MAX_VALUE)
+                .addComponent(titleLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(shirtLbl)
+                    .addComponent(truckLbl)
+                    .addComponent(hatLbl))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(hatCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(shirtCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(truckCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(backBtn)
+                    .addComponent(resetCustomisationsBtn))
                 .addContainerGap())
         );
 
@@ -129,7 +172,7 @@ public class CustomisationGUI extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void hatListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hatListActionPerformed
+    private void hatCmbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hatCmbActionPerformed
         JComboBox comboBox = (JComboBox) evt.getSource();
         switch((String)comboBox.getSelectedItem()) { // Transfers hat choice to Customisation Manager
             case "Top Hat":
@@ -157,7 +200,7 @@ public class CustomisationGUI extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "You do not have enough points to use this item.");
                 break;
         }      
-    }//GEN-LAST:event_hatListActionPerformed
+    }//GEN-LAST:event_hatCmbActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
         OOPGroupCAGUI mainMenuGUI = new OOPGroupCAGUI(); // Back button functionality
@@ -165,7 +208,7 @@ public class CustomisationGUI extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_backBtnActionPerformed
 
-    private void hatListHierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_hatListHierarchyChanged
+    private void hatCmbHierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_hatCmbHierarchyChanged
         JComboBox comboBox = (JComboBox) evt.getSource(); // Load saved choice of hat to customisations dropdown
         if(!itemsAdded) {
             if(ScoreManager.getTotalScore()>=800) {
@@ -181,17 +224,65 @@ public class CustomisationGUI extends javax.swing.JFrame {
             itemsAdded=true;
         }
         comboBox.setSelectedIndex(CustomisationManager.getHat());
-    }//GEN-LAST:event_hatListHierarchyChanged
+    }//GEN-LAST:event_hatCmbHierarchyChanged
 
-    private void shirtListHierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_shirtListHierarchyChanged
+    private void shirtCmbHierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_shirtCmbHierarchyChanged
         JComboBox comboBox = (JComboBox) evt.getSource(); // Load saved choice of shirt to customisations dropdown
         comboBox.setSelectedIndex(CustomisationManager.getBodyNum());
-    }//GEN-LAST:event_shirtListHierarchyChanged
+    }//GEN-LAST:event_shirtCmbHierarchyChanged
 
-    private void shirtListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shirtListActionPerformed
+    private void shirtCmbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shirtCmbActionPerformed
         JComboBox comboBox = (JComboBox) evt.getSource(); // Sends shirt choice to customisations manager
         CustomisationManager.setBody(comboBox.getSelectedIndex());
-    }//GEN-LAST:event_shirtListActionPerformed
+    }//GEN-LAST:event_shirtCmbActionPerformed
+
+    private void resetCustomisationsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetCustomisationsBtnActionPerformed
+        int confirmed = JOptionPane.showConfirmDialog(this, "Are you sure you want to reset all your customizations?", "Reset Customisations", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        if (confirmed == 0) {
+            CustomisationManager.resetCustomisations();
+            
+            dispose();
+            CustomisationGUI menu = new CustomisationGUI();
+            menu.setVisible(true);
+        }
+    }//GEN-LAST:event_resetCustomisationsBtnActionPerformed
+
+    private void shirtCmbAncestorRemoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_shirtCmbAncestorRemoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_shirtCmbAncestorRemoved
+
+    private void truckCmbHierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_truckCmbHierarchyChanged
+        JComboBox comboBox = (JComboBox) evt.getSource(); // Load saved choice of hat to customisations dropdown
+        if (!truckItemsAdded) {
+            if (ScoreManager.getTotalScore() >= 50) {
+                comboBox.addItem("Golden");
+            } else {
+                comboBox.addItem("Golden (900 points)");
+            }
+            
+            truckItemsAdded = true;
+        }
+        
+        comboBox.setSelectedIndex(CustomisationManager.getTruckStyleIndex());
+    }//GEN-LAST:event_truckCmbHierarchyChanged
+
+    private void truckCmbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_truckCmbActionPerformed
+        JComboBox comboBox = (JComboBox) evt.getSource();
+        switch ((String) comboBox.getSelectedItem()) { // Transfers hat choice to Customisation Manager
+            case "Default":
+                CustomisationManager.setTruckStyle(0);
+                break;
+            case "Christmas":
+                CustomisationManager.setTruckStyle(1);
+                break;
+            case "Gold Truck":
+                CustomisationManager.setTruckStyle(2);
+                break;
+            case "Golden (900 points)":
+                JOptionPane.showMessageDialog(this, "You do not have enough points to use this item.");
+                break;
+        }
+    }//GEN-LAST:event_truckCmbActionPerformed
 
     /**
      * @param args the command line arguments
@@ -220,10 +311,13 @@ public class CustomisationGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backBtn;
-    private javax.swing.JLabel hatLabel;
-    private javax.swing.JLabel hatLabel1;
-    private javax.swing.JComboBox<String> hatList;
-    private javax.swing.JComboBox<String> shirtList;
-    private java.awt.Label title;
+    private javax.swing.JComboBox<String> hatCmb;
+    private javax.swing.JLabel hatLbl;
+    private javax.swing.JButton resetCustomisationsBtn;
+    private javax.swing.JComboBox<String> shirtCmb;
+    private javax.swing.JLabel shirtLbl;
+    private java.awt.Label titleLbl;
+    private javax.swing.JComboBox<String> truckCmb;
+    private javax.swing.JLabel truckLbl;
     // End of variables declaration//GEN-END:variables
 }

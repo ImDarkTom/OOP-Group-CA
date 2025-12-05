@@ -4,16 +4,24 @@
  */
 package com.ncirl.oop.groupca.antonio.util;
 
+import com.ncirl.oop.groupca.thomas.util.TruckStyle;
+
 import java.awt.Color;
 import java.io.Serializable;
 
 /**
+ * <p>
+ *     `bodyNum/bodyColor` is used by Antonio.
+ *     `hat` is used by Alex.
+ *     `truckStyle` is used by Thomas.
+ * </p>
  *
  * @author Anton + Thomas + Alex
  */
 public class Customisations implements Serializable {
     int bodyNum = 0;
     int hat = 0;
+    int truckStyleIndex = 0;
 
     public Customisations() {}
 
@@ -24,6 +32,10 @@ public class Customisations implements Serializable {
 
     public void setHat(int hat) {
         this.hat = hat;
+    }
+
+    public void setTruckStyleIndex(int truckStyleIndex) {
+        this.truckStyleIndex = truckStyleIndex;
     }
 
     // Getters
@@ -47,4 +59,11 @@ public class Customisations implements Serializable {
         return hat;
     }
 
+    public int getTruckStyleIndex() {
+        return truckStyleIndex;
+    }
+
+    public TruckStyle getTruckStyle() {
+        return TruckStyle.values()[truckStyleIndex];
+    }
 }
