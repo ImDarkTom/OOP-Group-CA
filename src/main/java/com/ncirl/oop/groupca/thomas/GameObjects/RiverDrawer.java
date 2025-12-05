@@ -31,10 +31,6 @@ public class RiverDrawer extends GameObject {
     private static void generateRiver() {
         riverPoints.add(new Point(200, 0));
         riverPoints.add(new Point(800, 600));
-
-        // maybe river generation
-        // riverPoints.add(new Point(random.nextInt(1000), random.nextInt(600)));
-        // riverPoints.add(new Point(random.nextInt(1000), random.nextInt(600)));
     }
 
     @Override
