@@ -1,5 +1,6 @@
 package com.ncirl.oop.groupca.thomas;
 
+import com.ncirl.oop.groupca.thomas.GameObjects.FoodDelivery;
 import com.ncirl.oop.groupca.thomas.GameWindowUI.ActionButtons;
 import com.ncirl.oop.groupca.thomas.util.FrameUtils;
 
@@ -103,6 +104,9 @@ public class TomGameWindow extends JFrame {
                 "Food Distribution Game Tutorial",
                 JOptionPane.INFORMATION_MESSAGE
         );
+
+        // refresh the truck asset, since the user might have changed it before re-entering the game
+        FoodDelivery.refreshTruckAsset();
 
         // game state
         GameObjectManager.generateWorld();

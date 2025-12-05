@@ -30,4 +30,8 @@ public enum TruckStyle {
 
         return label;
     }
+
+    public int getRequiredScore() {
+        return requiredScore;
+    }
 }

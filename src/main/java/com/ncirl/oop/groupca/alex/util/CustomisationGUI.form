@@ -35,36 +35,36 @@
                   <Group type="102" attributes="0">
                       <EmptySpace min="0" pref="41" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="hatCmb" min="-2" pref="120" max="-2" attributes="0"/>
-                                  <Component id="hatLbl" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="shirtCmb" min="-2" pref="120" max="-2" attributes="0"/>
-                                  <Component id="shirtLbl" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="truckCmb" min="-2" pref="120" max="-2" attributes="0"/>
-                                  <Component id="truckLbl" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Component id="titleLbl" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="hatCmb" min="-2" pref="120" max="-2" attributes="0"/>
+                          <Component id="hatLbl" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="shirtCmb" min="-2" pref="120" max="-2" attributes="0"/>
+                          <Component id="shirtLbl" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="truckCmb" min="-2" pref="120" max="-2" attributes="0"/>
+                          <Component id="truckLbl" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="43" max="32767" attributes="0"/>
                   </Group>
               </Group>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace pref="56" max="32767" attributes="0"/>
-              <Component id="titleLbl" min="-2" pref="59" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+              <EmptySpace pref="93" max="32767" attributes="0"/>
+              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="shirtLbl" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="truckLbl" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -76,7 +76,7 @@
                   <Component id="shirtCmb" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="truckCmb" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="138" max="32767" attributes="0"/>
+              <EmptySpace pref="132" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="backBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="resetCustomisationsBtn" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -87,17 +87,6 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="java.awt.Label" name="titleLbl">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Dialog" size="24" style="0"/>
-        </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="0" green="0" red="0" type="rgb"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Customise your character!"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JComboBox" name="hatCmb">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
@@ -136,6 +125,11 @@
     </Component>
     <Component class="javax.swing.JLabel" name="shirtLbl">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.editors2.FontEditor">
+          <FontInfo relative="true">
+            <Font component="shirtLbl" property="font" relativeSize="true" size="0"/>
+          </FontInfo>
+        </Property>
         <Property name="text" type="java.lang.String" value="Select a shirt colour!"/>
       </Properties>
     </Component>
@@ -173,7 +167,9 @@
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox&lt;&gt;()"/>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="truckCmb.setSelectedItem(CustomisationManager.getTruckStyle());"/>
+        <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="CustomisationGUI_truckCmb"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;TruckStyle&gt;"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="truckLbl">
@@ -188,6 +184,16 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="resetCustomisationsBtnActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.editors2.FontEditor">
+          <FontInfo relative="true">
+            <Font bold="true" component="jLabel1" property="font" relativeSize="true" size="11"/>
+          </FontInfo>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Customise your character!"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

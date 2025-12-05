@@ -40,9 +40,14 @@ public class GameObjectManager {
     }
 
     public static void resetState() {
+        // Stop all running loops
         GameLoop.stopLoops();
+
+        // Reset objects and trucks
         gameObjects = new ArrayList<>();
-        GameValues.setPlayerMaterials(100);
+        foodDeliveries = new ArrayList<>();
+
+        GameValues.reset();
     }
 
     public static void tickLogic() {

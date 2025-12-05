@@ -24,11 +24,8 @@ public class CustomisationGUI extends javax.swing.JFrame {
      */
     private boolean itemsAdded = false;
     
-    private static ComboBoxModel<String> getTruckStyleList() {
-        String[] itemNamesList = Arrays.stream(TruckStyle.values())
-                .map(TruckStyle::toString)
-                .toArray(String[]::new);
-        return new DefaultComboBoxModel<>(itemNamesList);
+    private static ComboBoxModel<TruckStyle> getTruckStyleList() {
+        return new DefaultComboBoxModel<>(TruckStyle.values());
     }
     
     public CustomisationGUI() {
@@ -43,7 +40,6 @@ public class CustomisationGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        titleLbl = new java.awt.Label();
         hatCmb = new javax.swing.JComboBox<>();
         backBtn = new javax.swing.JButton();
         hatLbl = new javax.swing.JLabel();
@@ -52,12 +48,9 @@ public class CustomisationGUI extends javax.swing.JFrame {
         truckCmb = new javax.swing.JComboBox<>();
         truckLbl = new javax.swing.JLabel();
         resetCustomisationsBtn = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        titleLbl.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        titleLbl.setForeground(new java.awt.Color(0, 0, 0));
-        titleLbl.setText("Customise your character!");
 
         hatCmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None", "Top Hat", "Straw Hat", "Propeller Hat", "Delivery Hat" }));
         hatCmb.addHierarchyListener(new java.awt.event.HierarchyListener() {
@@ -81,6 +74,7 @@ public class CustomisationGUI extends javax.swing.JFrame {
 
         hatLbl.setText("Select a hat!");
 
+        shirtLbl.setFont(shirtLbl.getFont());
         shirtLbl.setText("Select a shirt colour!");
 
         shirtCmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Blue", "Cyan", "Red", "Magenta", "Pink", "Gray", "Black" }));
@@ -105,6 +99,7 @@ public class CustomisationGUI extends javax.swing.JFrame {
         });
 
         truckCmb.setModel(getTruckStyleList());
+        truckCmb.setSelectedItem(CustomisationManager.getTruckStyle());
         truckCmb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 truckCmbActionPerformed(evt);
@@ -119,6 +114,9 @@ public class CustomisationGUI extends javax.swing.JFrame {
                 resetCustomisationsBtnActionPerformed(evt);
             }
         });
+
+        jLabel1.setFont(jLabel1.getFont().deriveFont(jLabel1.getFont().getStyle() | java.awt.Font.BOLD, jLabel1.getFont().getSize()+11));
+        jLabel1.setText("Customise your character!");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -135,26 +133,27 @@ public class CustomisationGUI extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 41, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(hatCmb, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(hatLbl))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(shirtCmb, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(shirtLbl))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(truckCmb, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(truckLbl)))
-                            .addComponent(titleLbl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(hatCmb, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(hatLbl))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(shirtCmb, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(shirtLbl))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(truckCmb, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(truckLbl))
                         .addContainerGap(43, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(56, Short.MAX_VALUE)
-                .addComponent(titleLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(93, Short.MAX_VALUE)
+                .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(shirtLbl)
@@ -165,7 +164,7 @@ public class CustomisationGUI extends javax.swing.JFrame {
                     .addComponent(hatCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(shirtCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(truckCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(backBtn)
                     .addComponent(resetCustomisationsBtn))
@@ -256,27 +255,17 @@ public class CustomisationGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_shirtCmbAncestorRemoved
 
     private void truckCmbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_truckCmbActionPerformed
-        String selectedStyle = (String) truckCmb.getSelectedItem();
-        
-        switch (selectedStyle) {
-            case "Default":
-                CustomisationManager.setTruckStyle(0);
-                break;
-            case "Christmas":
-                CustomisationManager.setTruckStyle(1);
-                break;
-            case "Golden (900 points)":
-                if (ScoreManager.getTotalScore() >= 900) {
-                    CustomisationManager.setTruckStyle(2);
-                } else {
-                    JOptionPane.showMessageDialog(this, "You do not have enough points to use this item.");
-                    truckCmb.setSelectedIndex(0);
-                }
-                break;
-            default:
-                // This shouldn't be triggered, but is required to prevent errors.
-                JOptionPane.showMessageDialog(this, "Invalid option");
-                break;
+        TruckStyle selectedStyle = (TruckStyle) truckCmb.getSelectedItem();
+
+        if (selectedStyle == null) {
+            return;
+        }
+
+        if (ScoreManager.getTotalScore() >= selectedStyle.getRequiredScore()) {
+            CustomisationManager.setTruckStyle(selectedStyle);
+        } else {
+            JOptionPane.showMessageDialog(this, "You do not have enough points to select this style.");
+            truckCmb.setSelectedIndex(0);
         }
     }//GEN-LAST:event_truckCmbActionPerformed
 
@@ -309,11 +298,11 @@ public class CustomisationGUI extends javax.swing.JFrame {
     private javax.swing.JButton backBtn;
     private javax.swing.JComboBox<String> hatCmb;
     private javax.swing.JLabel hatLbl;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JButton resetCustomisationsBtn;
     private javax.swing.JComboBox<String> shirtCmb;
     private javax.swing.JLabel shirtLbl;
-    private java.awt.Label titleLbl;
-    private javax.swing.JComboBox<String> truckCmb;
+    private javax.swing.JComboBox<TruckStyle> truckCmb;
     private javax.swing.JLabel truckLbl;
     // End of variables declaration//GEN-END:variables
 }

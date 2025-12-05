@@ -39,8 +39,8 @@ public class CustomisationManager {
         save();
     }
 
-    public static void setTruckStyle(int truckStyle) {
-        getInstance().setTruckStyleIndex(truckStyle);
+    public static void setTruckStyle(TruckStyle truckStyle) {
+        getInstance().setTruckStyle(truckStyle);
         save();
     }
 
@@ -55,10 +55,6 @@ public class CustomisationManager {
 
     public static Color getBodyCol() {
         return getInstance().getBodyCol();
-    }
-
-    public static int getTruckStyleIndex() {
-        return getInstance().getTruckStyleIndex();
     }
 
     public static TruckStyle getTruckStyle() {

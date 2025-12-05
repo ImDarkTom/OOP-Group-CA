@@ -1,5 +1,6 @@
 package com.ncirl.oop.groupca.thomas;
 
+import com.ncirl.oop.groupca.thomas.GameObjects.FoodDelivery;
 import com.ncirl.oop.groupca.thomas.GameObjects.RiverDrawer;
 import com.ncirl.oop.groupca.thomas.util.UpgradeableValue;
 
@@ -63,10 +64,13 @@ public class GameValues {
 
     public static UpgradeableValue[] upgradesRegistry = { deliveryDelay, deliveryRange, deliverySpeed, deliveryHungerDecreaseAmount, irrigationDistance };
 
+    // Defaults
+    private static final int INITIAL_PLAYER_MATERIALS = 100;
+
     // Player values
     private static int day = 0;
     private static int score = 0;
-    private static int playerMaterials = 100;
+    private static int playerMaterials = INITIAL_PLAYER_MATERIALS;
 
     // Getters/setters
     public static int getDeliveryHungerDecreaseAmount() {
@@ -97,10 +101,6 @@ public class GameValues {
         playerMaterials += addedPlayerMaterials;
     }
 
-    public static void setPlayerMaterials(int playerMaterials) {
-        GameValues.playerMaterials = playerMaterials;
-    }
-
     public static void addScore(int score) {
         GameValues.score += score;
     }
@@ -117,5 +117,16 @@ public class GameValues {
     // score
     public static int getScore() {
         return score;
+    }
+    
+    
+    public static void reset() {
+        for (UpgradeableValue upgrade : upgradesRegistry) {
+            upgrade.reset();
+        }
+
+        GameValues.day = 0;
+        GameValues.score = 0;
+        GameValues.playerMaterials = INITIAL_PLAYER_MATERIALS;
     }
 }

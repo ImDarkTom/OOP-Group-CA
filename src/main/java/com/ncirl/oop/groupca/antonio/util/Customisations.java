@@ -21,7 +21,7 @@ import java.io.Serializable;
 public class Customisations implements Serializable {
     int bodyNum = 0;
     int hat = 0;
-    int truckStyleIndex = 0;
+    TruckStyle truckStyle = TruckStyle.DEFAULT;
 
     public Customisations() {}
 
@@ -34,8 +34,8 @@ public class Customisations implements Serializable {
         this.hat = hat;
     }
 
-    public void setTruckStyleIndex(int truckStyleIndex) {
-        this.truckStyleIndex = truckStyleIndex;
+    public void setTruckStyle(TruckStyle truckStyle) {
+        this.truckStyle = truckStyle;
     }
 
     // Getters
@@ -59,11 +59,7 @@ public class Customisations implements Serializable {
         return hat;
     }
 
-    public int getTruckStyleIndex() {
-        return truckStyleIndex;
-    }
-
     public TruckStyle getTruckStyle() {
-        return TruckStyle.values()[truckStyleIndex];
+        return truckStyle;
     }
 }

@@ -16,8 +16,7 @@ import java.awt.*;
  */
 public class FoodDelivery implements Renderable, Tickable {
     // Assets
-    private static final String truckFilepath = "/tom_game/truck/" + CustomisationManager.getTruckStyle().getFileName();
-    private static final Image ASSET = ImageLoader.load(truckFilepath);
+    private static Image asset = ImageLoader.load(getTruckAssetFilepath());
 
     private final Point pos;
     private final Point from;
@@ -52,9 +51,17 @@ public class FoodDelivery implements Renderable, Tickable {
         requiredProgress = (float) Math.sqrt(Math.pow(to.x - from.x, 2) + Math.pow(to.y - from.y, 2));
     }
 
+    private static String getTruckAssetFilepath() {
+        return "/tom_game/truck/" + CustomisationManager.getTruckStyle().getFileName();
+    }
+
+    public static void refreshTruckAsset() {
+        asset = ImageLoader.load(getTruckAssetFilepath());
+    }
+
     @Override
     public void render(Graphics2D g2, Point mousePos) {
-        RenderUtils.drawImage(g2, ASSET, pos);
+        RenderUtils.drawImage(g2, asset, pos);
     }
 
     @Override
