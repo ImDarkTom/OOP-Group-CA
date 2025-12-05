@@ -7,6 +7,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.Color;
 import java.awt.event.*;
+
+import com.ncirl.oop.groupca.thomas.shared.FontManager;
 import com.ncirl.oop.groupca.thomas.util.FrameUtils;
 
 /**
@@ -43,9 +45,9 @@ public class AlexWindow { // Must create variables at the start so they can be u
             f.addKeyListener(this);
             //Points, timer and pass panel obj to gameLoop
             points = new Label("Points"); // Create label for points
-            points.setFont(new Font("Arial",Font.PLAIN,20));
+            points.setFont(FontManager.getFont(20));
             timer = new Label("Points"); // Create label for timer
-            timer.setFont(new Font("Arial",Font.PLAIN,20));
+            timer.setFont(FontManager.getFont(20));
             
             // Layout and add labels to topdisplay
             f.add(topDisplay, BorderLayout.NORTH);

@@ -15,7 +15,7 @@ import java.util.ArrayList;
  * @author Alex
  */
 public class GameLoop {
-    private int ticks = 0; private int seconds;//Tracks ticks since starto of game.
+    private int ticks = 0; private int seconds;//Tracks ticks since start of game.
     private GameWindow panel; // Have to pass panel into here to trigger redraw
     private int points; // Track players point
     private Player player;
@@ -38,11 +38,10 @@ public class GameLoop {
             if(plants.size()<=12) { // Every 5 seconds add 2 new plants
                 if((ran(1,6)%2)==0) {
                     plants.add(new Onion(ran(0,800),ran(0,550), plantID, false));
-                    plantID++;
                 } else {
                     plants.add(new Wheat(ran(0,800),ran(0,550), plantID, false));
-                    plantID++;
                 }
+                plantID++;
             }
             ticks++;
             collisionHandling();
