@@ -26,7 +26,6 @@ public class Customisations implements Serializable {
         this.hat = hat;
     }
 
-
     // Getters
     public Color getBodyCol() { // Returns number according to int
         return switch (bodyNum) {
@@ -39,9 +38,11 @@ public class Customisations implements Serializable {
             default -> Color.BLUE;
         };
     }
+
     public int getBodyNum() { // Returns number
         return bodyNum;
     }
+
     public int getHat() {
         return hat;
     }

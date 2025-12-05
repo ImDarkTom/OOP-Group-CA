@@ -28,9 +28,8 @@ import java.awt.*;
  * .
  * .
  * Final requirements:
- * - File I/O todo
- * -
- *
+ * - File I/O (FileLoader, CustomisationManager, ScoreManager) ✔️
+ * .
  * @author tom
  */
 public class TomGameWindow extends JFrame {

@@ -2,9 +2,6 @@ package com.ncirl.oop.groupca.thomas.shared;
 
 import com.ncirl.oop.groupca.alex.util.FileLoader;
 import com.ncirl.oop.groupca.antonio.util.Customisations;
-import com.ncirl.oop.groupca.thomas.ImageLoader;
-import com.ncirl.oop.groupca.thomas.util.RenderUtils;
-import com.ncirl.oop.groupca.thomas.GameValues;
 
 import java.awt.*;
 /**
@@ -23,14 +20,17 @@ public class CustomisationManager {
 
         return customisationsInstance;
     }
+
     // Setters
     public static void setBody(int bodyNum) {
         getInstance().setBody(bodyNum);
         // loadImage();
     }
+
     public static void setHat(int hat) {
         getInstance().setHat(hat);
     }
+
     // Getters
     public static int getHat() {
         return getInstance().getHat();
@@ -42,28 +42,12 @@ public class CustomisationManager {
     public static Color getBodyCol() {
         return getInstance().getBodyCol();
     }
-//    public static void resetScores() {
-//        FileLoader.saveToFile(new Scores(), SCORE_FILENAME);
-//
-//        scoresInstance = null;
-//        getInstance();
-//    }
-//
-//    //
-//    public static String getAlexScoreText() {
-//        return getInstance().getAlexScoreText();
-//    }
-//
-//    public static String getAntonioScoreText() {
-//        return getInstance().getAntonioScoreText();
-//    }
-//
-//    public static String getThomasScoreText() {
-//        return getInstance().getThomasScoreText();
-//    }
-//
-//    public static String getFullScoreText() {
-//        return getInstance().getFullScoreText();
-//    }
+
+    public static void resetCustomisations() {
+        FileLoader.saveToFile(new Customisations(), CUSTOMISATION_FILENAME);
+
+        customisationsInstance = null;
+        getInstance();
+    }
 
 }
